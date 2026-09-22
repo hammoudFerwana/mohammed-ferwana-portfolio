@@ -8,6 +8,7 @@ export const projects = [
     category: 'Enterprise',
     tier: 1,
     featured: true,
+    image: '/images/projects/insurflow.jpg',
     technologies: ['Node.js', 'Express.js', 'MongoDB', 'Mongoose', 'JWT', 'RBAC', 'REST APIs', 'Jest'],
     links: {
       github: 'https://github.com/InsurFlow-Team/insurflow-backend',
@@ -122,6 +123,7 @@ export const projects = [
     category: 'Platform',
     tier: 1,
     featured: true,
+    image: '/images/projects/teamline.jpg',
     technologies: ['Node.js', 'Express.js', 'MongoDB', 'Mongoose', 'JWT', 'RBAC', 'REST APIs'],
     links: {
       github: null,
@@ -218,6 +220,7 @@ export const projects = [
     category: 'Education',
     tier: 1,
     featured: true,
+    image: '/images/projects/saios-academy.jpg',
     technologies: ['Node.js', 'Express.js', 'MongoDB', 'Mongoose', 'REST APIs', 'JWT'],
     links: {
       github: 'https://github.com/hammoudFerwana/saios-academy',
@@ -293,6 +296,7 @@ export const projects = [
     category: 'Volunteer',
     tier: 2,
     featured: false,
+    image: '/images/projects/pcd-pced.jpg',
     technologies: ['Node.js', 'Express.js', 'MongoDB', 'REST APIs'],
     links: {
       github: 'https://github.com/PCD-Org/backEnd',
