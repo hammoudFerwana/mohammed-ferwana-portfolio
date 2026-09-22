@@ -1,10 +1,21 @@
 # Git & GitHub Engineering Standard (Lead / 20+ YOE Standard)
 
-This document establishes the mandatory Git workflow, commit conventions, and branching policies for this repository. Every automated agent and contributor must adhere to these guidelines strictly.
+This document establishes the mandatory Git workflow, commit conventions, branching policies, and CI/CD protocols for this repository. Every automated agent and contributor must adhere to these guidelines strictly.
 
 ---
 
-## 1. Commit Message Standard: Conventional Commits v1.0.0
+## 1. Mandatory User Approval Gate (STRICT ENFORCEMENT)
+
+**CRITICAL RULE**: The agent MUST NEVER start executing code changes, creating branches, or modifying files without explicit prior permission from Mohammed.
+
+1. **Before any new task**: Outline clearly in Arabic what will be done (the feature, branch name, and planned changes).
+2. **Ask directly**: Ask the user: *"هل أبلش شغل على [...] ولا لأ؟"*.
+3. **Execution Condition**: Proceed ONLY when Mohammed explicitly replies with approval (e.g., "بلش", "اشتغل", "نعم", "تمام").
+4. If approval is not yet given, pause and wait.
+
+---
+
+## 2. Commit Message Standard: Conventional Commits v1.0.0
 
 All commits must strictly follow the format:
 
@@ -20,7 +31,7 @@ All commits must strictly follow the format:
 - **`feat`**: A new user-facing feature or major technical capability.
 - **`fix`**: A bug fix.
 - **`docs`**: Documentation only changes (architecture docs, README, specifications).
-- **`style`**: Code formatting, missing semi-colons, whitespace (no functional logic change).
+- **`style`**: Code formatting, styling, CSS tokens (no functional logic change).
 - **`refactor`**: Code restructuring without bug fixes or new features.
 - **`perf`**: Performance optimizations.
 - **`test`**: Adding missing tests or correcting existing tests.
@@ -36,7 +47,7 @@ All commits must strictly follow the format:
 
 ---
 
-## 2. Branching Strategy
+## 3. Branching Strategy
 
 We follow a robust Gitflow / GitHub Flow model designed for production stability:
 
@@ -59,9 +70,20 @@ We follow a robust Gitflow / GitHub Flow model designed for production stability
 
 ---
 
-## 3. Remote Synchronization & Safety
+## 4. CI/CD Quality Gates & Automated Verification
+
+1. **GitHub Actions**: Every `push` and `pull_request` to `main` and `develop` triggers `.github/workflows/ci.yml`.
+2. **Local Pre-flight Check**: Before merging any branch into `develop` or pushing to remote, always verify locally:
+   - `npm run lint` passes with 0 errors.
+   - `npm run build` generates production bundles successfully with 0 errors.
+3. **Deterministic Dependencies**: Always use `npm ci` in CI and keep `package-lock.json` updated and tracked in Git.
+
+---
+
+## 5. Remote Synchronization & Safety
 
 1. Always verify working tree with `git status` before staging.
 2. Stage specific, intended files (avoid blind `git add .` when untracked scratch files exist).
-3. Do not force push (`--force` or `-f`) to `main` or `develop`.
-4. Keep `.gitignore` strictly updated to prevent secret leaks, build outputs (`.next`, `dist`), or OS junk from polluting remote history.
+3. Merge feature branches into `develop` using `--no-ff` (non-fast-forward) to preserve clear history graphs.
+4. Do not force push (`--force` or `-f`) to `main` or `develop`.
+5. Keep `.gitignore` strictly updated to prevent secret leaks, build outputs (`.next`, `dist`), or OS junk from polluting remote history.
