@@ -1,0 +1,314 @@
+export const projects = [
+  {
+    id: 'insurflow',
+    slug: 'insurflow',
+    title: 'InsurFlow',
+    description: 'Enterprise B2B motor insurance claims management platform designed to automate multi-party claim settlement and audit compliance.',
+    role: 'Backend Engineer / Backend Owner',
+    category: 'Enterprise',
+    tier: 1,
+    featured: true,
+    technologies: ['Node.js', 'Express.js', 'MongoDB', 'Mongoose', 'JWT', 'RBAC', 'REST APIs', 'Jest'],
+    links: {
+      github: 'https://github.com/InsurFlow-Team/insurflow-backend',
+      live: null,
+      dashboard: 'https://insurflow-dashboard.vercel.app',
+    },
+    problem: 'Insurance claims processing typically suffers from fragmented communication, opaque review stages, and high latency when validating damages and financial disbursements across adjusters, workshops, and underwriters.',
+    solution: 'Designed an enterprise-grade backend with modular domain separation, strict state transitions for claim lifecycles, role-based access control, and audited data persistence.',
+    system: 'InsurFlow coordinates claim submission, document verification, adjuster assessment, and final approval pipelines with idempotent transitions and detailed audit logging.',
+    architecture: {
+      nodes: [
+        {
+          id: 'client',
+          label: 'Client Applications',
+          description: 'Web dashboard used by claim handlers, repair shops, and insurance executives.',
+          type: 'client',
+          responsibilities: ['User interaction', 'Document uploads', 'Claim lifecycle tracking'],
+        },
+        {
+          id: 'gateway',
+          label: 'API & Routing Layer',
+          description: 'Express.js router handling rate limiting, CORS, payload validation, and request dispatching.',
+          type: 'api',
+          responsibilities: ['Route dispatching', 'Input sanitization', 'Global error mediation'],
+        },
+        {
+          id: 'auth',
+          label: 'Auth & RBAC Service',
+          description: 'JWT issuance, session verification, and granular role/permission evaluation.',
+          type: 'auth',
+          responsibilities: ['JWT verification', 'Role authorization (Underwriter, Adjuster, Admin)', 'Access tokens'],
+        },
+        {
+          id: 'claims-engine',
+          label: 'Claims Core Logic',
+          description: 'Business rules engine governing valid status state machines and approval thresholds.',
+          type: 'logic',
+          responsibilities: ['State transition enforcement', 'Document linkage', 'Audit logging'],
+        },
+        {
+          id: 'data-layer',
+          label: 'Data Access Layer',
+          description: 'Mongoose abstraction models with strict schema constraints and indexing strategies.',
+          type: 'data',
+          responsibilities: ['Query abstraction', 'Index optimization', 'Transactional consistency'],
+        },
+        {
+          id: 'db',
+          label: 'MongoDB Cluster',
+          description: 'Document database housing claims, policy references, user identities, and history logs.',
+          type: 'db',
+          responsibilities: ['Persistent storage', 'Compound index lookup', 'Audit log retention'],
+        },
+      ],
+      connections: [
+        { from: 'client', to: 'gateway', label: 'HTTPS / REST' },
+        { from: 'gateway', to: 'auth', label: 'Auth Check' },
+        { from: 'gateway', to: 'claims-engine', label: 'Dispatch' },
+        { from: 'claims-engine', to: 'data-layer', label: 'CRUD' },
+        { from: 'data-layer', to: 'db', label: 'Queries' },
+      ],
+    },
+    engineeringDecisions: [
+      {
+        title: 'Finite State Machine for Claim Lifecycle',
+        description: 'Enforced claim status transitions through a validated state machine rather than arbitrary database updates, preventing illegal bypasses (e.g. payout before adjuster approval).',
+        context: 'Critical for financial compliance and regulatory auditability in insurance domains.',
+      },
+      {
+        title: 'Role-Based Access Control (RBAC) Middleware',
+        description: 'Implemented declarative permission middleware to decouple authentication logic from business controllers, simplifying endpoint security audits.',
+        context: 'Different stakeholders (claimants, adjusters, approvers) require strictly bounded visibility.',
+      },
+      {
+        title: 'Defensive Input Sanitization & Schema Validation',
+        description: 'Constructed rigid schema validation layers for all inbound requests before execution reaches controller handlers, eliminating malformed or injection-prone payloads.',
+        context: 'Ensures payload integrity across complex nested claim forms.',
+      },
+    ],
+    tradeoffs: [
+      {
+        decision: 'Embedded vs. Referenced Document Schema in MongoDB',
+        reasoning: 'Embedded sub-documents for claim timeline events to optimize read latency, while referencing user accounts to avoid duplicate denormalization anomalies.',
+      },
+      {
+        decision: 'JWT Stateless Verification vs. Redis Session Store',
+        reasoning: 'Selected signed JWTs with explicit expiration and token rotation to keep infrastructure lightweight and horizontally scalable without immediate cache dependencies.',
+      },
+    ],
+    testing: {
+      approach: 'Integration testing for critical API endpoints, auth verification, and claim lifecycle status transitions.',
+      tools: ['Jest', 'Supertest'],
+      details: 'Automated test suite simulating end-to-end claim submissions, permission rejections for unauthorized roles, and edge-case payload handling.',
+    },
+    whatIWouldImprove: [
+      {
+        area: 'Asynchronous Event Pipeline',
+        description: 'Integrate an asynchronous message queue (e.g. RabbitMQ or Redis Streams) for long-running notifications, webhook callbacks, and PDF report generation.',
+      },
+      {
+        area: 'Distributed Caching',
+        description: 'Introduce Redis caching for frequently accessed policy catalogs and lookup metadata to reduce database round-trips.',
+      },
+    ],
+  },
+  {
+    id: 'teamline',
+    slug: 'teamline',
+    title: 'TeamLine',
+    description: 'Collaborative team project management and agile workspace platform built during the TAQAT internship.',
+    role: 'Backend Developer & Team Leader',
+    category: 'Platform',
+    tier: 1,
+    featured: true,
+    technologies: ['Node.js', 'Express.js', 'MongoDB', 'Mongoose', 'JWT', 'RBAC', 'REST APIs'],
+    links: {
+      github: null,
+      live: 'https://team-line-frontend-eight.vercel.app/',
+      dashboard: null,
+    },
+    problem: 'Agile teams frequently juggle disconnected tools for task tracking, team communication, and sprint deadlines, causing friction and misaligned delivery goals.',
+    solution: 'Engineered a unified backend providing structured board workflows, task status updates, team permission hierarchies, and sprint tracking.',
+    system: 'Features modular API controllers, project-level access controls, and task activity timelines that keep team members synchronized.',
+    architecture: {
+      nodes: [
+        {
+          id: 'client',
+          label: 'TeamLine Web App',
+          description: 'Interactive React SPA for agile team boards, task lists, and sprint analytics.',
+          type: 'client',
+          responsibilities: ['Kanban interactions', 'Task editing', 'Member management'],
+        },
+        {
+          id: 'gateway',
+          label: 'Express API Server',
+          description: 'RESTful API service providing task, board, and collaboration endpoints.',
+          type: 'api',
+          responsibilities: ['API routing', 'Auth parsing', 'Payload validation'],
+        },
+        {
+          id: 'auth',
+          label: 'Auth & Workspace RBAC',
+          description: 'Secures team boundaries and manages user roles (Team Lead, Member, Viewer).',
+          type: 'auth',
+          responsibilities: ['Workspace token validation', 'Role permissions'],
+        },
+        {
+          id: 'services',
+          label: 'Workspace & Task Service',
+          description: 'Manages board hierarchies, task dependencies, and assignment workflows.',
+          type: 'logic',
+          responsibilities: ['Board operations', 'Task state handling', 'Member assignment'],
+        },
+        {
+          id: 'db',
+          label: 'MongoDB Database',
+          description: 'Houses workspace entities, board data, comment streams, and user profiles.',
+          type: 'db',
+          responsibilities: ['Data persistence', 'Query execution'],
+        },
+      ],
+      connections: [
+        { from: 'client', to: 'gateway', label: 'HTTP / REST' },
+        { from: 'gateway', to: 'auth', label: 'Validate Token' },
+        { from: 'gateway', to: 'services', label: 'Invoke Logic' },
+        { from: 'services', to: 'db', label: 'Store & Query' },
+      ],
+    },
+    engineeringDecisions: [
+      {
+        title: 'Role-Based Workspace Boundaries',
+        description: 'Designed multi-tenant workspace isolation at the query level, ensuring users can only interact with resources belonging to their assigned team workspaces.',
+        context: 'Prevents accidental data leakage across teams sharing the same database.',
+      },
+      {
+        title: 'Leading Engineering Sprints & API Contracts',
+        description: 'Established rigorous frontend/backend API contracts early, minimizing blocking dependencies between team members and accelerating feature velocity.',
+        context: 'Served as Team Leader coordinating architectural design and team output.',
+      },
+    ],
+    leadership: {
+      description: 'Served as Team Leader during the TAQAT internship, facilitating daily standups, unblocking teammates, and reviewing backend pull requests.',
+      responsibilities: [
+        'Organized sprint backlog and defined API endpoint specifications.',
+        'Conducted architectural reviews and enforced code hygiene standards.',
+        'Mentored junior peers on asynchronous JavaScript patterns and database modeling.',
+      ],
+    },
+    tradeoffs: [
+      {
+        decision: 'Normalized Task Records vs. Single Board Document',
+        reasoning: 'Separated tasks into individual documents with indexed board IDs to prevent MongoDB document size limits when boards scale to thousands of cards.',
+      },
+    ],
+    whatIWouldImprove: [
+      {
+        area: 'Real-Time WebSocket Integration',
+        description: 'Integrate WebSockets (Socket.io) for live drag-and-drop cursor updates and instant collaborative card movement without polling.',
+      },
+    ],
+  },
+  {
+    id: 'saios-academy',
+    slug: 'saios-academy',
+    title: 'SAIOS Academy',
+    description: 'Scalable Learning Management System (LMS) backend with modular course structures, enrollment logic, and student progress tracking.',
+    role: 'Backend Engineer',
+    category: 'Education',
+    tier: 1,
+    featured: true,
+    technologies: ['Node.js', 'Express.js', 'MongoDB', 'Mongoose', 'REST APIs', 'JWT'],
+    links: {
+      github: 'https://github.com/hammoudFerwana/saios-academy',
+      live: null,
+      dashboard: null,
+    },
+    problem: 'Educational platforms require flexible curriculum organization (modules, lessons, quizzes) while managing enrollment states, progress calculation, and instructor permissions without degradation.',
+    solution: 'Constructed a clean, modular REST API that decouples course authoring from enrollment and progress evaluation engines.',
+    system: 'Enables instructors to publish structured course content while maintaining relational data integrity across student enrollments and completion milestones.',
+    architecture: {
+      nodes: [
+        {
+          id: 'client',
+          label: 'LMS Web Interface',
+          description: 'Student and instructor portal for viewing course content and track progress.',
+          type: 'client',
+          responsibilities: ['Content rendering', 'Lesson navigation', 'Quiz submissions'],
+        },
+        {
+          id: 'api',
+          label: 'Express LMS API',
+          description: 'Modular routing layer exposing course management, enrollment, and auth endpoints.',
+          type: 'api',
+          responsibilities: ['Route handling', 'Input validation', 'Middleware execution'],
+        },
+        {
+          id: 'course-logic',
+          label: 'Curriculum & Progress Service',
+          description: 'Calculates completion percentages and controls sequential lesson unlocking.',
+          type: 'logic',
+          responsibilities: ['Prerequisite checks', 'Progress tracking', 'Enrollment verification'],
+        },
+        {
+          id: 'db',
+          label: 'MongoDB Database',
+          description: 'Schema-backed persistence for courses, lessons, enrollments, and student progress.',
+          type: 'db',
+          responsibilities: ['Document persistence', 'Aggregations'],
+        },
+      ],
+      connections: [
+        { from: 'client', to: 'api', label: 'HTTP / REST' },
+        { from: 'api', to: 'course-logic', label: 'Business Rules' },
+        { from: 'course-logic', to: 'db', label: 'Aggregations & Queries' },
+      ],
+    },
+    engineeringDecisions: [
+      {
+        title: 'Decoupled Progress Tracking Engine',
+        description: 'Separated course definition schemas from dynamic user enrollment progress, allowing curriculum updates without invalidating historical progress data.',
+        context: 'Essential for maintaining accurate student completion records.',
+      },
+    ],
+    tradeoffs: [
+      {
+        decision: 'On-Demand Progress Aggregation vs Pre-Calculated Counters',
+        reasoning: 'Computed progress percentages dynamically using MongoDB aggregation pipelines during milestone events to avoid state desynchronization.',
+      },
+    ],
+    whatIWouldImprove: [
+      {
+        area: 'Content Delivery Optimization',
+        description: 'Add CDN pre-signed URLs for media assets and integrate video streaming analytics.',
+      },
+    ],
+  },
+  {
+    id: 'pcd-pced',
+    slug: 'pcd-pced',
+    title: 'PCD / PCED',
+    description: 'Community civic development platform serving non-profit initiatives, volunteer coordination, and outreach tracking.',
+    role: 'Backend Developer & Team Leader',
+    category: 'Volunteer',
+    tier: 2,
+    featured: false,
+    technologies: ['Node.js', 'Express.js', 'MongoDB', 'REST APIs'],
+    links: {
+      github: 'https://github.com/PCD-Org/backEnd',
+      live: 'https://pced.vercel.app/',
+      dashboard: null,
+    },
+    problem: 'Civic non-profit organizations require dependable, low-overhead tools to coordinate community volunteers, publish announcements, and track community initiatives.',
+    solution: 'Built a lightweight, robust backend system supporting initiative publishing, user registration, and administrative oversight.',
+    system: 'Delivered clean REST APIs integrated with a front-end portal, providing role-separated management for volunteers and staff.',
+    leadership: {
+      description: 'Led technical backend execution for the volunteer initiative, guiding fellow contributors and architecting data schemas.',
+      responsibilities: [
+        'Architected database schemas and API endpoints.',
+        'Mentored team members in backend practices and Git workflow.',
+        'Collaborated with frontend developers to ensure smooth API integration.',
+      ],
+    },
+  },
+];
