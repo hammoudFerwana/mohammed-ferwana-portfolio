@@ -19,7 +19,7 @@ export default function FeaturedProjects() {
             className="mb-0 sm:mb-0"
           />
           <Button href="/projects" variant="secondary" size="md">
-            View All Projects (7+) →
+            View All Projects →
           </Button>
         </div>
 

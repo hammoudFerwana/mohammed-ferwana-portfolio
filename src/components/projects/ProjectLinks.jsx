@@ -8,14 +8,14 @@ import Button from '@/components/shared/Button';
  *
  * @param {Object} links — { github, live, dashboard }
  */
-export default function ProjectLinks({ links }) {
-  const hasLinks = links.github || links.live || links.dashboard;
+export default function ProjectLinks({ links = {} }) {
+  const hasLinks = Boolean(links?.github || links?.live || links?.dashboard);
 
   if (!hasLinks) return null;
 
   return (
     <div className="flex flex-wrap gap-3">
-      {links.github && (
+      {links?.github && (
         <Button href={links.github} variant="secondary" size="md" external>
           <span className="flex items-center gap-2">
             <svg
@@ -31,7 +31,7 @@ export default function ProjectLinks({ links }) {
         </Button>
       )}
 
-      {links.dashboard && (
+      {links?.dashboard && (
         <Button href={links.dashboard} variant="outline" size="md" external>
           <span className="flex items-center gap-2">
             <svg
@@ -54,7 +54,7 @@ export default function ProjectLinks({ links }) {
         </Button>
       )}
 
-      {links.live && (
+      {links?.live && (
         <Button href={links.live} variant="primary" size="md" external>
           <span className="flex items-center gap-2">
             <svg

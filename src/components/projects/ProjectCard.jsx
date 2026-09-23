@@ -57,21 +57,23 @@ export default function ProjectCard({ project, priority = false }) {
           </p>
 
           {/* Technology Badges */}
-          <div className="flex flex-wrap gap-1.5 pt-2">
-            {project.technologies.slice(0, 6).map((tech) => (
-              <span
-                key={tech}
-                className="font-mono text-[11px] px-2.5 py-1 rounded-md bg-bg-primary/80 border border-border-subtle text-text-muted"
-              >
-                {tech}
-              </span>
-            ))}
-            {project.technologies.length > 6 && (
-              <span className="font-mono text-[10px] px-2 py-1 rounded text-text-muted">
-                +{project.technologies.length - 6} more
-              </span>
-            )}
-          </div>
+          {project.technologies && project.technologies.length > 0 && (
+            <div className="flex flex-wrap gap-1.5 pt-2">
+              {project.technologies.slice(0, 6).map((tech) => (
+                <span
+                  key={tech}
+                  className="font-mono text-[11px] px-2.5 py-1 rounded-md bg-bg-primary/80 border border-border-subtle text-text-muted"
+                >
+                  {tech}
+                </span>
+              ))}
+              {project.technologies.length > 6 && (
+                <span className="font-mono text-[10px] px-2 py-1 rounded text-text-muted">
+                  +{project.technologies.length - 6} more
+                </span>
+              )}
+            </div>
+          )}
         </div>
       </div>
 
@@ -82,24 +84,26 @@ export default function ProjectCard({ project, priority = false }) {
             View Architecture Case Study →
           </Button>
         ) : (
-          <div className="flex items-center gap-2">
-            {project.links.github && (
-              <Button href={project.links.github} variant="secondary" size="sm" external>
-                GitHub ↗
-              </Button>
-            )}
-            {project.links.live && (
-              <Button href={project.links.live} variant="primary" size="sm" external>
-                Live Demo ↗
-              </Button>
-            )}
-          </div>
+          (project.links?.github || project.links?.live) && (
+            <div className="flex items-center gap-2">
+              {project.links?.github && (
+                <Button href={project.links.github} variant="secondary" size="sm" external>
+                  GitHub ↗
+                </Button>
+              )}
+              {project.links?.live && (
+                <Button href={project.links.live} variant="primary" size="sm" external>
+                  Live Demo ↗
+                </Button>
+              )}
+            </div>
+          )
         )}
 
         {/* External links row for Tier 1 */}
-        {isTier1 && (
+        {isTier1 && (project.links?.github || project.links?.dashboard || project.links?.live) && (
           <div className="flex items-center gap-3 text-xs font-mono text-text-muted">
-            {project.links.github && (
+            {project.links?.github && (
               <a
                 href={project.links.github}
                 target="_blank"
@@ -110,7 +114,7 @@ export default function ProjectCard({ project, priority = false }) {
                 Code ↗
               </a>
             )}
-            {project.links.dashboard && (
+            {project.links?.dashboard && (
               <a
                 href={project.links.dashboard}
                 target="_blank"
@@ -121,7 +125,7 @@ export default function ProjectCard({ project, priority = false }) {
                 Dashboard ↗
               </a>
             )}
-            {project.links.live && (
+            {project.links?.live && (
               <a
                 href={project.links.live}
                 target="_blank"

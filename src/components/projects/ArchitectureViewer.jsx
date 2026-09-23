@@ -53,9 +53,9 @@ export default function ArchitectureViewer({ architecture }) {
     return null;
   }
 
-  const selectedNode =
-    architecture.nodes.find((n) => n.id === selectedNodeId) ||
-    architecture.nodes[0];
+  const selectedNode = selectedNodeId
+    ? architecture.nodes.find((n) => n.id === selectedNodeId) || null
+    : null;
 
   const nodeTypeStyles = {
     client:
@@ -175,8 +175,8 @@ export default function ArchitectureViewer({ architecture }) {
         </div>
       </div>
 
-      {/* Selected Component Inspection Panel */}
-      {selectedNode && (
+      {/* Component Inspection Panel (Selected or Instructional State) */}
+      {selectedNode ? (
         <div
           className="rounded-xl bg-bg-tertiary/70 border border-border-default p-5 sm:p-6 space-y-4 transition-all duration-200"
           aria-live="polite"
@@ -219,6 +219,23 @@ export default function ArchitectureViewer({ architecture }) {
                 </ul>
               </div>
             )}
+        </div>
+      ) : (
+        <div
+          className="rounded-xl bg-bg-tertiary/40 border border-dashed border-border-default p-6 text-center transition-all duration-200"
+          aria-live="polite"
+          role="region"
+          aria-label="Component inspection instructions"
+        >
+          <div className="flex flex-col items-center justify-center gap-2 max-w-md mx-auto">
+            <div className="flex items-center gap-2 font-mono text-xs text-accent">
+              <span className="w-1.5 h-1.5 rounded-full bg-accent" aria-hidden="true" />
+              <span>INSPECTION READY</span>
+            </div>
+            <p className="text-sm text-text-secondary">
+              Select a component to explore its responsibilities and architectural role.
+            </p>
+          </div>
         </div>
       )}
     </div>
