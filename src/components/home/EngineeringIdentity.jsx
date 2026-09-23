@@ -5,9 +5,9 @@ export default function EngineeringIdentity() {
   const pillars = [
     {
       number: '01',
-      title: 'Scalable Systems & Data Architecture',
-      description: 'I design backends with modular separation of concerns. From domain-driven entity boundaries in MongoDB to normalized relational schemas in PostgreSQL, I ensure data integrity and query efficiency under growth.',
-      highlights: ['Modular Domain Boundaries', 'Index Optimization', 'Transaction Safety'],
+      title: 'Modular Architecture & Data Modeling',
+      description: 'I design backends with clear separation of concerns. Grounded in domain-driven entity boundaries and compound indexing in MongoDB, alongside relational database fundamentals from intensive training, I model schemas for query efficiency and data integrity.',
+      highlights: ['Domain Boundaries', 'Index Optimization', 'Data Integrity'],
     },
     {
       number: '02',

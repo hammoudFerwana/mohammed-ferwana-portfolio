@@ -9,8 +9,8 @@ export default function HeroSection() {
     { name: 'Backend Engineering', status: 'Operational' },
     { name: 'API Architecture', status: 'Optimal' },
     { name: 'Security & RBAC', status: 'Hardened' },
-    { name: 'Automated Testing', status: 'Passing' },
-    { name: 'Scalability & Performance', status: 'Indexed' },
+    { name: 'Build Verification', status: 'Passing' },
+    { name: 'Database Architecture', status: 'Indexed' },
   ];
 
   return (
@@ -23,7 +23,7 @@ export default function HeroSection() {
         <RevealOnScroll delay={0.05}>
           <div className="inline-flex items-center gap-2 font-mono text-[11px] sm:text-xs text-text-muted tracking-widest uppercase bg-bg-secondary/70 border border-border-default px-3.5 py-1.5 rounded-full mb-8 shadow-inner">
             <span className="w-2 h-2 rounded-full bg-functional-success animate-pulse shrink-0" />
-            <span>Node.js · Express · MongoDB · PostgreSQL · System Architecture</span>
+            <span>Node.js · Express · MongoDB · REST APIs · System Architecture</span>
           </div>
         </RevealOnScroll>
 

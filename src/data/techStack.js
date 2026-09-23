@@ -1,14 +1,20 @@
 export const techStack = {
   categories: [
     {
-      name: 'Backend & Databases',
-      description: 'Core server technologies, data persistence, and query optimization.',
+      name: 'Core Backend & Document DBs',
+      description: 'Primary server technologies and document persistence demonstrated across featured systems.',
       items: [
         { name: 'Node.js', icon: 'NodeJs' },
         { name: 'Express.js', icon: 'Express' },
         { name: 'MongoDB', icon: 'Mongo' },
-        { name: 'PostgreSQL', icon: 'Postgres' },
         { name: 'Mongoose', icon: 'Mongoose' },
+      ],
+    },
+    {
+      name: 'Relational DBs (Training & Foundations)',
+      description: 'Relational data modeling, SQL queries, and ORM concepts from intensive immersion.',
+      items: [
+        { name: 'PostgreSQL', icon: 'Postgres' },
         { name: 'Sequelize', icon: 'Sequelize' },
       ],
     },
@@ -17,8 +23,7 @@ export const techStack = {
       description: 'System modularity, authentication protocols, and defensive design.',
       items: [
         { name: 'RESTful APIs', icon: 'Api' },
-        { name: 'MVC Architecture', icon: 'Layers' },
-        { name: 'Modular Design', icon: 'Grid' },
+        { name: 'Modular Architecture', icon: 'Layers' },
         { name: 'JWT Authentication', icon: 'ShieldCheck' },
         { name: 'Role-Based Access (RBAC)', icon: 'Lock' },
         { name: 'Schema Validation', icon: 'CheckSquare' },
@@ -26,7 +31,7 @@ export const techStack = {
     },
     {
       name: 'Testing & Reliability',
-      description: 'Defensive engineering, automated testing, and comprehensive error handling.',
+      description: 'Defensive engineering, integration test design, and structured error handling.',
       items: [
         { name: 'Jest', icon: 'TestTube' },
         { name: 'Supertest', icon: 'ArrowsLeftRight' },
@@ -36,13 +41,13 @@ export const techStack = {
     },
     {
       name: 'DevOps & Tooling',
-      description: 'Containerization, version control, and API testing environments.',
+      description: 'Version control workflows, automated pipelines, and container exploration.',
       items: [
-        { name: 'Docker', icon: 'Docker' },
-        { name: 'CI/CD Pipelines', icon: 'GitBranch' },
-        { name: 'GitHub Actions', icon: 'Github' },
         { name: 'Git', icon: 'GitCommit' },
+        { name: 'GitHub Actions', icon: 'Github' },
+        { name: 'CI/CD Pipelines', icon: 'GitBranch' },
         { name: 'Postman', icon: 'PaperPlaneTilt' },
+        { name: 'Docker (Exploring)', icon: 'Docker' },
       ],
     },
   ],

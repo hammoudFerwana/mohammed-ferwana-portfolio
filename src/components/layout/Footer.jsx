@@ -24,7 +24,7 @@ export default function Footer() {
               </span>
             </div>
             <p className="text-sm text-text-secondary max-w-sm leading-relaxed">
-              {siteMetadata.tagline}. Specializing in robust API design, distributed architecture, and resilient server-side systems.
+              {siteMetadata.tagline}. Specializing in robust API design, modular architecture, and resilient server-side systems.
             </p>
             <div className="inline-flex items-center gap-2 px-2.5 py-1 rounded-full bg-functional-success/10 border border-functional-success/20 text-functional-success text-xs font-mono">
               <span className="w-1.5 h-1.5 rounded-full bg-functional-success animate-pulse" />

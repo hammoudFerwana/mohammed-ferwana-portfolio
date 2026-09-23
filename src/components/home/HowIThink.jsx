@@ -48,7 +48,7 @@ export default function HowIThink() {
       num: '06',
       title: 'Profile, Index & Optimize',
       summary: 'Analyze query explain plans, eliminate slow operations, and refactor code.',
-      detail: 'After validating functionality, I inspect database explain plans, add compound indexes for high-frequency queries, and eliminate N+1 bottlenecks to ensure sub-100ms response latencies.',
+      detail: 'After validating functionality, I inspect database explain plans, add compound indexes for high-frequency queries, and eliminate unindexed collection scans through deliberate MongoDB indexing.',
       keyTakeaway: 'Optimize with profiler measurements, never by intuition alone.',
     },
   ];

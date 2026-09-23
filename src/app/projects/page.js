@@ -19,7 +19,7 @@ export default function ProjectsPage() {
         <SectionHeading
           eyebrow="ENGINEERING PORTFOLIO"
           title="Projects & Architecture Case Studies"
-          description="A deep dive into distributed systems, modular backends, and data schemas built for real-world resilience."
+          description="A deep dive into modular backend architecture, clean API design, and data schemas built for real-world reliability."
         />
       </RevealOnScroll>
 

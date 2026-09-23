@@ -3,7 +3,7 @@ export const projects = [
     id: 'insurflow',
     slug: 'insurflow',
     title: 'InsurFlow',
-    description: 'Enterprise B2B motor insurance claims management platform designed to automate multi-party claim settlement and audit compliance.',
+    description: 'B2B motor insurance claims management platform designed to automate multi-party claim settlement workflows and audit compliance.',
     role: 'Backend Engineer / Backend Owner',
     category: 'Enterprise',
     tier: 1,
@@ -11,12 +11,12 @@ export const projects = [
     image: '/images/projects/insurflow.jpg',
     technologies: ['Node.js', 'Express.js', 'MongoDB', 'Mongoose', 'JWT', 'RBAC', 'REST APIs', 'Jest'],
     links: {
-      github: 'https://github.com/InsurFlow-Team/insurflow-backend',
+      github: null,
       live: null,
       dashboard: 'https://insurflow-dashboard.vercel.app',
     },
     problem: 'Insurance claims processing typically suffers from fragmented communication, opaque review stages, and high latency when validating damages and financial disbursements across adjusters, workshops, and underwriters.',
-    solution: 'Designed an enterprise-grade backend with modular domain separation, strict state transitions for claim lifecycles, role-based access control, and audited data persistence.',
+    solution: 'Designed a modular backend architecture with domain separation, strict state transitions for claim lifecycles, role-based access control, and audited data persistence.',
     system: 'InsurFlow coordinates claim submission, document verification, adjuster assessment, and final approval pipelines with idempotent transitions and detailed audit logging.',
     architecture: {
       nodes: [
@@ -215,7 +215,7 @@ export const projects = [
     id: 'saios-academy',
     slug: 'saios-academy',
     title: 'SAIOS Academy',
-    description: 'Scalable Learning Management System (LMS) backend with modular course structures, enrollment logic, and student progress tracking.',
+    description: 'Modular Learning Management System (LMS) backend with structured course progression, enrollment logic, and student progress tracking.',
     role: 'Backend Engineer',
     category: 'Education',
     tier: 1,
@@ -223,7 +223,7 @@ export const projects = [
     image: '/images/projects/saios-academy.jpg',
     technologies: ['Node.js', 'Express.js', 'MongoDB', 'Mongoose', 'REST APIs', 'JWT'],
     links: {
-      github: 'https://github.com/hammoudFerwana/saios-academy',
+      github: null,
       live: null,
       dashboard: null,
     },
