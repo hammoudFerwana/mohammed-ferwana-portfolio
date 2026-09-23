@@ -12,6 +12,7 @@ import TestingSection from '@/components/projects/TestingSection';
 import ImprovementCard from '@/components/projects/ImprovementCard';
 import ProjectLinks from '@/components/projects/ProjectLinks';
 import LeadershipCard from '@/components/projects/LeadershipCard';
+import InsurflowEvidence from '@/components/projects/InsurflowEvidence';
 
 /* ---------- Static Generation ---------- */
 
@@ -196,6 +197,13 @@ export default async function CaseStudyPage({ params }) {
                 <DecisionCard key={idx} decision={decision} index={idx} />
               ))}
             </div>
+          </CaseStudySection>
+        )}
+
+        {/* TECHNICAL EVIDENCE (InsurFlow-specific verified implementation artifact) */}
+        {project.slug === 'insurflow' && (
+          <CaseStudySection number={nextSection()} title="Technical Evidence">
+            <InsurflowEvidence />
           </CaseStudySection>
         )}
 
