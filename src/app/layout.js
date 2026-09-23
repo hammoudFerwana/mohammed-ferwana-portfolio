@@ -36,11 +36,20 @@ export const metadata = {
     title: `${siteMetadata.name} | ${siteMetadata.title}`,
     description: siteMetadata.description,
     siteName: siteMetadata.name,
+    images: [
+      {
+        url: siteMetadata.ogImage,
+        width: 800,
+        height: 800,
+        alt: `${siteMetadata.name} — ${siteMetadata.title}`,
+      },
+    ],
   },
   twitter: {
-    card: 'summary_large_image',
+    card: 'summary',
     title: `${siteMetadata.name} | ${siteMetadata.title}`,
     description: siteMetadata.description,
+    images: [siteMetadata.ogImage],
   },
   robots: {
     index: true,
