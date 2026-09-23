@@ -4,10 +4,9 @@ export const commandGroups = [
     commands: [
       { id: 'nav-home', label: 'Home', shortcut: 'H', action: 'navigate', target: '/', icon: 'House' },
       { id: 'nav-projects', label: 'Projects', shortcut: 'P', action: 'navigate', target: '/projects', icon: 'Folder' },
-      { id: 'nav-about', label: 'About', shortcut: 'A', action: 'navigate', target: '/about', icon: 'User' },
+      { id: 'nav-about', label: 'About', shortcut: 'A', action: 'navigate', target: '/#about', icon: 'User' },
       { id: 'nav-experience', label: 'Experience', shortcut: 'E', action: 'navigate', target: '/experience', icon: 'Briefcase' },
-      { id: 'nav-contact', label: 'Contact', shortcut: 'C', action: 'navigate', target: '/contact', icon: 'Envelope' },
-      { id: 'nav-lab', label: 'Engineering Lab', shortcut: 'L', action: 'navigate', target: '/lab', icon: 'Flask' },
+      { id: 'nav-contact', label: 'Contact', shortcut: 'C', action: 'navigate', target: '/#contact', icon: 'Envelope' },
     ],
   },
   {
@@ -21,7 +20,7 @@ export const commandGroups = [
   {
     group: 'Actions & Utilities',
     commands: [
-      { id: 'act-resume', label: 'Download Resume', shortcut: 'R', action: 'download', target: '/resume/Mohammed_Ferwana_Resume.pdf', icon: 'FileText' },
+      { id: 'act-resume', label: 'Request Resume (Email)', shortcut: 'R', action: 'external', target: 'mailto:mohammedferwana2@gmail.com?subject=Resume%20Request%20%E2%80%94%20Mohammed%20Ferwana', icon: 'Envelope' },
       { id: 'act-terminal', label: 'Launch Interactive Terminal', shortcut: 'T', action: 'terminal', target: null, icon: 'Terminal' },
     ],
   },

@@ -65,15 +65,15 @@ export default function MiniTerminal() {
       }
 
       case 'about':
-        newHistory.push({ type: 'output', text: 'Redirecting to /about...' });
+        newHistory.push({ type: 'output', text: 'Navigating to #about...' });
         setTimeout(() => {
           closeTerminal();
-          router.push('/about');
+          router.push('/#about');
         }, 500);
         break;
 
       case 'experience':
-        newHistory.push({ type: 'output', text: 'Redirecting to /experience...' });
+        newHistory.push({ type: 'output', text: 'Navigating to /experience...' });
         setTimeout(() => {
           closeTerminal();
           router.push('/experience');
@@ -81,10 +81,10 @@ export default function MiniTerminal() {
         break;
 
       case 'contact':
-        newHistory.push({ type: 'output', text: 'Redirecting to /contact...' });
+        newHistory.push({ type: 'output', text: 'Navigating to #contact...' });
         setTimeout(() => {
           closeTerminal();
-          router.push('/contact');
+          router.push('/#contact');
         }, 500);
         break;
 

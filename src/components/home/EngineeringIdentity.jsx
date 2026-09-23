@@ -24,7 +24,7 @@ export default function EngineeringIdentity() {
   ];
 
   return (
-    <section className="py-20 md:py-28 border-t border-border-subtle bg-bg-secondary/20">
+    <section id="about" className="py-20 md:py-28 border-t border-border-subtle bg-bg-secondary/20 scroll-mt-20">
       <div className="max-w-7xl mx-auto px-5 sm:px-8">
         <SectionHeading
           eyebrow="ENGINEERING IDENTITY"

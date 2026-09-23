@@ -63,14 +63,14 @@ export default function HeroSection() {
                   Explore My Work
                 </Button>
                 <Button
-                  href="/resume/Mohammed_Ferwana_Resume.pdf"
+                  href={`mailto:${siteMetadata.email}?subject=Resume%20Request%20%E2%80%94%20Mohammed%20Ferwana`}
                   variant="secondary"
                   size="lg"
                   external
                 >
-                  Download Resume
+                  Request Resume
                 </Button>
-                <Button href="/contact" variant="ghost" size="lg">
+                <Button href="/#contact" variant="ghost" size="lg">
                   Let&apos;s Talk →
                 </Button>
               </div>

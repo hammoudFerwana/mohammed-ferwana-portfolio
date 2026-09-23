@@ -4,7 +4,7 @@ import { siteMetadata } from '@/data/siteMetadata';
 
 export default function CTASection() {
   return (
-    <section className="py-24 md:py-32 border-t border-border-subtle relative overflow-hidden">
+    <section id="contact" className="py-24 md:py-32 border-t border-border-subtle relative overflow-hidden scroll-mt-20">
       {/* Background glow */}
       <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[500px] h-[300px] bg-accent/10 blur-[130px] rounded-full pointer-events-none" />
 
@@ -24,16 +24,21 @@ export default function CTASection() {
 
         <RevealOnScroll delay={0.15}>
           <div className="flex flex-wrap items-center justify-center gap-4 pt-2">
-            <Button href="/contact" variant="primary" size="lg">
+            <Button
+              href={`mailto:${siteMetadata.email}?subject=Project%20Inquiry%20%E2%80%94%20Mohammed%20Ferwana`}
+              variant="primary"
+              size="lg"
+              external
+            >
               Start a Conversation
             </Button>
             <Button
-              href="/resume/Mohammed_Ferwana_Resume.pdf"
+              href={siteMetadata.social.linkedin}
               variant="secondary"
               size="lg"
               external
             >
-              Download Resume
+              Connect on LinkedIn ↗
             </Button>
             <Button
               href={siteMetadata.social.github}
