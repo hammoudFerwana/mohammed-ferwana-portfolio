@@ -1,15 +1,22 @@
 import Badge from '@/components/shared/Badge';
+import InsurflowTestingEvidence from '@/components/projects/InsurflowTestingEvidence';
 
 /**
  * TestingSection — Testing and reliability display.
  *
  * Renders the testing approach, tools used (as badges), and detailed
- * testing description. Used in the "Testing & Reliability" section
- * of case study pages.
+ * testing description. When projectSlug === 'insurflow', renders the
+ * source-verified empirical testing evidence artifact (P2.5).
  *
- * @param {Object} testing — { approach, tools[], details }
+ * @param {Object} props
+ * @param {Object} props.testing — { approach, tools[], details }
+ * @param {string} [props.projectSlug] — Project slug identifier
  */
-export default function TestingSection({ testing }) {
+export default function TestingSection({ testing, projectSlug }) {
+  if (projectSlug === 'insurflow') {
+    return <InsurflowTestingEvidence />;
+  }
+
   return (
     <div className="rounded-xl bg-bg-secondary border border-border-default p-5 sm:p-6 space-y-5">
       {/* Approach */}

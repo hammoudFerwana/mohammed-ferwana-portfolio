@@ -221,7 +221,7 @@ export default async function CaseStudyPage({ params }) {
         {/* 07 — TESTING & RELIABILITY */}
         {project.testing && (
           <CaseStudySection number={nextSection()} title="Testing & Reliability">
-            <TestingSection testing={project.testing} />
+            <TestingSection testing={project.testing} projectSlug={project.slug} />
           </CaseStudySection>
         )}
 
