@@ -6,7 +6,7 @@ export const commandGroups = [
       { id: 'nav-projects', label: 'Projects', shortcut: 'P', action: 'navigate', target: '/projects', icon: 'Folder' },
       { id: 'nav-about', label: 'About', shortcut: 'A', action: 'navigate', target: '/#about', icon: 'User' },
       { id: 'nav-experience', label: 'Experience', shortcut: 'E', action: 'navigate', target: '/experience', icon: 'Briefcase' },
-      { id: 'nav-contact', label: 'Contact', shortcut: 'C', action: 'navigate', target: '/#contact', icon: 'Envelope' },
+      { id: 'nav-contact', label: 'Contact', shortcut: 'C', action: 'navigate', target: '/contact', icon: 'Envelope' },
     ],
   },
   {

@@ -81,10 +81,10 @@ export default function MiniTerminal() {
         break;
 
       case 'contact':
-        newHistory.push({ type: 'output', text: 'Navigating to #contact...' });
+        newHistory.push({ type: 'output', text: 'Navigating to /contact...' });
         setTimeout(() => {
           closeTerminal();
-          router.push('/#contact');
+          router.push('/contact');
         }, 500);
         break;
 
