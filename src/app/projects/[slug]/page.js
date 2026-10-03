@@ -13,6 +13,7 @@ import ImprovementCard from '@/components/projects/ImprovementCard';
 import ProjectLinks from '@/components/projects/ProjectLinks';
 import LeadershipCard from '@/components/projects/LeadershipCard';
 import InsurflowEvidence from '@/components/projects/InsurflowEvidence';
+import CaseStudyFooter from '@/components/projects/CaseStudyFooter';
 
 /* ---------- Static Generation ---------- */
 
@@ -348,6 +349,9 @@ export default async function CaseStudyPage({ params }) {
           )}
         </div>
       )}
+
+      {/* ── Case Study Continuation & Conversion Footer ── */}
+      <CaseStudyFooter currentProject={project} />
     </div>
   );
 }
