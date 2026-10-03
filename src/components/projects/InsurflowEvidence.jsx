@@ -195,7 +195,7 @@ export default function InsurflowEvidence() {
                 Why OrganizationId Leads Every Compound Index
               </span>
               <span>
-                InsurFlow enforces multi-tenant boundary checks at the database query engine level. By placing <code className="text-accent font-mono">organizationId</code> as the leftmost prefix on all compound indexes, MongoDB query execution plans never scan unindexed collection space or bleed records across tenant boundaries. The embedded <code className="text-accent font-mono">timeline</code> subdocument (<code className="text-accent font-mono">_id: false</code>) preserves full audit chronological history with zero join overhead.
+                InsurFlow enforces multi-tenant boundary checks at the database query layer. By placing <code className="text-accent font-mono">organizationId</code> as the leftmost prefix on all compound indexes, MongoDB query execution plans use index-bounded lookups tailored to primary tenant query patterns, supporting query-level tenant isolation efficiently. The embedded <code className="text-accent font-mono">timeline</code> subdocument (<code className="text-accent font-mono">_id: false</code>) records sequential audit history without relational join overhead.
               </span>
             </div>
           </div>
@@ -354,7 +354,7 @@ export default function InsurflowEvidence() {
                 FSM Integrity & Mistake-Proofing (Poka-Yoke)
               </span>
               <span>
-                By rejecting out-of-order mutations at the service boundary with HTTP 409 and <code className="text-accent font-mono">INVALID_STATUS_TRANSITION</code>, callers cannot bypass critical phases (e.g., closing unapproved claims or submitting inspections without requisite GPS/photos). Every valid transition atomically appends an immutable timeline event, ensuring guaranteed regulatory traceability.
+                By rejecting out-of-order mutations at the service boundary with HTTP 409 and <code className="text-accent font-mono">INVALID_STATUS_TRANSITION</code>, callers cannot bypass critical lifecycle phases (e.g., closing unapproved claims or submitting inspections prematurely). Every valid transition appends an audit event to the claim timeline, maintaining a verifiable chronological record of lifecycle mutations.
               </span>
             </div>
           </div>

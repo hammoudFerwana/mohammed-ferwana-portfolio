@@ -44,7 +44,7 @@ export default function InsurflowTestingEvidence() {
           </p>
         </div>
 
-        {/* ── Test Infrastructure & Contextual Metadata Badge Bar (EVD-007 + Secondary Metadata) ── */}
+        {/* ── Test Infrastructure & Contextual Metadata Badge Bar (EVD-007 + Dual Scope Metadata) ── */}
         <div className="flex flex-wrap items-center justify-between gap-3 pt-1">
           <div className="flex flex-wrap items-center gap-2">
             <span className="font-mono text-xs text-text-muted font-medium mr-1">
@@ -54,9 +54,12 @@ export default function InsurflowTestingEvidence() {
             <Badge variant="neutral" size="sm">Supertest 6</Badge>
             <Badge variant="neutral" size="sm">MongoMemoryServer 9</Badge>
           </div>
-          <div className="flex items-center gap-2">
+          <div className="flex flex-wrap items-center gap-2">
             <span className="font-mono text-[11px] text-text-muted bg-bg-tertiary px-2.5 py-1 rounded border border-border-subtle">
-              Suite Execution: 387 automated tests across 27 suites
+              Full Backend: 553 tests · 34 suites
+            </span>
+            <span className="font-mono text-[11px] text-text-primary bg-bg-tertiary px-2.5 py-1 rounded border border-accent/40">
+              Core Claims Engine: 387 tests · 27 suites
             </span>
           </div>
         </div>
@@ -116,7 +119,7 @@ export default function InsurflowTestingEvidence() {
                 : 'text-text-muted hover:text-text-secondary'
             )}
           >
-            03. Stealth Multi-Tenant Security
+            03. Cross-Tenant Masking
           </button>
         </div>
 
@@ -324,7 +327,7 @@ export default function InsurflowTestingEvidence() {
               <div className="flex flex-wrap items-center justify-between gap-2">
                 <h4 className="text-sm font-mono font-semibold text-text-primary flex items-center gap-2">
                   <span className="text-accent">Pillar 3:</span>
-                  Cross-Tenant Anti-Enumeration Defense (Stealth Tenancy)
+                  Cross-Tenant Resource Masking (HTTP 404)
                 </h4>
                 <Badge variant="outline" size="sm">
                   HTTP 404 (Masked Authorization)
@@ -332,7 +335,7 @@ export default function InsurflowTestingEvidence() {
               </div>
               <p className="text-xs sm:text-sm text-text-secondary leading-relaxed">
                 Cross-tenant resource requests return HTTP 404 CLAIM_NOT_FOUND rather than 403 Forbidden,
-                preventing malicious actors from confirming the existence of claims belonging to rival organizations.
+                preventing callers from confirming the existence of claims belonging to rival organizations through status-code side channels.
               </p>
             </div>
 
