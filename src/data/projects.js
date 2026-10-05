@@ -1,3 +1,5 @@
+import { metrics } from './metrics';
+
 export const projects = [
   {
     id: 'insurflow',
@@ -16,7 +18,7 @@ export const projects = [
       dashboard: 'https://insurflow-dashboard.vercel.app',
     },
     problem: 'Motor insurance claims processing involves disconnected stakeholders—claimants, field adjusters, repair workshops, and underwriters. Standard implementations risk out-of-order state transitions, cross-tenant data exposure, and sequence collisions during concurrent claim filings.',
-    solution: 'Engineered a modular backend architecture featuring a 10-state claim lifecycle finite state machine, tenant-scoped compound indexing, atomic sequential numbering, and automated integration test suites.',
+    solution: `Engineered a modular backend architecture featuring a ${metrics.fsmStates}-state claim lifecycle finite state machine, tenant-scoped compound indexing, atomic sequential numbering, and automated integration test suites.`,
     system: 'InsurFlow coordinates claim filing, damage assessment, workshop quotation, and underwriter settlement with deterministic transition guards, immutable audit timeline recording, and isolated multi-tenant data access.',
     backendOwnership: [
       {
@@ -29,7 +31,7 @@ export const projects = [
       },
       {
         title: 'Atomic Sequential Claim Numbering',
-        description: 'Implemented tenant-scoped sequential claim numbering (CLM-<ORG>-0001) using atomic counter increments, verified under a 15-request concurrent creation test without collisions or sequence gaps.',
+        description: `Implemented tenant-scoped sequential claim numbering (CLM-<ORG>-0001) using atomic counter increments, verified under a ${metrics.concurrentRequests}-request concurrent creation test without collisions or sequence gaps.`,
       },
       {
         title: 'Cross-Tenant Resource Masking',
@@ -125,8 +127,8 @@ export const projects = [
       tools: ['Jest', 'Supertest', 'MongoMemoryServer'],
       details: 'Automated test suite executing against an in-memory MongoDB replica with real B-tree indexes and per-test collection clearing, validating failure conditions and business invariants.',
       metrics: {
-        fullBackend: '553 automated tests across 34 suites',
-        claimsEngine: '387 automated tests across 27 suites',
+        fullBackend: `${metrics.integrationTests} automated tests across ${metrics.testSuites} suites`,
+        claimsEngine: `${metrics.claimsEngineTests} automated tests across ${metrics.claimsEngineSuites} suites`,
       },
     },
     whatIWouldImprove: [

@@ -3,15 +3,9 @@ import Link from 'next/link';
 import Button from '@/components/shared/Button';
 import RevealOnScroll from '@/components/shared/RevealOnScroll';
 import { siteMetadata } from '@/data/siteMetadata';
+import { metrics } from '@/data/metrics';
 
 export default function HeroSection() {
-  const statusItems = [
-    { name: 'Backend Engineering', status: 'Operational' },
-    { name: 'API Architecture', status: 'Optimal' },
-    { name: 'Security & RBAC', status: 'Hardened' },
-    { name: 'Build Verification', status: 'Passing' },
-    { name: 'Database Architecture', status: 'Indexed' },
-  ];
 
   return (
     <section className="relative min-h-[92dvh] flex flex-col justify-center pt-28 pb-16 overflow-hidden">
@@ -111,21 +105,42 @@ export default function HeroSection() {
               >
                 <div className="flex items-center justify-between pb-3 mb-3 border-b border-border-subtle text-[11px] font-mono">
                   <div className="flex items-center gap-2 text-text-muted uppercase tracking-wider">
-                    <span className="w-1.5 h-1.5 rounded-full bg-functional-success animate-pulse" />
-                    <span>ENGINEERING CAPABILITIES</span>
+                    <span className="w-1.5 h-1.5 rounded-full bg-functional-success" />
+                    <span>VERIFIED EVIDENCE</span>
                   </div>
-                  <span className="text-accent text-[10px]">LIVE</span>
                 </div>
-                <div className="space-y-2">
-                  {statusItems.map((item) => (
-                    <div key={item.name} className="flex items-center justify-between text-xs">
-                      <span className="text-text-secondary">{item.name}</span>
-                      <div className="flex items-center gap-1.5 font-mono text-[11px] text-text-primary">
-                        <span className="w-1.5 h-1.5 rounded-full bg-functional-success" />
-                        <span className="text-text-muted">{item.status}</span>
-                      </div>
-                    </div>
-                  ))}
+                <div className="space-y-2.5">
+                  <div className="flex items-center gap-2 text-xs">
+                    <span className="w-1.5 h-1.5 rounded-full bg-functional-success shrink-0" />
+                    <span className="text-text-secondary font-mono text-[11px]">
+                      {`${metrics.integrationTests} integration tests · ${metrics.testSuites} suites`}
+                    </span>
+                  </div>
+                  <div className="flex items-center gap-2 text-xs">
+                    <span className="w-1.5 h-1.5 rounded-full bg-functional-success shrink-0" />
+                    <span className="text-text-secondary font-mono text-[11px]">
+                      {`Concurrency: ${metrics.concurrentRequests} requests, no collisions or gaps`}
+                    </span>
+                  </div>
+                  <div className="flex items-center gap-2 text-xs">
+                    <span className="w-1.5 h-1.5 rounded-full bg-functional-success shrink-0" />
+                    <span className="text-text-secondary font-mono text-[11px]">
+                      {`${metrics.fsmStates}-state claim lifecycle, guarded transitions`}
+                    </span>
+                  </div>
+                  <div className="flex items-center justify-between gap-2 text-xs pt-1 border-t border-border-subtle/50">
+                    <span className="text-text-secondary font-mono text-[11px]">
+                      Portfolio CI: lint and build
+                    </span>
+                    <Image
+                      src={`https://github.com/hammoudFerwana/mohammed-ferwana-portfolio/actions/workflows/ci.yml/badge.svg?branch=${metrics.ciBadgeBranch}`}
+                      alt="Portfolio CI: lint and build"
+                      width={106}
+                      height={20}
+                      unoptimized
+                      className="h-4 sm:h-5 w-auto"
+                    />
+                  </div>
                 </div>
               </div>
             </RevealOnScroll>
