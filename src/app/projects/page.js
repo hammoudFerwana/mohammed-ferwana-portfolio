@@ -19,6 +19,7 @@ export default function ProjectsPage() {
       {/* Page Header */}
       <RevealOnScroll>
         <SectionHeading
+          as="h1"
           eyebrow="ENGINEERING PORTFOLIO"
           title="Projects & Architecture Case Studies"
           description="A deep dive into modular backend architecture, clean API design, and data schemas built for real-world reliability."

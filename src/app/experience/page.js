@@ -40,6 +40,7 @@ export default function ExperiencePage() {
       {/* ── Page Header ── */}
       <RevealOnScroll>
         <SectionHeading
+          as="h1"
           eyebrow="CAREER & BACKGROUND"
           title="Experience & Education"
           description="A track record of backend delivery, engineering leadership, and foundational computer systems education."
