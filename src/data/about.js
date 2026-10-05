@@ -1,3 +1,5 @@
+import { metrics } from './metrics';
+
 export const aboutData = {
   hero: {
     eyebrow: 'THE ENGINEER',
@@ -45,7 +47,7 @@ export const aboutData = {
         title: 'Production-Oriented Systems & InsurFlow Backend Ownership',
         period: '2024 – Present',
         content:
-          'Designing and implementing the backend for InsurFlow — a B2B motor insurance claim management platform — represented a major focus on complex server-side systems. Managing complex multi-party claims cannot rely on arbitrary database updates; it requires strict lifecycle state machines to prevent illegal state transitions, granular permission middleware, and audit trails. To guarantee system resilience, I authored 553 automated integration tests across 34 test suites, all passing.',
+          `Designing and implementing the backend for InsurFlow — a B2B motor insurance claim management platform — represented a major focus on complex server-side systems. Managing complex multi-party claims cannot rely on arbitrary database updates; it requires strict lifecycle state machines to prevent illegal state transitions, granular permission middleware, and audit trails. To guarantee system resilience, I authored ${metrics.integrationTests} automated integration tests across ${metrics.testSuites} test suites, all passing.`,
       },
       {
         number: '05',
@@ -158,8 +160,8 @@ export const aboutData = {
       type: 'systems',
       status: 'Active',
       description:
-        'Architected the core backend for InsurFlow, a multi-party motor claims management system. Implemented finite state machine transitions, MongoDB indexing, and 553 automated tests.',
-      highlight: '553 automated tests across 34 test suites, all passing, verifying financial and claim lifecycles.',
+        `Architected the core backend for InsurFlow, a multi-party motor claims management system. Implemented finite state machine transitions, MongoDB indexing, and ${metrics.integrationTests} automated tests.`,
+      highlight: `${metrics.integrationTests} automated tests across ${metrics.testSuites} test suites, all passing, verifying financial and claim lifecycles.`,
     },
     {
       year: '2027',

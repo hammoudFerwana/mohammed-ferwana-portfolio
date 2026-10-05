@@ -3,6 +3,7 @@
 import { useState } from 'react';
 import Badge from '@/components/shared/Badge';
 import { cn } from '@/lib/utils';
+import { metrics } from '@/data/metrics';
 
 /**
  * InsurflowTestingEvidence — Verified backend testing evidence artifact.
@@ -56,10 +57,10 @@ export default function InsurflowTestingEvidence() {
           </div>
           <div className="flex flex-wrap items-center gap-2">
             <span className="font-mono text-[11px] text-text-muted bg-bg-tertiary px-2.5 py-1 rounded border border-border-subtle">
-              Full Backend: 553 tests · 34 suites
+              Full Backend: {metrics.integrationTests} tests · {metrics.testSuites} suites
             </span>
             <span className="font-mono text-[11px] text-text-primary bg-bg-tertiary px-2.5 py-1 rounded border border-accent/40">
-              Core Claims Engine: 387 tests · 27 suites
+              Core Claims Engine: {metrics.claimsEngineTests} tests · {metrics.claimsEngineSuites} suites
             </span>
           </div>
         </div>
