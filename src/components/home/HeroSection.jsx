@@ -70,7 +70,7 @@ export default function HeroSection() {
                 >
                   Request Resume
                 </Button>
-                <Button href="/#contact" variant="ghost" size="lg">
+                <Button href="/contact" variant="ghost" size="lg">
                   Let&apos;s Talk →
                 </Button>
               </div>

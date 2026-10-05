@@ -5,6 +5,7 @@ export default function SectionHeading({
   title,
   description,
   align = 'left', // 'left' | 'center'
+  as: Component = 'h2',
   className = '',
 }) {
   const isCenter = align === 'center';
@@ -19,9 +20,9 @@ export default function SectionHeading({
         </div>
       )}
       {title && (
-        <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold tracking-tight text-text-primary text-balance">
+        <Component className="text-2xl sm:text-3xl md:text-4xl font-bold tracking-tight text-text-primary text-balance">
           {title}
-        </h2>
+        </Component>
       )}
       {description && (
         <p

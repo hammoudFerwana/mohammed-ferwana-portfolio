@@ -18,17 +18,37 @@ export default function CommandPalette() {
     group.commands.map((cmd) => ({ ...cmd, group: group.group }))
   );
 
-  const filteredCommands = allCommands.filter((cmd) =>
-    cmd.label.toLowerCase().includes(query.toLowerCase()) ||
-    cmd.group.toLowerCase().includes(query.toLowerCase())
-  );
+  const normalizedQuery = query.trim().toLowerCase();
 
+  const filteredCommands = allCommands.filter((cmd) => {
+    if (!normalizedQuery) return true;
+    const labelMatch = cmd.label.toLowerCase().includes(normalizedQuery);
+    const keywordMatch = cmd.keywords?.some((k) =>
+      k.toLowerCase().includes(normalizedQuery)
+    );
+    const groupMatch =
+      normalizedQuery.length >= 3 &&
+      cmd.group.toLowerCase().includes(normalizedQuery);
+    return labelMatch || keywordMatch || groupMatch;
+  });
+
+  // Focus search input when opened
   useEffect(() => {
     if (isCommandPaletteOpen) {
       setQuery('');
       setSelectedIndex(0);
       setTimeout(() => inputRef.current?.focus(), 50);
     }
+  }, [isCommandPaletteOpen]);
+
+  // Lock background scroll when palette is open, restore on cleanup
+  useEffect(() => {
+    if (!isCommandPaletteOpen) return;
+    const originalOverflow = document.body.style.overflow;
+    document.body.style.overflow = 'hidden';
+    return () => {
+      document.body.style.overflow = originalOverflow;
+    };
   }, [isCommandPaletteOpen]);
 
   useEffect(() => {
@@ -90,7 +110,8 @@ export default function CommandPalette() {
             value={query}
             onChange={(e) => setQuery(e.target.value)}
             onKeyDown={handleKeyDown}
-            placeholder="Type a command or navigate to a page..."
+            placeholder="Type a command or search projects..."
+            aria-label="Search commands, projects, or pages"
             className="w-full bg-transparent text-sm text-text-primary placeholder:text-text-muted focus:outline-none"
           />
           <kbd className="hidden sm:inline-flex items-center text-[10px] font-mono px-2 py-0.5 rounded bg-bg-tertiary border border-border-default text-text-muted">
@@ -99,7 +120,11 @@ export default function CommandPalette() {
         </div>
 
         {/* Command List */}
-        <div className="max-h-80 overflow-y-auto p-2 divide-y divide-border-subtle/50">
+        <div
+          role="listbox"
+          aria-label="Commands"
+          className="max-h-80 overflow-y-auto p-2 divide-y divide-border-subtle/50"
+        >
           {filteredCommands.length === 0 ? (
             <div className="py-8 text-center text-xs text-text-muted">
               No matching commands found.
@@ -111,6 +136,8 @@ export default function CommandPalette() {
                 <button
                   key={cmd.id}
                   type="button"
+                  role="option"
+                  aria-selected={isSelected}
                   onClick={() => executeCommand(cmd)}
                   onMouseEnter={() => setSelectedIndex(idx)}
                   className={cn(

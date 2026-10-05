@@ -13,6 +13,7 @@ import ImprovementCard from '@/components/projects/ImprovementCard';
 import ProjectLinks from '@/components/projects/ProjectLinks';
 import LeadershipCard from '@/components/projects/LeadershipCard';
 import InsurflowEvidence from '@/components/projects/InsurflowEvidence';
+import CaseStudyFooter from '@/components/projects/CaseStudyFooter';
 
 /* ---------- Static Generation ---------- */
 
@@ -149,100 +150,208 @@ export default async function CaseStudyPage({ params }) {
       </RevealOnScroll>
 
       {/* ── Case Study Sections ── */}
-      <div className="space-y-0">
-        {/* 01 — THE PROBLEM */}
-        {project.problem && (
-          <CaseStudySection number={nextSection()} title="The Problem">
-            <p className="text-base text-text-secondary leading-relaxed">
-              {project.problem}
-            </p>
-          </CaseStudySection>
-        )}
-
-        {/* 02 — MY ROLE */}
-        {(project.role || project.leadership) && (
-          <CaseStudySection number={nextSection()} title="My Role">
-            <div className="space-y-4">
-              {project.solution && (
-                <p className="text-base text-text-secondary leading-relaxed">
-                  {project.solution}
-                </p>
+      {project.slug === 'insurflow' ? (
+        <div className="space-y-0">
+          {/* 01 — EXECUTIVE OVERVIEW & BACKEND OWNERSHIP */}
+          <CaseStudySection number={nextSection()} title="Executive Overview & Backend Ownership">
+            <div className="space-y-6">
+              {project.problem && (
+                <div className="space-y-2">
+                  <h3 className="text-xs font-mono uppercase tracking-wider text-accent font-semibold">
+                    The Problem
+                  </h3>
+                  <p className="text-base text-text-secondary leading-relaxed">
+                    {project.problem}
+                  </p>
+                </div>
               )}
-              <LeadershipCard leadership={project.leadership} />
+
+              {project.system && (
+                <div className="space-y-2">
+                  <h3 className="text-xs font-mono uppercase tracking-wider text-accent font-semibold">
+                    The System
+                  </h3>
+                  <p className="text-base text-text-secondary leading-relaxed">
+                    {project.system}
+                  </p>
+                </div>
+              )}
+
+              {project.backendOwnership && project.backendOwnership.length > 0 && (
+                <div className="space-y-3 pt-2">
+                  <h3 className="text-xs font-mono uppercase tracking-wider text-accent font-semibold">
+                    Backend Engineering Ownership
+                  </h3>
+                  <div className="grid grid-cols-1 gap-2.5">
+                    {project.backendOwnership.map((item, idx) => (
+                      <div
+                        key={idx}
+                        className="p-3.5 rounded-lg bg-bg-secondary/70 border border-border-subtle space-y-1"
+                      >
+                        <div className="flex items-center gap-2">
+                          <span className="w-1.5 h-1.5 rounded-full bg-accent shrink-0" aria-hidden="true" />
+                          <h4 className="text-sm font-mono font-semibold text-text-primary">
+                            {item.title}
+                          </h4>
+                        </div>
+                        <p className="text-xs sm:text-sm text-text-secondary leading-relaxed pl-3.5">
+                          {item.description}
+                        </p>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              )}
             </div>
           </CaseStudySection>
-        )}
 
-        {/* 03 — THE SYSTEM */}
-        {project.system && (
-          <CaseStudySection number={nextSection()} title="The System">
-            <p className="text-base text-text-secondary leading-relaxed">
-              {project.system}
-            </p>
-          </CaseStudySection>
-        )}
+          {/* 02 — ARCHITECTURE */}
+          {project.architecture && project.architecture.nodes && project.architecture.nodes.length > 0 && (
+            <CaseStudySection number={nextSection()} title="Architecture">
+              <ArchitectureViewer architecture={project.architecture} />
+            </CaseStudySection>
+          )}
 
-        {/* 04 — ARCHITECTURE */}
-        {project.architecture && project.architecture.nodes && project.architecture.nodes.length > 0 && (
-          <CaseStudySection number={nextSection()} title="Architecture">
-            <ArchitectureViewer architecture={project.architecture} />
-          </CaseStudySection>
-        )}
+          {/* 03 — CORE ENGINEERING DECISIONS & TECHNICAL EVIDENCE */}
+          {project.engineeringDecisions && project.engineeringDecisions.length > 0 && (
+            <CaseStudySection number={nextSection()} title="Core Engineering Decisions & Technical Evidence">
+              <div className="space-y-6">
+                <div className="space-y-3">
+                  {project.engineeringDecisions.map((decision, idx) => (
+                    <DecisionCard key={idx} decision={decision} index={idx} />
+                  ))}
+                </div>
+                <InsurflowEvidence />
+              </div>
+            </CaseStudySection>
+          )}
 
-        {/* 05 — ENGINEERING DECISIONS */}
-        {project.engineeringDecisions && project.engineeringDecisions.length > 0 && (
-          <CaseStudySection number={nextSection()} title="Engineering Decisions">
-            <div className="space-y-3">
-              {project.engineeringDecisions.map((decision, idx) => (
-                <DecisionCard key={idx} decision={decision} index={idx} />
-              ))}
-            </div>
-          </CaseStudySection>
-        )}
+          {/* 04 — TESTING & RELIABILITY */}
+          {project.testing && (
+            <CaseStudySection number={nextSection()} title="Testing & Reliability">
+              <TestingSection testing={project.testing} projectSlug={project.slug} />
+            </CaseStudySection>
+          )}
 
-        {/* TECHNICAL EVIDENCE (InsurFlow-specific verified implementation artifact) */}
-        {project.slug === 'insurflow' && (
-          <CaseStudySection number={nextSection()} title="Technical Evidence">
-            <InsurflowEvidence />
-          </CaseStudySection>
-        )}
+          {/* 05 — TRADE-OFFS */}
+          {project.tradeoffs && project.tradeoffs.length > 0 && (
+            <CaseStudySection number={nextSection()} title="Trade-Offs">
+              <div className="space-y-3">
+                {project.tradeoffs.map((tradeoff, idx) => (
+                  <TradeoffCard key={idx} tradeoff={tradeoff} />
+                ))}
+              </div>
+            </CaseStudySection>
+          )}
 
-        {/* 06 — TRADE-OFFS */}
-        {project.tradeoffs && project.tradeoffs.length > 0 && (
-          <CaseStudySection number={nextSection()} title="Trade-Offs">
-            <div className="space-y-3">
-              {project.tradeoffs.map((tradeoff, idx) => (
-                <TradeoffCard key={idx} tradeoff={tradeoff} />
-              ))}
-            </div>
-          </CaseStudySection>
-        )}
+          {/* 06 — WHAT I WOULD IMPROVE */}
+          {project.whatIWouldImprove && project.whatIWouldImprove.length > 0 && (
+            <CaseStudySection number={nextSection()} title="What I Would Improve">
+              <div className="space-y-3">
+                {project.whatIWouldImprove.map((improvement, idx) => (
+                  <ImprovementCard key={idx} improvement={improvement} />
+                ))}
+              </div>
+            </CaseStudySection>
+          )}
 
-        {/* 07 — TESTING & RELIABILITY */}
-        {project.testing && (
-          <CaseStudySection number={nextSection()} title="Testing & Reliability">
-            <TestingSection testing={project.testing} projectSlug={project.slug} />
-          </CaseStudySection>
-        )}
-
-        {/* 08 — WHAT I WOULD IMPROVE */}
-        {project.whatIWouldImprove && project.whatIWouldImprove.length > 0 && (
-          <CaseStudySection number={nextSection()} title="What I Would Improve">
-            <div className="space-y-3">
-              {project.whatIWouldImprove.map((improvement, idx) => (
-                <ImprovementCard key={idx} improvement={improvement} />
-              ))}
-            </div>
-          </CaseStudySection>
-        )}
-
-        {/* 09 — LINKS */}
-        {project.links && (project.links.github || project.links.live || project.links.dashboard) && (
+          {/* 07 — LINKS */}
           <CaseStudySection number={nextSection()} title="Links">
-            <ProjectLinks links={project.links} />
+            <ProjectLinks links={project.links} projectSlug={project.slug} />
           </CaseStudySection>
-        )}
-      </div>
+        </div>
+      ) : (
+        <div className="space-y-0">
+          {/* 01 — THE PROBLEM */}
+          {project.problem && (
+            <CaseStudySection number={nextSection()} title="The Problem">
+              <p className="text-base text-text-secondary leading-relaxed">
+                {project.problem}
+              </p>
+            </CaseStudySection>
+          )}
+
+          {/* 02 — MY ROLE */}
+          {(project.role || project.leadership) && (
+            <CaseStudySection number={nextSection()} title="My Role">
+              <div className="space-y-4">
+                {project.solution && (
+                  <p className="text-base text-text-secondary leading-relaxed">
+                    {project.solution}
+                  </p>
+                )}
+                <LeadershipCard leadership={project.leadership} />
+              </div>
+            </CaseStudySection>
+          )}
+
+          {/* 03 — THE SYSTEM */}
+          {project.system && (
+            <CaseStudySection number={nextSection()} title="The System">
+              <p className="text-base text-text-secondary leading-relaxed">
+                {project.system}
+              </p>
+            </CaseStudySection>
+          )}
+
+          {/* 04 — ARCHITECTURE */}
+          {project.architecture && project.architecture.nodes && project.architecture.nodes.length > 0 && (
+            <CaseStudySection number={nextSection()} title="Architecture">
+              <ArchitectureViewer architecture={project.architecture} />
+            </CaseStudySection>
+          )}
+
+          {/* 05 — ENGINEERING DECISIONS */}
+          {project.engineeringDecisions && project.engineeringDecisions.length > 0 && (
+            <CaseStudySection number={nextSection()} title="Engineering Decisions">
+              <div className="space-y-3">
+                {project.engineeringDecisions.map((decision, idx) => (
+                  <DecisionCard key={idx} decision={decision} index={idx} />
+                ))}
+              </div>
+            </CaseStudySection>
+          )}
+
+          {/* 06 — TRADE-OFFS */}
+          {project.tradeoffs && project.tradeoffs.length > 0 && (
+            <CaseStudySection number={nextSection()} title="Trade-Offs">
+              <div className="space-y-3">
+                {project.tradeoffs.map((tradeoff, idx) => (
+                  <TradeoffCard key={idx} tradeoff={tradeoff} />
+                ))}
+              </div>
+            </CaseStudySection>
+          )}
+
+          {/* 07 — TESTING & RELIABILITY */}
+          {project.testing && (
+            <CaseStudySection number={nextSection()} title="Testing & Reliability">
+              <TestingSection testing={project.testing} projectSlug={project.slug} />
+            </CaseStudySection>
+          )}
+
+          {/* 08 — WHAT I WOULD IMPROVE */}
+          {project.whatIWouldImprove && project.whatIWouldImprove.length > 0 && (
+            <CaseStudySection number={nextSection()} title="What I Would Improve">
+              <div className="space-y-3">
+                {project.whatIWouldImprove.map((improvement, idx) => (
+                  <ImprovementCard key={idx} improvement={improvement} />
+                ))}
+              </div>
+            </CaseStudySection>
+          )}
+
+          {/* 09 — LINKS */}
+          {project.links && (project.links.github || project.links.live || project.links.dashboard) && (
+            <CaseStudySection number={nextSection()} title="Links">
+              <ProjectLinks links={project.links} projectSlug={project.slug} />
+            </CaseStudySection>
+          )}
+        </div>
+      )}
+
+      {/* ── Case Study Continuation & Conversion Footer ── */}
+      <CaseStudyFooter currentProject={project} />
     </div>
   );
 }

@@ -65,10 +65,10 @@ export default function MiniTerminal() {
       }
 
       case 'about':
-        newHistory.push({ type: 'output', text: 'Navigating to #about...' });
+        newHistory.push({ type: 'output', text: 'Navigating to /about...' });
         setTimeout(() => {
           closeTerminal();
-          router.push('/#about');
+          router.push('/about');
         }, 500);
         break;
 

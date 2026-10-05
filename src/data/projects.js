@@ -5,7 +5,7 @@ export const projects = [
     title: 'InsurFlow',
     description: 'B2B motor insurance claims management platform designed to automate multi-party claim settlement workflows and audit compliance.',
     role: 'Backend Engineer / Backend Owner',
-    category: 'Enterprise',
+    category: 'B2B Claims Engine',
     tier: 1,
     featured: true,
     image: '/images/projects/insurflow.jpg',
@@ -15,9 +15,31 @@ export const projects = [
       live: null,
       dashboard: 'https://insurflow-dashboard.vercel.app',
     },
-    problem: 'Insurance claims processing typically suffers from fragmented communication, opaque review stages, and high latency when validating damages and financial disbursements across adjusters, workshops, and underwriters.',
-    solution: 'Designed a modular backend architecture with domain separation, strict state transitions for claim lifecycles, role-based access control, and audited data persistence.',
-    system: 'InsurFlow coordinates claim submission, document verification, adjuster assessment, and final approval pipelines with idempotent transitions and detailed audit logging.',
+    problem: 'Motor insurance claims processing involves disconnected stakeholders—claimants, field adjusters, repair workshops, and underwriters. Standard implementations risk out-of-order state transitions, cross-tenant data exposure, and sequence collisions during concurrent claim filings.',
+    solution: 'Engineered a modular backend architecture featuring a 10-state claim lifecycle finite state machine, tenant-scoped compound indexing, atomic sequential numbering, and automated integration test suites.',
+    system: 'InsurFlow coordinates claim filing, damage assessment, workshop quotation, and underwriter settlement with deterministic transition guards, immutable audit timeline recording, and isolated multi-tenant data access.',
+    backendOwnership: [
+      {
+        title: 'State Machine Lifecycle Engine',
+        description: 'Implemented the claim lifecycle finite state machine in claim.service.js with transition guards and deterministic HTTP 409 INVALID_STATUS_TRANSITION responses.',
+      },
+      {
+        title: 'Multi-Tenant Data Modeling & Indexing',
+        description: 'Designed tenant-scoped claim access patterns and compound B-tree indexes using organizationId as the leading scope field to enforce query isolation.',
+      },
+      {
+        title: 'Atomic Sequential Claim Numbering',
+        description: 'Implemented tenant-scoped sequential claim numbering (CLM-<ORG>-0001) using atomic counter increments, verified under a 15-request concurrent creation test without collisions or sequence gaps.',
+      },
+      {
+        title: 'Cross-Tenant Resource Masking',
+        description: 'Implemented repository-level tenant checks that return HTTP 404 CLAIM_NOT_FOUND rather than 403 Forbidden for cross-tenant access attempts to prevent ID enumeration.',
+      },
+      {
+        title: 'Automated Integration Testing',
+        description: 'Authored and maintained automated integration test suites using Jest, Supertest, and MongoMemoryServer, validating business invariants against an in-memory replica.',
+      },
+    ],
     architecture: {
       nodes: [
         {
@@ -73,19 +95,19 @@ export const projects = [
     },
     engineeringDecisions: [
       {
-        title: 'Finite State Machine for Claim Lifecycle',
-        description: 'Enforced claim status transitions through a validated state machine rather than arbitrary database updates, preventing illegal bypasses (e.g. payout before adjuster approval).',
-        context: 'Critical for financial compliance and regulatory auditability in insurance domains.',
+        title: 'Deterministic Finite State Machine (FSM)',
+        description: 'Enforced claim status transitions through a validated state machine in claim.service.js rather than arbitrary database updates, rejecting out-of-order mutations with HTTP 409 INVALID_STATUS_TRANSITION.',
+        context: 'Enforces that claims cannot bypass mandatory review stages (e.g. payout before adjuster approval) while appending structured audit events to the timeline.',
       },
       {
-        title: 'Role-Based Access Control (RBAC) Middleware',
-        description: 'Implemented declarative permission middleware to decouple authentication logic from business controllers, simplifying endpoint security audits.',
-        context: 'Different stakeholders (claimants, adjusters, approvers) require strictly bounded visibility.',
+        title: 'Multi-Tenant Data Modeling & Compound Indexing',
+        description: 'Structured Mongoose schemas with organizationId as the leading field in all compound indexes ({ organizationId: 1, claimNumber: 1 }, { organizationId: 1, createdAt: -1, status: 1 }).',
+        context: 'Aligns database B-tree indexes directly with tenant-scoped query patterns, ensuring query execution plans use efficient index-bounded lookups for primary tenant queries.',
       },
       {
-        title: 'Defensive Input Sanitization & Schema Validation',
-        description: 'Constructed rigid schema validation layers for all inbound requests before execution reaches controller handlers, eliminating malformed or injection-prone payloads.',
-        context: 'Ensures payload integrity across complex nested claim forms.',
+        title: 'Atomic Sequential Claim Numbering',
+        description: 'Engineered tenant-scoped sequential numbering (CLM-<ORG>-0001) using Counter.findOneAndUpdate with atomic $inc updates in a pre-save hook, verified under concurrent execution.',
+        context: 'Prevents duplicate number collisions across parallel filings while maintaining separate sequential counters per tenant organization.',
       },
     ],
     tradeoffs: [
@@ -99,18 +121,22 @@ export const projects = [
       },
     ],
     testing: {
-      approach: 'Integration testing for critical API endpoints, auth verification, and claim lifecycle status transitions.',
-      tools: ['Jest', 'Supertest'],
-      details: 'Automated test suite simulating end-to-end claim submissions, permission rejections for unauthorized roles, and edge-case payload handling.',
+      approach: 'Defensive integration testing targeting state transitions, concurrency safety, cross-tenant isolation, and API error contracts.',
+      tools: ['Jest', 'Supertest', 'MongoMemoryServer'],
+      details: 'Automated test suite executing against an in-memory MongoDB replica with real B-tree indexes and per-test collection clearing, validating failure conditions and business invariants.',
+      metrics: {
+        fullBackend: '553 automated tests across 34 suites',
+        claimsEngine: '387 automated tests across 27 suites',
+      },
     },
     whatIWouldImprove: [
       {
         area: 'Asynchronous Event Pipeline',
-        description: 'Integrate an asynchronous message queue (e.g. RabbitMQ or Redis Streams) for long-running notifications, webhook callbacks, and PDF report generation.',
+        description: 'Future consideration: Integrate an asynchronous message queue (e.g. RabbitMQ or Redis Streams) for long-running notifications, webhook callbacks, and PDF report generation.',
       },
       {
         area: 'Distributed Caching',
-        description: 'Introduce Redis caching for frequently accessed policy catalogs and lookup metadata to reduce database round-trips.',
+        description: 'Future consideration: Introduce Redis caching for frequently accessed policy catalogs and lookup metadata to reduce database round-trips.',
       },
     ],
   },
