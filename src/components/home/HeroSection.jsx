@@ -105,10 +105,9 @@ export default function HeroSection() {
               >
                 <div className="flex items-center justify-between pb-3 mb-3 border-b border-border-subtle text-[11px] font-mono">
                   <div className="flex items-center gap-2 text-text-muted uppercase tracking-wider">
-                    <span className="w-1.5 h-1.5 rounded-full bg-functional-success animate-pulse" />
+                    <span className="w-1.5 h-1.5 rounded-full bg-functional-success" />
                     <span>VERIFIED EVIDENCE</span>
                   </div>
-                  <span className="text-accent text-[10px]">LIVE</span>
                 </div>
                 <div className="space-y-2.5">
                   <div className="flex items-center gap-2 text-xs">
