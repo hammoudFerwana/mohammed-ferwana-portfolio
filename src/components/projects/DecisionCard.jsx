@@ -1,6 +1,7 @@
 'use client';
 
 import { useState } from 'react';
+import SpotlightCard from '@/components/shared/SpotlightCard';
 import { cn } from '@/lib/utils';
 
 /**
@@ -16,7 +17,8 @@ export default function DecisionCard({ decision, index = 0 }) {
   const [isExpanded, setIsExpanded] = useState(index === 0);
 
   return (
-    <div
+    <SpotlightCard
+      as="div"
       className={cn(
         'rounded-xl border transition-all duration-300',
         isExpanded
@@ -68,6 +70,6 @@ export default function DecisionCard({ decision, index = 0 }) {
           )}
         </div>
       )}
-    </div>
+    </SpotlightCard>
   );
 }

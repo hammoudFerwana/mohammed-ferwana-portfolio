@@ -2,13 +2,15 @@ import Image from 'next/image';
 import Link from 'next/link';
 import Badge from '@/components/shared/Badge';
 import Button from '@/components/shared/Button';
+import SpotlightCard from '@/components/shared/SpotlightCard';
 import { cn } from '@/lib/utils';
 
 export default function ProjectCard({ project, priority = false }) {
   const isTier1 = project.tier === 1;
 
   return (
-    <div
+    <SpotlightCard
+      as="div"
       className={cn(
         'group rounded-2xl bg-bg-secondary border border-border-default hover:border-border-strong overflow-hidden transition-all duration-300 flex flex-col justify-between hover:-translate-y-1 hover:shadow-xl hover:shadow-accent/5'
       )}
@@ -139,6 +141,6 @@ export default function ProjectCard({ project, priority = false }) {
           </div>
         )}
       </div>
-    </div>
+    </SpotlightCard>
   );
 }
