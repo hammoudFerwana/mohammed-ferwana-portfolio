@@ -28,12 +28,7 @@ const NODE_COORDINATES = {
 export default function FsmSimulator() {
   const [currentState, setCurrentState] = useState(states[0]); // Initial state: 'NEW'
   const [history, setHistory] = useState([]);
-  const [activeResponse, setActiveResponse] = useState(() => ({
-    type: 'success',
-    status: 200,
-    target: states[0],
-    payload: build200ResponseBody(states[0]),
-  }));
+  const [activeResponse, setActiveResponse] = useState(null);
   const [errorFeedbackState, setErrorFeedbackState] = useState(null);
   const [ariaLiveMessage, setAriaLiveMessage] = useState(
     'FSM Simulator ready. Initial state is NEW.'
@@ -112,12 +107,7 @@ export default function FsmSimulator() {
     const initialState = states[0];
     setCurrentState(initialState);
     setErrorFeedbackState(null);
-    setActiveResponse({
-      type: 'success',
-      status: 200,
-      target: initialState,
-      payload: build200ResponseBody(initialState),
-    });
+    setActiveResponse(null);
     setAriaLiveMessage(`Simulator reset to initial state ${initialState}.`);
   }, []);
 
@@ -142,7 +132,7 @@ export default function FsmSimulator() {
               Interactive Claim Lifecycle Simulator (FSM)
             </h3>
             <Badge variant="accent" size="sm">
-              Single Source of Truth
+              Simulation
             </Badge>
           </div>
           <p className="text-xs text-text-secondary">
@@ -354,10 +344,8 @@ export default function FsmSimulator() {
                     ? 'Current State.'
                     : isAllowed
                       ? 'Allowed Target (returns 200).'
-                      : isTerminal
-                        ? 'Terminal State.'
-                        : 'Forbidden Target (returns 409).'
-                    }`}
+                      : 'Forbidden Target (returns 409).'
+                  }${isTerminal ? ' Terminal state.' : ''}`}
                   onClick={() => handleSelectState(state)}
                   onKeyDown={(e) => {
                     if (e.key === 'Enter' || e.key === ' ') {
@@ -366,11 +354,23 @@ export default function FsmSimulator() {
                     }
                   }}
                   className={cn(
-                    'cursor-pointer focus:outline-none transition-transform duration-150',
+                    'group cursor-pointer focus:outline-none transition-transform duration-150',
                     !shouldReduceMotion && 'hover:scale-[1.03]'
                   )}
                   style={{ transformOrigin: `${node.x}px ${node.y}px` }}
                 >
+                  {/* Keyboard Focus Ring */}
+                  <rect
+                    x={node.x - node.w / 2 - 4}
+                    y={node.y - node.h / 2 - 4}
+                    width={node.w + 8}
+                    height={node.h + 8}
+                    rx="10"
+                    fill="none"
+                    stroke="#8b5cf6"
+                    strokeWidth="2"
+                    className="pointer-events-none opacity-0 group-focus-visible:opacity-100"
+                  />
                   {/* Outer Focus/Hover Glow */}
                   {isCurrent && (
                     <rect
@@ -430,50 +430,68 @@ export default function FsmSimulator() {
 
       {/* Two-Column Detail View: Response Envelope Panel & Transition Attempt Log */}
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
-        {/* Left Column: Response Payload Panel (D2) */}
+        {/* Left Column: Response Payload Panel */}
         <div className="rounded-lg bg-bg-primary/95 border border-border-subtle p-4 space-y-3">
-          <div className="flex flex-wrap items-center justify-between gap-2 border-b border-border-subtle pb-2.5">
-            <div className="flex items-center gap-2">
-              <span className="font-mono text-xs text-text-primary font-semibold">
-                HTTP {activeResponse.status}{' '}
-                {activeResponse.status === 200 ? 'OK' : 'Conflict'}
-              </span>
-              <Badge
-                variant={activeResponse.status === 200 ? 'success' : 'error'}
-                size="sm"
-              >
-                {activeResponse.status === 200 ? 'Permitted' : 'Rejected'}
-              </Badge>
-            </div>
-            <span className="font-mono text-[11px] text-text-muted">
-              {activeResponse.status === 200
-                ? 'Service return value'
-                : 'INVALID_STATUS_TRANSITION'}
-            </span>
-          </div>
+          {activeResponse ? (
+            <>
+              <div className="flex flex-wrap items-center justify-between gap-2 border-b border-border-subtle pb-2.5">
+                <div className="flex items-center gap-2">
+                  <span className="font-mono text-xs text-text-primary font-semibold">
+                    HTTP {activeResponse.status}{' '}
+                    {activeResponse.status === 200 ? 'OK' : 'Conflict'}
+                  </span>
+                  <span
+                    className={
+                      activeResponse.status === 200
+                        ? 'px-1.5 py-0.5 rounded text-[10px] font-semibold bg-functional-success/10 text-functional-success border border-functional-success/30'
+                        : 'px-1.5 py-0.5 rounded text-[10px] font-semibold bg-functional-error/10 text-functional-error border border-functional-error/30'
+                    }
+                  >
+                    {activeResponse.status === 200 ? 'Permitted' : 'Rejected'}
+                  </span>
+                </div>
+                <span className="font-mono text-[11px] text-text-muted">
+                  {activeResponse.status === 200
+                    ? 'Service return value'
+                    : 'INVALID_STATUS_TRANSITION'}
+                </span>
+              </div>
 
-          {/* Response Payload Pre Box */}
-          <div className="overflow-x-auto rounded bg-bg-secondary p-3 font-mono text-xs leading-relaxed">
-            <pre
-              className={
-                activeResponse.status === 200
-                  ? 'text-functional-success'
-                  : 'text-functional-error'
-              }
-            >
-              {JSON.stringify(activeResponse.payload, null, 2)}
-            </pre>
-          </div>
+              {/* Response Payload Pre Box */}
+              <div className="overflow-x-auto rounded bg-bg-secondary p-3 font-mono text-xs leading-relaxed">
+                <pre
+                  className={
+                    activeResponse.status === 200
+                      ? 'text-functional-success'
+                      : 'text-functional-error'
+                  }
+                >
+                  {JSON.stringify(activeResponse.payload, null, 2)}
+                </pre>
+              </div>
 
-          {/* D2 Strict Mandatory Captions */}
-          <div className="space-y-1 font-mono text-[11px] text-text-muted">
-            <p>Simulated response, no network call</p>
-            {activeResponse.status === 409 && (
-              <p className="text-text-secondary">
-                message derived from the transition table
-              </p>
-            )}
-          </div>
+              {/* Response Captions */}
+              <div className="space-y-1 font-mono text-[11px] text-text-muted">
+                <p>Simulated response, no network call</p>
+                {activeResponse.status === 409 && (
+                  <p className="text-text-secondary">
+                    message derived from the transition table
+                  </p>
+                )}
+              </div>
+            </>
+          ) : (
+            <>
+              <div className="border-b border-border-subtle pb-2.5">
+                <span className="font-mono text-xs font-semibold text-text-primary">
+                  No request sent yet
+                </span>
+              </div>
+              <div className="py-8 text-center text-xs text-text-muted font-mono">
+                Select a target state. The simulated response appears here.
+              </div>
+            </>
+          )}
         </div>
 
         {/* Right Column: Execution History Log (Last 5 Attempts) */}

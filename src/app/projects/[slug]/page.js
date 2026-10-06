@@ -21,7 +21,7 @@ const FsmSimulator = dynamic(
   {
     loading: () => (
       <div
-        className="min-h-[480px] rounded-xl bg-bg-secondary border border-border-default animate-pulse"
+        className="min-h-[480px] rounded-xl bg-bg-secondary border border-border-default motion-safe:animate-pulse"
         aria-hidden="true"
       />
     ),
