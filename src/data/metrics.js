@@ -6,6 +6,8 @@
  * contains the literal number 15 and remains unchanged as a syntax-highlighted code excerpt.
  */
 
+import { claimFsm } from './claimFsm';
+
 // Switch to 'main' after the first production release merge
 export const ciBadgeBranch = 'develop';
 
@@ -14,7 +16,7 @@ export const metrics = {
   testSuites: 34,
   claimsEngineTests: 387,
   claimsEngineSuites: 27,
-  fsmStates: 10,
+  fsmStates: claimFsm.states.length,
   concurrentRequests: 15,
   ciBadgeBranch,
   source: 'Existing portfolio data at commit 2b60f86',
