@@ -1,7 +1,6 @@
 'use client';
 
 import { useRef, useCallback } from 'react';
-import { cn } from '@/lib/utils';
 
 /**
  * SpotlightCard — Dynamic radial gradient cursor glow card container.
@@ -35,11 +34,15 @@ export default function SpotlightCard({
     el.style.setProperty('--my', `${y}px`);
   }, []);
 
+  const combinedClassName = className
+    ? `spotlight-card ${className}`
+    : 'spotlight-card';
+
   return (
     <Component
       ref={containerRef}
       onPointerMove={handlePointerMove}
-      className={cn('spotlight-card', className)}
+      className={combinedClassName}
       {...props}
     >
       {children}
