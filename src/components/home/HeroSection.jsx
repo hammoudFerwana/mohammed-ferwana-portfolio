@@ -9,14 +9,24 @@ export default function HeroSection() {
 
   return (
     <section className="relative min-h-[92dvh] flex flex-col justify-center pt-28 pb-16 overflow-hidden">
-      {/* Background radial gradient glow */}
-      <div className="absolute top-1/4 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[400px] bg-accent/8 blur-[140px] pointer-events-none rounded-full" />
+      {/* Background Animated Aurora Mesh (3 Orbs, GPU-accelerated) */}
+      <div className="absolute inset-0 overflow-hidden pointer-events-none" aria-hidden="true">
+        <div className="absolute top-1/4 left-1/4 -translate-x-1/2 -translate-y-1/2 w-[550px] h-[400px] bg-accent/10 blur-[130px] rounded-full animate-aurora" />
+        <div
+          className="absolute top-1/3 right-1/4 translate-x-1/4 -translate-y-1/2 w-[480px] h-[380px] bg-accent-secondary/10 blur-[140px] rounded-full animate-aurora"
+          style={{ animationDelay: '-6s' }}
+        />
+        <div
+          className="absolute bottom-1/4 left-1/2 -translate-x-1/2 translate-y-1/4 w-[380px] h-[320px] bg-cyan-500/5 blur-[120px] rounded-full animate-aurora"
+          style={{ animationDelay: '-11s' }}
+        />
+      </div>
 
       <div className="max-w-7xl mx-auto px-5 sm:px-8 w-full relative z-10">
-        {/* Technical Metadata Bar */}
+        {/* Technical Metadata Bar (Frame 0ms - 50ms) */}
         <RevealOnScroll delay={0.05}>
           <div className="inline-flex items-center gap-2 font-mono text-[11px] sm:text-xs text-text-muted tracking-widest uppercase bg-bg-secondary/70 border border-border-default px-3.5 py-1.5 rounded-full mb-8 shadow-inner">
-            <span className="w-2 h-2 rounded-full bg-functional-success animate-pulse shrink-0" />
+            <span className="w-2 h-2 rounded-full bg-functional-success animate-pulse-ring shrink-0" />
             <span>Node.js · Express · MongoDB · REST APIs · System Architecture</span>
           </div>
         </RevealOnScroll>
@@ -24,16 +34,26 @@ export default function HeroSection() {
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-8 items-center">
           {/* Main Hero Copy (7 cols) */}
           <div className="lg:col-span-7 space-y-6">
-            <RevealOnScroll delay={0.1}>
-              <h1 className="text-4xl sm:text-6xl md:text-7xl font-bold tracking-[-0.04em] text-text-primary leading-[1.08] text-balance">
-                Mohammed <br />
-                <span className="text-transparent bg-clip-text bg-gradient-to-r from-text-primary via-text-primary to-text-secondary">
+            <div>
+              <RevealOnScroll delay={0.15}>
+                <h1 className="text-4xl sm:text-6xl md:text-7xl font-bold tracking-[-0.04em] text-text-primary leading-[1.08] text-balance">
+                  Mohammed
+                </h1>
+              </RevealOnScroll>
+              <RevealOnScroll delay={0.25}>
+                <span
+                  className="text-4xl sm:text-6xl md:text-7xl font-bold tracking-[-0.04em] leading-[1.08] text-transparent bg-clip-text animate-shimmer inline-block"
+                  style={{
+                    backgroundImage: 'linear-gradient(110deg, #f5f5f7 0%, #8b5cf6 35%, #6366f1 65%, #f5f5f7 100%)',
+                    backgroundSize: '250% 100%',
+                  }}
+                >
                   Ferwana
                 </span>
-              </h1>
-            </RevealOnScroll>
+              </RevealOnScroll>
+            </div>
 
-            <RevealOnScroll delay={0.15}>
+            <RevealOnScroll delay={0.35}>
               <div className="space-y-2">
                 <p className="font-mono text-sm sm:text-base text-accent font-medium tracking-tight">
                   Backend Engineer
@@ -44,17 +64,17 @@ export default function HeroSection() {
               </div>
             </RevealOnScroll>
 
-            <RevealOnScroll delay={0.2}>
+            <RevealOnScroll delay={0.45}>
               <p className="text-base sm:text-lg text-text-secondary leading-relaxed max-w-xl text-balance">
                 I design robust backend architectures, engineer predictable RESTful APIs, and translate complex domain workflows into maintainable, production-ready systems.
               </p>
             </RevealOnScroll>
 
-            {/* CTAs */}
-            <RevealOnScroll delay={0.25}>
+            {/* CTAs (Frame 550ms) */}
+            <RevealOnScroll delay={0.55}>
               <div className="flex flex-wrap items-center gap-3 pt-2">
                 <Button href="/projects" variant="primary" size="lg">
-                  Explore My Work
+                  Explore My Work →
                 </Button>
                 <Button
                   href={`mailto:${siteMetadata.email}?subject=Resume%20Request%20%E2%80%94%20Mohammed%20Ferwana`}
@@ -73,8 +93,8 @@ export default function HeroSection() {
 
           {/* Portrait & System Status Widget (5 cols) */}
           <div className="lg:col-span-5 flex flex-col items-center lg:items-end gap-6">
-            <RevealOnScroll delay={0.2} className="w-full max-w-sm">
-              <div className="relative group">
+            <RevealOnScroll delay={0.7} className="w-full max-w-sm">
+              <div className="relative group animate-float">
                 {/* Subtle back ambient glow */}
                 <div className="absolute -inset-1 rounded-2xl bg-gradient-to-tr from-accent/30 to-accent-secondary/20 blur-lg opacity-70 group-hover:opacity-100 transition duration-500" />
 
@@ -97,15 +117,15 @@ export default function HeroSection() {
               </div>
             </RevealOnScroll>
 
-            {/* System Status Widget (Signature engineering element) */}
-            <RevealOnScroll delay={0.3} className="w-full max-w-sm">
+            {/* System Status Widget (Signature engineering element - Frame 850ms) */}
+            <RevealOnScroll delay={0.85} className="w-full max-w-sm">
               <div
                 className="w-full rounded-xl bg-bg-secondary/90 border border-border-default p-4 shadow-lg backdrop-blur-sm"
                 aria-hidden="true"
               >
                 <div className="flex items-center justify-between pb-3 mb-3 border-b border-border-subtle text-[11px] font-mono">
                   <div className="flex items-center gap-2 text-text-muted uppercase tracking-wider">
-                    <span className="w-1.5 h-1.5 rounded-full bg-functional-success" />
+                    <span className="w-2 h-2 rounded-full bg-functional-success animate-pulse-ring shrink-0" />
                     <span>VERIFIED EVIDENCE</span>
                   </div>
                 </div>

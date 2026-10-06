@@ -32,7 +32,7 @@ export default function MobileMenu({ isOpen, onClose, links, currentPath }) {
 
   return (
     <div
-      className="fixed inset-0 z-50 md:hidden bg-bg-primary/95 backdrop-blur-xl flex flex-col justify-between p-6 transition-all duration-300"
+      className="fixed inset-0 z-50 md:hidden bg-bg-primary/92 backdrop-blur-3xl flex flex-col justify-between p-6 transition-all duration-300"
       role="dialog"
       aria-modal="true"
       aria-label="Mobile Navigation"
@@ -40,7 +40,7 @@ export default function MobileMenu({ isOpen, onClose, links, currentPath }) {
       {/* Top Header */}
       <div className="flex items-center justify-between pb-6 border-b border-border-subtle">
         <Link href="/" onClick={onClose} className="flex items-center gap-2.5">
-          <div className="w-8 h-8 rounded-lg bg-bg-secondary border border-border-default flex items-center justify-center font-mono font-bold text-accent text-sm">
+          <div className="w-8 h-8 rounded-full bg-bg-secondary border border-border-default flex items-center justify-center font-mono font-bold text-accent text-sm">
             MF
           </div>
           <span className="text-sm font-semibold tracking-tight text-text-primary">
@@ -52,7 +52,7 @@ export default function MobileMenu({ isOpen, onClose, links, currentPath }) {
           type="button"
           onClick={onClose}
           aria-label="Close menu"
-          className="p-2 rounded-lg bg-bg-secondary border border-border-default text-text-secondary hover:text-text-primary focus-visible:ring-2 focus-visible:ring-accent"
+          className="p-2 rounded-full bg-bg-secondary border border-border-default text-text-secondary hover:text-text-primary focus-visible:ring-2 focus-visible:ring-accent"
         >
           <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2">
             <path strokeLinecap="round" strokeLinejoin="round" d="M6 18L18 6M6 6l12 12" />
@@ -60,20 +60,21 @@ export default function MobileMenu({ isOpen, onClose, links, currentPath }) {
         </button>
       </div>
 
-      {/* Navigation Links */}
+      {/* Navigation Links with Staggered Reveals */}
       <nav className="flex flex-col gap-2 my-auto py-8">
         <span className="font-mono text-[11px] uppercase tracking-widest text-text-muted mb-2">
           Navigation
         </span>
-        {links.map((item) => {
+        {links.map((item, idx) => {
           const isActive = currentPath === item.href;
           return (
             <Link
               key={item.href}
               href={item.href}
               onClick={onClose}
+              style={{ animationDelay: `${idx * 60}ms` }}
               className={cn(
-                'flex items-center justify-between py-3 px-4 rounded-xl text-lg font-medium transition-all duration-150',
+                'flex items-center justify-between py-3 px-4 rounded-xl text-lg font-medium transition-all duration-200 animate-in fade-in slide-in-from-bottom-4 fill-mode-both',
                 isActive
                   ? 'bg-bg-secondary text-text-primary border border-accent/30'
                   : 'text-text-secondary hover:text-text-primary hover:bg-bg-secondary/60'

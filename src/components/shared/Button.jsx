@@ -15,7 +15,7 @@ export default function Button({
   iconPosition = 'left',
   ...props
 }) {
-  const baseStyles = 'inline-flex items-center justify-center font-medium rounded-lg transition-all duration-200 focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2 focus-visible:ring-offset-bg-primary active:scale-[0.98] disabled:opacity-50 disabled:pointer-events-none disabled:cursor-not-allowed select-none';
+  const baseStyles = 'group inline-flex items-center justify-center font-medium rounded-lg transition-all duration-300 ease-[cubic-bezier(0.32,0.72,0,1)] focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2 focus-visible:ring-offset-bg-primary active:scale-[0.98] disabled:opacity-50 disabled:pointer-events-none disabled:cursor-not-allowed select-none';
 
   const variants = {
     primary: 'bg-accent hover:bg-accent-hover text-white shadow-sm hover:shadow-accent/25 hover:shadow-lg',
@@ -30,10 +30,25 @@ export default function Button({
     lg: 'text-base px-6 py-3.5 gap-2.5',
   };
 
+  let formattedChildren = children;
+  let trailingArrow = null;
+
+  if (typeof children === 'string' && (children.includes('→') || children.includes('↗'))) {
+    const isExternalArrow = children.includes('↗');
+    const arrowSymbol = isExternalArrow ? '↗' : '→';
+    formattedChildren = children.replace(/[→↗]/g, '').trim();
+    trailingArrow = (
+      <span className="ml-1.5 w-5 h-5 rounded-full bg-white/20 inline-flex items-center justify-center text-xs group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform duration-300 ease-[cubic-bezier(0.32,0.72,0,1)] shrink-0">
+        {arrowSymbol}
+      </span>
+    );
+  }
+
   const content = (
     <>
       {Icon && iconPosition === 'left' && <Icon className="w-4 h-4 shrink-0" />}
-      <span>{children}</span>
+      <span>{formattedChildren}</span>
+      {trailingArrow}
       {Icon && iconPosition === 'right' && <Icon className="w-4 h-4 shrink-0" />}
     </>
   );

@@ -4,15 +4,36 @@ export const easeSpring = [0.32, 0.72, 0, 1];
 export const scrollReveal = {
   hidden: {
     opacity: 0,
-    y: 24,
-    filter: 'blur(6px)',
+    y: 32,
+    filter: 'blur(8px)',
+    scale: 0.98,
   },
   visible: {
     opacity: 1,
     y: 0,
     filter: 'blur(0px)',
+    scale: 1,
     transition: {
-      duration: 0.65,
+      duration: 0.7,
+      ease: easeOutExpo,
+    },
+  },
+};
+
+export const staggerReveal = {
+  hidden: {
+    opacity: 0,
+    y: 28,
+    filter: 'blur(6px)',
+    scale: 0.98,
+  },
+  visible: {
+    opacity: 1,
+    y: 0,
+    filter: 'blur(0px)',
+    scale: 1,
+    transition: {
+      duration: 0.6,
       ease: easeOutExpo,
     },
   },

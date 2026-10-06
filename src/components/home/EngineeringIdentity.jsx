@@ -1,3 +1,6 @@
+'use client';
+
+import { motion } from 'framer-motion';
 import SectionHeading from '@/components/shared/SectionHeading';
 import RevealOnScroll from '@/components/shared/RevealOnScroll';
 
@@ -35,36 +38,46 @@ export default function EngineeringIdentity() {
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6 lg:gap-8">
           {pillars.map((pillar, idx) => (
             <RevealOnScroll key={pillar.number} delay={0.1 * (idx + 1)}>
-              <div className="h-full rounded-2xl bg-bg-secondary border border-border-default hover:border-border-strong p-6 sm:p-8 flex flex-col justify-between transition-all duration-300 hover:-translate-y-1 hover:shadow-lg group">
-                <div className="space-y-4">
-                  <div className="flex items-center justify-between font-mono text-xs text-text-muted">
-                    <span className="text-accent font-semibold">{pillar.number}</span>
-                    <span>PILLAR</span>
-                  </div>
-                  <h3 className="text-lg sm:text-xl font-bold text-text-primary tracking-tight group-hover:text-accent transition-colors">
-                    {pillar.title}
-                  </h3>
-                  <p className="text-sm text-text-secondary leading-relaxed">
-                    {pillar.description}
-                  </p>
-                </div>
-
-                <div className="mt-8 pt-4 border-t border-border-subtle space-y-2">
-                  <span className="font-mono text-[10px] uppercase tracking-wider text-text-muted block">
-                    Core Focus
-                  </span>
-                  <div className="flex flex-wrap gap-1.5">
-                    {pillar.highlights.map((tag) => (
-                      <span
-                        key={tag}
-                        className="font-mono text-[11px] px-2 py-0.5 rounded bg-bg-tertiary text-text-secondary border border-border-subtle"
-                      >
-                        {tag}
+              {/* Outer Shell: Double-Bezel Architecture */}
+              <motion.div
+                whileHover={{ y: -6, transition: { duration: 0.4, ease: [0.32, 0.72, 0, 1] } }}
+                whileTap={{ scale: 0.99 }}
+                className="h-full rounded-[1.75rem] bg-white/[0.03] ring-1 ring-white/[0.07] p-1.5 transition-all duration-300 hover:ring-white/[0.18] group"
+              >
+                {/* Inner Core: Concentric Machine-finished Core */}
+                <div className="h-full rounded-[calc(1.75rem-0.375rem)] bg-bg-secondary shadow-[inset_0_1px_1px_rgba(255,255,255,0.06)] p-6 sm:p-8 flex flex-col justify-between">
+                  <div className="space-y-4">
+                    <div className="flex items-center justify-between font-mono text-xs text-text-muted">
+                      <span className="text-accent font-semibold transition-transform duration-300 group-hover:scale-110 inline-block">
+                        {pillar.number}
                       </span>
-                    ))}
+                      <span>PILLAR</span>
+                    </div>
+                    <h3 className="text-lg sm:text-xl font-bold text-text-primary tracking-tight group-hover:text-accent transition-colors">
+                      {pillar.title}
+                    </h3>
+                    <p className="text-sm text-text-secondary leading-relaxed">
+                      {pillar.description}
+                    </p>
+                  </div>
+
+                  <div className="mt-8 pt-4 border-t border-border-subtle space-y-2">
+                    <span className="font-mono text-[10px] uppercase tracking-wider text-text-muted block">
+                      Core Focus
+                    </span>
+                    <div className="flex flex-wrap gap-1.5">
+                      {pillar.highlights.map((tag) => (
+                        <span
+                          key={tag}
+                          className="font-mono text-[11px] px-2 py-0.5 rounded bg-bg-tertiary text-text-secondary border border-border-subtle"
+                        >
+                          {tag}
+                        </span>
+                      ))}
+                    </div>
                   </div>
                 </div>
-              </div>
+              </motion.div>
             </RevealOnScroll>
           ))}
         </div>
