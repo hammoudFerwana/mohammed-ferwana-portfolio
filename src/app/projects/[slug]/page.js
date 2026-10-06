@@ -1,5 +1,6 @@
 import Link from 'next/link';
 import Image from 'next/image';
+import dynamic from 'next/dynamic';
 import { notFound } from 'next/navigation';
 import { projects } from '@/data/projects';
 import Badge from '@/components/shared/Badge';
@@ -14,6 +15,18 @@ import ProjectLinks from '@/components/projects/ProjectLinks';
 import LeadershipCard from '@/components/projects/LeadershipCard';
 import InsurflowEvidence from '@/components/projects/InsurflowEvidence';
 import CaseStudyFooter from '@/components/projects/CaseStudyFooter';
+
+const FsmSimulator = dynamic(
+  () => import('@/components/projects/lab/FsmSimulator'),
+  {
+    loading: () => (
+      <div
+        className="min-h-[480px] rounded-xl bg-bg-secondary border border-border-default animate-pulse"
+        aria-hidden="true"
+      />
+    ),
+  }
+);
 
 /* ---------- Static Generation ---------- */
 
@@ -221,6 +234,7 @@ export default async function CaseStudyPage({ params }) {
                     <DecisionCard key={idx} decision={decision} index={idx} />
                   ))}
                 </div>
+                {project.slug === 'insurflow' && <FsmSimulator />}
                 <InsurflowEvidence />
               </div>
             </CaseStudySection>
