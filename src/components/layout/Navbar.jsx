@@ -28,29 +28,29 @@ export default function Navbar() {
 
   return (
     <>
-      <header
-        className={cn(
-          'fixed top-0 left-0 right-0 z-40 transition-all duration-300',
-          isScrolled
-            ? 'bg-bg-primary/85 backdrop-blur-md border-b border-border-subtle shadow-sm py-3.5'
-            : 'bg-transparent py-5'
-        )}
-      >
-        <div className="max-w-7xl mx-auto px-5 sm:px-8 flex items-center justify-between">
+      <header className="fixed top-0 left-0 right-0 z-40 flex justify-center px-4 pt-4 sm:pt-6 pointer-events-none">
+        <div
+          className={cn(
+            'pointer-events-auto flex items-center justify-between gap-4 sm:gap-6 md:gap-8 rounded-full px-4 sm:px-6 py-2.5 transition-all duration-400 ease-[cubic-bezier(0.32,0.72,0,1)] w-full max-w-5xl',
+            isScrolled
+              ? 'bg-bg-primary/75 backdrop-blur-xl border border-white/15 shadow-[0_8px_32px_rgba(0,0,0,0.4)]'
+              : 'bg-bg-primary/60 backdrop-blur-lg border border-white/10 shadow-[0_4px_20px_rgba(0,0,0,0.2)]'
+          )}
+        >
           {/* Logo / Brand */}
           <Link
             href="/"
-            className="group flex items-center gap-2.5 focus-visible:ring-2 focus-visible:ring-accent rounded-md px-1 py-0.5"
+            className="group flex items-center gap-2.5 focus-visible:ring-2 focus-visible:ring-accent rounded-full px-1 py-0.5"
             aria-label="Mohammed Ferwana Home"
           >
-            <div className="w-8 h-8 rounded-lg bg-bg-secondary border border-border-default flex items-center justify-center font-mono font-bold text-accent text-sm group-hover:border-accent/50 group-hover:shadow-accent transition-all duration-200">
+            <div className="w-8 h-8 rounded-full bg-bg-secondary border border-border-default flex items-center justify-center font-mono font-bold text-accent text-sm group-hover:border-accent/50 group-hover:shadow-accent transition-all duration-200">
               MF
             </div>
             <div className="flex flex-col">
               <span className="text-sm font-semibold tracking-tight text-text-primary group-hover:text-accent transition-colors">
                 Mohammed Ferwana
               </span>
-              <span className="text-[11px] font-mono text-text-muted">
+              <span className="text-[10px] font-mono text-text-muted hidden sm:block">
                 Backend Engineer
               </span>
             </div>
@@ -81,13 +81,13 @@ export default function Navbar() {
           </nav>
 
           {/* Right Actions: Command Palette & Mobile Toggle */}
-          <div className="flex items-center gap-2.5">
+          <div className="flex items-center gap-2 sm:gap-2.5">
             {/* Command Palette Trigger */}
             <button
               type="button"
               onClick={openCommandPalette}
               aria-label="Open command palette"
-              className="flex items-center gap-2 px-2.5 py-1.5 rounded-lg bg-bg-secondary hover:bg-bg-tertiary border border-border-default hover:border-border-strong text-text-secondary hover:text-text-primary text-xs transition-all duration-200 focus-visible:ring-2 focus-visible:ring-accent"
+              className="flex items-center gap-2 px-2.5 py-1.5 rounded-full bg-bg-secondary hover:bg-bg-tertiary border border-border-default hover:border-border-strong text-text-secondary hover:text-text-primary text-xs transition-all duration-200 focus-visible:ring-2 focus-visible:ring-accent"
             >
               <svg
                 className="w-3.5 h-3.5 text-accent"
@@ -110,35 +110,30 @@ export default function Navbar() {
               </kbd>
             </button>
 
-            {/* Mobile Menu Button */}
+            {/* Mobile Menu Button with morphing animation */}
             <button
               type="button"
               onClick={() => setIsMobileMenuOpen((prev) => !prev)}
               aria-label="Toggle navigation menu"
               aria-expanded={isMobileMenuOpen}
-              className="md:hidden p-2 rounded-lg bg-bg-secondary border border-border-default text-text-secondary hover:text-text-primary hover:bg-bg-tertiary focus-visible:ring-2 focus-visible:ring-accent"
+              className="md:hidden relative w-8 h-8 rounded-full bg-bg-secondary border border-border-default text-text-secondary hover:text-text-primary hover:bg-bg-tertiary focus-visible:ring-2 focus-visible:ring-accent flex items-center justify-center"
             >
-              <svg
-                className="w-5 h-5"
-                fill="none"
-                viewBox="0 0 24 24"
-                stroke="currentColor"
-                strokeWidth="2"
-              >
-                {isMobileMenuOpen ? (
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    d="M6 18L18 6M6 6l12 12"
-                  />
-                ) : (
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    d="M4 6h16M4 12h16M4 18h16"
-                  />
+              <span
+                className={cn(
+                  'absolute w-4 h-0.5 bg-current rounded-full transition-all duration-300 ease-[cubic-bezier(0.32,0.72,0,1)]',
+                  isMobileMenuOpen
+                    ? 'top-1/2 -translate-y-1/2 rotate-45'
+                    : 'top-[38%]'
                 )}
-              </svg>
+              />
+              <span
+                className={cn(
+                  'absolute w-4 h-0.5 bg-current rounded-full transition-all duration-300 ease-[cubic-bezier(0.32,0.72,0,1)]',
+                  isMobileMenuOpen
+                    ? 'top-1/2 -translate-y-1/2 -rotate-45'
+                    : 'top-[60%]'
+                )}
+              />
             </button>
           </div>
         </div>

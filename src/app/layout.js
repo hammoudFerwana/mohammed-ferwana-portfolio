@@ -61,6 +61,7 @@ export default function RootLayout({ children }) {
   return (
     <html lang="en" className={`dark ${GeistSans.variable} ${GeistMono.variable}`}>
       <body className="min-h-screen bg-bg-primary text-text-primary antialiased font-sans flex flex-col selection:bg-accent/30 selection:text-white">
+        <div className="noise-overlay" aria-hidden="true" />
         {/* Skip to Content Link for Accessibility */}
         <a
           href="#main-content"

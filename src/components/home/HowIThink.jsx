@@ -1,6 +1,7 @@
 'use client';
 
 import { useState } from 'react';
+import { motion, AnimatePresence } from 'framer-motion';
 import SectionHeading from '@/components/shared/SectionHeading';
 import RevealOnScroll from '@/components/shared/RevealOnScroll';
 import { cn } from '@/lib/utils';
@@ -73,12 +74,19 @@ export default function HowIThink() {
                   type="button"
                   onClick={() => setActiveStep(index)}
                   className={cn(
-                    'w-full text-left p-4 rounded-xl transition-all duration-200 flex items-start gap-4 border',
+                    'relative w-full text-left p-4 rounded-xl transition-all duration-200 flex items-start gap-4 border',
                     isActive
                       ? 'bg-bg-secondary border-accent/40 shadow-sm'
                       : 'bg-transparent border-transparent hover:bg-bg-secondary/40 text-text-secondary'
                   )}
                 >
+                  {isActive && (
+                    <motion.div
+                      layoutId="activeBar"
+                      className="absolute left-0 top-2 bottom-2 w-1 bg-accent rounded-r-full"
+                      transition={{ type: 'spring', stiffness: 500, damping: 35 }}
+                    />
+                  )}
                   <span
                     className={cn(
                       'font-mono text-xs px-2 py-0.5 rounded border shrink-0 mt-0.5',
@@ -107,39 +115,53 @@ export default function HowIThink() {
             })}
           </div>
 
-          {/* Step Detail Display Card (7 cols) */}
+          {/* Step Detail Display Card (7 cols) with AnimatePresence */}
           <div className="lg:col-span-7">
             <RevealOnScroll delay={0.1}>
-              <div className="rounded-2xl bg-bg-secondary border border-border-default p-6 sm:p-8 space-y-6 shadow-xl relative overflow-hidden">
-                <div className="absolute top-0 right-0 p-8 opacity-5 font-mono text-8xl font-black text-text-primary select-none pointer-events-none">
-                  {steps[activeStep].num}
-                </div>
+              <AnimatePresence mode="wait">
+                <motion.div
+                  key={activeStep}
+                  initial={{ opacity: 0, x: 16, filter: 'blur(4px)' }}
+                  animate={{ opacity: 1, x: 0, filter: 'blur(0px)' }}
+                  exit={{ opacity: 0, x: -16, filter: 'blur(4px)' }}
+                  transition={{ duration: 0.3, ease: [0.32, 0.72, 0, 1] }}
+                  className="rounded-2xl bg-bg-secondary border border-border-default p-6 sm:p-8 space-y-6 shadow-xl relative overflow-hidden"
+                >
+                  <motion.div
+                    initial={{ opacity: 0.03, scale: 0.95 }}
+                    animate={{ opacity: 0.08, scale: 1 }}
+                    transition={{ duration: 0.4 }}
+                    className="absolute top-0 right-0 p-8 font-mono text-8xl font-black text-text-primary select-none pointer-events-none"
+                  >
+                    {steps[activeStep].num}
+                  </motion.div>
 
-                <div className="space-y-2">
-                  <div className="flex items-center gap-2 font-mono text-xs text-accent">
-                    <span>STEP {steps[activeStep].num} OF 06</span>
+                  <div className="space-y-2">
+                    <div className="flex items-center gap-2 font-mono text-xs text-accent">
+                      <span>STEP {steps[activeStep].num} OF 06</span>
+                    </div>
+                    <h3 className="text-xl sm:text-2xl font-bold text-text-primary tracking-tight">
+                      {steps[activeStep].title}
+                    </h3>
+                    <p className="text-sm sm:text-base text-accent font-mono">
+                      {steps[activeStep].summary}
+                    </p>
                   </div>
-                  <h3 className="text-xl sm:text-2xl font-bold text-text-primary tracking-tight">
-                    {steps[activeStep].title}
-                  </h3>
-                  <p className="text-sm sm:text-base text-accent font-mono">
-                    {steps[activeStep].summary}
-                  </p>
-                </div>
 
-                <div className="p-4 rounded-xl bg-bg-primary/80 border border-border-subtle text-sm text-text-secondary leading-relaxed space-y-3">
-                  <p>{steps[activeStep].detail}</p>
-                </div>
+                  <div className="p-4 rounded-xl bg-bg-primary/80 border border-border-subtle text-sm text-text-secondary leading-relaxed space-y-3">
+                    <p>{steps[activeStep].detail}</p>
+                  </div>
 
-                <div className="pt-4 border-t border-border-subtle flex items-start gap-3 text-xs">
-                  <span className="font-mono text-accent font-semibold uppercase tracking-wider shrink-0 mt-0.5">
-                    KEY PRINCIPLE:
-                  </span>
-                  <p className="text-text-primary font-medium">
-                    {steps[activeStep].keyTakeaway}
-                  </p>
-                </div>
-              </div>
+                  <div className="pt-4 border-t border-border-subtle flex items-start gap-3 text-xs">
+                    <span className="font-mono text-accent font-semibold uppercase tracking-wider shrink-0 mt-0.5">
+                      KEY PRINCIPLE:
+                    </span>
+                    <p className="text-text-primary font-medium">
+                      {steps[activeStep].keyTakeaway}
+                    </p>
+                  </div>
+                </motion.div>
+              </AnimatePresence>
             </RevealOnScroll>
           </div>
         </div>
