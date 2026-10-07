@@ -158,7 +158,43 @@ class SoundSynthesizer {
       // Graceful fallback
     }
   }
+
+  /**
+   * Crystalline resonant glass chime for zero-gravity crystal collisions.
+   * Uses high-register harmonic partials to emulate delicate acoustic crystal.
+   */
+  playCrystalChime(pitchMultiplier = 1) {
+    if (this.muted || !this.init()) return;
+    try {
+      const now = this.ctx.currentTime;
+      // High-register crystalline bell frequencies (Hz)
+      const baseFreq = Math.min(1800, Math.max(380, 880 * pitchMultiplier));
+      const partials = [1, 2.76, 5.4, 8.1];
+      const gains = [0.032, 0.014, 0.007, 0.003];
+
+      partials.forEach((mult, idx) => {
+        const osc = this.ctx.createOscillator();
+        const gain = this.ctx.createGain();
+
+        osc.type = 'sine';
+        osc.frequency.setValueAtTime(baseFreq * mult, now);
+
+        const decay = 0.35 + idx * 0.08;
+        gain.gain.setValueAtTime(gains[idx], now);
+        gain.gain.exponentialRampToValueAtTime(0.0001, now + decay);
+
+        osc.connect(gain);
+        gain.connect(this.ctx.destination);
+
+        osc.start(now);
+        osc.stop(now + decay + 0.02);
+      });
+    } catch {
+      // Graceful fallback
+    }
+  }
 }
 
 export const soundFx = new SoundSynthesizer();
 export const soundManager = soundFx;
+
