@@ -10,7 +10,7 @@ import MobileMenu from './MobileMenu';
 
 export default function Navbar() {
   const pathname = usePathname();
-  const { openCommandPalette } = useOverlay();
+  const { openCommandPalette, openResumeModal } = useOverlay();
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
@@ -80,8 +80,22 @@ export default function Navbar() {
             })}
           </nav>
 
-          {/* Right Actions: Command Palette & Mobile Toggle */}
+          {/* Right Actions: Resume Dossier, Command Palette & Mobile Toggle */}
           <div className="flex items-center gap-2 sm:gap-2.5">
+            {/* Quick Resume Trigger */}
+            <button
+              type="button"
+              onClick={openResumeModal}
+              aria-label="Open Resume & Engineering Dossier"
+              className="flex items-center gap-1.5 px-2.5 py-1.5 rounded-full bg-accent/10 hover:bg-accent/20 border border-accent/25 hover:border-accent/40 text-accent text-xs font-semibold transition-all duration-200 focus-visible:ring-2 focus-visible:ring-accent"
+            >
+              <svg className="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z" />
+                <polyline points="14 2 14 8 20 8" />
+              </svg>
+              <span>CV</span>
+            </button>
+
             {/* Command Palette Trigger */}
             <button
               type="button"

@@ -7,7 +7,8 @@
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
-    "test": "node --test src/lib/fsm.test.mjs"
+    "test": "node --test src/lib/fsm.test.mjs",
+    "build:resume": "node scripts/generate-resume-pdf.mjs"
   },
   "dependencies": {
     "@phosphor-icons/react": "^2.1.7",
