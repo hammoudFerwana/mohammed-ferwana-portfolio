@@ -4,6 +4,7 @@ import { useState, useEffect, useRef, useCallback, useMemo } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import SectionHeading from '@/components/shared/SectionHeading';
 import RevealOnScroll from '@/components/shared/RevealOnScroll';
+import CounterTicker from '@/components/shared/CounterTicker';
 import { cn } from '@/lib/utils';
 
 // Architectural hierarchy: 3-Tier Isometric Monolith
@@ -147,15 +148,20 @@ export default function DistributedSystem3D() {
   const [activePulse, setActivePulse] = useState(null); // Active transaction visual shockwave
   const [isClient, setIsClient] = useState(false);
 
-  // Isometric orbital angles (constrained range for pristine readability)
+  // Isometric orbital angles & momentum physics
   const rotRef = useRef({ x: 0.22, y: 0.35 });
   const targetRotRef = useRef({ x: 0.22, y: 0.35 });
+  const velocityRef = useRef({ x: 0, y: 0 });
+  const lastPointerPosRef = useRef({ x: 0, y: 0, time: 0 });
   const isDraggingRef = useRef(false);
   const dragStartRef = useRef({ x: 0, y: 0, rotX: 0, rotY: 0 });
   const particlesRef = useRef([]);
   const animFrameRef = useRef(null);
   const isVisibleRef = useRef(true);
   const shockwavesRef = useRef([]);
+  const trailHistoryRef = useRef([]);
+  const burstSparksRef = useRef([]);
+  const lastTriggeredLegRef = useRef(-1);
 
   useEffect(() => {
     setIsClient(true);
@@ -290,14 +296,24 @@ export default function DistributedSystem3D() {
       // Clear Canvas
       ctx.clearRect(0, 0, width, height);
 
-      // Smooth auto-orbiting with gentle oscillation
-      if (isAutoRotating && !isDraggingRef.current) {
-        targetRotRef.current.y += 0.0032;
+      // Inertia momentum decay or smooth auto-orbiting
+      if (!isDraggingRef.current) {
+        if (Math.abs(velocityRef.current.x) > 0.00005 || Math.abs(velocityRef.current.y) > 0.00005) {
+          targetRotRef.current.y += velocityRef.current.x;
+          targetRotRef.current.x = Math.max(
+            0.05,
+            Math.min(0.65, targetRotRef.current.x + velocityRef.current.y)
+          );
+          velocityRef.current.x *= 0.94; // Physical friction decay
+          velocityRef.current.y *= 0.94;
+        } else if (isAutoRotating) {
+          targetRotRef.current.y += 0.0028;
+        }
       }
 
-      // Smooth damping interpolation
-      rotRef.current.x += (targetRotRef.current.x - rotRef.current.x) * 0.08;
-      rotRef.current.y += (targetRotRef.current.y - rotRef.current.y) * 0.08;
+      // Smooth spring damping interpolation
+      rotRef.current.x += (targetRotRef.current.x - rotRef.current.x) * 0.1;
+      rotRef.current.y += (targetRotRef.current.y - rotRef.current.y) * 0.1;
 
       // Compute projected coordinates for tiers & nodes
       const projectedNodes = {};
