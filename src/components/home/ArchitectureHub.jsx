@@ -2,12 +2,31 @@
 
 import { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
+import dynamic from 'next/dynamic';
 import SectionHeading from '@/components/shared/SectionHeading';
 import RevealOnScroll from '@/components/shared/RevealOnScroll';
-import DistributedSystem3D from '@/components/home/DistributedSystem3D';
-import InteractiveArchitectureLab from '@/components/home/InteractiveArchitectureLab';
 import { cn } from '@/lib/utils';
 import { soundFx } from '@/lib/soundFx';
+
+const DistributedSystem3D = dynamic(() => import('@/components/home/DistributedSystem3D'), {
+  ssr: false,
+  loading: () => (
+    <div className="h-[440px] sm:h-[500px] rounded-[2rem] bg-bg-secondary/60 border border-border-default flex flex-col items-center justify-center gap-2 font-mono text-xs text-text-muted animate-pulse">
+      <span className="w-2 h-2 rounded-full bg-accent animate-ping" />
+      <span>INITIALIZING 3D SPATIAL MONOLITH...</span>
+    </div>
+  ),
+});
+
+const InteractiveArchitectureLab = dynamic(() => import('@/components/home/InteractiveArchitectureLab'), {
+  ssr: false,
+  loading: () => (
+    <div className="h-[500px] rounded-2xl bg-bg-secondary/60 border border-border-default flex flex-col items-center justify-center gap-2 font-mono text-xs text-text-muted animate-pulse">
+      <span className="w-2 h-2 rounded-full bg-cyan-400 animate-ping" />
+      <span>LOADING ARCHITECTURE LAB...</span>
+    </div>
+  ),
+});
 
 export default function ArchitectureHub() {
   const [activeView, setActiveView] = useState('3d'); // '3d' | 'lab'
