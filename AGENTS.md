@@ -15,3 +15,6 @@
 ## 3. CI/CD Standards
 - Every commit pushed to `develop` or `main` must pass GitHub Actions CI (`.github/workflows/ci.yml`).
 - Always run and verify `npm run lint` and `npm run build` locally before pushing or merging.
+
+## 4. Browser & UI Verification Policy (Standing Permission)
+- **Always Allowed**: Antigravity has permanent, standing permission to open the project in the browser (via browser tools or subagents) to inspect live rendering, verify UI components, test interactive flows, and validate visual design whenever necessary. No extra user approval gate is required just to inspect or view the site in the browser (مسموح دائمًا ومفوض لفتح المتصفح وفحص الموقع عند الضرورة دون استئذان إضافي).
