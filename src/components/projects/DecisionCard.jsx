@@ -1,6 +1,7 @@
 'use client';
 
 import { useState } from 'react';
+import { motion, AnimatePresence } from 'framer-motion';
 import SpotlightCard from '@/components/shared/SpotlightCard';
 import { cn } from '@/lib/utils';
 
@@ -8,7 +9,7 @@ import { cn } from '@/lib/utils';
  * DecisionCard — Expand/collapse card for engineering decisions.
  *
  * Shows the decision title with a toggle indicator. On click, reveals the
- * full description and optional context in a muted callout.
+ * full description and optional context in a muted callout with spring physics.
  *
  * @param {Object} decision — { title, description, context }
  * @param {number} index — Index for stagger delay
@@ -35,7 +36,7 @@ export default function DecisionCard({ decision, index = 0 }) {
         {/* Expand/Collapse Indicator */}
         <span
           className={cn(
-            'mt-1 shrink-0 text-accent transition-transform duration-200 text-sm font-mono',
+            'mt-1 shrink-0 text-accent transition-transform duration-300 ease-[cubic-bezier(0.32,0.72,0,1)] text-sm font-mono',
             isExpanded ? 'rotate-90' : 'rotate-0'
           )}
           aria-hidden="true"
@@ -56,20 +57,30 @@ export default function DecisionCard({ decision, index = 0 }) {
         </span>
       </button>
 
-      {/* Expanded Content */}
-      {isExpanded && (
-        <div className="px-5 sm:px-6 pb-5 sm:pb-6 pl-12 sm:pl-14 space-y-3">
-          <p className="text-sm text-text-secondary leading-relaxed">
-            {decision.description}
-          </p>
-          {decision.context && (
-            <div className="flex items-start gap-2 text-xs text-text-muted bg-bg-primary/60 rounded-lg px-4 py-3 border border-border-subtle">
-              <span className="text-accent font-mono shrink-0 mt-px">→</span>
-              <span className="leading-relaxed">{decision.context}</span>
+      {/* Expanded Content with spring accordion motion */}
+      <AnimatePresence initial={false}>
+        {isExpanded && (
+          <motion.div
+            initial={{ height: 0, opacity: 0 }}
+            animate={{ height: 'auto', opacity: 1 }}
+            exit={{ height: 0, opacity: 0 }}
+            transition={{ duration: 0.3, ease: [0.32, 0.72, 0, 1] }}
+            className="overflow-hidden"
+          >
+            <div className="px-5 sm:px-6 pb-5 sm:pb-6 pl-12 sm:pl-14 space-y-3">
+              <p className="text-sm text-text-secondary leading-relaxed">
+                {decision.description}
+              </p>
+              {decision.context && (
+                <div className="flex items-start gap-2 text-xs text-text-muted bg-bg-primary/60 rounded-lg px-4 py-3 border border-border-subtle">
+                  <span className="text-accent font-mono shrink-0 mt-px">→</span>
+                  <span className="leading-relaxed">{decision.context}</span>
+                </div>
+              )}
             </div>
-          )}
-        </div>
-      )}
+          </motion.div>
+        )}
+      </AnimatePresence>
     </SpotlightCard>
   );
 }

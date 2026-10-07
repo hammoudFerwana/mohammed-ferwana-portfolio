@@ -178,6 +178,19 @@ body {
   animation: aurora 16s ease-in-out infinite alternate;
 }
 
+@keyframes conduit-pulse {
+  0% {
+    transform: translateY(-100%);
+  }
+  100% {
+    transform: translateY(220%);
+  }
+}
+
+.animate-conduit-pulse {
+  animation: conduit-pulse 1.8s cubic-bezier(0.4, 0, 0.2, 1) infinite;
+}
+
 /* Noise overlay */
 .noise-overlay {
   position: fixed;
@@ -210,7 +223,8 @@ body {
   .animate-float,
   .animate-pulse-ring,
   .animate-shimmer,
-  .animate-aurora {
+  .animate-aurora,
+  .animate-conduit-pulse {
     animation: none !important;
   }
 }
