@@ -74,10 +74,13 @@ body {
   outline-offset: 2px;
 }
 
-/* Cursor Spotlight Card */
+/* Cursor Spotlight Card & 3D Perspective Tilt */
 .spotlight-card {
   position: relative;
   isolation: isolate;
+  transform: perspective(1000px) rotateX(var(--tilt-x, 0deg)) rotateY(var(--tilt-y, 0deg));
+  transition: transform 0.4s cubic-bezier(0.32, 0.72, 0, 1);
+  transform-style: preserve-3d;
 }
 
 .spotlight-card::before {
@@ -97,6 +100,10 @@ body {
 }
 
 @media (hover: hover) and (pointer: fine) {
+  .spotlight-card:hover {
+    transition: transform 0.08s ease-out;
+  }
+
   .spotlight-card:hover::before {
     opacity: 1;
   }
@@ -194,6 +201,10 @@ body {
 
   .spotlight-card::before {
     display: none;
+  }
+
+  .spotlight-card {
+    transform: none !important;
   }
 
   .animate-float,

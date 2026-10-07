@@ -6,6 +6,7 @@ import Navbar from '@/components/layout/Navbar';
 import Footer from '@/components/layout/Footer';
 import CommandPalette from '@/components/overlays/CommandPalette';
 import MiniTerminal from '@/components/overlays/MiniTerminal';
+import KineticCursor from '@/components/shared/KineticCursor';
 import './globals.css';
 
 export const metadata = {
@@ -78,6 +79,7 @@ export default function RootLayout({ children }) {
           <Footer />
           <CommandPalette />
           <MiniTerminal />
+          <KineticCursor />
         </OverlayProvider>
       </body>
     </html>
