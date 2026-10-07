@@ -9,6 +9,7 @@ import TextScramble from '@/components/shared/TextScramble';
 import { useOverlay } from '@/context/OverlayContext';
 import { siteMetadata } from '@/data/siteMetadata';
 import { metrics } from '@/data/metrics';
+import InteractivePortraitCard from '@/components/home/InteractivePortraitCard';
 
 export default function HeroSection() {
   const { openResumeModal } = useOverlay();
@@ -104,27 +105,7 @@ export default function HeroSection() {
           {/* Portrait & System Status Widget (5 cols) */}
           <div className="lg:col-span-5 flex flex-col items-center lg:items-end gap-6">
             <RevealOnScroll delay={0.7} className="w-full max-w-sm">
-              <div className="relative group animate-float">
-                {/* Subtle back ambient glow */}
-                <div className="absolute -inset-1 rounded-2xl bg-gradient-to-tr from-accent/30 to-accent-secondary/20 blur-lg opacity-70 group-hover:opacity-100 transition duration-500" />
-
-                {/* Portrait Frame */}
-                <div className="relative rounded-2xl overflow-hidden bg-bg-secondary border border-border-strong shadow-2xl aspect-square">
-                  <Image
-                    src="/images/portrait.jpg"
-                    alt="Mohammed Ferwana - Backend Engineer"
-                    width={480}
-                    height={480}
-                    priority
-                    className="w-full h-full object-cover object-center filter contrast-[1.02] brightness-95 group-hover:scale-[1.02] transition-transform duration-500"
-                  />
-                  <div className="absolute inset-0 bg-gradient-to-t from-bg-primary/80 via-transparent to-transparent opacity-60" />
-                  <div className="absolute bottom-3 left-3 right-3 flex items-center justify-between px-3 py-1.5 rounded-lg bg-bg-primary/90 backdrop-blur-md border border-border-default text-xs font-mono">
-                    <span className="text-text-primary font-semibold">Mohammed Ferwana</span>
-                    <span className="text-accent">Gaza, Palestine</span>
-                  </div>
-                </div>
-              </div>
+              <InteractivePortraitCard />
             </RevealOnScroll>
 
             {/* System Status Widget (Signature engineering element - Frame 850ms) */}
