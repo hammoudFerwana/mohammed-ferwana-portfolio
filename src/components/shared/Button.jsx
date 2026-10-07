@@ -1,5 +1,6 @@
 import Link from 'next/link';
 import { cn } from '@/lib/utils';
+import Magnetic from '@/components/shared/Magnetic';
 
 export default function Button({
   children,
@@ -13,9 +14,11 @@ export default function Button({
   disabled = false,
   icon: Icon,
   iconPosition = 'left',
+  magnetic = false,
+  magneticStrength = 0.28,
   ...props
 }) {
-  const baseStyles = 'group inline-flex items-center justify-center font-medium rounded-lg transition-all duration-300 ease-[cubic-bezier(0.32,0.72,0,1)] focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2 focus-visible:ring-offset-bg-primary active:scale-[0.98] disabled:opacity-50 disabled:pointer-events-none disabled:cursor-not-allowed select-none';
+  const baseStyles = 'group inline-flex items-center justify-center font-medium rounded-lg transition-all duration-200 ease-[cubic-bezier(0.32,0.72,0,1)] focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2 focus-visible:ring-offset-bg-primary active:scale-[0.97] disabled:opacity-50 disabled:pointer-events-none disabled:cursor-not-allowed select-none cursor-pointer';
 
   const variants = {
     primary: 'bg-accent hover:bg-accent-hover text-white shadow-sm hover:shadow-accent/25 hover:shadow-lg',
@@ -55,37 +58,51 @@ export default function Button({
 
   const classes = cn(baseStyles, variants[variant], sizes[size], className);
 
+  let element = null;
+
   if (href) {
     if (external) {
-      return (
+      element = (
         <a
           href={href}
           target="_blank"
           rel="noopener noreferrer"
           className={classes}
+          data-cursor-target
           {...props}
         >
           {content}
         </a>
       );
+    } else {
+      element = (
+        <Link href={href} className={classes} data-cursor-target {...props}>
+          {content}
+        </Link>
+      );
     }
-
-    return (
-      <Link href={href} className={classes} {...props}>
+  } else {
+    element = (
+      <button
+        type={type}
+        onClick={onClick}
+        disabled={disabled}
+        className={classes}
+        data-cursor-target
+        {...props}
+      >
         {content}
-      </Link>
+      </button>
     );
   }
 
-  return (
-    <button
-      type={type}
-      onClick={onClick}
-      disabled={disabled}
-      className={classes}
-      {...props}
-    >
-      {content}
-    </button>
-  );
+  if (magnetic) {
+    return (
+      <Magnetic strength={magneticStrength} className="inline-block">
+        {element}
+      </Magnetic>
+    );
+  }
+
+  return element;
 }

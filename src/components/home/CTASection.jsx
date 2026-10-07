@@ -44,36 +44,33 @@ export default function CTASection() {
 
         <RevealOnScroll delay={0.15}>
           <div className="flex flex-wrap items-center justify-center gap-4 pt-2">
-            <motion.div whileHover={{ y: -2 }} whileTap={{ scale: 0.98 }}>
-              <Button
-                href={`mailto:${siteMetadata.email}?subject=Project%20Inquiry%20%E2%80%94%20Mohammed%20Ferwana`}
-                variant="primary"
-                size="lg"
-                external
-              >
-                Start a Conversation →
-              </Button>
-            </motion.div>
-            <motion.div whileHover={{ y: -2 }} whileTap={{ scale: 0.98 }}>
-              <Button
-                href={siteMetadata.social.linkedin}
-                variant="secondary"
-                size="lg"
-                external
-              >
-                Connect on LinkedIn ↗
-              </Button>
-            </motion.div>
-            <motion.div whileHover={{ y: -2 }} whileTap={{ scale: 0.98 }}>
-              <Button
-                href={siteMetadata.social.github}
-                variant="ghost"
-                size="lg"
-                external
-              >
-                GitHub Profile ↗
-              </Button>
-            </motion.div>
+            <Button
+              href={`mailto:${siteMetadata.email}?subject=Project%20Inquiry%20%E2%80%94%20Mohammed%20Ferwana`}
+              variant="primary"
+              size="lg"
+              external
+              magnetic
+            >
+              Start a Conversation →
+            </Button>
+            <Button
+              href={siteMetadata.social.linkedin}
+              variant="secondary"
+              size="lg"
+              external
+              magnetic
+            >
+              Connect on LinkedIn ↗
+            </Button>
+            <Button
+              href={siteMetadata.social.github}
+              variant="ghost"
+              size="lg"
+              external
+              magnetic
+            >
+              GitHub Profile ↗
+            </Button>
           </div>
         </RevealOnScroll>
       </div>
