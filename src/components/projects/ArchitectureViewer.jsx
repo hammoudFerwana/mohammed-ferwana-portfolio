@@ -1,6 +1,7 @@
 'use client';
 
 import { useState, useCallback, useRef } from 'react';
+import { motion, AnimatePresence } from 'framer-motion';
 import { cn } from '@/lib/utils';
 import Badge from '@/components/shared/Badge';
 
@@ -144,20 +145,22 @@ export default function ArchitectureViewer({ architecture }) {
                   </p>
                 </button>
 
-                {/* Connector arrow with optional label */}
+                {/* Connector conduit with flowing animated pulse & label */}
                 {index < architecture.nodes.length - 1 && (
-                  <div className="my-1.5 flex flex-col items-center" aria-hidden="true">
-                    <div className="w-0.5 h-3 bg-border-strong" />
+                  <div className="my-2 flex flex-col items-center relative" aria-hidden="true">
+                    <div className="relative w-0.5 h-6 bg-border-strong overflow-hidden rounded-full">
+                      <div className="absolute inset-x-0 top-0 h-3 bg-gradient-to-b from-transparent via-accent to-transparent animate-conduit-pulse" />
+                    </div>
 
                     {/* Connection Label */}
                     {connectionLabel && (
-                      <span className="font-mono text-[9px] text-text-muted/70 px-2 py-0.5 rounded bg-bg-secondary/80 border border-border-subtle my-0.5 select-none">
+                      <span className="font-mono text-[9px] text-accent font-medium px-2.5 py-0.5 rounded-full bg-accent/10 border border-accent/25 my-1 select-none shadow-sm">
                         {connectionLabel}
                       </span>
                     )}
 
                     <svg
-                      className="w-3 h-3 text-accent -mt-0.5"
+                      className="w-3.5 h-3.5 text-accent animate-pulse"
                       fill="currentColor"
                       viewBox="0 0 20 20"
                     >
@@ -175,69 +178,81 @@ export default function ArchitectureViewer({ architecture }) {
         </div>
       </div>
 
-      {/* Component Inspection Panel (Selected or Instructional State) */}
-      {selectedNode ? (
-        <div
-          className="rounded-xl bg-bg-tertiary/70 border border-border-default p-5 sm:p-6 space-y-4 transition-all duration-200"
-          aria-live="polite"
-          role="region"
-          aria-label={`Details for ${selectedNode.label}`}
-        >
-          <div className="flex flex-wrap items-center justify-between gap-3">
-            <div className="flex items-center gap-2.5">
-              <h4 className="text-lg font-bold text-text-primary tracking-tight">
-                {selectedNode.label}
-              </h4>
-              <Badge variant="accent" size="sm">
-                {selectedNode.type}
-              </Badge>
-            </div>
-            <span className="font-mono text-[11px] text-text-muted">
-              Node ID: #{selectedNode.id}
-            </span>
-          </div>
-
-          <p className="text-sm text-text-secondary leading-relaxed">
-            {selectedNode.description}
-          </p>
-
-          {selectedNode.responsibilities &&
-            selectedNode.responsibilities.length > 0 && (
-              <div className="pt-3 border-t border-border-subtle/80 space-y-2">
-                <span className="font-mono text-xs uppercase tracking-wider text-text-muted font-semibold block">
-                  Primary Component Responsibilities
-                </span>
-                <ul className="grid grid-cols-1 sm:grid-cols-2 gap-2 text-xs text-text-primary">
-                  {selectedNode.responsibilities.map((resp, i) => (
-                    <li key={i} className="flex items-start gap-2">
-                      <span className="text-accent mt-0.5 font-bold" aria-hidden="true">
-                        ✓
-                      </span>
-                      <span>{resp}</span>
-                    </li>
-                  ))}
-                </ul>
+      {/* Component Inspection Panel (Selected or Instructional State with AnimatePresence) */}
+      <AnimatePresence mode="wait">
+        {selectedNode ? (
+          <motion.div
+            key={selectedNode.id}
+            initial={{ opacity: 0, y: 10, filter: 'blur(4px)' }}
+            animate={{ opacity: 1, y: 0, filter: 'blur(0px)' }}
+            exit={{ opacity: 0, y: -10, filter: 'blur(4px)' }}
+            transition={{ duration: 0.25, ease: [0.32, 0.72, 0, 1] }}
+            className="rounded-xl bg-bg-tertiary/70 border border-border-default p-5 sm:p-6 space-y-4 shadow-inner"
+            aria-live="polite"
+            role="region"
+            aria-label={`Details for ${selectedNode.label}`}
+          >
+            <div className="flex flex-wrap items-center justify-between gap-3">
+              <div className="flex items-center gap-2.5">
+                <h4 className="text-lg font-bold text-text-primary tracking-tight">
+                  {selectedNode.label}
+                </h4>
+                <Badge variant="accent" size="sm">
+                  {selectedNode.type}
+                </Badge>
               </div>
-            )}
-        </div>
-      ) : (
-        <div
-          className="rounded-xl bg-bg-tertiary/40 border border-dashed border-border-default p-6 text-center transition-all duration-200"
-          aria-live="polite"
-          role="region"
-          aria-label="Component inspection instructions"
-        >
-          <div className="flex flex-col items-center justify-center gap-2 max-w-md mx-auto">
-            <div className="flex items-center gap-2 font-mono text-xs text-accent">
-              <span className="w-1.5 h-1.5 rounded-full bg-accent" aria-hidden="true" />
-              <span>INSPECTION READY</span>
+              <span className="font-mono text-[11px] text-text-muted">
+                Node ID: #{selectedNode.id}
+              </span>
             </div>
-            <p className="text-sm text-text-secondary">
-              Select a component to explore its responsibilities and architectural role.
+
+            <p className="text-sm text-text-secondary leading-relaxed">
+              {selectedNode.description}
             </p>
-          </div>
-        </div>
-      )}
+
+            {selectedNode.responsibilities &&
+              selectedNode.responsibilities.length > 0 && (
+                <div className="pt-3 border-t border-border-subtle/80 space-y-2">
+                  <span className="font-mono text-xs uppercase tracking-wider text-text-muted font-semibold block">
+                    Primary Component Responsibilities
+                  </span>
+                  <ul className="grid grid-cols-1 sm:grid-cols-2 gap-2 text-xs text-text-primary">
+                    {selectedNode.responsibilities.map((resp, i) => (
+                      <li key={i} className="flex items-start gap-2">
+                        <span className="text-accent mt-0.5 font-bold" aria-hidden="true">
+                          ✓
+                        </span>
+                        <span>{resp}</span>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              )}
+          </motion.div>
+        ) : (
+          <motion.div
+            key="empty"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 0.2 }}
+            className="rounded-xl bg-bg-tertiary/40 border border-dashed border-border-default p-6 text-center"
+            aria-live="polite"
+            role="region"
+            aria-label="Component inspection instructions"
+          >
+            <div className="flex flex-col items-center justify-center gap-2 max-w-md mx-auto">
+              <div className="flex items-center gap-2 font-mono text-xs text-accent">
+                <span className="w-1.5 h-1.5 rounded-full bg-accent" aria-hidden="true" />
+                <span>INSPECTION READY</span>
+              </div>
+              <p className="text-sm text-text-secondary">
+                Select a component to explore its responsibilities and architectural role.
+              </p>
+            </div>
+          </motion.div>
+        )}
+      </AnimatePresence>
     </div>
   );
 }
