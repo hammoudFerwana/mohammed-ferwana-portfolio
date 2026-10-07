@@ -12,6 +12,7 @@ This document establishes the mandatory Git workflow, commit conventions, branch
 2. **Ask directly**: Ask the user: *"هل أبلش شغل على [...] ولا لأ؟"*.
 3. **Execution Condition**: Proceed ONLY when Mohammed explicitly replies with approval (e.g., "بلش", "اشتغل", "نعم", "تمام").
 4. If approval is not yet given, pause and wait.
+5. **Browser & UI Inspection Standing Permission**: Antigravity is always authorized to open the application in the browser and inspect the UI / visual state whenever necessary without needing prior approval.
 
 ---
 
