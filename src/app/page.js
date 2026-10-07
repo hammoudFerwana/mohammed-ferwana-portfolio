@@ -1,5 +1,5 @@
 import HeroSection from '@/components/home/HeroSection';
-import InteractiveArchitectureLab from '@/components/home/InteractiveArchitectureLab';
+import HolographicCore3D from '@/components/home/HolographicCore3D';
 import EngineeringIdentity from '@/components/home/EngineeringIdentity';
 import FeaturedProjects from '@/components/home/FeaturedProjects';
 import HowIThink from '@/components/home/HowIThink';
@@ -10,7 +10,7 @@ export default function Home() {
   return (
     <>
       <HeroSection />
-      <InteractiveArchitectureLab />
+      <HolographicCore3D />
       <EngineeringIdentity />
       <FeaturedProjects />
       <HowIThink />
