@@ -161,3 +161,4 @@ class SoundSynthesizer {
 }
 
 export const soundFx = new SoundSynthesizer();
+export const soundManager = soundFx;

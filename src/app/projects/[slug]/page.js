@@ -28,6 +28,30 @@ const FsmSimulator = dynamic(
   }
 );
 
+const InsurflowConcurrencySandbox = dynamic(
+  () => import('@/components/projects/lab/InsurflowConcurrencySandbox'),
+  {
+    loading: () => (
+      <div
+        className="min-h-[340px] rounded-xl bg-bg-secondary border border-border-default motion-safe:animate-pulse"
+        aria-hidden="true"
+      />
+    ),
+  }
+);
+
+const TeamlineWorkspaceSimulator = dynamic(
+  () => import('@/components/projects/lab/TeamlineWorkspaceSimulator'),
+  {
+    loading: () => (
+      <div
+        className="min-h-[460px] rounded-xl bg-bg-secondary border border-border-default motion-safe:animate-pulse"
+        aria-hidden="true"
+      />
+    ),
+  }
+);
+
 /* ---------- Static Generation ---------- */
 
 export async function generateStaticParams() {
@@ -234,7 +258,12 @@ export default async function CaseStudyPage({ params }) {
                     <DecisionCard key={idx} decision={decision} index={idx} />
                   ))}
                 </div>
-                {project.slug === 'insurflow' && <FsmSimulator />}
+                {project.slug === 'insurflow' && (
+                  <>
+                    <FsmSimulator />
+                    <InsurflowConcurrencySandbox />
+                  </>
+                )}
                 <InsurflowEvidence />
               </div>
             </CaseStudySection>
@@ -315,13 +344,16 @@ export default async function CaseStudyPage({ params }) {
             </CaseStudySection>
           )}
 
-          {/* 05 — ENGINEERING DECISIONS */}
+          {/* 05 — ENGINEERING DECISIONS & INTERACTIVE LAB */}
           {project.engineeringDecisions && project.engineeringDecisions.length > 0 && (
-            <CaseStudySection number={nextSection()} title="Engineering Decisions">
-              <div className="space-y-3">
-                {project.engineeringDecisions.map((decision, idx) => (
-                  <DecisionCard key={idx} decision={decision} index={idx} />
-                ))}
+            <CaseStudySection number={nextSection()} title="Engineering Decisions & Interactive Lab">
+              <div className="space-y-6">
+                <div className="space-y-3">
+                  {project.engineeringDecisions.map((decision, idx) => (
+                    <DecisionCard key={idx} decision={decision} index={idx} />
+                  ))}
+                </div>
+                {project.slug === 'teamline' && <TeamlineWorkspaceSimulator />}
               </div>
             </CaseStudySection>
           )}
