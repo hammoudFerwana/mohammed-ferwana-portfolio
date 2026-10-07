@@ -2,6 +2,8 @@ import Image from 'next/image';
 import Link from 'next/link';
 import Button from '@/components/shared/Button';
 import RevealOnScroll from '@/components/shared/RevealOnScroll';
+import CounterTicker from '@/components/shared/CounterTicker';
+import TextScramble from '@/components/shared/TextScramble';
 import { siteMetadata } from '@/data/siteMetadata';
 import { metrics } from '@/data/metrics';
 
@@ -25,9 +27,13 @@ export default function HeroSection() {
       <div className="max-w-7xl mx-auto px-5 sm:px-8 w-full relative z-10">
         {/* Technical Metadata Bar (Frame 0ms - 50ms) */}
         <RevealOnScroll delay={0.05}>
-          <div className="inline-flex items-center gap-2 font-mono text-[11px] sm:text-xs text-text-muted tracking-widest uppercase bg-bg-secondary/70 border border-border-default px-3.5 py-1.5 rounded-full mb-8 shadow-inner">
+          <div className="inline-flex items-center gap-2 font-mono text-[11px] sm:text-xs text-text-muted tracking-widest uppercase bg-bg-secondary/70 border border-border-default px-3.5 py-1.5 rounded-full mb-8 shadow-inner hover:border-accent/40 transition-colors duration-300">
             <span className="w-2 h-2 rounded-full bg-functional-success animate-pulse-ring shrink-0" />
-            <span>Node.js · Express · MongoDB · REST APIs · System Architecture</span>
+            <TextScramble
+              text="Node.js · Express · MongoDB · REST APIs · System Architecture"
+              speed={28}
+              delay={200}
+            />
           </div>
         </RevealOnScroll>
 
@@ -56,7 +62,7 @@ export default function HeroSection() {
             <RevealOnScroll delay={0.35}>
               <div className="space-y-2">
                 <p className="font-mono text-sm sm:text-base text-accent font-medium tracking-tight">
-                  Backend Engineer
+                  <TextScramble text="Backend Engineer" speed={35} delay={400} />
                 </p>
                 <h2 className="text-xl sm:text-2xl text-text-secondary font-medium tracking-tight">
                   Building Scalable & Reliable Systems
@@ -70,10 +76,10 @@ export default function HeroSection() {
               </p>
             </RevealOnScroll>
 
-            {/* CTAs (Frame 550ms) */}
+            {/* CTAs (Frame 550ms) with Magnetic Spring Interaction */}
             <RevealOnScroll delay={0.55}>
               <div className="flex flex-wrap items-center gap-3 pt-2">
-                <Button href="/projects" variant="primary" size="lg">
+                <Button href="/projects" variant="primary" size="lg" magnetic>
                   Explore My Work →
                 </Button>
                 <Button
@@ -81,10 +87,11 @@ export default function HeroSection() {
                   variant="secondary"
                   size="lg"
                   external
+                  magnetic
                 >
                   Request Resume
                 </Button>
-                <Button href="/contact" variant="ghost" size="lg">
+                <Button href="/contact" variant="ghost" size="lg" magnetic>
                   Let&apos;s Talk →
                 </Button>
               </div>
@@ -133,19 +140,19 @@ export default function HeroSection() {
                   <div className="flex items-center gap-2 text-xs">
                     <span className="w-1.5 h-1.5 rounded-full bg-functional-success shrink-0" />
                     <span className="text-text-secondary font-mono text-[11px]">
-                      {`${metrics.integrationTests} integration tests · ${metrics.testSuites} suites`}
+                      <CounterTicker value={metrics.integrationTests} className="text-text-primary font-semibold" /> integration tests · <CounterTicker value={metrics.testSuites} className="text-text-primary font-semibold" /> suites
                     </span>
                   </div>
                   <div className="flex items-center gap-2 text-xs">
                     <span className="w-1.5 h-1.5 rounded-full bg-functional-success shrink-0" />
                     <span className="text-text-secondary font-mono text-[11px]">
-                      {`Concurrency: ${metrics.concurrentRequests} requests, no collisions or gaps`}
+                      Concurrency: <CounterTicker value={metrics.concurrentRequests} className="text-text-primary font-semibold" /> requests, no collisions or gaps
                     </span>
                   </div>
                   <div className="flex items-center gap-2 text-xs">
                     <span className="w-1.5 h-1.5 rounded-full bg-functional-success shrink-0" />
                     <span className="text-text-secondary font-mono text-[11px]">
-                      {`${metrics.fsmStates}-state claim lifecycle, guarded transitions`}
+                      <CounterTicker value={metrics.fsmStates} className="text-text-primary font-semibold" />-state claim lifecycle, guarded transitions
                     </span>
                   </div>
                   <div className="flex items-center justify-between gap-2 text-xs pt-1 border-t border-border-subtle/50">
