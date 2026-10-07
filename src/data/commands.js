@@ -146,13 +146,12 @@ export const commandGroups = [
     commands: [
       {
         id: 'act-resume',
-        label: 'Request Resume (Email)',
+        label: 'Request & Download Resume (PDF)',
         shortcut: 'R',
-        action: 'external',
-        target:
-          'mailto:mohammedferwana2@gmail.com?subject=Resume%20Request%20%E2%80%94%20Mohammed%20Ferwana',
-        icon: 'Envelope',
-        keywords: ['cv', 'resume', 'pdf', 'hire', 'qualifications'],
+        action: 'resume',
+        target: '/resume/Mohammed_Ferwana_Resume.pdf',
+        icon: 'FileText',
+        keywords: ['cv', 'resume', 'pdf', 'hire', 'qualifications', 'download'],
       },
       {
         id: 'act-terminal',

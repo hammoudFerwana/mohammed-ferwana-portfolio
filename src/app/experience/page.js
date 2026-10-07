@@ -3,6 +3,7 @@ import SectionHeading from '@/components/shared/SectionHeading';
 import RevealOnScroll from '@/components/shared/RevealOnScroll';
 import CareerTimeline from '@/components/experience/CareerTimeline';
 import Button from '@/components/shared/Button';
+import ResumeRequestButton from '@/components/shared/ResumeRequestButton';
 import { experiences, education } from '@/data/experience';
 import { siteMetadata } from '@/data/siteMetadata';
 
@@ -71,14 +72,7 @@ export default function ExperiencePage() {
               <Button href="/contact" variant="primary" size="md">
                 Get in Touch →
               </Button>
-              <Button
-                href={`mailto:${siteMetadata.email}?subject=Resume%20Request%20%E2%80%94%20Mohammed%20Ferwana`}
-                variant="secondary"
-                size="md"
-                external
-              >
-                Request Resume
-              </Button>
+              <ResumeRequestButton variant="secondary" size="md" />
             </div>
           </div>
         </RevealOnScroll>

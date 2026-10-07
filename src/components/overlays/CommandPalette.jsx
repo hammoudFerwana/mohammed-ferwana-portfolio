@@ -8,7 +8,7 @@ import { cn } from '@/lib/utils';
 
 export default function CommandPalette() {
   const router = useRouter();
-  const { isCommandPaletteOpen, closeCommandPalette, openTerminal } = useOverlay();
+  const { isCommandPaletteOpen, closeCommandPalette, openTerminal, openResumeModal } = useOverlay();
   const [query, setQuery] = useState('');
   const [selectedIndex, setSelectedIndex] = useState(0);
   const inputRef = useRef(null);
@@ -65,6 +65,8 @@ export default function CommandPalette() {
       window.open(cmd.target, '_blank');
     } else if (cmd.action === 'terminal') {
       openTerminal();
+    } else if (cmd.action === 'resume') {
+      openResumeModal();
     }
   };
 

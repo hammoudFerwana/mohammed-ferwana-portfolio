@@ -6,6 +6,7 @@ import Navbar from '@/components/layout/Navbar';
 import Footer from '@/components/layout/Footer';
 import CommandPalette from '@/components/overlays/CommandPalette';
 import MiniTerminal from '@/components/overlays/MiniTerminal';
+import ResumeModal from '@/components/overlays/ResumeModal';
 import KineticCursor from '@/components/shared/KineticCursor';
 import SmoothScrollProvider from '@/components/shared/SmoothScrollProvider';
 import './globals.css';
@@ -81,6 +82,7 @@ export default function RootLayout({ children }) {
             <Footer />
             <CommandPalette />
             <MiniTerminal />
+            <ResumeModal />
             <KineticCursor />
           </SmoothScrollProvider>
         </OverlayProvider>

@@ -1,13 +1,17 @@
+'use client';
+
 import Image from 'next/image';
 import Link from 'next/link';
 import Button from '@/components/shared/Button';
 import RevealOnScroll from '@/components/shared/RevealOnScroll';
 import CounterTicker from '@/components/shared/CounterTicker';
 import TextScramble from '@/components/shared/TextScramble';
+import { useOverlay } from '@/context/OverlayContext';
 import { siteMetadata } from '@/data/siteMetadata';
 import { metrics } from '@/data/metrics';
 
 export default function HeroSection() {
+  const { openResumeModal } = useOverlay();
 
   return (
     <section className="relative min-h-[92dvh] flex flex-col justify-center pt-28 pb-16 overflow-hidden">
@@ -83,10 +87,9 @@ export default function HeroSection() {
                   Explore My Work →
                 </Button>
                 <Button
-                  href={`mailto:${siteMetadata.email}?subject=Resume%20Request%20%E2%80%94%20Mohammed%20Ferwana`}
+                  onClick={openResumeModal}
                   variant="secondary"
                   size="lg"
-                  external
                   magnetic
                 >
                   Request Resume
