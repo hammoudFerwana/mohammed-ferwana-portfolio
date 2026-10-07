@@ -1,6 +1,10 @@
+'use client';
+
+import { useOverlay } from '@/context/OverlayContext';
 import { siteMetadata } from '@/data/siteMetadata';
 
 export default function ContactInfo() {
+  const { openResumeModal } = useOverlay();
   const directChannels = [
     {
       platform: 'Email',
@@ -60,10 +64,11 @@ export default function ContactInfo() {
     },
     {
       platform: 'Resume / CV',
-      value: 'Request via Email',
-      href: `mailto:${siteMetadata.email}?subject=Resume%20Request%20%E2%80%94%20Mohammed%20Ferwana`,
+      value: 'View & Download Dossier (PDF)',
+      href: '/resume/Mohammed_Ferwana_Resume.pdf',
       external: false,
-      description: 'Request a comprehensive CV detailing verified backend engineering systems and experience.',
+      isResumeModal: true,
+      description: 'Access complete verified CV, systems architecture achievements, and technical credentials.',
       icon: (
         <svg
           className="w-5 h-5 text-accent"
@@ -116,14 +121,9 @@ export default function ContactInfo() {
         </div>
 
         <ul className="space-y-3" role="list">
-          {directChannels.map((channel) => (
-            <li key={channel.platform}>
-              <a
-                href={channel.href}
-                target={channel.external ? '_blank' : undefined}
-                rel={channel.external ? 'noopener noreferrer' : undefined}
-                className="group flex items-start gap-4 p-3.5 rounded-xl bg-bg-tertiary/50 border border-border-subtle hover:border-accent/40 hover:bg-bg-tertiary transition-all duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent"
-              >
+          {directChannels.map((channel) => {
+            const content = (
+              <>
                 <div className="p-2.5 rounded-lg bg-bg-primary border border-border-default group-hover:border-accent/30 transition-colors shrink-0">
                   {channel.icon}
                 </div>
@@ -132,11 +132,15 @@ export default function ContactInfo() {
                     <span className="text-xs font-mono uppercase tracking-wider text-text-muted">
                       {channel.platform}
                     </span>
-                    {channel.external && (
+                    {channel.external ? (
                       <span className="text-xs text-text-muted group-hover:text-accent transition-colors">
                         ↗
                       </span>
-                    )}
+                    ) : channel.isResumeModal ? (
+                      <span className="text-[10px] font-mono text-accent bg-accent/10 px-2 py-0.5 rounded-full border border-accent/20">
+                        Interactive
+                      </span>
+                    ) : null}
                   </div>
                   <p className="text-sm font-semibold text-text-primary group-hover:text-accent transition-colors truncate mt-0.5">
                     {channel.value}
@@ -145,9 +149,31 @@ export default function ContactInfo() {
                     {channel.description}
                   </p>
                 </div>
-              </a>
-            </li>
-          ))}
+              </>
+            );
+
+            const baseClass =
+              'w-full text-left group flex items-start gap-4 p-3.5 rounded-xl bg-bg-tertiary/50 border border-border-subtle hover:border-accent/40 hover:bg-bg-tertiary transition-all duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent cursor-pointer';
+
+            return (
+              <li key={channel.platform}>
+                {channel.isResumeModal ? (
+                  <button type="button" onClick={openResumeModal} className={baseClass}>
+                    {content}
+                  </button>
+                ) : (
+                  <a
+                    href={channel.href}
+                    target={channel.external ? '_blank' : undefined}
+                    rel={channel.external ? 'noopener noreferrer' : undefined}
+                    className={baseClass}
+                  >
+                    {content}
+                  </a>
+                )}
+              </li>
+            );
+          })}
         </ul>
 
         {/* Location & Timezone Details */}
