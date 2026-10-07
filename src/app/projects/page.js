@@ -2,6 +2,7 @@ import SectionHeading from '@/components/shared/SectionHeading';
 import ProjectsExplorer from '@/components/projects/ProjectsExplorer';
 import RevealOnScroll from '@/components/shared/RevealOnScroll';
 import Button from '@/components/shared/Button';
+import ResumeRequestButton from '@/components/shared/ResumeRequestButton';
 import { projects } from '@/data/projects';
 import { siteMetadata } from '@/data/siteMetadata';
 
@@ -47,14 +48,7 @@ export default function ProjectsPage() {
               <Button href="/contact" variant="primary" size="md">
                 Get in Touch →
               </Button>
-              <Button
-                href={`mailto:${siteMetadata.email}?subject=Resume%20Request%20%E2%80%94%20Mohammed%20Ferwana`}
-                variant="secondary"
-                size="md"
-                external
-              >
-                Request Resume
-              </Button>
+              <ResumeRequestButton variant="secondary" size="md" />
             </div>
           </div>
         </RevealOnScroll>

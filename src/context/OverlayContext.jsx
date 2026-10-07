@@ -11,11 +11,16 @@ const OverlayContext = createContext({
   openTerminal: () => {},
   closeTerminal: () => {},
   toggleTerminal: () => {},
+  isResumeModalOpen: false,
+  openResumeModal: () => {},
+  closeResumeModal: () => {},
+  toggleResumeModal: () => {},
 });
 
 export function OverlayProvider({ children }) {
   const [isCommandPaletteOpen, setIsCommandPaletteOpen] = useState(false);
   const [isTerminalOpen, setIsTerminalOpen] = useState(false);
+  const [isResumeModalOpen, setIsResumeModalOpen] = useState(false);
 
   const openCommandPalette = () => setIsCommandPaletteOpen(true);
   const closeCommandPalette = () => setIsCommandPaletteOpen(false);
@@ -25,7 +30,14 @@ export function OverlayProvider({ children }) {
   const closeTerminal = () => setIsTerminalOpen(false);
   const toggleTerminal = () => setIsTerminalOpen((prev) => !prev);
 
+  const openResumeModal = () => setIsResumeModalOpen(true);
+  const closeResumeModal = () => setIsResumeModalOpen(false);
+  const toggleResumeModal = () => setIsResumeModalOpen((prev) => !prev);
+
   useEffect(() => {
+    const handleOpenResumeEvent = () => setIsResumeModalOpen(true);
+    window.addEventListener('open-resume-modal', handleOpenResumeEvent);
+
     const handleKeyDown = (e) => {
       // Command palette: Ctrl+K or Cmd+K
       if ((e.ctrlKey || e.metaKey) && e.key.toLowerCase() === 'k') {
@@ -44,16 +56,20 @@ export function OverlayProvider({ children }) {
         return;
       }
 
-      // Escape closes both
+      // Escape closes all overlays
       if (e.key === 'Escape') {
         if (isCommandPaletteOpen) setIsCommandPaletteOpen(false);
         if (isTerminalOpen) setIsTerminalOpen(false);
+        if (isResumeModalOpen) setIsResumeModalOpen(false);
       }
     };
 
     window.addEventListener('keydown', handleKeyDown);
-    return () => window.removeEventListener('keydown', handleKeyDown);
-  }, [isCommandPaletteOpen, isTerminalOpen]);
+    return () => {
+      window.removeEventListener('open-resume-modal', handleOpenResumeEvent);
+      window.removeEventListener('keydown', handleKeyDown);
+    };
+  }, [isCommandPaletteOpen, isTerminalOpen, isResumeModalOpen]);
 
   return (
     <OverlayContext.Provider
@@ -66,6 +82,10 @@ export function OverlayProvider({ children }) {
         openTerminal,
         closeTerminal,
         toggleTerminal,
+        isResumeModalOpen,
+        openResumeModal,
+        closeResumeModal,
+        toggleResumeModal,
       }}
     >
       {children}

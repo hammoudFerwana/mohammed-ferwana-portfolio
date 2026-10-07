@@ -1,7 +1,10 @@
+'use client';
+
 import Link from 'next/link';
 import Button from '@/components/shared/Button';
 import Badge from '@/components/shared/Badge';
 import RevealOnScroll from '@/components/shared/RevealOnScroll';
+import { useOverlay } from '@/context/OverlayContext';
 import { projects } from '@/data/projects';
 import { siteMetadata } from '@/data/siteMetadata';
 
@@ -16,6 +19,7 @@ import { siteMetadata } from '@/data/siteMetadata';
  * @param {Object} props.currentProject — Current project data object
  */
 export default function CaseStudyFooter({ currentProject }) {
+  const { openResumeModal } = useOverlay();
   const tier1Projects = projects.filter((p) => p.tier === 1 && p.slug);
   const currentIndex = tier1Projects.findIndex((p) => p.slug === currentProject?.slug);
   const nextProject =
@@ -103,10 +107,9 @@ export default function CaseStudyFooter({ currentProject }) {
                 Start a Conversation →
               </Button>
               <Button
-                href={`mailto:${siteMetadata.email}?subject=Resume%20Request%20%E2%80%94%20Mohammed%20Ferwana`}
+                onClick={openResumeModal}
                 variant="secondary"
                 size="md"
-                external
               >
                 Request Resume
               </Button>
