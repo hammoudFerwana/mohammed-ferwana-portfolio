@@ -1,6 +1,7 @@
 import SectionHeading from '@/components/shared/SectionHeading';
 import RevealOnScroll from '@/components/shared/RevealOnScroll';
 import Badge from '@/components/shared/Badge';
+import SpotlightCard from '@/components/shared/SpotlightCard';
 import { aboutData } from '@/data/about';
 
 export default function AboutTimeline() {
@@ -30,17 +31,25 @@ export default function AboutTimeline() {
         />
       </RevealOnScroll>
 
-      <div className="relative mt-12 pl-6 sm:pl-8 border-l border-border-default space-y-12">
+      <div className="relative mt-12 pl-6 sm:pl-8 space-y-12">
+        {/* Animated Continuous Conduit Spine */}
+        <div
+          className="absolute left-0 top-3 bottom-3 w-0.5 bg-gradient-to-b from-accent via-accent-secondary/50 to-border-subtle"
+          aria-hidden="true"
+        >
+          <div className="w-full h-full animate-conduit-pulse opacity-60" />
+        </div>
+
         {timeline.map((item, idx) => (
           <RevealOnScroll key={`${item.year}-${idx}`} delay={0.08 * idx}>
             <div className="relative group">
               {/* Timeline Node Marker */}
-              <div className="absolute -left-[31px] sm:-left-[39px] top-1.5 w-4 h-4 rounded-full bg-bg-primary border-2 border-accent flex items-center justify-center">
+              <div className="absolute -left-[31px] sm:-left-[39px] top-6 w-4 h-4 rounded-full bg-bg-primary border-2 border-accent flex items-center justify-center shadow-sm shadow-accent/20">
                 <span className="w-1.5 h-1.5 rounded-full bg-accent group-hover:scale-125 transition-transform" />
               </div>
 
-              {/* Milestone Card */}
-              <div className="rounded-2xl bg-bg-secondary border border-border-default hover:border-border-strong p-6 sm:p-7 space-y-3 transition-all duration-300">
+              {/* Milestone Card with 3D Tilt */}
+              <SpotlightCard className="rounded-2xl bg-bg-secondary border border-border-default hover:border-border-strong p-6 sm:p-7 space-y-3 transition-all duration-300">
                 <div className="flex flex-wrap items-center justify-between gap-2">
                   <div className="flex items-center gap-2">
                     <span className="font-mono text-xs font-semibold text-accent px-2 py-0.5 rounded bg-accent/10 border border-accent/25">
@@ -69,7 +78,7 @@ export default function AboutTimeline() {
                     {item.highlight}
                   </div>
                 )}
-              </div>
+              </SpotlightCard>
             </div>
           </RevealOnScroll>
         ))}
