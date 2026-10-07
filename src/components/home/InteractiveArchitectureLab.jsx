@@ -6,6 +6,7 @@ import SectionHeading from '@/components/shared/SectionHeading';
 import RevealOnScroll from '@/components/shared/RevealOnScroll';
 import Badge from '@/components/shared/Badge';
 import { cn } from '@/lib/utils';
+import { soundFx } from '@/lib/soundFx';
 
 // ==========================================
 // ARCHITECTURAL NODES & SPECIFICATIONS
@@ -309,7 +310,7 @@ const SCENARIOS = [
   },
 ];
 
-export default function InteractiveArchitectureLab() {
+export default function InteractiveArchitectureLab({ isEmbedded = false }) {
   const [activeScenarioId, setActiveScenarioId] = useState(SCENARIOS[0].id);
   const [selectedNodeId, setSelectedNodeId] = useState('fsm');
   const [activeStepIndex, setActiveStepIndex] = useState(-1);
@@ -359,6 +360,7 @@ export default function InteractiveArchitectureLab() {
           const nodeId = pathNodes[currentStep];
           setActiveStepIndex(currentStep);
           setSelectedNodeId(nodeId);
+          soundFx.playPacketHop(currentStep);
 
           const logItem = scenarioToRun.logs[currentStep];
           if (logItem) {
@@ -377,6 +379,11 @@ export default function InteractiveArchitectureLab() {
           clearInterval(interval);
           setIsSimulating(false);
           setActiveStepIndex(-1);
+          if (scenarioToRun.blockNode) {
+            soundFx.playWarning();
+          } else {
+            soundFx.playSuccess();
+          }
         }
       }, 550);
 
@@ -389,21 +396,16 @@ export default function InteractiveArchitectureLab() {
   const handleCopyCode = () => {
     if (typeof navigator !== 'undefined' && navigator.clipboard) {
       navigator.clipboard.writeText(selectedNode.code);
+      soundFx.playClick();
       setCopiedCode(true);
       setTimeout(() => setCopiedCode(false), 2000);
     }
   };
 
-  return (
-    <section id="architecture" className="py-20 md:py-28 relative overflow-hidden bg-bg-primary">
-      {/* Background Subtle Gradient & Grid Pattern */}
-      <div className="absolute inset-0 pointer-events-none opacity-40">
-        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[850px] h-[550px] bg-accent/8 blur-[160px] rounded-full" />
-        <div className="absolute top-1/4 right-1/4 w-[450px] h-[350px] bg-cyan-500/5 blur-[140px] rounded-full" />
-      </div>
-
-      <div className="max-w-7xl mx-auto px-5 sm:px-8 relative z-10">
-        {/* Section Heading */}
+  const content = (
+    <div className={cn('relative z-10', !isEmbedded && 'max-w-7xl mx-auto px-5 sm:px-8')}>
+      {/* Section Heading only if standalone */}
+      {!isEmbedded && (
         <RevealOnScroll delay={0.05}>
           <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-12">
             <div>
@@ -431,6 +433,7 @@ export default function InteractiveArchitectureLab() {
             </div>
           </div>
         </RevealOnScroll>
+      )}
 
         {/* ========================================================
             TOP SCENARIO TRIGGER BAR (INTERACTIVE PLAYGROUND)
@@ -875,7 +878,20 @@ export default function InteractiveArchitectureLab() {
             </div>
           </div>
         </RevealOnScroll>
+    </div>
+  );
+
+  if (isEmbedded) {
+    return content;
+  }
+
+  return (
+    <section id="architecture" className="py-20 md:py-28 relative overflow-hidden bg-bg-primary">
+      <div className="absolute inset-0 pointer-events-none opacity-40">
+        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[850px] h-[550px] bg-accent/8 blur-[160px] rounded-full" />
+        <div className="absolute top-1/4 right-1/4 w-[450px] h-[350px] bg-cyan-500/5 blur-[140px] rounded-full" />
       </div>
+      {content}
     </section>
   );
 }
