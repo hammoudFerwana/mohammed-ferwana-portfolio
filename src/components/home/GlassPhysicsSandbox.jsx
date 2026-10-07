@@ -48,11 +48,11 @@ const ICOSAHEDRON = {
   ],
 };
 
-// 3. Hexagonal Crystal Prism (Quartz)
+// 3. Hexagonal Crystal Prism (Quartz Column)
 const createHexPrism = () => {
   const verts = [];
-  const h = 1.3;
-  const r = 0.8;
+  const h = 1.35;
+  const r = 0.82;
   for (let i = 0; i < 6; i++) {
     const angle = (i * Math.PI) / 3;
     verts.push([Math.cos(angle) * r, -h / 2, Math.sin(angle) * r]);
@@ -61,8 +61,8 @@ const createHexPrism = () => {
     const angle = (i * Math.PI) / 3;
     verts.push([Math.cos(angle) * r, h / 2, Math.sin(angle) * r]);
   }
-  verts.push([0, -h * 0.8, 0]); // top point
-  verts.push([0, h * 0.8, 0]);  // bottom point
+  verts.push([0, -h * 0.85, 0]); // 12: top pyramid point
+  verts.push([0, h * 0.85, 0]);  // 13: bottom pyramid point
 
   const faces = [];
   // side quads split into triangles
@@ -103,7 +103,7 @@ const TETRAHEDRON = {
   ],
 };
 
-// 5. Glass Orb / Spherical Lens (rendered dynamically with layered glass shaders)
+// 5. Glass Orb / Spherical Lens
 const GLASS_ORB = {
   type: 'orb',
   radius: 1,
@@ -122,11 +122,12 @@ const PALETTES = {
     primary: '#38bdf8',     // sky blue
     secondary: '#c084fc',   // violet
     accent: '#f472b6',      // pink
-    glow: 'rgba(56, 189, 248, 0.25)',
-    borderGlow: 'rgba(192, 132, 252, 0.4)',
+    glow: 'rgba(56, 189, 248, 0.28)',
+    borderGlow: 'rgba(192, 132, 252, 0.45)',
     specular: '#ffffff',
-    dispersionA: 'rgba(56, 189, 248, 0.8)',
-    dispersionB: 'rgba(236, 72, 153, 0.8)',
+    dispersionA: 'rgba(56, 189, 248, 0.85)',
+    dispersionB: 'rgba(236, 72, 153, 0.85)',
+    laserColor: 'rgba(56, 189, 248, 0.95)',
     bgGradient: 'radial-gradient(ellipse at 50% 40%, rgba(56, 189, 248, 0.08) 0%, rgba(139, 92, 246, 0.03) 60%, transparent 100%)',
   },
   aurora: {
@@ -136,11 +137,12 @@ const PALETTES = {
     primary: '#10b981',     // emerald
     secondary: '#06b6d4',   // cyan
     accent: '#8b5cf6',      // violet
-    glow: 'rgba(16, 185, 129, 0.25)',
-    borderGlow: 'rgba(6, 182, 212, 0.4)',
+    glow: 'rgba(16, 185, 129, 0.28)',
+    borderGlow: 'rgba(6, 182, 212, 0.45)',
     specular: '#ffffff',
-    dispersionA: 'rgba(16, 185, 129, 0.8)',
-    dispersionB: 'rgba(6, 182, 212, 0.8)',
+    dispersionA: 'rgba(16, 185, 129, 0.85)',
+    dispersionB: 'rgba(6, 182, 212, 0.85)',
+    laserColor: 'rgba(16, 185, 129, 0.95)',
     bgGradient: 'radial-gradient(ellipse at 50% 40%, rgba(16, 185, 129, 0.07) 0%, rgba(6, 182, 212, 0.04) 60%, transparent 100%)',
   },
   obsidian: {
@@ -150,34 +152,78 @@ const PALETTES = {
     primary: '#f43f5e',     // rose
     secondary: '#a855f7',   // purple
     accent: '#3b82f6',      // blue
-    glow: 'rgba(244, 63, 94, 0.22)',
+    glow: 'rgba(244, 63, 94, 0.25)',
     borderGlow: 'rgba(168, 85, 247, 0.45)',
     specular: '#ffffff',
     dispersionA: 'rgba(244, 63, 94, 0.85)',
     dispersionB: 'rgba(168, 85, 247, 0.85)',
+    laserColor: 'rgba(244, 63, 94, 0.95)',
     bgGradient: 'radial-gradient(ellipse at 50% 40%, rgba(244, 63, 94, 0.06) 0%, rgba(168, 85, 247, 0.04) 60%, transparent 100%)',
   },
   champagne: {
     id: 'champagne',
     name: 'Rose Champagne',
     desc: 'Warm peach quartz, crystalline rose gold, and sunset amber',
-    primary: '#fb923c',     // orange/peach
+    primary: '#fb923c',     // peach
     secondary: '#f43f5e',   // rose
     accent: '#facc15',      // gold
-    glow: 'rgba(251, 146, 60, 0.22)',
-    borderGlow: 'rgba(244, 63, 94, 0.4)',
+    glow: 'rgba(251, 146, 60, 0.25)',
+    borderGlow: 'rgba(244, 63, 94, 0.42)',
     specular: '#ffffff',
     dispersionA: 'rgba(251, 146, 60, 0.85)',
     dispersionB: 'rgba(244, 63, 94, 0.85)',
+    laserColor: 'rgba(251, 146, 60, 0.95)',
     bgGradient: 'radial-gradient(ellipse at 50% 40%, rgba(251, 146, 60, 0.07) 0%, rgba(244, 63, 94, 0.04) 60%, transparent 100%)',
   },
 };
 
 // ==========================================
-// 3D VECTOR MATH & MATRIX TRANSFORMATIONS
+// MATERIAL PROPERTIES (OPTICAL SHADERS)
+// ==========================================
+const MATERIAL_MODES = {
+  glass: {
+    id: 'glass',
+    label: 'Prismatic Glass',
+    desc: 'Refractive optical crystal with chromatic dispersion',
+    baseAlpha: 0.32,
+    specularStrength: 1.0,
+    fresnelBoost: 0.75,
+    metallic: 0.1,
+  },
+  chrome: {
+    id: 'chrome',
+    label: 'Liquid Chrome',
+    desc: 'Mirrored liquid mercury with ultra-high reflective sheen',
+    baseAlpha: 0.82,
+    specularStrength: 1.6,
+    fresnelBoost: 0.3,
+    metallic: 0.9,
+  },
+  nebula: {
+    id: 'nebula',
+    label: 'Bioluminescent Opal',
+    desc: 'Pulsing inner energy core with ethereal neon contours',
+    baseAlpha: 0.55,
+    specularStrength: 0.75,
+    fresnelBoost: 1.2,
+    metallic: 0.3,
+  },
+};
+
+// ==========================================
+// TIME DILATION PRESETS
+// ==========================================
+const TIME_SPEEDS = [
+  { id: 'realtime', label: '1.0x', value: 1.0, name: 'Realtime Zero-G' },
+  { id: 'slowmo', label: '0.25x', value: 0.25, name: 'Bullet-Time Slow-Mo' },
+  { id: 'freeze', label: '0.0x', value: 0.0, name: 'Time-Freeze' },
+];
+
+// ==========================================
+// 3D VECTOR MATH & TRANSFORMATIONS
 // ==========================================
 function rotatePoint(p, rx, ry, rz) {
-  let [x, y, z] = p;
+  const [x, y, z] = p;
 
   // Rotate around X
   const cosX = Math.cos(rx);
@@ -217,7 +263,7 @@ function computeNormal(p0, p1, p2) {
   return [nx / len, ny / len, nz / len];
 }
 
-// Light source vector in 3D (top-right-front)
+// Key Light source vector in 3D (top-right-front)
 const LIGHT_DIR = [0.45, -0.65, 0.61];
 const lenL = Math.hypot(...LIGHT_DIR);
 const L = LIGHT_DIR.map((v) => v / lenL);
@@ -228,42 +274,47 @@ const lenBL = Math.hypot(...BACKLIGHT_DIR);
 const BL = BACKLIGHT_DIR.map((v) => v / lenBL);
 
 // ==========================================
-// MAIN COMPONENT
+// MAIN ZERO-GRAVITY GLASS COMPONENT
 // ==========================================
 export default function GlassPhysicsSandbox() {
   const containerRef = useRef(null);
   const canvasRef = useRef(null);
 
-  // UI State
+  // UI Interactive States
   const [activePalette, setActivePalette] = useState('prismatic');
+  const [materialMode, setMaterialMode] = useState('glass');
+  const [timeSpeed, setTimeSpeed] = useState(1.0);
   const [gravityMode, setGravityMode] = useState('zero_g'); // 'zero_g' | 'antigravity' | 'vortex'
+  const [isLaserActive, setIsLaserActive] = useState(true);
   const [isFullscreen, setIsFullscreen] = useState(false);
   const [isAudioMuted, setIsAudioMuted] = useState(true);
   const [crystalCount, setCrystalCount] = useState(12);
   const [interactionHint, setInteractionHint] = useState('Click & drag crystals to fling them in zero gravity');
 
-  // Interactive Refs
-  const mousePosRef = useRef({ x: 0, y: 0, isDown: false, vx: 0, vy: 0, prevX: 0, prevY: 0 });
+  // Interactive Refs for Realtime Simulation
+  const mousePosRef = useRef({ x: 0, y: 0, isDown: false, vx: 0, vy: 0, prevX: 0, prevY: 0, activeInCanvas: false });
   const draggedCrystalRef = useRef(null);
   const crystalsRef = useRef([]);
   const animFrameIdRef = useRef(null);
   const isVisibleRef = useRef(true);
   const ripplesRef = useRef([]);
+  const causticsRef = useRef([]);
   const lastChimeTimeRef = useRef(0);
 
   const palette = PALETTES[activePalette];
+  const material = MATERIAL_MODES[materialMode];
 
-  // Initialize Crystals
+  // Initialize Weightless Crystals
   const initCrystals = useCallback((width, height, count = 12) => {
     const list = [];
     const minDim = Math.min(width, height);
-    const baseRadius = Math.max(34, Math.min(62, minDim * 0.08));
+    const baseRadius = Math.max(34, Math.min(64, minDim * 0.082));
 
     for (let i = 0; i < count; i++) {
       const geo = GEOMETRY_CHOICES[i % GEOMETRY_CHOICES.length];
-      const scale = baseRadius * (0.65 + Math.random() * 0.75);
+      const scale = baseRadius * (0.68 + Math.random() * 0.72);
       const angle = Math.random() * Math.PI * 2;
-      const dist = (Math.random() * 0.38 + 0.05) * minDim;
+      const dist = (Math.random() * 0.36 + 0.06) * minDim;
 
       list.push({
         id: i,
@@ -272,15 +323,15 @@ export default function GlassPhysicsSandbox() {
         x: width / 2 + Math.cos(angle) * dist,
         y: height / 2 + Math.sin(angle) * dist,
         z: (Math.random() - 0.5) * 160,
-        vx: (Math.random() - 0.5) * 0.8,
-        vy: (Math.random() - 0.5) * 0.8,
-        vz: (Math.random() - 0.5) * 0.4,
+        vx: (Math.random() - 0.5) * 0.7,
+        vy: (Math.random() - 0.5) * 0.7,
+        vz: (Math.random() - 0.5) * 0.35,
         rx: Math.random() * Math.PI * 2,
         ry: Math.random() * Math.PI * 2,
         rz: Math.random() * Math.PI * 2,
-        avx: (Math.random() - 0.5) * 0.025,
-        avy: (Math.random() - 0.5) * 0.025,
-        avz: (Math.random() - 0.5) * 0.025,
+        avx: (Math.random() - 0.5) * 0.022,
+        avy: (Math.random() - 0.5) * 0.022,
+        avz: (Math.random() - 0.5) * 0.022,
         mass: scale / 40,
         radius: scale,
         colorPhase: Math.random() * Math.PI * 2,
@@ -290,11 +341,11 @@ export default function GlassPhysicsSandbox() {
     crystalsRef.current = list;
   }, []);
 
-  // Trigger Acoustic Crystal Chime
+  // Acoustic Crystal Chime Synthesizer
   const triggerCrystalChime = useCallback((scale) => {
     if (isAudioMuted) return;
     const now = performance.now();
-    if (now - lastChimeTimeRef.current < 85) return; // Audio throttle
+    if (now - lastChimeTimeRef.current < 75) return; // Throttling for clean acoustic mix
     lastChimeTimeRef.current = now;
 
     // Pitch is inversely proportional to crystal mass/scale
@@ -302,7 +353,7 @@ export default function GlassPhysicsSandbox() {
     soundFx.playCrystalChime(pitch);
   }, [isAudioMuted]);
 
-  // Gravitational Wave Pulse
+  // Gravitational Shockwave Pulse
   const triggerGravitationalWave = useCallback(() => {
     const canvas = canvasRef.current;
     if (!canvas) return;
@@ -314,8 +365,8 @@ export default function GlassPhysicsSandbox() {
     ripplesRef.current.push({
       x: cx,
       y: cy,
-      radius: 10,
-      maxRadius: Math.max(canvas.width, canvas.height) * 0.8,
+      radius: 12,
+      maxRadius: Math.max(canvas.width, canvas.height) * 0.85,
       opacity: 1,
       color: palette.primary,
     });
@@ -324,18 +375,57 @@ export default function GlassPhysicsSandbox() {
       const dx = c.x - cx;
       const dy = c.y - cy;
       const dist = Math.hypot(dx, dy) || 1;
-      const force = 12 + Math.random() * 8;
+      const force = 14 + Math.random() * 8;
       c.vx += (dx / dist) * force;
       c.vy += (dy / dist) * force;
       c.vz += (Math.random() - 0.5) * 8;
-      c.avx += (Math.random() - 0.5) * 0.15;
-      c.avy += (Math.random() - 0.5) * 0.15;
+      c.avx += (Math.random() - 0.5) * 0.16;
+      c.avy += (Math.random() - 0.5) * 0.16;
     });
 
-    setInteractionHint('Gravitational Wave Released • Crystals scattering in zero-G');
+    setInteractionHint('Gravitational Wave Released • Crystals scattering across zero-G void');
   }, [palette]);
 
-  // Main Canvas Setup & Simulation Loop
+  // Materialize an extra crystal
+  const handleAddCrystal = () => {
+    const canvas = canvasRef.current;
+    if (!canvas) return;
+    const rect = canvas.getBoundingClientRect();
+    const w = rect.width;
+    const h = rect.height;
+
+    const geo = GEOMETRY_CHOICES[crystalsRef.current.length % GEOMETRY_CHOICES.length];
+    const baseRadius = Math.max(34, Math.min(64, Math.min(w, h) * 0.082));
+    const scale = baseRadius * (0.7 + Math.random() * 0.7);
+
+    crystalsRef.current.push({
+      id: Date.now(),
+      geo,
+      scale,
+      x: w / 2 + (Math.random() - 0.5) * 80,
+      y: h / 2 + (Math.random() - 0.5) * 80,
+      z: 0,
+      vx: (Math.random() - 0.5) * 4,
+      vy: (Math.random() - 0.5) * 4,
+      vz: (Math.random() - 0.5) * 3,
+      rx: Math.random() * Math.PI * 2,
+      ry: Math.random() * Math.PI * 2,
+      rz: Math.random() * Math.PI * 2,
+      avx: (Math.random() - 0.5) * 0.04,
+      avy: (Math.random() - 0.5) * 0.04,
+      avz: (Math.random() - 0.5) * 0.04,
+      mass: scale / 40,
+      radius: scale,
+      colorPhase: Math.random() * Math.PI * 2,
+      ambientDriftAngle: Math.random() * Math.PI * 2,
+    });
+
+    setCrystalCount(crystalsRef.current.length);
+    triggerCrystalChime(scale);
+    setInteractionHint('New optical crystal crystallized in zero-G void');
+  };
+
+  // Main Canvas Setup & Physics Simulation Loop
   useEffect(() => {
     const canvas = canvasRef.current;
     if (!canvas) return;
@@ -364,21 +454,25 @@ export default function GlassPhysicsSandbox() {
     handleResize();
     window.addEventListener('resize', handleResize);
 
-    // Visibility Observer to pause when not in screen (saving 100% CPU/GPU)
+    // Visibility Observer to pause when scrolled out of screen (saving 100% CPU/GPU)
     const observer = new IntersectionObserver(([entry]) => {
       isVisibleRef.current = entry.isIntersecting;
     }, { threshold: 0.1 });
     observer.observe(canvas);
 
     let lastTime = performance.now();
+    let laserSweepAngle = 0;
 
-    // Render & Physics Loop
+    // Simulation & Render Loop
     const renderLoop = (time) => {
       animFrameIdRef.current = requestAnimationFrame(renderLoop);
       if (!isVisibleRef.current) return;
 
-      const dt = Math.min((time - lastTime) / 1000, 0.05);
+      const rawDt = Math.min((time - lastTime) / 1000, 0.05);
       lastTime = time;
+
+      // Time Dilation Scaling: Freezes or slows physics while retaining interactive responsive feel
+      const simDt = rawDt * timeSpeed;
 
       ctx.clearRect(0, 0, width, height);
 
@@ -391,11 +485,11 @@ export default function GlassPhysicsSandbox() {
 
       const dragged = draggedCrystalRef.current;
 
-      // 1. Process Gravitational Ripples
+      // 1. Process Gravitational Shockwave Ripples
       for (let i = ripplesRef.current.length - 1; i >= 0; i--) {
         const rip = ripplesRef.current[i];
-        rip.radius += 520 * dt;
-        rip.opacity -= 1.1 * dt;
+        rip.radius += 520 * (timeSpeed > 0 ? simDt : rawDt * 0.4);
+        rip.opacity -= 1.1 * rawDt;
 
         if (rip.opacity <= 0 || rip.radius > rip.maxRadius) {
           ripplesRef.current.splice(i, 1);
@@ -406,96 +500,177 @@ export default function GlassPhysicsSandbox() {
         ctx.beginPath();
         ctx.arc(rip.x, rip.y, rip.radius, 0, Math.PI * 2);
         ctx.strokeStyle = rip.color;
-        ctx.globalAlpha = Math.max(0, rip.opacity * 0.6);
+        ctx.globalAlpha = Math.max(0, rip.opacity * 0.65);
         ctx.lineWidth = 2.5;
         ctx.shadowColor = rip.color;
-        ctx.shadowBlur = 15;
+        ctx.shadowBlur = 16;
         ctx.stroke();
         ctx.restore();
+      }
+
+      // 2. Interactive Prism Laser & Refraction Caustics
+      if (isLaserActive) {
+        laserSweepAngle += 0.25 * rawDt;
+        // Laser Origin from top-left, aimed towards mouse or sweeping across
+        const laserOriginX = 20;
+        const laserOriginY = 20;
+        const targetX = mouse.activeInCanvas ? mouse.x : width * 0.65 + Math.cos(laserSweepAngle) * (width * 0.25);
+        const targetY = mouse.activeInCanvas ? mouse.y : height * 0.55 + Math.sin(laserSweepAngle * 1.2) * (height * 0.25);
+
+        const ldx = targetX - laserOriginX;
+        const ldy = targetY - laserOriginY;
+        const ldist = Math.hypot(ldx, ldy) || 1;
+        const lDirX = ldx / ldist;
+        const lDirY = ldy / ldist;
+
+        // Primary Coherent Laser Ray
+        ctx.save();
+        ctx.beginPath();
+        ctx.moveTo(laserOriginX, laserOriginY);
+        ctx.lineTo(laserOriginX + lDirX * Math.max(width, height) * 1.4, laserOriginY + lDirY * Math.max(width, height) * 1.4);
+        ctx.strokeStyle = palette.laserColor;
+        ctx.lineWidth = 1.8;
+        ctx.shadowColor = palette.primary;
+        ctx.shadowBlur = 12;
+        ctx.globalAlpha = 0.65;
+        ctx.stroke();
+
+        // Laser Origin Emitter Pulse
+        ctx.beginPath();
+        ctx.arc(laserOriginX, laserOriginY, 4, 0, Math.PI * 2);
+        ctx.fillStyle = '#ffffff';
+        ctx.shadowBlur = 18;
+        ctx.shadowColor = palette.primary;
+        ctx.fill();
+        ctx.restore();
+
+        // Check Prism Laser Intersections with Crystals
+        crystalsRef.current.forEach((c) => {
+          // Distance from crystal center to laser ray
+          const cx = c.x - laserOriginX;
+          const cy = c.y - laserOriginY;
+          const proj = cx * lDirX + cy * lDirY;
+
+          if (proj > 0) {
+            const nearestX = laserOriginX + lDirX * proj;
+            const nearestY = laserOriginY + lDirY * proj;
+            const distToBeam = Math.hypot(c.x - nearestX, c.y - nearestY);
+
+            if (distToBeam < c.radius * 0.85) {
+              // PRISM REFRACTION: Crystal splits laser into chromatic spectral fans
+              ctx.save();
+              ctx.translate(c.x, c.y);
+
+              // Refracted Rainbow Flare Ray 1
+              ctx.beginPath();
+              ctx.moveTo(0, 0);
+              ctx.lineTo(lDirX * 110 - lDirY * 45, lDirY * 110 + lDirX * 45);
+              ctx.strokeStyle = palette.dispersionA;
+              ctx.lineWidth = 2.2;
+              ctx.shadowColor = palette.secondary;
+              ctx.shadowBlur = 14;
+              ctx.globalAlpha = 0.75;
+              ctx.stroke();
+
+              // Refracted Rainbow Flare Ray 2
+              ctx.beginPath();
+              ctx.moveTo(0, 0);
+              ctx.lineTo(lDirX * 110 + lDirY * 45, lDirY * 110 - lDirX * 45);
+              ctx.strokeStyle = palette.dispersionB;
+              ctx.lineWidth = 2.2;
+              ctx.shadowColor = palette.accent;
+              ctx.shadowBlur = 14;
+              ctx.globalAlpha = 0.75;
+              ctx.stroke();
+
+              // Prismatic Caustic Sparkle on Crystal Core
+              ctx.beginPath();
+              ctx.arc(0, 0, 5, 0, Math.PI * 2);
+              ctx.fillStyle = '#ffffff';
+              ctx.shadowColor = '#ffffff';
+              ctx.shadowBlur = 20;
+              ctx.fill();
+
+              ctx.restore();
+            }
+          }
+        });
       }
 
       const crystals = crystalsRef.current;
       const numCrystals = crystals.length;
 
-      // 2. Physics & Forces Update
+      // 3. Physics & Forces Update
       for (let i = 0; i < numCrystals; i++) {
         const c = crystals[i];
 
         if (c === dragged) {
-          // Locked to cursor with spring damping
+          // Responsive direct manipulation (always responsive even during freeze or slow-mo)
           const targetX = mouse.x;
           const targetY = mouse.y;
           c.vx = (targetX - c.x) * 18;
           c.vy = (targetY - c.y) * 18;
-          c.x += c.vx * dt;
-          c.y += c.vy * dt;
-          c.z += -c.z * 6 * dt; // Pull slightly forward in 3D
+          c.x += c.vx * rawDt;
+          c.y += c.vy * rawDt;
+          c.z += -c.z * 6 * rawDt;
           c.rx += c.avx;
           c.ry += c.avy;
           c.rz += c.avz;
         } else {
-          // Ambient organic micro-currents in zero-G
-          c.ambientDriftAngle += 0.4 * dt;
+          // Weightless ambient micro-currents in zero-G
+          c.ambientDriftAngle += 0.4 * simDt;
           const driftX = Math.cos(c.ambientDriftAngle) * 0.25;
           const driftY = Math.sin(c.ambientDriftAngle * 0.8) * 0.25;
 
           // Apply Gravity Modes
-          if (gravityMode === 'antigravity' && (mouse.x > 0 || mouse.y > 0)) {
+          if (gravityMode === 'antigravity' && mouse.activeInCanvas) {
             const dx = c.x - mouse.x;
             const dy = c.y - mouse.y;
             const dist = Math.hypot(dx, dy);
             if (dist < 260 && dist > 1) {
-              const repelForce = (1 - dist / 260) * 45;
-              c.vx += (dx / dist) * repelForce * dt * 25;
-              c.vy += (dy / dist) * repelForce * dt * 25;
+              const repelForce = (1 - dist / 260) * 48;
+              c.vx += (dx / dist) * repelForce * simDt * 24;
+              c.vy += (dy / dist) * repelForce * simDt * 24;
             }
-          } else if (gravityMode === 'vortex' && (mouse.x > 0 || mouse.y > 0)) {
+          } else if (gravityMode === 'vortex' && mouse.activeInCanvas) {
             const dx = mouse.x - c.x;
             const dy = mouse.y - c.y;
-            const dist = Math.hypot(dx, dy);
-            if (dist > 20) {
-              // Pull toward vortex + tangential spin
-              const attract = Math.min(30, (350 / dist) * 18);
-              c.vx += (dx / dist) * attract * dt * 20;
-              c.vy += (dy / dist) * attract * dt * 20;
-              // Swirl
-              c.vx += (-dy / dist) * 14 * dt * 20;
-              c.vy += (dx / dist) * 14 * dt * 20;
+            const dist = Math.hypot(dx, dy) || 1;
+            if (dist > 30) {
+              const pullForce = 32;
+              // Orbital tangential force + center pull
+              c.vx += (dx / dist * pullForce - (dy / dist) * 22) * simDt;
+              c.vy += (dy / dist * pullForce + (dx / dist) * 22) * simDt;
             }
           }
 
-          // Inertial Integration
-          c.vx += driftX * dt * 10;
-          c.vy += driftY * dt * 10;
-          c.x += c.vx * dt * 60;
-          c.y += c.vy * dt * 60;
-          c.z += c.vz * dt * 60;
+          // Damping & Position Updates
+          const damping = 0.993;
+          c.vx = (c.vx + driftX * simDt * 4) * Math.pow(damping, simDt * 60);
+          c.vy = (c.vy + driftY * simDt * 4) * Math.pow(damping, simDt * 60);
+          c.vz = c.vz * Math.pow(damping, simDt * 60);
 
-          // Angular momentum
-          c.rx += c.avx;
-          c.ry += c.avy;
-          c.rz += c.avz;
+          c.x += c.vx * simDt * 60;
+          c.y += c.vy * simDt * 60;
+          c.z += c.vz * simDt * 60;
 
-          // Soft air damping
-          c.vx *= 0.985;
-          c.vy *= 0.985;
-          c.vz *= 0.985;
-          c.avx *= 0.992;
-          c.avy *= 0.992;
-          c.avz *= 0.992;
+          // Angular rotation
+          c.rx += c.avx * (timeSpeed > 0 ? timeSpeed : 0);
+          c.ry += c.avy * (timeSpeed > 0 ? timeSpeed : 0);
+          c.rz += c.avz * (timeSpeed > 0 ? timeSpeed : 0);
 
-          // Soft Boundary Bounces (Left, Right, Top, Bottom, Z)
-          const pad = c.radius * 0.9;
+          // Weightless Boundary Bounces
+          const pad = c.radius * 0.85;
           const bounceRestitution = -0.78;
 
           if (c.x < pad) {
             c.x = pad;
             c.vx *= bounceRestitution;
-            c.avz += 0.04;
+            c.avy += 0.04;
           } else if (c.x > width - pad) {
             c.x = width - pad;
             c.vx *= bounceRestitution;
-            c.avz -= 0.04;
+            c.avy -= 0.04;
           }
 
           if (c.y < pad) {
@@ -518,7 +693,7 @@ export default function GlassPhysicsSandbox() {
         }
       }
 
-      // 3. Pairwise Elastic Collisions
+      // 4. Pairwise Elastic Collisions
       for (let i = 0; i < numCrystals; i++) {
         for (let j = i + 1; j < numCrystals; j++) {
           const c1 = crystals[i];
@@ -536,7 +711,7 @@ export default function GlassPhysicsSandbox() {
             const ny = dy / dist;
             const nz = dz / dist;
 
-            // Separate bodies to prevent sticking
+            // Separate bodies to prevent clipping
             const overlap = (minDist - dist) * 0.5;
             if (c1 !== dragged) {
               c1.x -= nx * overlap;
@@ -554,7 +729,6 @@ export default function GlassPhysicsSandbox() {
             const ky = c1.vy - c2.vy;
             const kz = c1.vz - c2.vz;
             const p = 2 * (nx * kx + ny * ky + nz * kz) / (c1.mass + c2.mass);
-
             const impactSpeed = Math.hypot(kx, ky, kz);
 
             if (c1 !== dragged) {
@@ -573,7 +747,7 @@ export default function GlassPhysicsSandbox() {
             }
 
             // Audio chime & visual spark on noticeable impact
-            if (impactSpeed > 1.2) {
+            if (impactSpeed > 1.1) {
               triggerCrystalChime((c1.scale + c2.scale) / 2);
 
               // Optical shockwave ripple at impact center
@@ -581,7 +755,7 @@ export default function GlassPhysicsSandbox() {
                 x: (c1.x + c2.x) / 2,
                 y: (c1.y + c2.y) / 2,
                 radius: 4,
-                maxRadius: 38 + Math.min(50, impactSpeed * 8),
+                maxRadius: 36 + Math.min(50, impactSpeed * 8),
                 opacity: 0.8,
                 color: palette.secondary,
               });
@@ -590,7 +764,7 @@ export default function GlassPhysicsSandbox() {
         }
       }
 
-      // 4. Render Crystals with Depth Sort (Painter's Algorithm)
+      // 5. Render Crystals with Depth Sort (Painter's Algorithm)
       const sortedCrystals = [...crystals].sort((a, b) => a.z - b.z);
 
       for (let i = 0; i < sortedCrystals.length; i++) {
@@ -608,26 +782,45 @@ export default function GlassPhysicsSandbox() {
         ctx.translate(screenX, screenY);
 
         if (c.geo.type === 'orb') {
+          // ==============================
           // RENDER SPHERICAL GLASS ORB
+          // ==============================
           const r = currentScale * 0.95;
 
           // Ambient outer glass glow
-          const outerGlow = ctx.createRadialGradient(0, 0, r * 0.6, 0, 0, r * 1.3);
+          const outerGlow = ctx.createRadialGradient(0, 0, r * 0.6, 0, 0, r * 1.35);
           outerGlow.addColorStop(0, 'rgba(0,0,0,0)');
-          outerGlow.addColorStop(0.8, palette.glow);
+          outerGlow.addColorStop(0.8, material.id === 'nebula' ? palette.borderGlow : palette.glow);
           outerGlow.addColorStop(1, 'rgba(0,0,0,0)');
           ctx.fillStyle = outerGlow;
           ctx.beginPath();
-          ctx.arc(0, 0, r * 1.3, 0, Math.PI * 2);
+          ctx.arc(0, 0, r * 1.35, 0, Math.PI * 2);
           ctx.fill();
 
           // Glass Body Gradient (Frosted & Refractive Core)
           const grad = ctx.createRadialGradient(-r * 0.35, -r * 0.35, r * 0.08, 0, 0, r);
-          grad.addColorStop(0, 'rgba(255, 255, 255, 0.45)');
-          grad.addColorStop(0.3, 'rgba(255, 255, 255, 0.12)');
-          grad.addColorStop(0.7, palette.glow);
-          grad.addColorStop(0.92, 'rgba(255, 255, 255, 0.28)');
-          grad.addColorStop(1, palette.secondary);
+          if (material.id === 'chrome') {
+            // Liquid Chrome Mercury Shader
+            grad.addColorStop(0, 'rgba(255, 255, 255, 0.95)');
+            grad.addColorStop(0.25, 'rgba(203, 213, 225, 0.8)');
+            grad.addColorStop(0.5, 'rgba(71, 85, 105, 0.7)');
+            grad.addColorStop(0.85, 'rgba(255, 255, 255, 0.6)');
+            grad.addColorStop(1, palette.secondary);
+          } else if (material.id === 'nebula') {
+            // Bioluminescent Opal Shader
+            grad.addColorStop(0, '#ffffff');
+            grad.addColorStop(0.2, palette.primary);
+            grad.addColorStop(0.6, palette.secondary);
+            grad.addColorStop(0.9, palette.accent);
+            grad.addColorStop(1, 'rgba(15, 23, 42, 0.8)');
+          } else {
+            // Prismatic Glass Shader
+            grad.addColorStop(0, 'rgba(255, 255, 255, 0.55)');
+            grad.addColorStop(0.3, 'rgba(255, 255, 255, 0.15)');
+            grad.addColorStop(0.7, palette.glow);
+            grad.addColorStop(0.92, 'rgba(255, 255, 255, 0.32)');
+            grad.addColorStop(1, palette.secondary);
+          }
 
           ctx.beginPath();
           ctx.arc(0, 0, r, 0, Math.PI * 2);
@@ -635,24 +828,26 @@ export default function GlassPhysicsSandbox() {
           ctx.fill();
 
           // Prismatic Dispersion Rim Stroke
-          ctx.lineWidth = 1.6;
-          ctx.strokeStyle = palette.dispersionA;
+          ctx.lineWidth = material.id === 'chrome' ? 2.4 : 1.6;
+          ctx.strokeStyle = material.id === 'chrome' ? '#ffffff' : palette.dispersionA;
           ctx.stroke();
 
           // High Specular Reflection Glare
           ctx.beginPath();
           ctx.ellipse(-r * 0.35, -r * 0.38, r * 0.35, r * 0.18, -Math.PI / 4, 0, Math.PI * 2);
-          ctx.fillStyle = 'rgba(255, 255, 255, 0.72)';
+          ctx.fillStyle = material.id === 'chrome' ? 'rgba(255, 255, 255, 0.95)' : 'rgba(255, 255, 255, 0.75)';
           ctx.fill();
 
-          // Subtle Caustic Ring
+          // Caustic Secondary Ring
           ctx.beginPath();
           ctx.ellipse(r * 0.25, r * 0.25, r * 0.45, r * 0.2, Math.PI / 4, 0, Math.PI * 2);
           ctx.fillStyle = 'rgba(255, 255, 255, 0.12)';
           ctx.fill();
 
         } else {
+          // ==============================
           // RENDER FACETED 3D CRYSTAL
+          // ==============================
           const { vertices, faces } = c.geo;
 
           // Rotate and project 3D vertices
@@ -676,9 +871,9 @@ export default function GlassPhysicsSandbox() {
             .sort((a, b) => a.avgZ - b.avgZ);
 
           // Draw Ambient Prismatic Core Aura
-          const auraRadius = currentScale * 1.15;
+          const auraRadius = currentScale * 1.18;
           const auraGrad = ctx.createRadialGradient(0, 0, 0, 0, 0, auraRadius);
-          auraGrad.addColorStop(0, palette.glow);
+          auraGrad.addColorStop(0, material.id === 'nebula' ? palette.borderGlow : palette.glow);
           auraGrad.addColorStop(0.7, 'rgba(255,255,255,0.02)');
           auraGrad.addColorStop(1, 'rgba(0,0,0,0)');
           ctx.fillStyle = auraGrad;
@@ -692,19 +887,16 @@ export default function GlassPhysicsSandbox() {
             const dotL = normal[0] * L[0] + normal[1] * L[1] + normal[2] * L[2];
             const dotBL = normal[0] * BL[0] + normal[1] * BL[1] + normal[2] * BL[2];
 
-            // Camera view vector is [0, 0, 1]
-            const viewDot = Math.max(0, normal[2]);
-
             // Fresnel refraction effect (rim is more reflective than center)
-            const fresnel = 0.2 + 0.8 * Math.pow(1 - Math.abs(normal[2]), 3);
+            const fresnel = 0.2 + 0.8 * Math.pow(1 - Math.abs(normal[2]), 3) * material.fresnelBoost;
 
             // Specular highlight exponent
-            const spec = Math.pow(Math.max(0, dotL), 24);
+            const spec = Math.pow(Math.max(0, dotL), 24) * material.specularStrength;
             const fillLight = Math.max(0, dotBL) * 0.35;
             const diffuse = Math.max(0.08, dotL * 0.6 + 0.15) + fillLight;
 
             // Generate chromatic facet tone
-            const alpha = Math.min(0.85, Math.max(0.18, 0.28 + fresnel * 0.45));
+            const alpha = Math.min(0.9, Math.max(0.18, material.baseAlpha + fresnel * 0.35));
             const baseColor = normal[0] > 0 ? palette.primary : palette.secondary;
 
             // Draw Facet Polygon
@@ -716,17 +908,28 @@ export default function GlassPhysicsSandbox() {
             }
             ctx.closePath();
 
-            // Facet Surface Fill (Glass Shader)
+            // Facet Surface Fill with active Material Shader
             const facetGrad = ctx.createLinearGradient(p0[0], p0[1], -p0[0], -p0[1]);
-            facetGrad.addColorStop(0, `rgba(255, 255, 255, ${Math.min(0.75, 0.15 + spec * 0.8)})`);
-            facetGrad.addColorStop(0.5, `${baseColor}${Math.floor(alpha * 255).toString(16).padStart(2, '0')}`);
-            facetGrad.addColorStop(1, `rgba(15, 23, 42, ${Math.min(0.65, 0.2 + fresnel * 0.3)})`);
+            if (material.id === 'chrome') {
+              facetGrad.addColorStop(0, `rgba(255, 255, 255, ${Math.min(0.95, 0.4 + spec * 0.6)})`);
+              facetGrad.addColorStop(0.4, `rgba(203, 213, 225, 0.85)`);
+              facetGrad.addColorStop(0.7, `${baseColor}aa`);
+              facetGrad.addColorStop(1, `rgba(15, 23, 42, 0.9)`);
+            } else if (material.id === 'nebula') {
+              facetGrad.addColorStop(0, `rgba(255, 255, 255, ${Math.min(0.9, 0.3 + spec * 0.7)})`);
+              facetGrad.addColorStop(0.5, `${baseColor}dd`);
+              facetGrad.addColorStop(1, `${palette.accent}99`);
+            } else {
+              facetGrad.addColorStop(0, `rgba(255, 255, 255, ${Math.min(0.8, 0.18 + spec * 0.75)})`);
+              facetGrad.addColorStop(0.5, `${baseColor}${Math.floor(alpha * 255).toString(16).padStart(2, '0')}`);
+              facetGrad.addColorStop(1, `rgba(15, 23, 42, ${Math.min(0.68, 0.22 + fresnel * 0.35)})`);
+            }
 
             ctx.fillStyle = facetGrad;
             ctx.fill();
 
             // Prismatic Edge Strokes with Chromatic Dispersion
-            ctx.lineWidth = 1.1;
+            ctx.lineWidth = material.id === 'chrome' ? 1.4 : 1.1;
             ctx.strokeStyle = spec > 0.4 ? palette.specular : (normal[2] > 0.3 ? palette.dispersionA : palette.dispersionB);
             ctx.stroke();
 
@@ -736,9 +939,9 @@ export default function GlassPhysicsSandbox() {
               ctx.translate(p0[0], p0[1]);
               ctx.fillStyle = '#ffffff';
               ctx.shadowColor = '#ffffff';
-              ctx.shadowBlur = 12;
+              ctx.shadowBlur = 14;
               ctx.beginPath();
-              ctx.arc(0, 0, 2.5 + spec * 2, 0, Math.PI * 2);
+              ctx.arc(0, 0, 2.8 + spec * 2, 0, Math.PI * 2);
               ctx.fill();
               ctx.restore();
             }
@@ -756,7 +959,7 @@ export default function GlassPhysicsSandbox() {
       window.removeEventListener('resize', handleResize);
       observer.disconnect();
     };
-  }, [initCrystals, triggerCrystalChime, palette, gravityMode, crystalCount]);
+  }, [initCrystals, triggerCrystalChime, palette, material, timeSpeed, gravityMode, isLaserActive, crystalCount]);
 
   // Pointer Interaction Handlers
   const handlePointerDown = (e) => {
@@ -777,35 +980,25 @@ export default function GlassPhysicsSandbox() {
       vy: 0,
       prevX: x,
       prevY: y,
+      activeInCanvas: true,
     };
 
-    // Find nearest crystal under cursor
-    let found = null;
-    let minDist = Infinity;
+    // Find nearest crystal under pointer
+    let nearest = null;
+    let nearestDist = Infinity;
 
     crystalsRef.current.forEach((c) => {
-      const dist = Math.hypot(c.x - x, c.y - y);
-      if (dist < c.radius * 1.25 && dist < minDist) {
-        minDist = dist;
-        found = c;
+      const d = Math.hypot(c.x - x, c.y - y);
+      if (d < c.radius * 1.2 && d < nearestDist) {
+        nearest = c;
+        nearestDist = d;
       }
     });
 
-    if (found) {
-      draggedCrystalRef.current = found;
-      soundFx.playClick();
-      setInteractionHint('Crystal captured • Drag to position, release to fling with momentum');
-    } else {
-      // Tap on empty space creates water ripple
-      ripplesRef.current.push({
-        x,
-        y,
-        radius: 5,
-        maxRadius: 180,
-        opacity: 0.9,
-        color: palette.primary,
-      });
-      soundFx.playClick();
+    if (nearest) {
+      draggedCrystalRef.current = nearest;
+      triggerCrystalChime(nearest.scale);
+      setInteractionHint('Dragging crystal • Release with velocity to fling in zero-G');
     }
   };
 
@@ -813,74 +1006,40 @@ export default function GlassPhysicsSandbox() {
     const canvas = canvasRef.current;
     if (!canvas) return;
     const rect = canvas.getBoundingClientRect();
-    const clientX = e.clientX || (e.touches && e.touches[0]?.clientX);
-    const clientY = e.clientY || (e.touches && e.touches[0]?.clientY);
-
-    if (clientX === undefined || clientY === undefined) return;
+    const clientX = e.clientX || (e.touches && e.touches[0].clientX);
+    const clientY = e.clientY || (e.touches && e.touches[0].clientY);
 
     const x = clientX - rect.left;
     const y = clientY - rect.top;
 
     mousePosRef.current.x = x;
     mousePosRef.current.y = y;
+    mousePosRef.current.activeInCanvas = true;
   };
 
   const handlePointerUp = () => {
     const dragged = draggedCrystalRef.current;
     if (dragged) {
-      // Impart throw momentum
       const mouse = mousePosRef.current;
-      dragged.vx = Math.max(-28, Math.min(28, mouse.vx * 0.75));
-      dragged.vy = Math.max(-28, Math.min(28, mouse.vy * 0.75));
-      dragged.vz = (Math.random() - 0.5) * 8;
-      dragged.avx = (Math.random() - 0.5) * 0.12;
-      dragged.avy = (Math.random() - 0.5) * 0.12;
+      // Impart fling inertia velocity
+      dragged.vx = mouse.vx * 0.9;
+      dragged.vy = mouse.vy * 0.9;
+      dragged.vz = (Math.random() - 0.5) * 4;
+      dragged.avx = (Math.random() - 0.5) * 0.08;
+      dragged.avy = (Math.random() - 0.5) * 0.08;
 
-      triggerCrystalChime(dragged.scale);
+      if (Math.hypot(mouse.vx, mouse.vy) > 3) {
+        triggerCrystalChime(dragged.scale);
+      }
       draggedCrystalRef.current = null;
-      setInteractionHint('Crystal flung into zero gravity • Watch light refract as it drifts');
+      setInteractionHint('Fling momentum imparted • Floating weightless');
     }
     mousePosRef.current.isDown = false;
   };
 
-  // Add extra crystal
-  const handleAddCrystal = () => {
-    soundFx.playClick();
-    const canvas = canvasRef.current;
-    if (!canvas) return;
-    const rect = canvas.getBoundingClientRect();
-    const w = rect.width;
-    const h = rect.height;
-
-    const geo = GEOMETRY_CHOICES[crystalsRef.current.length % GEOMETRY_CHOICES.length];
-    const baseRadius = Math.max(34, Math.min(62, Math.min(w, h) * 0.08));
-    const scale = baseRadius * (0.7 + Math.random() * 0.7);
-
-    crystalsRef.current.push({
-      id: Date.now(),
-      geo,
-      scale,
-      x: w / 2 + (Math.random() - 0.5) * 80,
-      y: h / 2 + (Math.random() - 0.5) * 80,
-      z: 0,
-      vx: (Math.random() - 0.5) * 4,
-      vy: (Math.random() - 0.5) * 4,
-      vz: (Math.random() - 0.5) * 3,
-      rx: Math.random() * Math.PI * 2,
-      ry: Math.random() * Math.PI * 2,
-      rz: Math.random() * Math.PI * 2,
-      avx: (Math.random() - 0.5) * 0.04,
-      avy: (Math.random() - 0.5) * 0.04,
-      avz: (Math.random() - 0.5) * 0.04,
-      mass: scale / 40,
-      radius: scale,
-      colorPhase: Math.random() * Math.PI * 2,
-      ambientDriftAngle: Math.random() * Math.PI * 2,
-    });
-
-    setCrystalCount(crystalsRef.current.length);
-    triggerCrystalChime(scale);
-    setInteractionHint('New optical crystal materialized in zero-G void');
+  const handlePointerLeave = () => {
+    handlePointerUp();
+    mousePosRef.current.activeInCanvas = false;
   };
 
   return (
@@ -903,8 +1062,8 @@ export default function GlassPhysicsSandbox() {
             <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-8 sm:mb-10">
               <div>
                 <SectionHeading
-                  eyebrow="ZERO-GRAVITY KINETIC ART"
-                  title="Floating Glass & Crystal Sanctuary"
+                  eyebrow="CREATIVE KINETIC ART & ZERO-G SANCTUARY"
+                  title="Zero-Gravity Glass & Crystal Sanctuary"
                   description="A purely sensory, non-technical optical sandbox. Direct physics manipulation in weightless space—grab, fling, and collide refractive crystals, prisms, and gems to watch light scatter in real time."
                 />
               </div>
@@ -931,7 +1090,7 @@ export default function GlassPhysicsSandbox() {
             {/* Color Palette Presets */}
             <div className="flex items-center gap-1.5 flex-wrap">
               <span className="text-[11px] font-mono text-text-muted uppercase tracking-wider mr-1 hidden sm:inline">
-                Light Spectrum:
+                Palette:
               </span>
               {Object.values(PALETTES).map((p) => (
                 <button
@@ -958,7 +1117,65 @@ export default function GlassPhysicsSandbox() {
               ))}
             </div>
 
-            {/* Gravity & Interaction Modes */}
+            {/* Material Shaders Switcher */}
+            <div className="flex items-center gap-1.5 flex-wrap">
+              <span className="text-[11px] font-mono text-text-muted uppercase tracking-wider mr-1 hidden lg:inline">
+                Material:
+              </span>
+              <div className="inline-flex p-1 rounded-xl bg-bg-tertiary/70 border border-border-subtle">
+                {Object.values(MATERIAL_MODES).map((m) => (
+                  <button
+                    key={m.id}
+                    type="button"
+                    onClick={() => {
+                      soundFx.playClick();
+                      setMaterialMode(m.id);
+                      setInteractionHint(`Shader switched to ${m.label}`);
+                    }}
+                    className={cn(
+                      'px-2.5 py-1 rounded-lg text-xs font-mono transition-colors',
+                      materialMode === m.id
+                        ? 'bg-bg-primary text-text-primary font-semibold shadow-xs'
+                        : 'text-text-muted hover:text-text-secondary'
+                    )}
+                    title={m.desc}
+                  >
+                    {m.label}
+                  </button>
+                ))}
+              </div>
+            </div>
+
+            {/* Time Dilation (Bullet-Time / Freeze) */}
+            <div className="flex items-center gap-1.5 flex-wrap">
+              <span className="text-[11px] font-mono text-text-muted uppercase tracking-wider mr-1 hidden lg:inline">
+                Time:
+              </span>
+              <div className="inline-flex p-1 rounded-xl bg-bg-tertiary/70 border border-border-subtle">
+                {TIME_SPEEDS.map((t) => (
+                  <button
+                    key={t.id}
+                    type="button"
+                    onClick={() => {
+                      soundFx.playClick();
+                      setTimeSpeed(t.value);
+                      setInteractionHint(`Time dilation set to ${t.name}`);
+                    }}
+                    className={cn(
+                      'px-2 py-1 rounded-lg text-xs font-mono transition-colors',
+                      timeSpeed === t.value
+                        ? 'bg-bg-primary text-text-primary font-semibold shadow-xs'
+                        : 'text-text-muted hover:text-text-secondary'
+                    )}
+                    title={t.name}
+                  >
+                    {t.label}
+                  </button>
+                ))}
+              </div>
+            </div>
+
+            {/* Gravity & Laser Modes */}
             <div className="flex items-center gap-2 flex-wrap ml-auto">
               {/* Gravity Switcher */}
               <div className="inline-flex p-1 rounded-xl bg-bg-tertiary/70 border border-border-subtle">
@@ -988,14 +1205,14 @@ export default function GlassPhysicsSandbox() {
                     gravityMode === 'antigravity' ? 'bg-bg-primary text-text-primary font-semibold shadow-xs' : 'text-text-muted hover:text-text-secondary'
                   )}
                 >
-                  Repel Shield
+                  Repel
                 </button>
                 <button
                   type="button"
                   onClick={() => {
                     soundFx.playClick();
                     setGravityMode('vortex');
-                    setInteractionHint('Singularity vortex: Move cursor to pull crystals into orbit');
+                    setInteractionHint('Singularity vortex: Pulls crystals into swirling orbit');
                   }}
                   className={cn(
                     'px-2.5 py-1 rounded-lg text-xs font-mono transition-colors',
@@ -1006,7 +1223,27 @@ export default function GlassPhysicsSandbox() {
                 </button>
               </div>
 
-              {/* Action Buttons */}
+              {/* Prism Laser Toggle */}
+              <button
+                type="button"
+                onClick={() => {
+                  soundFx.playClick();
+                  setIsLaserActive((prev) => !prev);
+                  setInteractionHint(!isLaserActive ? 'Prism Laser Beam activated • Dispersion flares engaged' : 'Prism Laser disengaged');
+                }}
+                className={cn(
+                  'px-3 py-1.5 rounded-xl border font-mono text-xs transition-all flex items-center gap-1.5 active:scale-95',
+                  isLaserActive
+                    ? 'bg-accent/20 border-accent/40 text-accent font-semibold'
+                    : 'bg-bg-tertiary border-border-default text-text-muted hover:text-text-secondary'
+                )}
+                title="Toggle interactive prism refraction laser beam"
+              >
+                <span>🌈</span>
+                <span className="hidden sm:inline">Laser</span>
+              </button>
+
+              {/* Action: Gravity Pulse */}
               <button
                 type="button"
                 onClick={triggerGravitationalWave}
@@ -1014,9 +1251,10 @@ export default function GlassPhysicsSandbox() {
                 title="Release an explosive gravitational wave across space"
               >
                 <span>💥</span>
-                <span className="hidden sm:inline">Gravity Pulse</span>
+                <span className="hidden sm:inline">Pulse</span>
               </button>
 
+              {/* Action: Add Crystal */}
               <button
                 type="button"
                 onClick={handleAddCrystal}
@@ -1090,7 +1328,7 @@ export default function GlassPhysicsSandbox() {
             onPointerDown={handlePointerDown}
             onPointerMove={handlePointerMove}
             onPointerUp={handlePointerUp}
-            onPointerLeave={handlePointerUp}
+            onPointerLeave={handlePointerLeave}
             className="w-full h-full cursor-grab active:cursor-grabbing touch-none select-none block"
             style={{ touchAction: 'none' }}
           />
@@ -1104,6 +1342,8 @@ export default function GlassPhysicsSandbox() {
 
             <div className="hidden sm:flex items-center gap-2 bg-bg-primary/70 backdrop-blur-md px-3 py-1.5 rounded-full border border-border-subtle shadow-xs">
               <span>🖱️ Fling with mouse momentum</span>
+              <span className="text-border-default">|</span>
+              <span>⏳ Slow-Mo & Time-Freeze</span>
               <span className="text-border-default">|</span>
               <span>🎵 Crystalline Harmonics</span>
             </div>

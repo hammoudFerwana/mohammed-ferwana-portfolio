@@ -47,6 +47,15 @@ export const commandGroups = [
         icon: 'Envelope',
         keywords: ['hire', 'email', 'message', 'touch', 'reach'],
       },
+      {
+        id: 'nav-sanctuary',
+        label: 'Zero-G Glass & Crystal Sanctuary',
+        shortcut: 'G',
+        action: 'navigate',
+        target: '/#crystal-sanctuary',
+        icon: 'Sparkle',
+        keywords: ['glass', 'crystal', 'physics', 'sandbox', 'art', 'zero gravity', 'visual', 'chimes', 'zen'],
+      },
     ],
   },
   {
