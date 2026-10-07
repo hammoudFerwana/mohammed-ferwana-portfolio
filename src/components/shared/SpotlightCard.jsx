@@ -32,6 +32,21 @@ export default function SpotlightCard({
     const y = e.clientY - rect.top;
     el.style.setProperty('--mx', `${x}px`);
     el.style.setProperty('--my', `${y}px`);
+
+    // 3D Perspective Tilt calculation
+    const centerX = rect.width / 2;
+    const centerY = rect.height / 2;
+    const tiltX = ((y - centerY) / centerY) * -3.5;
+    const tiltY = ((x - centerX) / centerX) * 3.5;
+    el.style.setProperty('--tilt-x', `${tiltX.toFixed(2)}deg`);
+    el.style.setProperty('--tilt-y', `${tiltY.toFixed(2)}deg`);
+  }, []);
+
+  const handlePointerLeave = useCallback(() => {
+    const el = containerRef.current;
+    if (!el) return;
+    el.style.setProperty('--tilt-x', '0deg');
+    el.style.setProperty('--tilt-y', '0deg');
   }, []);
 
   const combinedClassName = className
@@ -42,6 +57,7 @@ export default function SpotlightCard({
     <Component
       ref={containerRef}
       onPointerMove={handlePointerMove}
+      onPointerLeave={handlePointerLeave}
       className={combinedClassName}
       {...props}
     >
