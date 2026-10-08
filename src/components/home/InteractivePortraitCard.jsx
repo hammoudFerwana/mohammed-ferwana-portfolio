@@ -2,12 +2,10 @@
 
 import { useState, useRef, useEffect, useCallback } from 'react';
 import Image from 'next/image';
-import { useAudio } from '@/context/AudioContext';
 
 export default function InteractivePortraitCard() {
   const containerRef = useRef(null);
   const cardRef = useRef(null);
-  const { playFlip, playClick, playSuccess, playHover } = useAudio();
 
   // 3D physics state with requestAnimationFrame interpolation
   const [isFlipped, setIsFlipped] = useState(false);
@@ -121,11 +119,9 @@ export default function InteractivePortraitCard() {
   // Ping kernel simulation
   const handlePingKernel = (e) => {
     e.stopPropagation();
-    playClick();
     setPingStatus((prev) => ({ ...prev, active: true }));
     setTimeout(() => {
       const randomLatency = Math.floor(Math.random() * 8) + 11; // 11ms - 18ms
-      playSuccess();
       setPingStatus({
         active: false,
         latency: randomLatency,
@@ -136,7 +132,6 @@ export default function InteractivePortraitCard() {
 
   const toggleFlip = (e) => {
     e.stopPropagation();
-    playFlip();
     setIsFlipped((prev) => !prev);
   };
 

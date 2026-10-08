@@ -3,15 +3,12 @@
 import { useState, useEffect, useRef } from 'react';
 import { useRouter } from 'next/navigation';
 import { useOverlay } from '@/context/OverlayContext';
-import { useAudio } from '@/context/AudioContext';
 import { commandGroups } from '@/data/commands';
-import { ambientSoundscape } from '@/lib/ambientSoundscape';
 import { cn } from '@/lib/utils';
 
 export default function CommandPalette() {
   const router = useRouter();
   const { isCommandPaletteOpen, closeCommandPalette, openTerminal, openResumeModal } = useOverlay();
-  const { playHover, playClick, playTerminalKey, toggleMute } = useAudio();
   const [query, setQuery] = useState('');
   const [selectedIndex, setSelectedIndex] = useState(0);
   const inputRef = useRef(null);
@@ -59,7 +56,6 @@ export default function CommandPalette() {
   }, [query]);
 
   const executeCommand = (cmd) => {
-    playClick();
     closeCommandPalette();
     if (cmd.action === 'navigate') {
       router.push(cmd.target);
@@ -71,24 +67,15 @@ export default function CommandPalette() {
       openTerminal();
     } else if (cmd.action === 'resume') {
       openResumeModal();
-    } else if (cmd.action === 'ambient') {
-      ambientSoundscape.toggle();
-    } else if (cmd.action === 'ambient-preset') {
-      ambientSoundscape.setPreset(cmd.target);
-      ambientSoundscape.play();
-    } else if (cmd.action === 'sfx-toggle') {
-      toggleMute();
     }
   };
 
   const handleKeyDown = (e) => {
     if (e.key === 'ArrowDown') {
       e.preventDefault();
-      playHover();
       setSelectedIndex((prev) => (prev + 1) % (filteredCommands.length || 1));
     } else if (e.key === 'ArrowUp') {
       e.preventDefault();
-      playHover();
       setSelectedIndex((prev) => (prev - 1 + filteredCommands.length) % (filteredCommands.length || 1));
     } else if (e.key === 'Enter') {
       e.preventDefault();
@@ -97,8 +84,6 @@ export default function CommandPalette() {
       }
     } else if (e.key === 'Escape') {
       closeCommandPalette();
-    } else if (e.key.length === 1 || e.key === 'Backspace') {
-      playTerminalKey();
     }
   };
 
@@ -156,12 +141,7 @@ export default function CommandPalette() {
                   role="option"
                   aria-selected={isSelected}
                   onClick={() => executeCommand(cmd)}
-                  onMouseEnter={() => {
-                    if (selectedIndex !== idx) {
-                      setSelectedIndex(idx);
-                      playHover();
-                    }
-                  }}
+                  onMouseEnter={() => setSelectedIndex(idx)}
                   className={cn(
                     'w-full flex items-center justify-between px-3 py-2.5 rounded-lg text-xs font-medium transition-colors text-left',
                     isSelected
