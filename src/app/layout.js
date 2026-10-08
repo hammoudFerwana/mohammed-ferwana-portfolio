@@ -11,6 +11,7 @@ import ResumeModal from '@/components/overlays/ResumeModal';
 import KineticCursor from '@/components/shared/KineticCursor';
 import SmoothScrollProvider from '@/components/shared/SmoothScrollProvider';
 import AmbientSoundDeck from '@/components/shared/AmbientSoundDeck';
+import AudioStudioModal from '@/components/overlays/AudioStudioModal';
 import './globals.css';
 
 export const metadata = {
@@ -86,6 +87,7 @@ export default function RootLayout({ children }) {
               <CommandPalette />
               <MiniTerminal />
               <ResumeModal />
+              <AudioStudioModal />
               <KineticCursor />
               <AmbientSoundDeck />
             </SmoothScrollProvider>
