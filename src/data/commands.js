@@ -207,6 +207,15 @@ export const commandGroups = [
         icon: 'Cpu',
         keywords: ['cyber', 'binaural', 'gamma', 'focus', 'flow state', '40hz'],
       },
+      {
+        id: 'act-sfx-toggle',
+        label: 'Toggle Tactile Sound Effects (SFX)',
+        shortcut: 'M',
+        action: 'sfx-toggle',
+        target: null,
+        icon: 'SpeakerSimpleHigh',
+        keywords: ['sound', 'sfx', 'audio', 'mute', 'unmute', 'effects', 'tactile', 'clicks', 'haptics'],
+      },
     ],
   },
 ];

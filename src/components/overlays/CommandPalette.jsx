@@ -11,7 +11,7 @@ import { cn } from '@/lib/utils';
 export default function CommandPalette() {
   const router = useRouter();
   const { isCommandPaletteOpen, closeCommandPalette, openTerminal, openResumeModal } = useOverlay();
-  const { playHover, playClick, playTerminalKey } = useAudio();
+  const { playHover, playClick, playTerminalKey, toggleMute } = useAudio();
   const [query, setQuery] = useState('');
   const [selectedIndex, setSelectedIndex] = useState(0);
   const inputRef = useRef(null);
@@ -76,6 +76,8 @@ export default function CommandPalette() {
     } else if (cmd.action === 'ambient-preset') {
       ambientSoundscape.setPreset(cmd.target);
       ambientSoundscape.play();
+    } else if (cmd.action === 'sfx-toggle') {
+      toggleMute();
     }
   };
 

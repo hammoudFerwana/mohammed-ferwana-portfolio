@@ -3,12 +3,14 @@
 import { useEffect } from 'react';
 import Link from 'next/link';
 import { useOverlay } from '@/context/OverlayContext';
+import { useAudio } from '@/context/AudioContext';
 import { siteMetadata } from '@/data/siteMetadata';
 import { cn } from '@/lib/utils';
 import AudioWaveToggle from './AudioWaveToggle';
 
 export default function MobileMenu({ isOpen, onClose, links, currentPath }) {
   const { openResumeModal } = useOverlay();
+  const { playClick } = useAudio();
   useEffect(() => {
     if (!isOpen) {
       document.body.style.overflow = 'unset';
@@ -55,7 +57,10 @@ export default function MobileMenu({ isOpen, onClose, links, currentPath }) {
           <AudioWaveToggle />
           <button
             type="button"
-            onClick={onClose}
+            onClick={() => {
+              playClick();
+              onClose();
+            }}
             aria-label="Close menu"
             className="p-2 rounded-full bg-bg-secondary border border-border-default text-text-secondary hover:text-text-primary focus-visible:ring-2 focus-visible:ring-accent"
           >
@@ -77,7 +82,10 @@ export default function MobileMenu({ isOpen, onClose, links, currentPath }) {
             <Link
               key={item.href}
               href={item.href}
-              onClick={onClose}
+              onClick={() => {
+                playClick();
+                onClose();
+              }}
               style={{ animationDelay: `${idx * 60}ms` }}
               className={cn(
                 'flex items-center justify-between py-3 px-4 rounded-xl text-lg font-medium transition-all duration-200 animate-in fade-in slide-in-from-bottom-4 fill-mode-both',
