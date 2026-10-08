@@ -4,6 +4,7 @@ import { useState, useEffect, useRef } from 'react';
 import { useRouter } from 'next/navigation';
 import { motion, AnimatePresence, useReducedMotion } from 'framer-motion';
 import { useOverlay } from '@/context/OverlayContext';
+import { useAudio } from '@/context/AudioContext';
 import { siteMetadata } from '@/data/siteMetadata';
 import { techStack } from '@/data/techStack';
 import { metrics } from '@/data/metrics';
@@ -32,6 +33,7 @@ const QUICK_CHIPS = ['help', 'status', 'fsm', 'metrics', 'projects', 'stack', 'c
 export default function MiniTerminal() {
   const router = useRouter();
   const { isTerminalOpen, closeTerminal, openTerminal } = useOverlay();
+  const { playTerminalKey, playTerminalEnter, playClick, playSuccess, playWarning, playHover } = useAudio();
   const shouldReduceMotion = useReducedMotion();
 
   const [inputVal, setInputVal] = useState('');
@@ -244,6 +246,7 @@ Content-Type: application/json; charset=utf-8
         break;
 
       case 'clear':
+        playSuccess();
         setHistory([]);
         setInputVal('');
         return;
@@ -254,11 +257,16 @@ Content-Type: application/json; charset=utf-8
         return;
 
       default:
+        playWarning();
         newHistory.push({
           type: 'error',
           text: `Command not found: "${raw}". Type "help" to see available commands or click a chip below.`,
         });
         break;
+    }
+
+    if (cmd !== 'clear' && AVAILABLE_COMMANDS.includes(cmd)) {
+      playSuccess();
     }
 
     // Keep history capped at 60 items
@@ -273,34 +281,41 @@ Content-Type: application/json; charset=utf-8
   const handleKeyDown = (e) => {
     if (e.key === 'Enter') {
       e.preventDefault();
+      playTerminalEnter();
       handleCommand(inputVal);
     } else if (e.key === 'Escape') {
       closeTerminal();
-    } else if (e.key === 'ArrowUp') {
-      e.preventDefault();
-      if (commandHistory.length === 0) return;
-      const nextPointer =
-        historyPointer === -1 ? commandHistory.length - 1 : Math.max(0, historyPointer - 1);
-      setHistoryPointer(nextPointer);
-      setInputVal(commandHistory[nextPointer] || '');
-    } else if (e.key === 'ArrowDown') {
-      e.preventDefault();
-      if (historyPointer === -1) return;
-      const nextPointer = historyPointer + 1;
-      if (nextPointer >= commandHistory.length) {
-        setHistoryPointer(-1);
-        setInputVal('');
-      } else {
-        setHistoryPointer(nextPointer);
-        setInputVal(commandHistory[nextPointer]);
+    } else {
+      if (e.key.length === 1 || e.key === 'Backspace' || e.key === 'Delete') {
+        playTerminalKey();
       }
-    } else if (e.key === 'Tab') {
-      e.preventDefault();
-      const current = inputVal.trim().toLowerCase();
-      if (!current) return;
-      const match = AVAILABLE_COMMANDS.find((cmd) => cmd.startsWith(current));
-      if (match) {
-        setInputVal(match);
+      if (e.key === 'ArrowUp') {
+        e.preventDefault();
+        if (commandHistory.length === 0) return;
+        const nextPointer =
+          historyPointer === -1 ? commandHistory.length - 1 : Math.max(0, historyPointer - 1);
+        setHistoryPointer(nextPointer);
+        setInputVal(commandHistory[nextPointer] || '');
+      } else if (e.key === 'ArrowDown') {
+        e.preventDefault();
+        if (historyPointer === -1) return;
+        const nextPointer = historyPointer + 1;
+        if (nextPointer >= commandHistory.length) {
+          setHistoryPointer(-1);
+          setInputVal('');
+        } else {
+          setHistoryPointer(nextPointer);
+          setInputVal(commandHistory[nextPointer]);
+        }
+      } else if (e.key === 'Tab') {
+        e.preventDefault();
+        const current = inputVal.trim().toLowerCase();
+        if (!current) return;
+        const match = AVAILABLE_COMMANDS.find((cmd) => cmd.startsWith(current));
+        if (match) {
+          playClick();
+          setInputVal(match);
+        }
       }
     }
   };
@@ -399,7 +414,9 @@ Content-Type: application/json; charset=utf-8
                   <button
                     key={chip}
                     type="button"
+                    onMouseEnter={playHover}
                     onClick={() => {
+                      playClick();
                       setInputVal(chip);
                       handleCommand(chip);
                     }}

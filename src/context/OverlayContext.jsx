@@ -1,6 +1,7 @@
 'use client';
 
-import { createContext, useContext, useState, useEffect } from 'react';
+import { createContext, useContext, useState, useEffect, useCallback } from 'react';
+import { useAudio } from '@/context/AudioContext';
 
 const OverlayContext = createContext({
   isCommandPaletteOpen: false,
@@ -18,21 +19,64 @@ const OverlayContext = createContext({
 });
 
 export function OverlayProvider({ children }) {
+  const { playModalOpen, playModalClose } = useAudio();
   const [isCommandPaletteOpen, setIsCommandPaletteOpen] = useState(false);
   const [isTerminalOpen, setIsTerminalOpen] = useState(false);
   const [isResumeModalOpen, setIsResumeModalOpen] = useState(false);
 
-  const openCommandPalette = () => setIsCommandPaletteOpen(true);
-  const closeCommandPalette = () => setIsCommandPaletteOpen(false);
-  const toggleCommandPalette = () => setIsCommandPaletteOpen((prev) => !prev);
+  const openCommandPalette = useCallback(() => {
+    playModalOpen();
+    setIsCommandPaletteOpen(true);
+  }, [playModalOpen]);
 
-  const openTerminal = () => setIsTerminalOpen(true);
-  const closeTerminal = () => setIsTerminalOpen(false);
-  const toggleTerminal = () => setIsTerminalOpen((prev) => !prev);
+  const closeCommandPalette = useCallback(() => {
+    playModalClose();
+    setIsCommandPaletteOpen(false);
+  }, [playModalClose]);
 
-  const openResumeModal = () => setIsResumeModalOpen(true);
-  const closeResumeModal = () => setIsResumeModalOpen(false);
-  const toggleResumeModal = () => setIsResumeModalOpen((prev) => !prev);
+  const toggleCommandPalette = useCallback(() => {
+    setIsCommandPaletteOpen((prev) => {
+      if (!prev) playModalOpen();
+      else playModalClose();
+      return !prev;
+    });
+  }, [playModalOpen, playModalClose]);
+
+  const openTerminal = useCallback(() => {
+    playModalOpen();
+    setIsTerminalOpen(true);
+  }, [playModalOpen]);
+
+  const closeTerminal = useCallback(() => {
+    playModalClose();
+    setIsTerminalOpen(false);
+  }, [playModalClose]);
+
+  const toggleTerminal = useCallback(() => {
+    setIsTerminalOpen((prev) => {
+      if (!prev) playModalOpen();
+      else playModalClose();
+      return !prev;
+    });
+  }, [playModalOpen, playModalClose]);
+
+  const openResumeModal = useCallback(() => {
+    playModalOpen();
+    setIsResumeModalOpen(true);
+  }, [playModalOpen]);
+
+  const closeResumeModal = useCallback(() => {
+    playModalClose();
+    setIsResumeModalOpen(false);
+  }, [playModalClose]);
+
+  const toggleResumeModal = useCallback(() => {
+    setIsResumeModalOpen((prev) => {
+      if (!prev) playModalOpen();
+      else playModalClose();
+      return !prev;
+    });
+  }, [playModalOpen, playModalClose]);
 
   useEffect(() => {
     const handleOpenResumeEvent = () => setIsResumeModalOpen(true);
@@ -58,9 +102,22 @@ export function OverlayProvider({ children }) {
 
       // Escape closes all overlays
       if (e.key === 'Escape') {
-        if (isCommandPaletteOpen) setIsCommandPaletteOpen(false);
-        if (isTerminalOpen) setIsTerminalOpen(false);
-        if (isResumeModalOpen) setIsResumeModalOpen(false);
+        let closedAny = false;
+        if (isCommandPaletteOpen) {
+          setIsCommandPaletteOpen(false);
+          closedAny = true;
+        }
+        if (isTerminalOpen) {
+          setIsTerminalOpen(false);
+          closedAny = true;
+        }
+        if (isResumeModalOpen) {
+          setIsResumeModalOpen(false);
+          closedAny = true;
+        }
+        if (closedAny) {
+          playModalClose();
+        }
       }
     };
 
@@ -69,7 +126,14 @@ export function OverlayProvider({ children }) {
       window.removeEventListener('open-resume-modal', handleOpenResumeEvent);
       window.removeEventListener('keydown', handleKeyDown);
     };
-  }, [isCommandPaletteOpen, isTerminalOpen, isResumeModalOpen]);
+  }, [
+    isCommandPaletteOpen,
+    isTerminalOpen,
+    isResumeModalOpen,
+    toggleCommandPalette,
+    toggleTerminal,
+    playModalClose,
+  ]);
 
   return (
     <OverlayContext.Provider

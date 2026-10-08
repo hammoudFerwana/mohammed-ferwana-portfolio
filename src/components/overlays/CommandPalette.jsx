@@ -4,6 +4,7 @@ import { useState, useEffect, useRef } from 'react';
 import { useRouter } from 'next/navigation';
 import { useOverlay } from '@/context/OverlayContext';
 import { commandGroups } from '@/data/commands';
+import { ambientSoundscape } from '@/lib/ambientSoundscape';
 import { cn } from '@/lib/utils';
 
 export default function CommandPalette() {
@@ -67,6 +68,11 @@ export default function CommandPalette() {
       openTerminal();
     } else if (cmd.action === 'resume') {
       openResumeModal();
+    } else if (cmd.action === 'ambient') {
+      ambientSoundscape.toggle();
+    } else if (cmd.action === 'ambient-preset') {
+      ambientSoundscape.setPreset(cmd.target);
+      ambientSoundscape.play();
     }
   };
 
