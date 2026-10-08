@@ -154,7 +154,12 @@ export default function CommandPalette() {
                   role="option"
                   aria-selected={isSelected}
                   onClick={() => executeCommand(cmd)}
-                  onMouseEnter={() => setSelectedIndex(idx)}
+                  onMouseEnter={() => {
+                    if (selectedIndex !== idx) {
+                      setSelectedIndex(idx);
+                      playHover();
+                    }
+                  }}
                   className={cn(
                     'w-full flex items-center justify-between px-3 py-2.5 rounded-lg text-xs font-medium transition-colors text-left',
                     isSelected
