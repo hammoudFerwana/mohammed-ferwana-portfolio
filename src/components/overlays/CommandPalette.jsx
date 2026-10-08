@@ -3,6 +3,7 @@
 import { useState, useEffect, useRef } from 'react';
 import { useRouter } from 'next/navigation';
 import { useOverlay } from '@/context/OverlayContext';
+import { useAudio } from '@/context/AudioContext';
 import { commandGroups } from '@/data/commands';
 import { ambientSoundscape } from '@/lib/ambientSoundscape';
 import { cn } from '@/lib/utils';
@@ -10,6 +11,7 @@ import { cn } from '@/lib/utils';
 export default function CommandPalette() {
   const router = useRouter();
   const { isCommandPaletteOpen, closeCommandPalette, openTerminal, openResumeModal } = useOverlay();
+  const { playHover, playClick, playTerminalKey } = useAudio();
   const [query, setQuery] = useState('');
   const [selectedIndex, setSelectedIndex] = useState(0);
   const inputRef = useRef(null);
@@ -57,6 +59,7 @@ export default function CommandPalette() {
   }, [query]);
 
   const executeCommand = (cmd) => {
+    playClick();
     closeCommandPalette();
     if (cmd.action === 'navigate') {
       router.push(cmd.target);
@@ -79,9 +82,11 @@ export default function CommandPalette() {
   const handleKeyDown = (e) => {
     if (e.key === 'ArrowDown') {
       e.preventDefault();
+      playHover();
       setSelectedIndex((prev) => (prev + 1) % (filteredCommands.length || 1));
     } else if (e.key === 'ArrowUp') {
       e.preventDefault();
+      playHover();
       setSelectedIndex((prev) => (prev - 1 + filteredCommands.length) % (filteredCommands.length || 1));
     } else if (e.key === 'Enter') {
       e.preventDefault();
@@ -90,6 +95,8 @@ export default function CommandPalette() {
       }
     } else if (e.key === 'Escape') {
       closeCommandPalette();
+    } else if (e.key.length === 1 || e.key === 'Backspace') {
+      playTerminalKey();
     }
   };
 
