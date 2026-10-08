@@ -5,15 +5,12 @@ import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { navigation } from '@/data/navigation';
 import { useOverlay } from '@/context/OverlayContext';
-import { useAudio } from '@/context/AudioContext';
 import { cn } from '@/lib/utils';
 import MobileMenu from './MobileMenu';
-import AudioWaveToggle from './AudioWaveToggle';
 
 export default function Navbar() {
   const pathname = usePathname();
   const { openCommandPalette, openResumeModal } = useOverlay();
-  const { playHover, playClick } = useAudio();
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
@@ -43,7 +40,6 @@ export default function Navbar() {
           {/* Logo / Brand */}
           <Link
             href="/"
-            onMouseEnter={playHover}
             className="group flex items-center gap-2.5 focus-visible:ring-2 focus-visible:ring-accent rounded-full px-1 py-0.5"
             aria-label="Mohammed Ferwana Home"
           >
@@ -68,7 +64,6 @@ export default function Navbar() {
                 <Link
                   key={item.href}
                   href={item.href}
-                  onMouseEnter={playHover}
                   className={cn(
                     'relative px-3.5 py-1.5 text-xs font-medium rounded-full transition-all duration-200 focus-visible:ring-2 focus-visible:ring-accent',
                     isActive
@@ -85,16 +80,12 @@ export default function Navbar() {
             })}
           </nav>
 
-          {/* Right Actions: Audio Toggle, Resume Dossier, Command Palette & Mobile Toggle */}
-          <div className="flex items-center gap-1.5 sm:gap-2">
-            {/* Native Web Audio SFX Waveform Switch */}
-            <AudioWaveToggle />
-
+          {/* Right Actions: Resume Dossier, Command Palette & Mobile Toggle */}
+          <div className="flex items-center gap-2 sm:gap-2.5">
             {/* Quick Resume Trigger */}
             <button
               type="button"
               onClick={openResumeModal}
-              onMouseEnter={playHover}
               aria-label="Open Resume & Engineering Dossier"
               className="flex items-center gap-1.5 px-2.5 py-1.5 rounded-full bg-accent/10 hover:bg-accent/20 border border-accent/25 hover:border-accent/40 text-accent text-xs font-semibold transition-all duration-200 focus-visible:ring-2 focus-visible:ring-accent"
             >
@@ -109,7 +100,6 @@ export default function Navbar() {
             <button
               type="button"
               onClick={openCommandPalette}
-              onMouseEnter={playHover}
               aria-label="Open command palette"
               className="flex items-center gap-2 px-2.5 py-1.5 rounded-full bg-bg-secondary hover:bg-bg-tertiary border border-border-default hover:border-border-strong text-text-secondary hover:text-text-primary text-xs transition-all duration-200 focus-visible:ring-2 focus-visible:ring-accent"
             >
@@ -137,10 +127,7 @@ export default function Navbar() {
             {/* Mobile Menu Button with morphing animation */}
             <button
               type="button"
-              onClick={() => {
-                playClick();
-                setIsMobileMenuOpen((prev) => !prev);
-              }}
+              onClick={() => setIsMobileMenuOpen((prev) => !prev)}
               aria-label="Toggle navigation menu"
               aria-expanded={isMobileMenuOpen}
               className="md:hidden relative w-8 h-8 rounded-full bg-bg-secondary border border-border-default text-text-secondary hover:text-text-primary hover:bg-bg-tertiary focus-visible:ring-2 focus-visible:ring-accent flex items-center justify-center"

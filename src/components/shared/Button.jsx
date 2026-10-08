@@ -1,9 +1,6 @@
-'use client';
-
 import Link from 'next/link';
 import { cn } from '@/lib/utils';
 import Magnetic from '@/components/shared/Magnetic';
-import { soundFx } from '@/lib/soundFx';
 
 export default function Button({
   children,
@@ -61,15 +58,6 @@ export default function Button({
 
   const classes = cn(baseStyles, variants[variant], sizes[size], className);
 
-  const handleMouseEnter = () => {
-    soundFx.playHover();
-  };
-
-  const handleClick = (e) => {
-    soundFx.playClick();
-    onClick?.(e);
-  };
-
   let element = null;
 
   if (href) {
@@ -81,8 +69,6 @@ export default function Button({
           rel="noopener noreferrer"
           className={classes}
           data-cursor-target
-          onMouseEnter={handleMouseEnter}
-          onClick={handleClick}
           {...props}
         >
           {content}
@@ -90,14 +76,7 @@ export default function Button({
       );
     } else {
       element = (
-        <Link
-          href={href}
-          className={classes}
-          data-cursor-target
-          onMouseEnter={handleMouseEnter}
-          onClick={handleClick}
-          {...props}
-        >
+        <Link href={href} className={classes} data-cursor-target {...props}>
           {content}
         </Link>
       );
@@ -106,8 +85,7 @@ export default function Button({
     element = (
       <button
         type={type}
-        onClick={handleClick}
-        onMouseEnter={handleMouseEnter}
+        onClick={onClick}
         disabled={disabled}
         className={classes}
         data-cursor-target

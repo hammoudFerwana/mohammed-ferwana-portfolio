@@ -1,7 +1,6 @@
 import { GeistSans } from 'geist/font/sans';
 import { GeistMono } from 'geist/font/mono';
 import { siteMetadata } from '@/data/siteMetadata';
-import { AudioProvider } from '@/context/AudioContext';
 import { OverlayProvider } from '@/context/OverlayContext';
 import Navbar from '@/components/layout/Navbar';
 import Footer from '@/components/layout/Footer';
@@ -10,8 +9,6 @@ import MiniTerminal from '@/components/overlays/MiniTerminal';
 import ResumeModal from '@/components/overlays/ResumeModal';
 import KineticCursor from '@/components/shared/KineticCursor';
 import SmoothScrollProvider from '@/components/shared/SmoothScrollProvider';
-import AmbientSoundDeck from '@/components/shared/AmbientSoundDeck';
-import AudioStudioModal from '@/components/overlays/AudioStudioModal';
 import './globals.css';
 
 export const metadata = {
@@ -76,23 +73,19 @@ export default function RootLayout({ children }) {
           Skip to main content
         </a>
 
-        <AudioProvider>
-          <OverlayProvider>
-            <SmoothScrollProvider>
-              <Navbar />
-              <main id="main-content" className="flex-1">
-                {children}
-              </main>
-              <Footer />
-              <CommandPalette />
-              <MiniTerminal />
-              <ResumeModal />
-              <AudioStudioModal />
-              <KineticCursor />
-              <AmbientSoundDeck />
-            </SmoothScrollProvider>
-          </OverlayProvider>
-        </AudioProvider>
+        <OverlayProvider>
+          <SmoothScrollProvider>
+            <Navbar />
+            <main id="main-content" className="flex-1">
+              {children}
+            </main>
+            <Footer />
+            <CommandPalette />
+            <MiniTerminal />
+            <ResumeModal />
+            <KineticCursor />
+          </SmoothScrollProvider>
+        </OverlayProvider>
       </body>
     </html>
   );

@@ -2,7 +2,6 @@
 
 import { useRef, useState, useEffect } from 'react';
 import { motion, useSpring, useMotionValue } from 'framer-motion';
-import { soundFx } from '@/lib/soundFx';
 
 /**
  * Magnetic — Premium spring-physics magnetic wrapper.
@@ -59,7 +58,6 @@ export default function Magnetic({
     <Component
       ref={ref}
       onMouseMove={handleMouseMove}
-      onMouseEnter={() => soundFx.playHover()}
       onMouseLeave={handleMouseLeave}
       style={{ x: springX, y: springY }}
       className={className}
