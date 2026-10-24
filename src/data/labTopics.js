@@ -24,14 +24,6 @@ export const labTopics = [
     notes: 'Balancing stateless authentication with granular route-level authorization.',
   },
   {
-    id: 'containerization-workflows',
-    title: 'Docker & Multi-Stage Production Builds',
-    description: 'Building hardened, non-root multi-stage Docker images for Node.js backends to ensure deterministic runtime environments and minimal surface area.',
-    status: 'exploring',
-    tags: ['docker', 'devops', 'containers'],
-    notes: 'Focusing on fast layer caching and lightweight base images.',
-  },
-  {
     id: 'automated-test-pyramids',
     title: 'Integration Test Automation with Jest & Supertest',
     description: 'Designing isolated test databases and fixture seeding strategies to test entire HTTP request lifecycles without mock contamination.',
@@ -54,6 +46,5 @@ export const currentlyExploring = [
   'System Design',
   'Database Performance',
   'Defensive Testing',
-  'Docker & Containerization',
   'CI/CD Pipelines',
 ];

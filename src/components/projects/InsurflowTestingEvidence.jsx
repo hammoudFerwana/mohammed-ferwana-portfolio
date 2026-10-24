@@ -385,7 +385,7 @@ export default function InsurflowTestingEvidence() {
           </div>
           <p className="text-xs text-text-secondary leading-relaxed">
             Integration tests run against a self-contained in-memory MongoDB replica via <code className="font-mono text-accent">mongodb-memory-server</code>.
-            This ensures tests execute real Mongoose pre-save hooks and B-tree compound unique indexes with per-test collection flushes,
+            This ensures tests execute real Mongoose models and compound unique indexes with per-test collection flushes,
             eliminating fragile mocks while maintaining fast, isolated test execution.
           </p>
         </div>

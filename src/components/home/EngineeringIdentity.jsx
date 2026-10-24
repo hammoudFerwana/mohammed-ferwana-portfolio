@@ -21,8 +21,8 @@ export default function EngineeringIdentity() {
     {
       number: '03',
       title: 'Engineering Ownership & Team Leadership',
-      description: 'As a team leader on projects like TeamLine and PCD, I bridge technical architecture with collaborative delivery. I align frontend and backend contracts early, review pull requests, and foster engineering discipline.',
-      highlights: ['API Contract Discipline', 'PR Reviews & Mentorship', 'Sprint Coordination'],
+      description: 'As Team Leader on TeamLine during the TAQAT internship, I agree API contracts with the frontend early and keep the backend aligned with them.',
+      highlights: ['API Contract Discipline', 'Workspace RBAC', 'Real-time Task Updates'],
     },
   ];
 

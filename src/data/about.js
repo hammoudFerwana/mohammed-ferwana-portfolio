@@ -54,7 +54,7 @@ export const aboutData = {
         title: 'Backend Engineering & Sawn (formerly InsurFlow)',
         period: '2026',
         content:
-          `Designing and implementing the backend for Sawn (formerly InsurFlow) — a multi-tenant B2B motor insurance claim management platform — represented a major focus on complex server-side systems. Managing multi-party claims cannot rely on arbitrary database updates; it requires strict lifecycle state machines to prevent illegal state transitions, granular permission middleware, and audit trails. To guarantee system resilience, I authored ${metrics.integrationTests} automated integration tests across ${metrics.testSuites} test suites (run ${formattedTestRunDate}), all passing.`,
+          `Designing and implementing the backend for Sawn (formerly InsurFlow) — a multi-tenant B2B motor insurance claim management platform — represented a major focus on complex server-side systems. Managing multi-party claims cannot rely on arbitrary database updates; it requires strict lifecycle state machines to prevent illegal state transitions, granular permission middleware, and audit trails. I wrote the test suite: ${metrics.integrationTests} tests passing in ${metrics.testSuites} suites (run ${formattedTestRunDate}), all passing.`,
       },
       {
         number: '05',
@@ -160,7 +160,7 @@ export const aboutData = {
       status: 'Active',
       description:
         `Built the core backend for Sawn (formerly InsurFlow), a multi-tenant motor claims management system. Implemented finite state machine transitions, MongoDB indexing, and ${metrics.integrationTests} automated tests (run ${formattedTestRunDate}).`,
-      highlight: `${metrics.integrationTests} automated tests across ${metrics.testSuites} test suites (run ${formattedTestRunDate}), all passing, verifying financial and claim lifecycles.`,
+      highlight: `${metrics.integrationTests} automated tests across ${metrics.testSuites} test suites (run ${formattedTestRunDate}), all passing, covering the claim lifecycle.`,
     },
     {
       year: '2027',
