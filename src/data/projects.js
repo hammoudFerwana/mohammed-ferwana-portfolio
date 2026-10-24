@@ -27,7 +27,7 @@ export const projects = [
     },
     problem: 'Motor insurance claims processing involves disconnected stakeholders across tenant organizations. Standard implementations risk out-of-order state transitions, cross-tenant data exposure, and sequence collisions during concurrent claim filings.',
     solution: `Engineered a modular backend architecture featuring a ${metrics.fsmStates}-state claim lifecycle finite state machine, tenant-scoped compound indexing, atomic sequential numbering, and automated integration test suites.`,
-    system: 'Sawn coordinates claim filing, field damage assessment, and claims officer review with deterministic transition guards, immutable audit timeline recording, and isolated multi-tenant data access across 3 roles: ADMIN, CLAIMS_OFFICER, and FIELD_ADJUSTER.',
+    system: 'Sawn coordinates claim filing, field damage assessment, and claims officer review with deterministic transition guards, an append-only claim timeline, and isolated multi-tenant data access across 3 roles: ADMIN, CLAIMS_OFFICER, and FIELD_ADJUSTER.',
     backendOwnership: [
       {
         title: 'State Machine Lifecycle Engine',
@@ -47,7 +47,7 @@ export const projects = [
       },
       {
         title: 'Automated Integration Testing',
-        description: 'Authored and maintained automated integration test suites using Jest, Supertest, and MongoMemoryServer, validating business invariants against an in-memory replica.',
+        description: 'Authored and maintained automated integration test suites using Jest, Supertest, and MongoMemoryServer, validating business rules against an in-memory MongoDB (mongodb-memory-server).',
       },
     ],
     architecture: {
@@ -76,7 +76,7 @@ export const projects = [
         {
           id: 'claims-engine',
           label: 'Claims Core Logic',
-          description: 'Business rules engine governing valid status state machines and approval thresholds.',
+          description: 'Business rules for the claim state machine, adjuster capacity (3 active claims) and loss assessment with deductible rules.',
           type: 'logic',
           responsibilities: ['State transition enforcement', 'Document linkage', 'Audit logging'],
         },
@@ -127,13 +127,13 @@ export const projects = [
       },
       {
         decision: 'Stateless JWT Authentication vs Stateful Server Sessions',
-        reasoning: 'Selected signed JWTs with explicit expiration and tenant payload to keep API nodes stateless and lightweight without requiring external session storage.',
+        reasoning: 'Signed JWTs (HS256, 8-hour expiry) carry the user role and organizationId, so the API needs no session store.',
       },
     ],
     testing: {
       approach: 'Defensive integration testing targeting state transitions, concurrency safety, cross-tenant isolation, and API error contracts.',
       tools: ['Jest', 'Supertest', 'MongoMemoryServer'],
-      details: 'Automated test suite executing against an in-memory MongoDB replica with real B-tree indexes and per-test collection clearing, validating failure conditions and business invariants.',
+      details: 'Automated test suite running against an in-memory MongoDB with real indexes and per-test collection clearing, validating failure conditions and business invariants.',
       metrics: {
         fullBackend: `${metrics.integrationTests} automated tests across ${metrics.testSuites} suites (run ${formattedTestRunDate})`,
       },
@@ -153,7 +153,7 @@ export const projects = [
     id: 'teamline',
     slug: 'teamline',
     title: 'TeamLine',
-    description: 'Collaborative team project management and agile workspace platform built during the TAQAT internship in 2026.',
+    description: 'Team workspace platform built during the TAQAT internship (2026).',
     role: 'Backend Developer & Team Leader',
     category: 'Platform',
     tier: 1,
@@ -165,15 +165,15 @@ export const projects = [
       live: 'https://team-line-frontend-eight.vercel.app/',
       dashboard: null,
     },
-    problem: 'Agile teams frequently juggle disconnected tools for task tracking, team communication, and sprint deadlines, causing friction and misaligned delivery goals.',
-    solution: 'Engineered a unified backend providing structured board workflows, task status updates, team permission hierarchies, and sprint tracking.',
-    system: 'Features modular API controllers, project-level access controls, and task activity timelines that keep team members synchronized.',
+    problem: 'Small teams track tasks across scattered tools, so ownership and status get lost.',
+    solution: 'Backend for workspaces, boards and tasks with role-based access (Lead, Member, Viewer), task comments, real-time task updates and version-guarded task moves.',
+    system: "Modular API controllers and workspace-level access control keep each team's data separate.",
     architecture: {
       nodes: [
         {
           id: 'client',
           label: 'TeamLine Web App',
-          description: 'Interactive React SPA for agile team boards, task lists, and sprint analytics.',
+          description: 'React frontend for team boards and task lists.',
           type: 'client',
           responsibilities: ['Kanban interactions', 'Task editing', 'Member management'],
         },
@@ -194,7 +194,7 @@ export const projects = [
         {
           id: 'services',
           label: 'Workspace & Task Service',
-          description: 'Manages board hierarchies, task dependencies, and assignment workflows.',
+          description: 'Manages boards, tasks, assignments and task comments.',
           type: 'logic',
           responsibilities: ['Board operations', 'Task state handling', 'Member assignment'],
         },
@@ -222,7 +222,7 @@ export const projects = [
       {
         title: 'API Contracts & Workspace Boundaries',
         description: 'Established explicit frontend/backend API contracts early, ensuring clear interface boundaries between team members.',
-        context: 'Served as Team Leader coordinating architectural design during the TAQAT internship (2026).',
+        context: 'Served as Team Leader during the TAQAT internship (2026).',
       },
     ],
     leadership: {
@@ -236,118 +236,14 @@ export const projects = [
     tradeoffs: [
       {
         decision: 'Normalized Task Records vs. Single Board Document',
-        reasoning: 'Separated tasks into individual documents with indexed board IDs to prevent MongoDB document size limits when boards grow to thousands of cards.',
+        reasoning: 'Stored each task as its own document with an indexed board ID, so a board never becomes one large document and tasks update one at a time.',
       },
     ],
     whatIWouldImprove: [
       {
-        area: 'Real-Time WebSocket Integration',
-        description: 'Integrate WebSockets (Socket.io) for live drag-and-drop cursor updates and instant collaborative card movement without polling.',
+        area: 'Board Presence',
+        description: 'Future consideration: show which teammates are viewing a board, on top of the existing real-time task updates.',
       },
     ],
-  },
-  {
-    id: 'saios-academy',
-    slug: 'saios-academy',
-    title: 'SAIOS Academy',
-    description: 'Modular Learning Management System (LMS) backend with structured course progression, enrollment logic, and student progress tracking.',
-    role: 'Backend Engineer',
-    category: 'Education',
-    tier: 1,
-    featured: true,
-    image: '/images/projects/saios-academy.jpg',
-    technologies: ['Node.js', 'Express.js', 'MongoDB', 'Mongoose', 'REST APIs', 'JWT'],
-    links: {
-      github: null,
-      live: null,
-      dashboard: null,
-    },
-    problem: 'Educational platforms require flexible curriculum organization (modules, lessons, quizzes) while managing enrollment states, progress calculation, and instructor permissions cleanly.',
-    solution: 'Constructed a clean, modular REST API that decouples course authoring from enrollment and progress evaluation engines.',
-    system: 'Enables instructors to publish structured course content while maintaining relational data integrity across student enrollments and completion milestones.',
-    architecture: {
-      nodes: [
-        {
-          id: 'client',
-          label: 'LMS Web Interface',
-          description: 'Student and instructor portal for viewing course content and track progress.',
-          type: 'client',
-          responsibilities: ['Content rendering', 'Lesson navigation', 'Quiz submissions'],
-        },
-        {
-          id: 'api',
-          label: 'Express LMS API',
-          description: 'Modular routing layer exposing course management, enrollment, and auth endpoints.',
-          type: 'api',
-          responsibilities: ['Route handling', 'Input validation', 'Middleware execution'],
-        },
-        {
-          id: 'course-logic',
-          label: 'Curriculum & Progress Service',
-          description: 'Calculates completion percentages and controls sequential lesson unlocking.',
-          type: 'logic',
-          responsibilities: ['Prerequisite checks', 'Progress tracking', 'Enrollment verification'],
-        },
-        {
-          id: 'db',
-          label: 'MongoDB Database',
-          description: 'Schema-backed persistence for courses, lessons, enrollments, and student progress.',
-          type: 'db',
-          responsibilities: ['Document persistence', 'Aggregations'],
-        },
-      ],
-      connections: [
-        { from: 'client', to: 'api', label: 'HTTP / REST' },
-        { from: 'api', to: 'course-logic', label: 'Business Rules' },
-        { from: 'course-logic', to: 'db', label: 'Aggregations & Queries' },
-      ],
-    },
-    engineeringDecisions: [
-      {
-        title: 'Decoupled Progress Tracking Engine',
-        description: 'Separated course definition schemas from dynamic user enrollment progress, allowing curriculum updates without invalidating historical progress data.',
-        context: 'Essential for maintaining accurate student completion records.',
-      },
-    ],
-    tradeoffs: [
-      {
-        decision: 'On-Demand Progress Aggregation vs Pre-Calculated Counters',
-        reasoning: 'Computed progress percentages dynamically using MongoDB aggregation pipelines during milestone events to avoid state desynchronization.',
-      },
-    ],
-    whatIWouldImprove: [
-      {
-        area: 'Content Delivery Optimization',
-        description: 'Add CDN pre-signed URLs for media assets and integrate video streaming analytics.',
-      },
-    ],
-  },
-  {
-    id: 'pcd-pced',
-    slug: 'pcd-pced',
-    title: 'PCD / PCED',
-    description: 'Community civic development platform serving non-profit initiatives, volunteer coordination, and outreach tracking.',
-    role: 'Backend Developer & Team Leader',
-    category: 'Volunteer',
-    tier: 2,
-    featured: false,
-    image: '/images/projects/pcd-pced.jpg',
-    technologies: ['Node.js', 'Express.js', 'MongoDB', 'REST APIs'],
-    links: {
-      github: 'https://github.com/PCD-Org/backEnd',
-      live: 'https://pced.vercel.app/',
-      dashboard: null,
-    },
-    problem: 'Civic non-profit organizations require dependable, low-overhead tools to coordinate community volunteers, publish announcements, and track community initiatives.',
-    solution: 'Built a lightweight, robust backend system supporting initiative publishing, user registration, and administrative oversight.',
-    system: 'Delivered clean REST APIs integrated with a front-end portal, providing role-separated management for volunteers and staff.',
-    leadership: {
-      description: 'Led technical backend execution for the volunteer initiative, guiding fellow contributors and architecting data schemas.',
-      responsibilities: [
-        'Architected database schemas and API endpoints.',
-        'Mentored team members in backend practices and Git workflow.',
-        'Collaborated with frontend developers to ensure smooth API integration.',
-      ],
-    },
   },
 ];

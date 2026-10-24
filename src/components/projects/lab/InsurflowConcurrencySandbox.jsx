@@ -32,7 +32,7 @@ export default function InsurflowConcurrencySandbox() {
   const currentOrgData = ORGANIZATIONS.find((o) => o.id === selectedOrg) || ORGANIZATIONS[0];
 
   const runConcurrentBurst = useCallback(
-    async (burstSize = 10, isInterleaved = false) => {
+    async (burstSize = 15, isInterleaved = false) => {
       if (isRunning) return;
       setIsRunning(true);
 
@@ -177,7 +177,7 @@ export default function InsurflowConcurrencySandbox() {
 
             <div className="space-y-2">
               <button
-                onClick={() => runConcurrentBurst(10, false)}
+                onClick={() => runConcurrentBurst(15, false)}
                 disabled={isRunning}
                 className="w-full py-2.5 px-3 rounded-lg bg-accent text-bg-primary font-mono text-xs font-bold hover:bg-accent/90 transition-all disabled:opacity-50 flex items-center justify-center gap-2 shadow-sm"
               >
@@ -188,7 +188,7 @@ export default function InsurflowConcurrencySandbox() {
                   </>
                 ) : (
                   <>
-                    <span>⚡ Fire 10 Concurrent Requests</span>
+                    <span>⚡ Fire 15 Concurrent Requests</span>
                   </>
                 )}
               </button>
@@ -270,7 +270,7 @@ export default function InsurflowConcurrencySandbox() {
                 {simulationLog.length === 0 ? (
                   <div className="h-full flex flex-col items-center justify-center text-text-muted text-center p-4">
                     <span>No concurrent bursts fired yet.</span>
-                    <span className="text-[11px] mt-1">Click &ldquo;Fire 10 Concurrent Requests&rdquo; to simulate parallel creation.</span>
+                    <span className="text-[11px] mt-1">Click &ldquo;Fire 15 Concurrent Requests&rdquo; to simulate parallel creation.</span>
                   </div>
                 ) : (
                   simulationLog.map((ev) => (

@@ -11,7 +11,7 @@ export default function AboutPhilosophy() {
         <SectionHeading
           eyebrow="HOW I WORK"
           title="Engineering Philosophy"
-          description="Seven foundational principles that guide my architectural decisions, code quality, and engineering mindset."
+          description="The principles behind my architectural decisions and code quality."
         />
       </RevealOnScroll>
 

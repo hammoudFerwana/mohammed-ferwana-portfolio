@@ -40,7 +40,7 @@ export const aboutData = {
         title: 'Practical Immersion & Clean Engineering',
         period: '2023 – 2024',
         content:
-          'To bridge academic theory and production software, I joined the Market Ready Developer program at Gaza Sky Geeks (GSG). This intensive immersion pushed me to write clean, modular JavaScript, design relational schemas with PostgreSQL, structure RESTful APIs with Express, and embrace professional Git workflows. It taught me that writing code that works is only the first step; writing code that is readable, maintainable, and testable is what defines professional engineering.',
+          'In 2023 to 2024 I completed the Market Ready Developer program at Gaza Sky Geeks (GSG), my first structured step from university coursework toward professional software work.',
       },
       {
         number: '03',
@@ -54,7 +54,7 @@ export const aboutData = {
         title: 'Backend Engineering & Sawn (formerly InsurFlow)',
         period: '2026',
         content:
-          `Designing and implementing the backend for Sawn (formerly InsurFlow) — a multi-tenant B2B motor insurance claim management platform — represented a major focus on complex server-side systems. Managing multi-party claims cannot rely on arbitrary database updates; it requires strict lifecycle state machines to prevent illegal state transitions, granular permission middleware, and audit trails. I wrote the test suite: ${metrics.integrationTests} tests passing in ${metrics.testSuites} suites (run ${formattedTestRunDate}), all passing.`,
+          `Designing and implementing the backend for Sawn (formerly InsurFlow) — a multi-tenant B2B motor insurance claim management platform — represented a major focus on complex server-side systems. Managing multi-party claims cannot rely on arbitrary database updates; it requires strict lifecycle state machines to prevent illegal state transitions, granular permission middleware, and audit trails. I wrote the test suite: ${metrics.integrationTests} tests passing in ${metrics.testSuites} suites (run ${formattedTestRunDate}).`,
       },
       {
         number: '05',
@@ -137,7 +137,7 @@ export const aboutData = {
       type: 'training',
       status: 'Completed',
       description:
-        'Completed an intensive professional software development immersion focused on full-stack architecture, clean code principles, PostgreSQL relational modeling, and agile workflows.',
+        'Completed the Market Ready Developer program at Gaza Sky Geeks (GSG).',
       highlight: 'Transitioned academic knowledge into professional software development practices.',
     },
     {

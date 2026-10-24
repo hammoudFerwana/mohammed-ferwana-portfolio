@@ -66,7 +66,7 @@ export default function ContactInfo() {
       href: '/resume/Mohammed_Ferwana_Resume.pdf',
       external: false,
       download: 'Mohammed_Ferwana_Resume.pdf',
-      description: 'Access complete verified CV, systems architecture achievements, and technical credentials.',
+      description: 'One-page CV as a PDF.',
       icon: (
         <svg
           className="w-5 h-5 text-accent"

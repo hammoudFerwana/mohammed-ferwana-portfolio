@@ -7,7 +7,7 @@ import { projects } from '@/data/projects';
 
 export const metadata = {
   title: 'Projects & System Architecture',
-  description: 'Backend engineering projects, production architectures, and system design case studies by Mohammed Ferwana.',
+  description: 'Backend engineering projects and case studies by Mohammed Ferwana.',
 };
 
 export default function ProjectsPage() {
@@ -19,7 +19,7 @@ export default function ProjectsPage() {
           as="h1"
           eyebrow="ENGINEERING PORTFOLIO"
           title="Projects & Architecture Case Studies"
-          description="A deep dive into modular backend architecture, clean API design, and data schemas built for real-world reliability."
+          description="Case studies of the backends I built, with the decisions behind them."
         />
       </RevealOnScroll>
 

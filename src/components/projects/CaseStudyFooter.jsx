@@ -10,7 +10,7 @@ import { siteMetadata } from '@/data/siteMetadata';
 /**
  * CaseStudyFooter — End-of-case-study continuation and hiring conversion block.
  *
- * 1. Inter-case study navigation (Sawn → TeamLine → SAIOS Academy → All Projects)
+ * 1. Inter-case study navigation (Sawn → TeamLine → All Projects)
  * 2. Discussion & hiring CTA routing to /contact
  * 3. Direct Resume / CV download action
  *

@@ -7,7 +7,7 @@ import ContactInfo from '@/components/contact/ContactInfo';
 export const metadata = {
   title: 'Contact & Collaboration',
   description:
-    'Get in touch with Mohammed Ferwana for backend engineering opportunities, backend architecture consulting, or technical collaboration.',
+    'Get in touch with Mohammed Ferwana for backend engineering roles or technical collaboration.',
 };
 
 export default function ContactPage() {

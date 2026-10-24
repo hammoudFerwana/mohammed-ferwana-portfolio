@@ -211,7 +211,7 @@ export default function InteractivePortraitCard() {
               onClick={toggleFlip}
               type="button"
               className="group/btn ml-auto inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-bg-primary/85 hover:bg-accent/20 backdrop-blur-md border border-border-default hover:border-accent/40 text-[10px] font-mono text-text-secondary hover:text-accent transition-all duration-200 shadow-sm"
-              title="Click to inspect Mohammed's Architectural DNA"
+              title="Flip the card"
               aria-label="Inspect Technical Specs"
             >
               <svg
@@ -246,7 +246,7 @@ export default function InteractivePortraitCard() {
               </div>
               <div className="text-right">
                 <span className="text-accent font-medium text-[11px] block">Gaza, Palestine</span>
-                <span className="text-[9px] text-text-muted tracking-wide">UTC+3 · Remote/Hybrid</span>
+                <span className="text-[9px] text-text-muted tracking-wide">Remote / Hybrid</span>
               </div>
             </div>
           </div>

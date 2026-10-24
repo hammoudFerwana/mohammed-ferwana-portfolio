@@ -15,7 +15,7 @@ export default function HowIThink() {
       title: 'Analyze & Frame the Problem',
       summary: 'Define requirements, domain constraints, and entity boundaries before writing code.',
       detail: 'I examine the problem from both user and business viewpoints. I clarify data relationships, security constraints, and access patterns so architectural choices solve real problems rather than theoretical ones.',
-      keyTakeaway: 'Understanding the problem prevents 90% of subsequent rewrites.',
+      keyTakeaway: 'Understanding the problem first prevents rewrites later.',
     },
     {
       num: '02',
@@ -28,8 +28,8 @@ export default function HowIThink() {
       num: '03',
       title: 'Specify Clear API Contracts',
       summary: 'Establish explicit request/response schemas, REST conventions, and error codes.',
-      detail: 'I agree on API payloads with frontend teammates before building. Endpoints adhere to REST semantics, predictable HTTP statuses, structured error responses, and consistent pagination standards.',
-      keyTakeaway: 'Clear API contracts eliminate frontend-backend synchronization friction.',
+      detail: 'I agree on API payloads with frontend teammates before building. Endpoints follow REST semantics with predictable HTTP statuses and structured error responses.',
+      keyTakeaway: 'Clear API contracts reduce rework between frontend and backend.',
     },
     {
       num: '04',
@@ -47,10 +47,10 @@ export default function HowIThink() {
     },
     {
       num: '06',
-      title: 'Profile, Index & Optimize',
-      summary: 'Analyze query explain plans, eliminate slow operations, and refactor code.',
-      detail: 'After validating functionality, I inspect database explain plans, add compound indexes for high-frequency queries, and eliminate unindexed collection scans through deliberate MongoDB indexing.',
-      keyTakeaway: 'Optimize with profiler measurements, never by intuition alone.',
+      title: 'Index for Real Queries',
+      summary: 'Add compound indexes that match tenant-scoped query patterns.',
+      detail: 'I add compound indexes led by organizationId so tenant queries use index-bounded lookups, and I add a new index only for a query the API actually runs.',
+      keyTakeaway: 'Indexes follow real query patterns.',
     },
   ];
 
@@ -60,7 +60,7 @@ export default function HowIThink() {
         <SectionHeading
           eyebrow="ENGINEERING PROCESS"
           title="How I Think & Build"
-          description="A structured, disciplined engineering workflow transforms chaotic software requirements into robust, self-documenting systems."
+          description="The workflow I follow on every backend feature, from requirements to indexes."
         />
 
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
