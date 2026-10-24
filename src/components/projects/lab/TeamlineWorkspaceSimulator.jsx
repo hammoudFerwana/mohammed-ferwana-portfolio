@@ -71,7 +71,7 @@ export default function TeamlineWorkspaceSimulator() {
       setSocketLog((prev) => [packet, ...prev].slice(0, 15));
       setOccResult({
         type: 'success',
-        message: `Task ${task.id} atomically moved to ${targetColumn}. Broadcast to 3 active peers.`,
+        message: `Task ${task.id} atomically moved to ${targetColumn}. Broadcast to workspace members.`,
       });
 
       setIsProcessing(false);
@@ -376,7 +376,7 @@ export default function TeamlineWorkspaceSimulator() {
                   </pre>
 
                   <div className="text-[10px] text-text-muted text-right font-mono">
-                    Broadcast to 3 peers in room [{packet.channel}]
+                    Broadcast to workspace members in room [{packet.channel}]
                   </div>
                 </div>
               ))

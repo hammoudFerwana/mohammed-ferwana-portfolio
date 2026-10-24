@@ -16,7 +16,7 @@ const project = {
   title: 'string',                 // Project name (e.g., 'InsurFlow')
   description: 'string',           // 1-2 sentence summary
   role: 'string',                  // Mohammed's role (e.g., 'Backend Engineer / Backend Owner')
-  category: 'string',             // 'enterprise' | 'platform' | 'education' | 'volunteer'
+  category: 'string',             // 'B2B Claims Engine' | 'Platform' | 'Education' | 'Volunteer'
   tier: 'number',                  // 1 = Featured case study, 2 = Supporting project
   technologies: ['string'],        // Array of technologies used
 

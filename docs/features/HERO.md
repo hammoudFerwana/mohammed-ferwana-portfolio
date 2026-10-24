@@ -9,7 +9,7 @@
 Communicate instantly:
 - **Who**: Mohammed Ferwana
 - **What**: Backend Engineer
-- **Value**: Building Scalable & Reliable Systems
+- **Value**: Reliable Multi-Tenant Backend Systems
 - **Action**: Explore My Work / Download Resume
 
 ---
@@ -22,24 +22,21 @@ Communicate instantly:
 ┌─────────────────────────────────────────────────────────────┐
 │                                                             │
 │  [tech metadata bar — subtle, monospace]                    │
-│  BACKEND ENGINEER · NODE.JS · EXPRESS · MONGODB · SYSTEM   │
+│  NODE.JS · EXPRESS · MONGODB · REST APIS · ARCHITECTURE     │
 │                                                             │
 │  ┌──────────────────────────────┐  ┌──────────────────┐    │
 │  │                              │  │                  │    │
-│  │  MOHAMMED                    │  │  [Professional   │    │
-│  │  FERWANA                     │  │   Portrait]      │    │
+│  │  MOHAMMED                    │  │  [Interactive    │    │
+│  │  FERWANA                     │  │   Portrait Card] │    │
 │  │                              │  │                  │    │
 │  │  Backend Engineer            │  │                  │    │
-│  │  Building Scalable &         │  │                  │    │
-│  │  Reliable Systems            │  └──────────────────┘    │
-│  │                              │                          │
-│  │  I build reliable backend    │  ┌──────────────────┐    │
-│  │  systems, design scalable    │  │ SYSTEM STATUS    │    │
-│  │  APIs, and turn real-world   │  │ Backend Eng  ●   │    │
-│  │  problems into software      │  │ API Arch     ●   │    │
-│  │  that works.                 │  │ Security     ●   │    │
-│  │                              │  │ Testing      ●   │    │
-│  │  [Explore My Work]           │  │ Scalability  ●   │    │
+│  │                              │  └──────────────────┘    │
+│  │  I build multi-tenant REST   │                          │
+│  │  APIs with guarded state     │  ┌──────────────────┐    │
+│  │  machines, tenant isolation  │  │ SYSTEM STATUS    │    │
+│  │  and tested business rules.  │  │ 616 tests passing│    │
+│  │                              │  │ 10-state FSM     │    │
+│  │  [Explore My Work]           │  │ CI: lint, test   │    │
 │  │  [Download Resume] [Talk]    │  └──────────────────┘    │
 │  │                              │                          │
 │  └──────────────────────────────┘                          │
@@ -58,12 +55,10 @@ Communicate instantly:
 │  FERWANA                  │
 │                           │
 │  Backend Engineer         │
-│  Building Scalable &      │
-│  Reliable Systems         │
 │                           │
 │  [Portrait — centered]    │
 │                           │
-│  I build reliable...      │
+│  I build multi-tenant...  │
 │                           │
 │  [Explore My Work]        │
 │  [Download Resume]        │
@@ -90,16 +85,16 @@ Backend Engineer
 
 ### Tagline
 ```
-Building Scalable & Reliable Systems
+Backend Engineer
 ```
 
 ### Supporting Copy
 ```
-I build reliable backend systems, design scalable APIs, and turn real-world problems into software that works.
+I build multi-tenant REST APIs with guarded state machines, tenant isolation and tested business rules.
 ```
 
 > [!NOTE]
-> This copy can be refined during implementation as long as the meaning is preserved.
+> This copy reflects the current production implementation in `src/components/home/HeroSection.jsx`.
 
 ### CTAs
 | Button | Type | Action |
@@ -111,7 +106,7 @@ I build reliable backend systems, design scalable APIs, and turn real-world prob
 ### Technical Metadata Bar
 Subtle, monospace, small text near the hero:
 ```
-BACKEND ENGINEER · NODE.JS · EXPRESS · MONGODB · POSTGRESQL · SYSTEM DESIGN
+Node.js · Express · MongoDB · REST APIs · System Architecture
 ```
 
 ### System Status Widget (Signature Element)

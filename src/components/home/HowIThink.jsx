@@ -14,7 +14,7 @@ export default function HowIThink() {
       num: '01',
       title: 'Analyze & Frame the Problem',
       summary: 'Define requirements, domain constraints, and entity boundaries before writing code.',
-      detail: 'I examine the problem from both user and business viewpoints. I clarify data relationships, security constraints, and throughput expectations so architectural choices solve real problems rather than theoretical ones.',
+      detail: 'I examine the problem from both user and business viewpoints. I clarify data relationships, security constraints, and access patterns so architectural choices solve real problems rather than theoretical ones.',
       keyTakeaway: 'Understanding the problem prevents 90% of subsequent rewrites.',
     },
     {

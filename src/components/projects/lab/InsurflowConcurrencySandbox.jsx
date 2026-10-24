@@ -123,7 +123,7 @@ export default function InsurflowConcurrencySandbox() {
             </Badge>
           </div>
           <p className="text-xs sm:text-sm text-text-secondary">
-            Simulates concurrent claim filings using tenant-scoped MongoDB <code className="text-accent bg-bg-tertiary px-1 py-0.5 rounded">$inc</code> atomic operations with zero collision guarantees.
+            Simulates concurrent claim filings using tenant-scoped MongoDB <code className="text-accent bg-bg-tertiary px-1 py-0.5 rounded">$inc</code> atomic operations, verified by an automated test of 15 concurrent creations in one tenant.
           </p>
         </div>
 

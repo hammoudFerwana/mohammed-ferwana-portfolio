@@ -8,6 +8,13 @@ import TextScramble from '@/components/shared/TextScramble';
 import { metrics } from '@/data/metrics';
 import InteractivePortraitCard from '@/components/home/InteractivePortraitCard';
 
+const formattedTestRunDate = new Date(`${metrics.testRunDate}T00:00:00Z`).toLocaleDateString('en-GB', {
+  day: 'numeric',
+  month: 'short',
+  year: 'numeric',
+  timeZone: 'UTC',
+});
+
 export default function HeroSection() {
   return (
     <section className="relative min-h-[92dvh] flex flex-col justify-center pt-28 pb-16 overflow-hidden">
@@ -117,7 +124,7 @@ export default function HeroSection() {
                   <div className="flex items-center gap-2 text-xs">
                     <span className="w-1.5 h-1.5 rounded-full bg-functional-success shrink-0" />
                     <span className="text-text-secondary font-mono text-[11px]">
-                      <CounterTicker value={metrics.integrationTests} className="text-text-primary font-semibold" /> tests passing (<CounterTicker value={metrics.testSuites} className="text-text-primary font-semibold" /> suites, run {metrics.testRunDate})
+                      <CounterTicker value={metrics.integrationTests} className="text-text-primary font-semibold" /> tests passing (<CounterTicker value={metrics.testSuites} className="text-text-primary font-semibold" /> suites, run {formattedTestRunDate})
                     </span>
                   </div>
                   <div className="flex items-center gap-2 text-xs">

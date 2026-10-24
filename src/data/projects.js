@@ -1,5 +1,12 @@
 import { metrics } from './metrics';
 
+const formattedTestRunDate = new Date(`${metrics.testRunDate}T00:00:00Z`).toLocaleDateString('en-GB', {
+  day: 'numeric',
+  month: 'short',
+  year: 'numeric',
+  timeZone: 'UTC',
+});
+
 export const projects = [
   {
     id: 'insurflow',
@@ -109,14 +116,14 @@ export const projects = [
       },
       {
         title: 'Atomic Sequential Claim Numbering',
-        description: 'Engineered tenant-scoped sequential numbering (CLM-<ORG>-0001) using Counter.findOneAndUpdate with atomic $inc updates in a pre-save hook, verified under automated test execution.',
+        description: 'Tenant-scoped claim numbers (CLM-<ORG>-0001) from a per-organization counter, incremented with one atomic findOneAndUpdate and $inc, backed by a compound unique index { organizationId: 1, claimNumber: 1 }.',
         context: 'Prevents duplicate number collisions across parallel filings while maintaining separate sequential counters per tenant organization.',
       },
     ],
     tradeoffs: [
       {
         decision: 'Embedded vs. Referenced Document Schema in MongoDB',
-        reasoning: 'Embedded sub-documents for claim timeline events to optimize read latency, while referencing user accounts to avoid duplicate denormalization anomalies.',
+        reasoning: 'Embedded the claim timeline in the claim document, so one read returns the claim with its history. User accounts are referenced, not copied.',
       },
       {
         decision: 'Stateless JWT Authentication vs Stateful Server Sessions',
@@ -128,7 +135,7 @@ export const projects = [
       tools: ['Jest', 'Supertest', 'MongoMemoryServer'],
       details: 'Automated test suite executing against an in-memory MongoDB replica with real B-tree indexes and per-test collection clearing, validating failure conditions and business invariants.',
       metrics: {
-        fullBackend: `${metrics.integrationTests} automated tests across ${metrics.testSuites} suites (run ${metrics.testRunDate})`,
+        fullBackend: `${metrics.integrationTests} automated tests across ${metrics.testSuites} suites (run ${formattedTestRunDate})`,
       },
     },
     whatIWouldImprove: [
@@ -213,17 +220,17 @@ export const projects = [
         context: 'Prevents accidental data leakage across teams sharing the same database.',
       },
       {
-        title: 'Leading Engineering Sprints & API Contracts',
-        description: 'Established rigorous frontend/backend API contracts early, minimizing blocking dependencies between team members and accelerating feature velocity.',
-        context: 'Served as Team Leader coordinating architectural design and team output.',
+        title: 'API Contracts & Workspace Boundaries',
+        description: 'Established explicit frontend/backend API contracts early, ensuring clear interface boundaries between team members.',
+        context: 'Served as Team Leader coordinating architectural design during the TAQAT internship (2026).',
       },
     ],
     leadership: {
-      description: 'Served as Team Leader during the TAQAT internship, facilitating daily standups, unblocking teammates, and reviewing backend pull requests.',
+      description: 'Served as Backend Developer and Team Leader during the TAQAT internship (2026), building TeamLine.',
       responsibilities: [
-        'Organized sprint backlog and defined API endpoint specifications.',
-        'Conducted architectural reviews and enforced code hygiene standards.',
-        'Mentored junior peers on asynchronous JavaScript patterns and database modeling.',
+        'Designed REST APIs and defined endpoint specifications.',
+        'Implemented workspace role-based access control (RBAC).',
+        'Built real-time task updates and version-guarded task moves.',
       ],
     },
     tradeoffs: [

@@ -11,7 +11,7 @@
 ```javascript
 const siteMetadata = {
   title: 'Mohammed Ferwana — Backend Engineer',
-  description: 'Backend Engineer building scalable systems, reliable APIs, and thoughtful software architecture.',
+  description: 'Backend engineer in Gaza building multi-tenant REST APIs with guarded state machines, tenant isolation and tested business rules.',
   siteUrl: '[VERCEL_URL]', // Update with actual domain
   ogImage: '/images/og-image.png',
   locale: 'en_US',
@@ -36,7 +36,7 @@ const siteMetadata = {
 
 | Page | Meta Description |
 |------|-----------------|
-| Home | Backend Engineer building scalable systems, reliable APIs, and thoughtful software architecture. |
+| Home | Backend engineer in Gaza building multi-tenant REST APIs with guarded state machines, tenant isolation and tested business rules. |
 | Projects | Engineering projects featuring backend systems, API design, and architecture case studies. |
 | About | The engineering journey of Mohammed Ferwana — from software engineering to backend systems and technical leadership. |
 | Experience | Professional experience, training, and education in backend engineering and software development. |
@@ -48,7 +48,7 @@ const siteMetadata = {
 
 ```html
 <meta property="og:title" content="Mohammed Ferwana — Backend Engineer" />
-<meta property="og:description" content="Backend Engineer building scalable systems..." />
+<meta property="og:description" content="Backend engineer in Gaza building multi-tenant REST APIs..." />
 <meta property="og:image" content="[VERCEL_URL]/images/og-image.png" />
 <meta property="og:url" content="[VERCEL_URL]" />
 <meta property="og:type" content="website" />
@@ -69,7 +69,7 @@ const siteMetadata = {
 ```html
 <meta name="twitter:card" content="summary_large_image" />
 <meta name="twitter:title" content="Mohammed Ferwana — Backend Engineer" />
-<meta name="twitter:description" content="Backend Engineer building scalable systems..." />
+<meta name="twitter:description" content="Backend engineer in Gaza building multi-tenant REST APIs..." />
 <meta name="twitter:image" content="[VERCEL_URL]/images/og-image.png" />
 ```
 
@@ -85,7 +85,7 @@ const siteMetadata = {
   "@type": "Person",
   "name": "Mohammed Ferwana",
   "jobTitle": "Backend Engineer",
-  "description": "Backend Engineer building scalable systems, reliable APIs, and thoughtful software architecture.",
+  "description": "Backend engineer in Gaza building multi-tenant REST APIs with guarded state machines, tenant isolation and tested business rules.",
   "url": "[VERCEL_URL]",
   "email": "mohammedferwana2@gmail.com",
   "sameAs": [

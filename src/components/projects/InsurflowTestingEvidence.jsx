@@ -5,6 +5,13 @@ import Badge from '@/components/shared/Badge';
 import { cn } from '@/lib/utils';
 import { metrics } from '@/data/metrics';
 
+const formattedTestRunDate = new Date(`${metrics.testRunDate}T00:00:00Z`).toLocaleDateString('en-GB', {
+  day: 'numeric',
+  month: 'short',
+  year: 'numeric',
+  timeZone: 'UTC',
+});
+
 /**
  * InsurflowTestingEvidence — Verified backend testing evidence artifact.
  *
@@ -57,7 +64,7 @@ export default function InsurflowTestingEvidence() {
           </div>
           <div className="flex flex-wrap items-center gap-2">
             <span className="font-mono text-[11px] text-text-muted bg-bg-tertiary px-2.5 py-1 rounded border border-border-subtle">
-              Full Backend: {metrics.integrationTests} tests · {metrics.testSuites} suites (run {metrics.testRunDate})
+              Full Backend: {metrics.integrationTests} tests · {metrics.testSuites} suites (run {formattedTestRunDate})
             </span>
           </div>
         </div>
@@ -251,7 +258,7 @@ export default function InsurflowTestingEvidence() {
                 className="space-y-3"
               >
                 <div className="flex items-center justify-between text-xs font-mono text-text-muted">
-                  <span>tests/claim.numbering.test.js (Lines 137–158)</span>
+                  <span>tests/claim.numbering.test.js, lines 138 to 159 (condensed excerpt)</span>
                   <span>EVD-002: Concurrent Atomic Sequence</span>
                 </div>
                 <div className="overflow-x-auto rounded-lg bg-bg-primary/95 border border-border-subtle p-4 font-mono text-xs sm:text-[13px] leading-relaxed text-text-secondary">
@@ -267,7 +274,7 @@ export default function InsurflowTestingEvidence() {
                     {'  '}claimNumbers.<span className="text-accent">forEach</span>((cn) =&gt; {'{'}{'\n'}
                     {'    '}<span className="text-accent">expect</span>(cn).<span className="text-accent">toMatch</span>(<span className="text-functional-success">/^CLM-ALPHA-\d{'{'}4{'}'}$/</span>);{'\n'}
                     {'  '}{'}'});{'\n\n'}
-                    {'  '}<span className="text-text-muted">{'// Extract and sort sequences — must be contiguous 1..15 without gaps'}</span>{'\n'}
+                    {'  '}<span className="text-text-muted">{'// Extract and sort sequences: contiguous 1..15'}</span>{'\n'}
                     {'  '}<span className="text-accent-secondary">const</span> sequences = claimNumbers.<span className="text-accent">map</span>(getSeq).<span className="text-accent">sort</span>((a, b) =&gt; a - b);{'\n'}
                     {'  '}<span className="text-accent">expect</span>(sequences).<span className="text-accent">toEqual</span>(Array.<span className="text-accent">from</span>({'{'} length: <span className="text-functional-warning">15</span> {'}'}, (_, i) =&gt; i + <span className="text-functional-warning">1</span>));{'\n'}
                     {'}'});

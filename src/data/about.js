@@ -1,5 +1,12 @@
 import { metrics } from './metrics';
 
+const formattedTestRunDate = new Date(`${metrics.testRunDate}T00:00:00Z`).toLocaleDateString('en-GB', {
+  day: 'numeric',
+  month: 'short',
+  year: 'numeric',
+  timeZone: 'UTC',
+});
+
 export const aboutData = {
   hero: {
     eyebrow: 'THE ENGINEER',
@@ -37,17 +44,17 @@ export const aboutData = {
       },
       {
         number: '03',
-        title: 'Engineering Leadership & Delivery at TAQAT',
+        title: 'Backend Developer and Team Leader at TAQAT',
         period: '2026',
         content:
-          'During my time at TAQAT, I took on the responsibility of Backend Developer & Team Leader for TeamLine, a collaborative project management platform. Leading a development team taught me that architectural clarity directly impacts team velocity. By specifying explicit API contracts upfront and establishing role-based access control (RBAC) boundaries early, we eliminated frontend-backend friction and delivered sprint commitments with high confidence.',
+          'During the TAQAT internship (2026), I served as Backend Developer and Team Leader for TeamLine, a collaborative team workspace platform. I designed REST APIs, implemented workspace role-based access control (RBAC), and built real-time task updates with version-guarded task moves.',
       },
       {
         number: '04',
         title: 'Backend Engineering & Sawn (formerly InsurFlow)',
         period: '2026',
         content:
-          `Designing and implementing the backend for Sawn (formerly InsurFlow) — a multi-tenant B2B motor insurance claim management platform — represented a major focus on complex server-side systems. Managing multi-party claims cannot rely on arbitrary database updates; it requires strict lifecycle state machines to prevent illegal state transitions, granular permission middleware, and audit trails. To guarantee system resilience, I authored ${metrics.integrationTests} automated integration tests across ${metrics.testSuites} test suites (run ${metrics.testRunDate}), all passing.`,
+          `Designing and implementing the backend for Sawn (formerly InsurFlow) — a multi-tenant B2B motor insurance claim management platform — represented a major focus on complex server-side systems. Managing multi-party claims cannot rely on arbitrary database updates; it requires strict lifecycle state machines to prevent illegal state transitions, granular permission middleware, and audit trails. To guarantee system resilience, I authored ${metrics.integrationTests} automated integration tests across ${metrics.testSuites} test suites (run ${formattedTestRunDate}), all passing.`,
       },
       {
         number: '05',
@@ -102,14 +109,6 @@ export const aboutData = {
     },
     {
       num: '06',
-      title: 'Improve systems based on evidence',
-      tagline: 'Optimize what you can measure.',
-      description:
-        'Intuition is often wrong when diagnosing latency or bottlenecks. I rely on profiler metrics, database explain plans, and measured benchmarks before restructuring queries or indexing.',
-      takeaway: 'Measure the actual bottleneck first; never optimize blindly.',
-    },
-    {
-      num: '07',
       title: 'Take ownership of engineering decisions',
       tagline: 'Explain why, not just what.',
       description:
@@ -149,8 +148,8 @@ export const aboutData = {
       type: 'leadership',
       status: 'Completed',
       description:
-        'Spearheaded backend architecture and led engineering delivery for TeamLine. Designed RESTful APIs, enforced workspace role-based access control (RBAC), and conducted PR reviews.',
-      highlight: 'Established API contracts and led sprint coordination across the team.',
+        'Backend Developer and Team Leader during the TAQAT internship (2026), building TeamLine. Designed REST APIs, implemented workspace role-based access control (RBAC), and built real-time task updates with version-guarded task moves.',
+      highlight: 'Designed REST APIs and workspace role-based access control for team collaboration.',
     },
     {
       year: '2026',
@@ -160,8 +159,8 @@ export const aboutData = {
       type: 'systems',
       status: 'Active',
       description:
-        `Architected the core backend for Sawn (formerly InsurFlow), a multi-tenant motor claims management system. Implemented finite state machine transitions, MongoDB indexing, and ${metrics.integrationTests} automated tests.`,
-      highlight: `${metrics.integrationTests} automated tests across ${metrics.testSuites} test suites (run ${metrics.testRunDate}), all passing, verifying financial and claim lifecycles.`,
+        `Built the core backend for Sawn (formerly InsurFlow), a multi-tenant motor claims management system. Implemented finite state machine transitions, MongoDB indexing, and ${metrics.integrationTests} automated tests (run ${formattedTestRunDate}).`,
+      highlight: `${metrics.integrationTests} automated tests across ${metrics.testSuites} test suites (run ${formattedTestRunDate}), all passing, verifying financial and claim lifecycles.`,
     },
     {
       year: '2027',

@@ -1,3 +1,12 @@
+import { metrics } from './metrics';
+
+const formattedTestRunDate = new Date(`${metrics.testRunDate}T00:00:00Z`).toLocaleDateString('en-GB', {
+  day: 'numeric',
+  month: 'short',
+  year: 'numeric',
+  timeZone: 'UTC',
+});
+
 export const experiences = [
   {
     id: 'aristo-trainee',
@@ -32,9 +41,9 @@ export const experiences = [
       'Designed and implemented deterministic 10-state claim lifecycle state machine with MongoDB optimistic concurrency control.',
       'Enforced multi-tenant isolation with strict tenant scoping across all collections and queries.',
       'Built and documented REST API endpoints for claims officers web dashboard and mobile adjuster client.',
-      'Achieved 616 automated tests across 39 test suites with zero schema collisions in full Jest suite.',
+      `${metrics.integrationTests} tests passing in ${metrics.testSuites} suites (full Jest run, ${formattedTestRunDate}).`,
     ],
-    technologies: ['Node.js', 'Express.js', 'MongoDB Atlas', 'Mongoose', 'Jest', 'Docker'],
+    technologies: ['Node.js', 'Express.js', 'MongoDB Atlas', 'Mongoose', 'Jest'],
   },
   {
     id: 'taqat-internship',
@@ -46,12 +55,11 @@ export const experiences = [
     project: 'TeamLine',
     projectSlug: 'teamline',
     isLeadership: true,
-    description: 'Spearheaded backend architecture and led engineering delivery for TeamLine, a collaborative project management system.',
+    description: 'Backend Developer and Team Leader during the TAQAT internship (2026), building TeamLine, a team workspace platform.',
     responsibilities: [
-      'Architected and implemented RESTful APIs using Node.js, Express, and MongoDB.',
-      'Led sprint planning, task estimation, and code reviews across the development team.',
-      'Designed secure authentication and role-based access control (RBAC) mechanisms.',
-      'Ensured API reliability and consistency through structured error handling and validation pipelines.',
+      'Designed REST APIs with JWT authentication and workspace role-based access control (RBAC).',
+      'Built real-time task updates and version-guarded task moves.',
+      'Ensured API reliability through structured error handling and validation pipelines.',
     ],
     technologies: ['Node.js', 'Express.js', 'MongoDB', 'JWT', 'RBAC', 'REST APIs'],
   },

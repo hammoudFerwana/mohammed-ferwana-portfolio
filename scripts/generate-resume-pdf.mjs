@@ -169,7 +169,7 @@ const resumeHtml = `<!DOCTYPE html>
   <section>
     <h2>Professional Summary</h2>
     <p class="summary-text">
-      Methodical and reliability-driven Backend Engineer with demonstrated ownership in architecting high-integrity server-side systems, finite state machine (FSM) workflows, and reliable RESTful APIs. Experience leading backend engineering delivery, designing relational and document data schemas (PostgreSQL & MongoDB), enforcing strict role-based access control (RBAC), and authoring comprehensive automated integration test suites. Solid foundation in Computer Systems Engineering principles, algorithm design, and database systems.
+      Backend Engineer working in Node.js, Express and MongoDB. I build REST APIs, claim lifecycle state machines, multi-tenant data isolation, JWT authentication with role-based access control, and automated Jest test suites. Computer Systems Engineering student at Al-Azhar University, Gaza.
     </p>
   </section>
 
@@ -183,13 +183,13 @@ const resumeHtml = `<!DOCTYPE html>
       <div class="skill-list">MongoDB Atlas, PostgreSQL, Mongoose, Compound Indexing, Data Modeling</div>
 
       <div class="skill-cat">Architecture & Security:</div>
-      <div class="skill-list">Finite State Machines (FSM), Multi-Tenant Isolation, JWT, RBAC, Data Validation, Rate Limiting</div>
+      <div class="skill-list">Finite State Machines (FSM), Multi-Tenant Isolation, JWT, RBAC, Data Validation</div>
 
       <div class="skill-cat">Testing & Quality:</div>
-      <div class="skill-list">Jest, Supertest, In-Memory DB Replicas, Integration Testing, Continuous Integration (CI)</div>
+      <div class="skill-list">Jest, Supertest, mongodb-memory-server, Integration Testing, Continuous Integration (CI)</div>
 
       <div class="skill-cat">DevOps & Tools:</div>
-      <div class="skill-list">Docker, Gitflow, GitHub Actions, Postman, Linux / Bash, Clean Architecture</div>
+      <div class="skill-list">Docker (basics), Gitflow, GitHub Actions, Postman</div>
     </div>
   </section>
 
@@ -205,9 +205,7 @@ const resumeHtml = `<!DOCTYPE html>
         <div class="item-meta">May 2026 – Present · Remote</div>
       </div>
       <ul class="bullets">
-        <li>Delivering modular backend endpoints and business validation logic following clean architecture principles.</li>
-        <li>Designing and optimizing MongoDB queries and data models for internal tooling.</li>
-        <li>Participating in technical code reviews, documentation, and agile team workflows.</li>
+        <li>Backend Developer Trainee through the Khireej Qader program.</li>
       </ul>
     </div>
 
@@ -220,24 +218,22 @@ const resumeHtml = `<!DOCTYPE html>
         <div class="item-meta">2026 · Remote</div>
       </div>
       <ul class="bullets">
-        <li><strong>Architecture & Delivery:</strong> Spearheaded backend system architecture for TeamLine, a collaborative project management system, ensuring predictable RESTful API contracts across teams.</li>
-        <li><strong>Security & Access Control:</strong> Designed secure authentication with JWT and granular workspace-scoped Role-Based Access Control (RBAC).</li>
-        <li><strong>Engineering Leadership:</strong> Conducted sprint planning, technical task estimation, and peer code reviews, accelerating engineering velocity and code consistency.</li>
-        <li><strong>System Reliability:</strong> Established centralized error handling pipelines, request sanitization, and database indexing that eliminated duplicate records.</li>
+        <li>Backend Developer and Team Leader during the TAQAT internship, building TeamLine, a team workspace platform.</li>
+        <li>Designed REST APIs with JWT authentication and workspace role-based access control.</li>
+        <li>Built real-time task updates and version-guarded task moves.</li>
       </ul>
     </div>
 
     <div class="item">
       <div class="item-header">
         <div>
-          <span class="item-title">Backend Engineering Fellow</span>
+          <span class="item-title">Backend Engineering Bootcamp, Batch 2</span>
           <span class="item-subtitle"> — Masar Tech</span>
         </div>
         <div class="item-meta">2026 · Remote</div>
       </div>
       <ul class="bullets">
         <li>Accepted to Masar Tech Backend Engineering Bootcamp, Batch 2 (2026).</li>
-        <li>Rigorous immersion in backend patterns, modular architecture, database design, and production testing.</li>
       </ul>
     </div>
 
@@ -250,9 +246,7 @@ const resumeHtml = `<!DOCTYPE html>
         <div class="item-meta">2023 – 2024 · Gaza, Palestine</div>
       </div>
       <ul class="bullets">
-        <li>Completed rigorous professional immersion centered on full-stack architecture, clean code principles, and PostgreSQL relational database design.</li>
-        <li>Architected reliable modular services adhering to separation of concerns, test-driven validation, and professional Gitflow branching workflows.</li>
-        <li>Collaborated in pair programming, architectural reviews, and agile sprint cadence.</li>
+        <li>Completed the Market Ready Developer program.</li>
       </ul>
     </div>
   </section>
@@ -270,9 +264,9 @@ const resumeHtml = `<!DOCTYPE html>
       </div>
       <ul class="bullets">
         <li><strong>Finite State Machine:</strong> Designed and implemented a deterministic 10-state claim lifecycle state machine preventing invalid status mutations with explicit HTTP 409 conflict handling.</li>
-        <li><strong>Multi-Tenant Compound Indexing:</strong> Structured tenant-scoped data isolation in MongoDB Atlas using compound B-tree indexes with organizationId leading keys to guarantee zero data leakage.</li>
-        <li><strong>Atomic Concurrency:</strong> Engineered sequential claim numbering (<tt>CLM-ORG-0001</tt>) via atomic counter operations, verified collision-free under automated integration tests.</li>
-        <li><strong>Automated Integration Testing:</strong> Authored 616 automated integration tests across 39 test suites with Jest and MongoMemoryServer (run 2026-10-01), validating business invariants.</li>
+        <li>Tenant-scoped data isolation: organizationId comes from the JWT and leads every compound index; cross-tenant access returns 404.</li>
+        <li>Tenant-scoped claim numbers (CLM-&lt;ORG&gt;-0001) from an atomic per-organization counter; an automated test creates 15 claims concurrently and checks numbers 1 to 15 with no gaps.</li>
+        <li>616 tests passing in 39 suites (Jest, Supertest, mongodb-memory-server; run 1 Oct 2026).</li>
       </ul>
     </div>
 
@@ -286,7 +280,6 @@ const resumeHtml = `<!DOCTYPE html>
       </div>
       <ul class="bullets">
         <li>Built modular REST API services for workspace membership, task assignment, and activity tracking.</li>
-        <li>Enforced schema validation and indexing that sustained rapid query response times without duplication.</li>
       </ul>
     </div>
   </section>
