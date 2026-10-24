@@ -4,7 +4,6 @@ import { useState, useId, useCallback } from 'react';
 import { useReducedMotion } from 'framer-motion';
 import Badge from '@/components/shared/Badge';
 import { cn } from '@/lib/utils';
-import { soundManager } from '@/lib/soundFx';
 
 const ORGANIZATIONS = [
   { id: 'ORG_ALLIANZ', label: 'Allianz Global', code: 'ALZ', initialSeq: 1040 },
@@ -23,7 +22,6 @@ export default function InsurflowConcurrencySandbox() {
     totalProcessed: 0,
     collisions: 0,
     gaps: 0,
-    p99Latency: 1.4,
     lastBurstSize: 0,
   });
   const [activeTab, setActiveTab] = useState('stream'); // 'stream' | 'contract'
@@ -37,17 +35,15 @@ export default function InsurflowConcurrencySandbox() {
     async (burstSize = 10, isInterleaved = false) => {
       if (isRunning) return;
       setIsRunning(true);
-      soundManager.playClick();
 
       const newEvents = [];
-      const startTime = performance.now();
       const orgA = ORGANIZATIONS[0];
       const orgB = ORGANIZATIONS[1];
 
       let baseA = counters[orgA.id];
       let baseB = counters[orgB.id];
 
-      // Simulate concurrent requests firing with slight jitter
+      // Simulate concurrent requests firing with deterministic atomic sequential numbering
       for (let i = 1; i <= burstSize; i++) {
         const targetOrg = isInterleaved ? (i % 2 === 0 ? orgB : orgA) : currentOrgData;
         const currentBase = targetOrg.id === orgA.id ? baseA : baseB;
@@ -56,17 +52,15 @@ export default function InsurflowConcurrencySandbox() {
         if (targetOrg.id === orgA.id) baseA = assignedSeq;
         else baseB = assignedSeq;
 
-        const simulatedLatency = +(1.1 + Math.random() * 1.6).toFixed(2);
         const claimId = `CLM-${targetOrg.code}-${String(assignedSeq).padStart(5, '0')}`;
         const threadId = `worker-pool-${(i % 4) + 1}`;
 
         newEvents.push({
-          id: `${Date.now()}-${i}-${Math.random()}`,
+          id: `${Date.now()}-${i}-${assignedSeq}`,
           index: i,
           claimId,
           orgCode: targetOrg.code,
           threadId,
-          latency: `${simulatedLatency}ms`,
           status: 201,
           strategy: 'Atomic $inc',
           timestamp: new Date().toLocaleTimeString('en-US', {
@@ -79,7 +73,7 @@ export default function InsurflowConcurrencySandbox() {
       }
 
       // Small async delay to give realistic visual feel
-      await new Promise((resolve) => setTimeout(resolve, shouldReduceMotion ? 50 : 280));
+      await new Promise((resolve) => setTimeout(resolve, shouldReduceMotion ? 50 : 200));
 
       setCounters((prev) => ({
         ...prev,
@@ -92,18 +86,15 @@ export default function InsurflowConcurrencySandbox() {
         totalProcessed: prev.totalProcessed + burstSize,
         collisions: 0,
         gaps: 0,
-        p99Latency: +(1.2 + Math.random() * 0.5).toFixed(2),
         lastBurstSize: burstSize,
       }));
 
-      soundManager.playSuccess();
       setIsRunning(false);
     },
     [counters, currentOrgData, isRunning, shouldReduceMotion]
   );
 
   const resetCounters = useCallback(() => {
-    soundManager.playWarning();
     setCounters({
       ORG_ALLIANZ: 1040,
       ORG_AXA: 420,
@@ -113,7 +104,6 @@ export default function InsurflowConcurrencySandbox() {
       totalProcessed: 0,
       collisions: 0,
       gaps: 0,
-      p99Latency: 1.4,
       lastBurstSize: 0,
     });
   }, []);
@@ -133,7 +123,7 @@ export default function InsurflowConcurrencySandbox() {
             </Badge>
           </div>
           <p className="text-xs sm:text-sm text-text-secondary">
-            Simulates high-velocity concurrent claim filings using tenant-scoped MongoDB <code className="text-accent bg-bg-tertiary px-1 py-0.5 rounded">$inc</code> atomic operations with zero collision guarantees.
+            Simulates concurrent claim filings using tenant-scoped MongoDB <code className="text-accent bg-bg-tertiary px-1 py-0.5 rounded">$inc</code> atomic operations with zero collision guarantees.
           </p>
         </div>
 
@@ -163,10 +153,7 @@ export default function InsurflowConcurrencySandbox() {
               return (
                 <button
                   key={org.id}
-                  onClick={() => {
-                    soundManager.playClick();
-                    setSelectedOrg(org.id);
-                  }}
+                  onClick={() => setSelectedOrg(org.id)}
                   className={cn(
                     'p-2.5 rounded-lg border text-left transition-all font-mono text-xs',
                     isSelected
@@ -221,7 +208,7 @@ export default function InsurflowConcurrencySandbox() {
         <div className="lg:col-span-2 rounded-lg bg-bg-primary/80 border border-border-subtle p-4 space-y-4">
           <div className="flex items-center justify-between border-b border-border-subtle pb-2.5">
             <span className="font-mono text-xs uppercase tracking-wider text-text-muted font-semibold">
-              Live Invariant Proofs & Telemetry
+              Live Invariant Proofs
             </span>
             <div className="flex gap-2">
               <button
@@ -249,8 +236,8 @@ export default function InsurflowConcurrencySandbox() {
             </div>
           </div>
 
-          {/* Telemetry Grid */}
-          <div className="grid grid-cols-2 sm:grid-cols-4 gap-2.5">
+          {/* Telemetry Grid (Truthful, non-fabricated metrics) */}
+          <div className="grid grid-cols-3 gap-2.5">
             <div className="p-2.5 rounded bg-bg-secondary/70 border border-border-subtle">
               <div className="text-[10px] font-mono text-text-muted uppercase">Processed</div>
               <div className="text-base sm:text-lg font-mono font-bold text-text-primary">
@@ -269,12 +256,6 @@ export default function InsurflowConcurrencySandbox() {
                 {metrics.gaps} (None)
               </div>
             </div>
-            <div className="p-2.5 rounded bg-bg-secondary/70 border border-border-subtle">
-              <div className="text-[10px] font-mono text-text-muted uppercase">P99 Latency</div>
-              <div className="text-base sm:text-lg font-mono font-bold text-accent">
-                {metrics.p99Latency}ms
-              </div>
-            </div>
           </div>
 
           {/* Tab Content */}
@@ -282,7 +263,7 @@ export default function InsurflowConcurrencySandbox() {
             <div className="space-y-2">
               <div className="flex items-center justify-between text-[11px] font-mono text-text-muted px-1">
                 <span>Recent Allocations ({simulationLog.length})</span>
-                <span>Sub-millisecond Resolution</span>
+                <span>Deterministic Sequential Integrity</span>
               </div>
 
               <div className="h-44 overflow-y-auto space-y-1.5 pr-1 font-mono text-xs">
@@ -306,7 +287,7 @@ export default function InsurflowConcurrencySandbox() {
                       </div>
 
                       <div className="flex items-center gap-2 text-[10px] text-text-muted shrink-0">
-                        <span className="text-accent">{ev.latency}</span>
+                        <span className="text-accent font-semibold">{ev.strategy}</span>
                         <span>{ev.timestamp}</span>
                       </div>
                     </div>

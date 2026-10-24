@@ -1,10 +1,8 @@
 'use client';
 
-import { useOverlay } from '@/context/OverlayContext';
 import { siteMetadata } from '@/data/siteMetadata';
 
 export default function ContactInfo() {
-  const { openResumeModal } = useOverlay();
   const directChannels = [
     {
       platform: 'Email',
@@ -64,10 +62,10 @@ export default function ContactInfo() {
     },
     {
       platform: 'Resume / CV',
-      value: 'View & Download Dossier (PDF)',
+      value: 'Download Resume (PDF)',
       href: '/resume/Mohammed_Ferwana_Resume.pdf',
       external: false,
-      isResumeModal: true,
+      download: 'Mohammed_Ferwana_Resume.pdf',
       description: 'Access complete verified CV, systems architecture achievements, and technical credentials.',
       icon: (
         <svg
@@ -136,9 +134,9 @@ export default function ContactInfo() {
                       <span className="text-xs text-text-muted group-hover:text-accent transition-colors">
                         ↗
                       </span>
-                    ) : channel.isResumeModal ? (
+                    ) : channel.download ? (
                       <span className="text-[10px] font-mono text-accent bg-accent/10 px-2 py-0.5 rounded-full border border-accent/20">
-                        Interactive
+                        PDF ↓
                       </span>
                     ) : null}
                   </div>
@@ -157,20 +155,15 @@ export default function ContactInfo() {
 
             return (
               <li key={channel.platform}>
-                {channel.isResumeModal ? (
-                  <button type="button" onClick={openResumeModal} className={baseClass}>
-                    {content}
-                  </button>
-                ) : (
-                  <a
-                    href={channel.href}
-                    target={channel.external ? '_blank' : undefined}
-                    rel={channel.external ? 'noopener noreferrer' : undefined}
-                    className={baseClass}
-                  >
-                    {content}
-                  </a>
-                )}
+                <a
+                  href={channel.href}
+                  download={channel.download}
+                  target={channel.external ? '_blank' : undefined}
+                  rel={channel.external ? 'noopener noreferrer' : undefined}
+                  className={baseClass}
+                >
+                  {content}
+                </a>
               </li>
             );
           })}

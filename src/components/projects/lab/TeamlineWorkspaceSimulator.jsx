@@ -4,7 +4,6 @@ import { useState, useCallback, useId } from 'react';
 import { useReducedMotion } from 'framer-motion';
 import Badge from '@/components/shared/Badge';
 import { cn } from '@/lib/utils';
-import { soundManager } from '@/lib/soundFx';
 
 const INITIAL_TASK = {
   id: 'TL-104',
@@ -16,14 +15,14 @@ const INITIAL_TASK = {
 };
 
 const CONNECTED_CLIENTS = [
-  { id: 'c1', name: 'Mohammed (Team Lead)', role: 'lead', latency: '4ms', status: 'online' },
-  { id: 'c2', name: 'Frontend Dev (Client A)', role: 'member', latency: '9ms', status: 'online' },
-  { id: 'c3', name: 'QA Engineer (Client B)', role: 'member', latency: '12ms', status: 'online' },
+  { id: 'c1', name: 'Mohammed (Team Lead)', role: 'lead', status: 'online' },
+  { id: 'c2', name: 'Frontend Dev (Client A)', role: 'member', status: 'online' },
+  { id: 'c3', name: 'QA Engineer (Client B)', role: 'member', status: 'online' },
 ];
 
 export default function TeamlineWorkspaceSimulator() {
   const [task, setTask] = useState(INITIAL_TASK);
-  const [activeClients, setActiveClients] = useState(CONNECTED_CLIENTS);
+  const [activeClients] = useState(CONNECTED_CLIENTS);
   const [socketLog, setSocketLog] = useState([]);
   const [isProcessing, setIsProcessing] = useState(false);
   const [occResult, setOccResult] = useState(null);
@@ -36,7 +35,6 @@ export default function TeamlineWorkspaceSimulator() {
     async (targetColumn) => {
       if (isProcessing || task.column === targetColumn) return;
       setIsProcessing(true);
-      soundManager.playClick();
 
       const newVersion = task.version + 1;
       const now = new Date().toLocaleTimeString('en-US', {
@@ -51,7 +49,7 @@ export default function TeamlineWorkspaceSimulator() {
 
       // 2. Broadcast via WebSocket
       const packet = {
-        id: `${Date.now()}-${Math.random()}`,
+        id: `${Date.now()}-${newVersion}`,
         event: 'TASK_MOVED',
         channel: 'workspace_taqat_internal',
         payload: {
@@ -61,7 +59,6 @@ export default function TeamlineWorkspaceSimulator() {
           version: newVersion,
           actor: 'Mohammed Ferwana',
         },
-        propagationMs: +(5.2 + Math.random() * 3.4).toFixed(1),
         timestamp: now,
       };
 
@@ -77,7 +74,6 @@ export default function TeamlineWorkspaceSimulator() {
         message: `Task ${task.id} atomically moved to ${targetColumn}. Broadcast to 3 active peers.`,
       });
 
-      soundManager.playSuccess();
       setIsProcessing(false);
     },
     [isProcessing, shouldReduceMotion, task]
@@ -86,7 +82,6 @@ export default function TeamlineWorkspaceSimulator() {
   const simulateOccConflict = useCallback(async () => {
     if (isProcessing) return;
     setIsProcessing(true);
-    soundManager.playClick();
 
     await new Promise((r) => setTimeout(r, shouldReduceMotion ? 40 : 200));
 
@@ -98,7 +93,7 @@ export default function TeamlineWorkspaceSimulator() {
     });
 
     const conflictPacket = {
-      id: `${Date.now()}-${Math.random()}`,
+      id: `${Date.now()}-conflict-${task.version}`,
       event: 'MUTATION_REJECTED',
       channel: 'workspace_taqat_internal',
       payload: {
@@ -107,7 +102,6 @@ export default function TeamlineWorkspaceSimulator() {
         incomingVersion: task.version - 1,
         status: 409,
       },
-      propagationMs: +(2.1 + Math.random() * 1.5).toFixed(1),
       timestamp: now,
     };
 
@@ -117,12 +111,10 @@ export default function TeamlineWorkspaceSimulator() {
       message: `Race condition detected: Client B submitted stale __v:${task.version - 1}. Rejected with HTTP 409 to prevent lost update.`,
     });
 
-    soundManager.playWarning();
     setIsProcessing(false);
   }, [isProcessing, shouldReduceMotion, task.version]);
 
   const resetSimulator = useCallback(() => {
-    soundManager.playWarning();
     setTask(INITIAL_TASK);
     setSocketLog([]);
     setOccResult(null);
@@ -207,7 +199,6 @@ export default function TeamlineWorkspaceSimulator() {
                 <div key={client.id} className="flex items-center gap-1.5 text-[11px] text-text-secondary">
                   <span className="w-1.5 h-1.5 rounded-full bg-functional-success" />
                   <span className="font-medium">{client.name}</span>
-                  <span className="text-text-muted">({client.latency})</span>
                 </div>
               ))}
             </div>
@@ -384,8 +375,8 @@ export default function TeamlineWorkspaceSimulator() {
                     {JSON.stringify(packet.payload, null, 2)}
                   </pre>
 
-                  <div className="text-[10px] text-accent text-right">
-                    Delivered to 3 sockets in {packet.propagationMs}ms
+                  <div className="text-[10px] text-text-muted text-right font-mono">
+                    Broadcast to 3 peers in room [{packet.channel}]
                   </div>
                 </div>
               ))

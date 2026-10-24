@@ -36,7 +36,7 @@ export const commandGroups = [
         action: 'navigate',
         target: '/experience',
         icon: 'Briefcase',
-        keywords: ['career', 'jobs', 'history', 'university', 'taqat', 'gsg'],
+        keywords: ['career', 'jobs', 'history', 'university', 'taqat', 'gsg', 'aristo'],
       },
       {
         id: 'nav-contact',
@@ -47,15 +47,6 @@ export const commandGroups = [
         icon: 'Envelope',
         keywords: ['hire', 'email', 'message', 'touch', 'reach'],
       },
-      {
-        id: 'nav-sanctuary',
-        label: 'Zero-G Glass & Crystal Sanctuary',
-        shortcut: 'G',
-        action: 'navigate',
-        target: '/#crystal-sanctuary',
-        icon: 'Sparkle',
-        keywords: ['glass', 'crystal', 'physics', 'sandbox', 'art', 'zero gravity', 'visual', 'chimes', 'zen'],
-      },
     ],
   },
   {
@@ -63,12 +54,13 @@ export const commandGroups = [
     commands: [
       {
         id: 'proj-insurflow',
-        label: 'InsurFlow — B2B Claims Engine & State Machine',
+        label: 'Sawn (formerly InsurFlow) — B2B Claims Engine & State Machine',
         shortcut: '1',
         action: 'navigate',
         target: '/projects/insurflow',
         icon: 'ShieldCheck',
         keywords: [
+          'sawn',
           'insurflow',
           'claims',
           'insurance',
@@ -76,7 +68,6 @@ export const commandGroups = [
           'fsm',
           'tests',
           'jest',
-          'adjudication',
           'architecture',
           'evidence',
         ],
@@ -155,21 +146,12 @@ export const commandGroups = [
     commands: [
       {
         id: 'act-resume',
-        label: 'Request & Download Resume (PDF)',
+        label: 'Download Resume (PDF)',
         shortcut: 'R',
         action: 'resume',
         target: '/resume/Mohammed_Ferwana_Resume.pdf',
         icon: 'FileText',
         keywords: ['cv', 'resume', 'pdf', 'hire', 'qualifications', 'download'],
-      },
-      {
-        id: 'act-terminal',
-        label: 'Launch Interactive Terminal',
-        shortcut: 'T',
-        action: 'terminal',
-        target: null,
-        icon: 'Terminal',
-        keywords: ['cli', 'bash', 'shell', 'console', 'easter egg'],
       },
     ],
   },
