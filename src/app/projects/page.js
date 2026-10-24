@@ -4,7 +4,6 @@ import RevealOnScroll from '@/components/shared/RevealOnScroll';
 import Button from '@/components/shared/Button';
 import ResumeRequestButton from '@/components/shared/ResumeRequestButton';
 import { projects } from '@/data/projects';
-import { siteMetadata } from '@/data/siteMetadata';
 
 export const metadata = {
   title: 'Projects & System Architecture',
@@ -41,7 +40,7 @@ export default function ProjectsPage() {
                 Looking for a Backend Engineer?
               </h2>
               <p className="text-sm text-text-secondary leading-relaxed">
-                Whether you need scalable REST API architecture, database optimization, or a dedicated engineer for your team, let&apos;s talk.
+                Whether you need reliable REST API architecture, database optimization, or a dedicated engineer for your team, let&apos;s talk.
               </p>
             </div>
             <div className="flex flex-wrap items-center gap-3 shrink-0">

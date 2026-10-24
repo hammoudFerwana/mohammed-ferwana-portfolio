@@ -6,12 +6,12 @@ export const aboutData = {
     title: 'About Mohammed Ferwana',
     role: 'Backend Engineer',
     summary:
-      'Backend Engineer focused on building scalable, reliable, and well-architected systems. Grounded in computer systems engineering principles, domain-driven boundaries, and evidence-first reliability.',
+      'Backend Engineer focused on building reliable and well-architected systems. Grounded in computer systems engineering principles, domain-driven boundaries, and evidence-first reliability.',
     highlights: [
-      { label: 'Role', value: 'Backend Engineer & Team Leader' },
+      { label: 'Role', value: 'Backend Developer & Team Leader' },
       { label: 'Education', value: 'B.Sc. Computer Systems Engineering (Al-Azhar)' },
       { label: 'Core Focus', value: 'REST APIs, State Machines, Data Modeling' },
-      { label: 'Location', value: 'Palestine' },
+      { label: 'Location', value: 'Gaza, Palestine' },
     ],
   },
 
@@ -26,7 +26,7 @@ export const aboutData = {
         title: 'Foundations & Low-Level Discovery',
         period: '2022',
         content:
-          'My journey into software engineering began in 2022 when I enrolled in Computer Systems Engineering at Al-Azhar University. Studying data structures, algorithms, operating systems, and computer architecture demystified how computers actually execute instructions and manage memory. That foundation shaped my preference for server-side engineering: I found myself far more fascinated by what happens behind the API endpoint — data integrity, transactions, and state management — than by purely visual interfaces.',
+          'My journey into software engineering began in 2022 when I enrolled in Computer Systems Engineering at Al-Azhar University. Studying data structures, algorithms, operating systems, and computer architecture demystified how computers actually execute instructions and manage memory. That foundation shaped my preference for server-side engineering: I found myself far more fascinated by what happens behind the API endpoint — data integrity, atomic updates, and state management — than by purely visual interfaces.',
       },
       {
         number: '02',
@@ -38,23 +38,23 @@ export const aboutData = {
       {
         number: '03',
         title: 'Engineering Leadership & Delivery at TAQAT',
-        period: '2024',
+        period: '2026',
         content:
           'During my time at TAQAT, I took on the responsibility of Backend Developer & Team Leader for TeamLine, a collaborative project management platform. Leading a development team taught me that architectural clarity directly impacts team velocity. By specifying explicit API contracts upfront and establishing role-based access control (RBAC) boundaries early, we eliminated frontend-backend friction and delivered sprint commitments with high confidence.',
       },
       {
         number: '04',
-        title: 'Production-Oriented Systems & InsurFlow Backend Ownership',
-        period: '2024 – Present',
+        title: 'Backend Engineering & Sawn (formerly InsurFlow)',
+        period: '2026',
         content:
-          `Designing and implementing the backend for InsurFlow — a B2B motor insurance claim management platform — represented a major focus on complex server-side systems. Managing complex multi-party claims cannot rely on arbitrary database updates; it requires strict lifecycle state machines to prevent illegal state transitions, granular permission middleware, and audit trails. To guarantee system resilience, I authored ${metrics.integrationTests} automated integration tests across ${metrics.testSuites} test suites, all passing.`,
+          `Designing and implementing the backend for Sawn (formerly InsurFlow) — a multi-tenant B2B motor insurance claim management platform — represented a major focus on complex server-side systems. Managing multi-party claims cannot rely on arbitrary database updates; it requires strict lifecycle state machines to prevent illegal state transitions, granular permission middleware, and audit trails. To guarantee system resilience, I authored ${metrics.integrationTests} automated integration tests across ${metrics.testSuites} test suites (run ${metrics.testRunDate}), all passing.`,
       },
       {
         number: '05',
         title: 'Where I am Heading',
         period: 'Looking Ahead → 2027',
         content:
-          'As I continue working toward my expected university graduation in 2027, my engineering trajectory remains focused on scalable distributed systems, event-driven message architectures, database optimization, and high-reliability backend infrastructure. I believe the best engineering is characterized not by complexity, but by simplicity, defensive boundaries, and verifiable proof.',
+          'As I continue working toward my expected university graduation in 2027, my engineering trajectory remains focused on reliable backend systems and data integrity. I believe the best engineering is characterized not by complexity, but by simplicity, defensive boundaries, and verifiable proof.',
       },
     ],
   },
@@ -114,7 +114,7 @@ export const aboutData = {
       tagline: 'Explain why, not just what.',
       description:
         'Every technical choice entails tradeoffs. I take ownership by documenting why an architecture or data model was chosen, acknowledging constraints, and guiding team consensus.',
-      takeaway: 'Senior engineering means taking full responsibility for the tradeoffs you choose.',
+      takeaway: 'Disciplined engineering means taking full responsibility for the tradeoffs you choose.',
     },
   ],
 
@@ -142,8 +142,8 @@ export const aboutData = {
       highlight: 'Transitioned academic knowledge into professional software development practices.',
     },
     {
-      year: '2024',
-      period: '2024',
+      year: '2026',
+      period: '2026',
       title: 'Backend Developer & Team Leader',
       organization: 'TAQAT (TeamLine)',
       type: 'leadership',
@@ -153,15 +153,15 @@ export const aboutData = {
       highlight: 'Established API contracts and led sprint coordination across the team.',
     },
     {
-      year: '2024 – Present',
-      period: '2024 – Present',
-      title: 'Production-Oriented Systems & InsurFlow Backend Ownership',
-      organization: 'Independent Engineering',
+      year: '2026',
+      period: '2026',
+      title: 'Backend Engineering & Sawn (formerly InsurFlow)',
+      organization: 'Sawn (formerly InsurFlow)',
       type: 'systems',
       status: 'Active',
       description:
-        `Architected the core backend for InsurFlow, a multi-party motor claims management system. Implemented finite state machine transitions, MongoDB indexing, and ${metrics.integrationTests} automated tests.`,
-      highlight: `${metrics.integrationTests} automated tests across ${metrics.testSuites} test suites, all passing, verifying financial and claim lifecycles.`,
+        `Architected the core backend for Sawn (formerly InsurFlow), a multi-tenant motor claims management system. Implemented finite state machine transitions, MongoDB indexing, and ${metrics.integrationTests} automated tests.`,
+      highlight: `${metrics.integrationTests} automated tests across ${metrics.testSuites} test suites (run ${metrics.testRunDate}), all passing, verifying financial and claim lifecycles.`,
     },
     {
       year: '2027',
@@ -171,7 +171,7 @@ export const aboutData = {
       type: 'academic',
       status: 'Expected',
       description:
-        'Anticipated completion of undergraduate engineering curriculum, continuing direct trajectory into high-scale server-side engineering and distributed systems architecture.',
+        'Anticipated completion of undergraduate engineering curriculum, continuing direct trajectory into server-side engineering and database design.',
       highlight: 'Expected graduation milestone.',
     },
   ],

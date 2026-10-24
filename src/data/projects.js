@@ -4,22 +4,23 @@ export const projects = [
   {
     id: 'insurflow',
     slug: 'insurflow',
-    title: 'InsurFlow',
-    description: 'B2B motor insurance claims management platform designed to automate multi-party claim settlement workflows and audit compliance.',
-    role: 'Backend Engineer / Backend Owner',
+    title: 'Sawn',
+    subtitle: 'formerly InsurFlow',
+    description: 'Multi-tenant B2B motor-insurance claims platform. Sole backend engineer in a team of four (2 frontend, 1 mobile, 1 backend).',
+    role: 'Backend Engineer (Sole Backend)',
     category: 'B2B Claims Engine',
     tier: 1,
     featured: true,
     image: '/images/projects/insurflow.jpg',
-    technologies: ['Node.js', 'Express.js', 'MongoDB', 'Mongoose', 'JWT', 'RBAC', 'REST APIs', 'Jest'],
+    technologies: ['Node.js', 'Express.js', 'MongoDB Atlas', 'Mongoose', 'JWT', 'RBAC', 'REST APIs', 'Jest'],
     links: {
       github: null,
       live: null,
       dashboard: 'https://insurflow-dashboard.vercel.app',
     },
-    problem: 'Motor insurance claims processing involves disconnected stakeholders—claimants, field adjusters, repair workshops, and underwriters. Standard implementations risk out-of-order state transitions, cross-tenant data exposure, and sequence collisions during concurrent claim filings.',
+    problem: 'Motor insurance claims processing involves disconnected stakeholders across tenant organizations. Standard implementations risk out-of-order state transitions, cross-tenant data exposure, and sequence collisions during concurrent claim filings.',
     solution: `Engineered a modular backend architecture featuring a ${metrics.fsmStates}-state claim lifecycle finite state machine, tenant-scoped compound indexing, atomic sequential numbering, and automated integration test suites.`,
-    system: 'InsurFlow coordinates claim filing, damage assessment, workshop quotation, and underwriter settlement with deterministic transition guards, immutable audit timeline recording, and isolated multi-tenant data access.',
+    system: 'Sawn coordinates claim filing, field damage assessment, and claims officer review with deterministic transition guards, immutable audit timeline recording, and isolated multi-tenant data access across 3 roles: ADMIN, CLAIMS_OFFICER, and FIELD_ADJUSTER.',
     backendOwnership: [
       {
         title: 'State Machine Lifecycle Engine',
@@ -31,7 +32,7 @@ export const projects = [
       },
       {
         title: 'Atomic Sequential Claim Numbering',
-        description: `Implemented tenant-scoped sequential claim numbering (CLM-<ORG>-0001) using atomic counter increments, verified under a ${metrics.concurrentRequests}-request concurrent creation test without collisions or sequence gaps.`,
+        description: 'Implemented tenant-scoped sequential claim numbering (CLM-<ORG>-0001) using atomic counter increments, verified under automated integration tests without collisions or sequence gaps.',
       },
       {
         title: 'Cross-Tenant Resource Masking',
@@ -47,23 +48,23 @@ export const projects = [
         {
           id: 'client',
           label: 'Client Applications',
-          description: 'Web dashboard used by claim handlers, repair shops, and insurance executives.',
+          description: 'Web dashboard used by claims officers and Flutter mobile app used by field adjusters.',
           type: 'client',
-          responsibilities: ['User interaction', 'Document uploads', 'Claim lifecycle tracking'],
+          responsibilities: ['Claims officer web dashboard', 'Field adjuster Flutter app', 'Claim lifecycle tracking'],
         },
         {
           id: 'gateway',
           label: 'API & Routing Layer',
-          description: 'Express.js router handling rate limiting, CORS, payload validation, and request dispatching.',
+          description: 'Express.js router handling rate limiting, CORS, payload validation, and request dispatching (hosted on Render).',
           type: 'api',
           responsibilities: ['Route dispatching', 'Input sanitization', 'Global error mediation'],
         },
         {
           id: 'auth',
           label: 'Auth & RBAC Service',
-          description: 'JWT issuance, session verification, and granular role/permission evaluation.',
+          description: 'JWT issuance and granular role evaluation for ADMIN, CLAIMS_OFFICER, and FIELD_ADJUSTER.',
           type: 'auth',
-          responsibilities: ['JWT verification', 'Role authorization (Underwriter, Adjuster, Admin)', 'Access tokens'],
+          responsibilities: ['JWT verification', 'Role authorization (ADMIN, CLAIMS_OFFICER, FIELD_ADJUSTER)', 'Tenant scoping'],
         },
         {
           id: 'claims-engine',
@@ -77,12 +78,12 @@ export const projects = [
           label: 'Data Access Layer',
           description: 'Mongoose abstraction models with strict schema constraints and indexing strategies.',
           type: 'data',
-          responsibilities: ['Query abstraction', 'Index optimization', 'Transactional consistency'],
+          responsibilities: ['Query abstraction', 'Index optimization', 'Atomic, tenant-scoped updates'],
         },
         {
           id: 'db',
-          label: 'MongoDB Cluster',
-          description: 'Document database housing claims, policy references, user identities, and history logs.',
+          label: 'MongoDB Atlas',
+          description: 'Document database housing claims, policy references, user identities, and history logs hosted on MongoDB Atlas.',
           type: 'db',
           responsibilities: ['Persistent storage', 'Compound index lookup', 'Audit log retention'],
         },
@@ -99,7 +100,7 @@ export const projects = [
       {
         title: 'Deterministic Finite State Machine (FSM)',
         description: 'Enforced claim status transitions through a validated state machine in claim.service.js rather than arbitrary database updates, rejecting out-of-order mutations with HTTP 409 INVALID_STATUS_TRANSITION.',
-        context: 'Enforces that claims cannot bypass mandatory review stages (e.g. payout before adjuster approval) while appending structured audit events to the timeline.',
+        context: 'Enforces that claims cannot bypass mandatory review stages while appending structured audit events to the timeline.',
       },
       {
         title: 'Multi-Tenant Data Modeling & Compound Indexing',
@@ -108,7 +109,7 @@ export const projects = [
       },
       {
         title: 'Atomic Sequential Claim Numbering',
-        description: 'Engineered tenant-scoped sequential numbering (CLM-<ORG>-0001) using Counter.findOneAndUpdate with atomic $inc updates in a pre-save hook, verified under concurrent execution.',
+        description: 'Engineered tenant-scoped sequential numbering (CLM-<ORG>-0001) using Counter.findOneAndUpdate with atomic $inc updates in a pre-save hook, verified under automated test execution.',
         context: 'Prevents duplicate number collisions across parallel filings while maintaining separate sequential counters per tenant organization.',
       },
     ],
@@ -118,8 +119,8 @@ export const projects = [
         reasoning: 'Embedded sub-documents for claim timeline events to optimize read latency, while referencing user accounts to avoid duplicate denormalization anomalies.',
       },
       {
-        decision: 'JWT Stateless Verification vs. Redis Session Store',
-        reasoning: 'Selected signed JWTs with explicit expiration and token rotation to keep infrastructure lightweight and horizontally scalable without immediate cache dependencies.',
+        decision: 'Stateless JWT Authentication vs Stateful Server Sessions',
+        reasoning: 'Selected signed JWTs with explicit expiration and tenant payload to keep API nodes stateless and lightweight without requiring external session storage.',
       },
     ],
     testing: {
@@ -127,18 +128,17 @@ export const projects = [
       tools: ['Jest', 'Supertest', 'MongoMemoryServer'],
       details: 'Automated test suite executing against an in-memory MongoDB replica with real B-tree indexes and per-test collection clearing, validating failure conditions and business invariants.',
       metrics: {
-        fullBackend: `${metrics.integrationTests} automated tests across ${metrics.testSuites} suites`,
-        claimsEngine: `${metrics.claimsEngineTests} automated tests across ${metrics.claimsEngineSuites} suites`,
+        fullBackend: `${metrics.integrationTests} automated tests across ${metrics.testSuites} suites (run ${metrics.testRunDate})`,
       },
     },
     whatIWouldImprove: [
       {
         area: 'Asynchronous Event Pipeline',
-        description: 'Future consideration: Integrate an asynchronous message queue (e.g. RabbitMQ or Redis Streams) for long-running notifications, webhook callbacks, and PDF report generation.',
+        description: 'Future consideration: Integrate an asynchronous message queue (e.g. RabbitMQ) for long-running notifications, webhook callbacks, and PDF report generation.',
       },
       {
-        area: 'Distributed Caching',
-        description: 'Future consideration: Introduce Redis caching for frequently accessed policy catalogs and lookup metadata to reduce database round-trips.',
+        area: 'Caching Layer',
+        description: 'Future consideration: Introduce caching for frequently accessed policy catalogs and lookup metadata to reduce database round-trips.',
       },
     ],
   },
@@ -146,7 +146,7 @@ export const projects = [
     id: 'teamline',
     slug: 'teamline',
     title: 'TeamLine',
-    description: 'Collaborative team project management and agile workspace platform built during the TAQAT internship.',
+    description: 'Collaborative team project management and agile workspace platform built during the TAQAT internship in 2026.',
     role: 'Backend Developer & Team Leader',
     category: 'Platform',
     tier: 1,
@@ -229,7 +229,7 @@ export const projects = [
     tradeoffs: [
       {
         decision: 'Normalized Task Records vs. Single Board Document',
-        reasoning: 'Separated tasks into individual documents with indexed board IDs to prevent MongoDB document size limits when boards scale to thousands of cards.',
+        reasoning: 'Separated tasks into individual documents with indexed board IDs to prevent MongoDB document size limits when boards grow to thousands of cards.',
       },
     ],
     whatIWouldImprove: [
@@ -255,7 +255,7 @@ export const projects = [
       live: null,
       dashboard: null,
     },
-    problem: 'Educational platforms require flexible curriculum organization (modules, lessons, quizzes) while managing enrollment states, progress calculation, and instructor permissions without degradation.',
+    problem: 'Educational platforms require flexible curriculum organization (modules, lessons, quizzes) while managing enrollment states, progress calculation, and instructor permissions cleanly.',
     solution: 'Constructed a clean, modular REST API that decouples course authoring from enrollment and progress evaluation engines.',
     system: 'Enables instructors to publish structured course content while maintaining relational data integrity across student enrollments and completion milestones.',
     architecture: {

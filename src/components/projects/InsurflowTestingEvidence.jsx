@@ -8,8 +8,8 @@ import { metrics } from '@/data/metrics';
 /**
  * InsurflowTestingEvidence — Verified backend testing evidence artifact.
  *
- * Implements Section 08 (Testing & Reliability) for InsurFlow based on
- * the approved P2.4 Evidence Selection & Prioritization:
+ * Implements Section 08 (Testing & Reliability) for Sawn (formerly InsurFlow) based on
+ * the approved Evidence Selection & Prioritization:
  * - Pillar 1 (EVD-001): Workflow Integrity & FSM Transition Gate (409 Conflict)
  * - Pillar 2 (EVD-002 + EVD-003): Multi-Tenant Data Integrity (Concurrency + Compound Unique Index)
  * - Pillar 3 (EVD-004): Stealth Multi-Tenant Security (404 Anti-Enumeration)
@@ -39,7 +39,7 @@ export default function InsurflowTestingEvidence() {
             </span>
           </div>
           <p className="text-sm text-text-secondary leading-relaxed max-w-[72ch]">
-            The InsurFlow backend is tested around critical business invariants,
+            The Sawn (formerly InsurFlow) backend is tested around critical business invariants,
             tenant boundary isolation, database integrity constraints, and defensive API behavior —
             not only happy-path responses.
           </p>
@@ -57,10 +57,7 @@ export default function InsurflowTestingEvidence() {
           </div>
           <div className="flex flex-wrap items-center gap-2">
             <span className="font-mono text-[11px] text-text-muted bg-bg-tertiary px-2.5 py-1 rounded border border-border-subtle">
-              Full Backend: {metrics.integrationTests} tests · {metrics.testSuites} suites
-            </span>
-            <span className="font-mono text-[11px] text-text-primary bg-bg-tertiary px-2.5 py-1 rounded border border-accent/40">
-              Core Claims Engine: {metrics.claimsEngineTests} tests · {metrics.claimsEngineSuites} suites
+              Full Backend: {metrics.integrationTests} tests · {metrics.testSuites} suites (run {metrics.testRunDate})
             </span>
           </div>
         </div>
@@ -71,7 +68,7 @@ export default function InsurflowTestingEvidence() {
         {/* Pillar Switcher */}
         <div
           role="tablist"
-          aria-label="InsurFlow Core Testing Evidence Pillars"
+          aria-label="Sawn Core Testing Evidence Pillars"
           className="flex flex-col sm:flex-row p-1 bg-bg-primary/80 rounded-lg border border-border-subtle gap-1"
         >
           <button

@@ -15,7 +15,7 @@ export default function EngineeringIdentity() {
     {
       number: '02',
       title: 'Predictable & Hardened REST APIs',
-      description: 'APIs are long-term contracts. I build RESTful endpoints with strict schema validations, structured RFC-compliant error responses, and defense-in-depth security including JWT token rotation and granular RBAC.',
+      description: 'APIs are long-term contracts. I build RESTful endpoints with strict schema validations, structured error responses, and defense-in-depth security including signed JWT authentication and granular RBAC.',
       highlights: ['Declarative RBAC Middleware', 'Schema Validation', 'Stateless JWT Lifecycle'],
     },
     {

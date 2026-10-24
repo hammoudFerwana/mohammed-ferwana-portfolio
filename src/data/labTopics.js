@@ -2,7 +2,7 @@ export const labTopics = [
   {
     id: 'api-design-patterns',
     title: 'REST API Design Patterns & Idempotency',
-    description: 'Investigating REST best practices, idempotency keys for distributed safety, structured error schemas (RFC 7807), and API versioning strategies.',
+    description: 'Investigating REST best practices, idempotency keys for safe retries, structured error schemas, and API versioning strategies.',
     status: 'practiced',
     tags: ['rest-api', 'architecture', 'api-design'],
     notes: 'Focusing on uniform response formatting, pagination contracts, and robust status code semantics.',
@@ -17,11 +17,11 @@ export const labTopics = [
   },
   {
     id: 'auth-security-patterns',
-    title: 'Auth Lifecycles & Token Rotation',
-    description: 'Evaluating safe token storage architectures, sliding expiration windows, refresh token rotation with reuse detection, and RBAC hierarchy caching.',
+    title: 'Auth Lifecycles & Role-Based Access Control',
+    description: 'Evaluating safe token architectures, token expiration windows, authentication middleware, and RBAC hierarchy validation.',
     status: 'practiced',
     tags: ['security', 'auth', 'jwt', 'rbac'],
-    notes: 'Balancing stateless scalability with instantaneous revocation capabilities.',
+    notes: 'Balancing stateless authentication with granular route-level authorization.',
   },
   {
     id: 'containerization-workflows',
@@ -29,7 +29,7 @@ export const labTopics = [
     description: 'Building hardened, non-root multi-stage Docker images for Node.js backends to ensure deterministic runtime environments and minimal surface area.',
     status: 'exploring',
     tags: ['docker', 'devops', 'containers'],
-    notes: 'Focusing on fast layer caching and lightweight alpine/distroless base images.',
+    notes: 'Focusing on fast layer caching and lightweight base images.',
   },
   {
     id: 'automated-test-pyramids',

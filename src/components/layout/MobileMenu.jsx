@@ -110,7 +110,7 @@ export default function MobileMenu({ isOpen, onClose, links, currentPath }) {
 
         <div className="flex items-center justify-between text-xs text-text-muted">
           <span>Backend Engineer</span>
-          <span className="font-mono">Palestine</span>
+          <span className="font-mono">Gaza, Palestine</span>
         </div>
         <div className="flex items-center gap-3">
           <a

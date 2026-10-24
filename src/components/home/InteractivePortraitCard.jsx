@@ -25,13 +25,6 @@ export default function InteractivePortraitCard() {
     rafId: null,
   });
 
-  // Back-side interactive ping state
-  const [pingStatus, setPingStatus] = useState({
-    active: false,
-    latency: 14,
-    timestamp: 'ONLINE',
-  });
-
   // Check prefers-reduced-motion
   useEffect(() => {
     if (typeof window !== 'undefined') {
@@ -116,20 +109,6 @@ export default function InteractivePortraitCard() {
     s.targetGlareOpacity = 0;
   }, []);
 
-  // Ping kernel simulation
-  const handlePingKernel = (e) => {
-    e.stopPropagation();
-    setPingStatus((prev) => ({ ...prev, active: true }));
-    setTimeout(() => {
-      const randomLatency = Math.floor(Math.random() * 8) + 11; // 11ms - 18ms
-      setPingStatus({
-        active: false,
-        latency: randomLatency,
-        timestamp: 'ACK_OK',
-      });
-    }, 400);
-  };
-
   const toggleFlip = (e) => {
     e.stopPropagation();
     setIsFlipped((prev) => !prev);
@@ -148,13 +127,12 @@ export default function InteractivePortraitCard() {
       <div
         className="absolute -inset-2 rounded-3xl bg-gradient-to-tr from-accent/35 via-accent-secondary/25 to-cyan-500/20 blur-xl opacity-60 transition-opacity duration-700 pointer-events-none group-hover:opacity-100"
         style={{
-          transform: isHovered ? 'scale(1.04)' : 'scale(1)',
-          transition: 'transform 0.4s ease, opacity 0.4s ease',
+          transform: 'translateZ(-50px)',
         }}
         aria-hidden="true"
       />
 
-      {/* 3D Card Shell */}
+      {/* Main Flip Card Shell */}
       <div
         ref={cardRef}
         className="relative w-full aspect-square rounded-2xl shadow-2xl transition-shadow duration-500 cursor-pointer"
@@ -164,7 +142,7 @@ export default function InteractivePortraitCard() {
         }}
         onClick={toggleFlip}
         role="region"
-        aria-label="Interactive 3D Engineering Identity Card of Mohammed Ferwana"
+        aria-label="Engineering Identity Card of Mohammed Ferwana"
       >
         {/* ========================================================
             FRONT FACE (Tactile Portrait & Glass HUD)
@@ -228,17 +206,11 @@ export default function InteractivePortraitCard() {
             className="absolute top-3.5 left-3.5 right-3.5 flex items-center justify-between z-20 pointer-events-auto"
             style={{ transform: 'translateZ(38px)' }}
           >
-            {/* Live Status Pill */}
-            <div className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-bg-primary/80 backdrop-blur-md border border-border-default shadow-sm text-[10px] font-mono text-text-secondary tracking-wider uppercase">
-              <span className="w-2 h-2 rounded-full bg-functional-success animate-pulse-ring shrink-0" />
-              <span className="font-semibold text-text-primary">SYS_ACTIVE</span>
-            </div>
-
             {/* Flip / Inspect Specs Action Pill */}
             <button
               onClick={toggleFlip}
               type="button"
-              className="group/btn inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-bg-primary/85 hover:bg-accent/20 backdrop-blur-md border border-border-default hover:border-accent/40 text-[10px] font-mono text-text-secondary hover:text-accent transition-all duration-200 shadow-sm"
+              className="group/btn ml-auto inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-bg-primary/85 hover:bg-accent/20 backdrop-blur-md border border-border-default hover:border-accent/40 text-[10px] font-mono text-text-secondary hover:text-accent transition-all duration-200 shadow-sm"
               title="Click to inspect Mohammed's Architectural DNA"
               aria-label="Inspect Technical Specs"
             >
@@ -270,7 +242,7 @@ export default function InteractivePortraitCard() {
                   <span className="text-text-primary font-bold tracking-tight">Mohammed Ferwana</span>
                   <span className="w-1.5 h-1.5 rounded-full bg-accent" />
                 </div>
-                <span className="text-[10px] text-text-muted">Senior Backend Engineer</span>
+                <span className="text-[10px] text-text-muted">Backend Engineer</span>
               </div>
               <div className="text-right">
                 <span className="text-accent font-medium text-[11px] block">Gaza, Palestine</span>
@@ -305,7 +277,7 @@ export default function InteractivePortraitCard() {
           {/* Header Bar */}
           <div className="relative z-10 flex items-center justify-between pb-3 border-b border-border-subtle">
             <div className="flex items-center gap-2 font-mono text-[11px]">
-              <span className="w-2 h-2 rounded-full bg-accent animate-pulse shrink-0" />
+              <span className="w-2 h-2 rounded-full bg-accent shrink-0" />
               <span className="font-bold text-text-primary tracking-wider uppercase">ARCH_KERNEL_SPECS</span>
             </div>
             <button
@@ -324,7 +296,7 @@ export default function InteractivePortraitCard() {
             <div className="p-2.5 rounded-lg bg-bg-tertiary/70 border border-border-subtle hover:border-accent/30 transition-colors">
               <div className="text-[10px] text-text-muted uppercase tracking-wider mb-1">CORE PARADIGM</div>
               <div className="text-text-primary font-medium text-[11px] flex items-center justify-between">
-                <span>Event-Driven & Deterministic</span>
+                <span>Modular Monolith & Deterministic FSM</span>
                 <span className="text-functional-success text-[10px]">VERIFIED</span>
               </div>
             </div>
@@ -334,7 +306,7 @@ export default function InteractivePortraitCard() {
               <div className="text-[10px] text-text-muted uppercase tracking-wider mb-1">CONCURRENCY & SAFETY</div>
               <div className="text-text-primary font-medium text-[11px] flex items-center justify-between">
                 <span>Guarded FSM · Zero Collisions</span>
-                <span className="text-accent text-[10px]">MUTEX/LOCKS</span>
+                <span className="text-accent text-[10px]">ATOMIC UPDATES</span>
               </div>
             </div>
 
@@ -342,29 +314,15 @@ export default function InteractivePortraitCard() {
             <div className="p-2.5 rounded-lg bg-bg-tertiary/70 border border-border-subtle hover:border-accent/30 transition-colors">
               <div className="text-[10px] text-text-muted uppercase tracking-wider mb-1">PRODUCTION STACK</div>
               <div className="text-text-primary font-medium text-[11px]">
-                Node.js · Go · Express · MongoDB · Redis · Docker
+                Node.js · Express · MongoDB · Mongoose · Jest · Docker
               </div>
             </div>
           </div>
 
-          {/* Interactive Heartbeat Ping Simulator */}
-          <div className="relative z-10 pt-2 border-t border-border-subtle flex items-center justify-between">
-            <div className="flex items-center gap-2 font-mono text-[10px] text-text-muted">
-              <span>LATENCY:</span>
-              <span className="text-functional-success font-semibold">
-                {pingStatus.latency}ms
-              </span>
-              <span className="text-[9px] text-text-secondary">({pingStatus.timestamp})</span>
-            </div>
-
-            <button
-              onClick={handlePingKernel}
-              disabled={pingStatus.active}
-              type="button"
-              className="px-2.5 py-1 rounded bg-bg-elevated hover:bg-accent/20 border border-border-default hover:border-accent/40 text-[10px] font-mono text-text-primary transition-all active:scale-95"
-            >
-              {pingStatus.active ? 'PINGING...' : '⚡ PING CORE'}
-            </button>
+          {/* Technical Specs Footer */}
+          <div className="relative z-10 pt-2 border-t border-border-subtle flex items-center justify-between text-[10px] font-mono text-text-muted">
+            <span className="text-accent font-semibold">VERIFIED ARCHITECTURE</span>
+            <span className="text-text-secondary">Sawn & TeamLine</span>
           </div>
         </div>
       </div>

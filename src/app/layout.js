@@ -8,8 +8,16 @@ import CommandPalette from '@/components/overlays/CommandPalette';
 import SmoothScrollProvider from '@/components/shared/SmoothScrollProvider';
 import './globals.css';
 
+const metadataBaseUrl = (() => {
+  try {
+    return new URL(siteMetadata.siteUrl);
+  } catch {
+    return new URL('https://portfolio.local');
+  }
+})();
+
 export const metadata = {
-  metadataBase: new URL(siteMetadata.siteUrl),
+  metadataBase: metadataBaseUrl,
   title: {
     default: `${siteMetadata.name} | ${siteMetadata.title}`,
     template: `%s | ${siteMetadata.name}`,
@@ -25,7 +33,7 @@ export const metadata = {
     'PostgreSQL',
     'System Architecture',
     'REST APIs',
-    'Palestine',
+    'Gaza, Palestine',
   ],
   authors: [{ name: siteMetadata.name, url: siteMetadata.siteUrl }],
   creator: siteMetadata.name,

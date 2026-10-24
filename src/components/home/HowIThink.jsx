@@ -28,7 +28,7 @@ export default function HowIThink() {
       num: '03',
       title: 'Specify Clear API Contracts',
       summary: 'Establish explicit request/response schemas, REST conventions, and error codes.',
-      detail: 'I agree on API payloads with frontend teammates before building. Endpoints adhere to REST semantics, predictable HTTP statuses, RFC-compliant error structures, and consistent pagination standards.',
+      detail: 'I agree on API payloads with frontend teammates before building. Endpoints adhere to REST semantics, predictable HTTP statuses, structured error responses, and consistent pagination standards.',
       keyTakeaway: 'Clear API contracts eliminate frontend-backend synchronization friction.',
     },
     {
@@ -42,7 +42,7 @@ export default function HowIThink() {
       num: '05',
       title: 'Test Behavior & Edge Cases',
       summary: 'Automate integration test suites, boundary tests, and failure recoveries.',
-      detail: 'I write integration tests with Jest and Supertest against realistic database fixtures. Tests focus on security barriers, unauthorized requests, invalid payloads, and transactional integrity.',
+      detail: 'I write integration tests with Jest and Supertest against realistic database fixtures. Tests focus on security barriers, unauthorized requests, invalid payloads, and data integrity.',
       keyTakeaway: 'Tests verify system behavior under duress, not just happy-path successes.',
     },
     {

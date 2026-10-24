@@ -58,7 +58,7 @@ Development server runs at `http://localhost:3000`.
 NEXT_PUBLIC_FORMSPREE_ID=your_formspree_id
 
 # Site URL (for SEO canonical URLs)
-NEXT_PUBLIC_SITE_URL=https://mohammedferwana.dev
+NEXT_PUBLIC_SITE_URL=[VERCEL_URL]
 ```
 
 ---
@@ -119,7 +119,7 @@ All routes should be `○` (static) or `●` (SSG with params).
 ### Custom Domain
 
 1. In Vercel Project Settings → Domains
-2. Add custom domain (e.g., `mohammedferwana.dev`)
+2. Add custom domain (or use `[VERCEL_URL]`)
 3. Update DNS records as instructed by Vercel
 4. SSL certificate is automatic
 
@@ -172,7 +172,7 @@ All routes should be `○` (static) or `●` (SSG with params).
 
 Run periodically:
 ```bash
-npx lighthouse https://mohammedferwana.dev --output html --output-path report.html
+npx lighthouse [VERCEL_URL] --output html --output-path report.html
 ```
 
 ### Target Metrics
