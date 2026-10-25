@@ -33,31 +33,24 @@ export const aboutData = {
         title: 'Foundations & Low-Level Discovery',
         period: '2022',
         content:
-          'My journey into software engineering began in 2022 when I enrolled in Computer Systems Engineering at Al-Azhar University. Studying data structures, algorithms, operating systems, and computer architecture demystified how computers actually execute instructions and manage memory. That foundation shaped my preference for server-side engineering: I found myself far more fascinated by what happens behind the API endpoint — data integrity, atomic updates, and state management — than by purely visual interfaces.',
+          'My journey into software engineering began in 2022 when I enrolled in Computer Systems Engineering at Al-Azhar University. Studying data structures, algorithms, operating systems and computer networks demystified how computers actually execute instructions and manage memory. That foundation shaped my preference for server-side engineering: I found myself far more fascinated by what happens behind the API endpoint — data integrity, atomic updates, and state management — than by purely visual interfaces.',
       },
       {
         number: '02',
-        title: 'Practical Immersion & Clean Engineering',
-        period: '2023 – 2024',
-        content:
-          'In 2023 to 2024 I completed the Market Ready Developer program at Gaza Sky Geeks (GSG), my first structured step from university coursework toward professional software work.',
-      },
-      {
-        number: '03',
         title: 'Backend Developer and Team Leader at TAQAT',
         period: '2026',
         content:
           'During the TAQAT internship (2026), I served as Backend Developer and Team Leader for TeamLine, a collaborative team workspace platform. I designed REST APIs, implemented workspace role-based access control (RBAC), and built real-time task updates with version-guarded task moves.',
       },
       {
-        number: '04',
+        number: '03',
         title: 'Backend Engineering & Sawn (formerly InsurFlow)',
         period: '2026',
         content:
           `Designing and implementing the backend for Sawn (formerly InsurFlow) — a multi-tenant B2B motor insurance claim management platform — represented a major focus on complex server-side systems. Managing multi-party claims cannot rely on arbitrary database updates; it requires strict lifecycle state machines to prevent illegal state transitions, granular permission middleware, and audit trails. I wrote the test suite: ${metrics.integrationTests} tests passing in ${metrics.testSuites} suites (run ${formattedTestRunDate}).`,
       },
       {
-        number: '05',
+        number: '04',
         title: 'Where I am Heading',
         period: 'Looking Ahead → 2027',
         content:
@@ -126,19 +119,8 @@ export const aboutData = {
       type: 'academic',
       status: 'Completed',
       description:
-        'Began B.Sc. studies in Computer Systems Engineering. Built foundational knowledge in discrete mathematics, algorithms, data structures, and computer architecture.',
+        'Began B.Sc. studies in Computer Systems Engineering, with coursework in data structures and algorithms, operating systems, databases and computer networks.',
       highlight: 'Discovered passion for backend systems and low-level computer operation.',
-    },
-    {
-      year: '2023 – 2024',
-      period: '2023 – 2024',
-      title: 'Market Ready Developer Program',
-      organization: 'Gaza Sky Geeks (GSG)',
-      type: 'training',
-      status: 'Completed',
-      description:
-        'Completed the Market Ready Developer program at Gaza Sky Geeks (GSG).',
-      highlight: 'Transitioned academic knowledge into professional software development practices.',
     },
     {
       year: '2026',
@@ -161,6 +143,17 @@ export const aboutData = {
       description:
         `Built the core backend for Sawn (formerly InsurFlow), a multi-tenant motor claims management system. Implemented finite state machine transitions, MongoDB indexing, and ${metrics.integrationTests} automated tests (run ${formattedTestRunDate}).`,
       highlight: `${metrics.integrationTests} automated tests across ${metrics.testSuites} test suites (run ${formattedTestRunDate}), all passing, covering the claim lifecycle.`,
+    },
+    {
+      year: '2026',
+      period: '2026 – Nov 2026',
+      title: 'Market Ready Developer Program',
+      organization: 'Gaza Sky Geeks (GSG)',
+      type: 'training',
+      status: 'Active',
+      description:
+        'Taking the Market Ready Developer program at Gaza Sky Geeks (GSG); completing November 2026.',
+      highlight: 'Completing November 2026.',
     },
     {
       year: '2027',
