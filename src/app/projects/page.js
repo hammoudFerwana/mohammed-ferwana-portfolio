@@ -4,11 +4,10 @@ import RevealOnScroll from '@/components/shared/RevealOnScroll';
 import Button from '@/components/shared/Button';
 import ResumeRequestButton from '@/components/shared/ResumeRequestButton';
 import { projects } from '@/data/projects';
-import { siteMetadata } from '@/data/siteMetadata';
 
 export const metadata = {
   title: 'Projects & System Architecture',
-  description: 'Backend engineering projects, production architectures, and system design case studies by Mohammed Ferwana.',
+  description: 'Backend engineering projects and case studies by Mohammed Ferwana.',
 };
 
 export default function ProjectsPage() {
@@ -20,7 +19,7 @@ export default function ProjectsPage() {
           as="h1"
           eyebrow="ENGINEERING PORTFOLIO"
           title="Projects & Architecture Case Studies"
-          description="A deep dive into modular backend architecture, clean API design, and data schemas built for real-world reliability."
+          description="Case studies of the backends I built, with the decisions behind them."
         />
       </RevealOnScroll>
 
@@ -41,7 +40,7 @@ export default function ProjectsPage() {
                 Looking for a Backend Engineer?
               </h2>
               <p className="text-sm text-text-secondary leading-relaxed">
-                Whether you need scalable REST API architecture, database optimization, or a dedicated engineer for your team, let&apos;s talk.
+                Whether you need reliable REST API architecture, database optimization, or a dedicated engineer for your team, let&apos;s talk.
               </p>
             </div>
             <div className="flex flex-wrap items-center gap-3 shrink-0">

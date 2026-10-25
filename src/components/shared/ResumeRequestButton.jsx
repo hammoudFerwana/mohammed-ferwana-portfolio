@@ -1,20 +1,18 @@
 'use client';
 
 import Button from '@/components/shared/Button';
-import { useOverlay } from '@/context/OverlayContext';
 
 export default function ResumeRequestButton({
   variant = 'secondary',
   size = 'md',
   magnetic = false,
   className = '',
-  children = 'Request Resume',
+  children = 'Download Resume',
 }) {
-  const { openResumeModal } = useOverlay();
-
   return (
     <Button
-      onClick={openResumeModal}
+      href="/resume/Mohammed_Ferwana_Resume.pdf"
+      download="Mohammed_Ferwana_Resume.pdf"
       variant={variant}
       size={size}
       magnetic={magnetic}

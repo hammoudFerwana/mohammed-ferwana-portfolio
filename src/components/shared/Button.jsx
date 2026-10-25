@@ -7,6 +7,7 @@ export default function Button({
   variant = 'primary', // 'primary' | 'secondary' | 'ghost' | 'outline'
   size = 'md', // 'sm' | 'md' | 'lg'
   href,
+  download,
   onClick,
   className = '',
   external = false,
@@ -61,14 +62,14 @@ export default function Button({
   let element = null;
 
   if (href) {
-    if (external) {
+    if (download || external) {
       element = (
         <a
           href={href}
-          target="_blank"
-          rel="noopener noreferrer"
+          download={download}
+          target={external ? '_blank' : undefined}
+          rel={external ? 'noopener noreferrer' : undefined}
           className={classes}
-          data-cursor-target
           {...props}
         >
           {content}
@@ -76,7 +77,7 @@ export default function Button({
       );
     } else {
       element = (
-        <Link href={href} className={classes} data-cursor-target {...props}>
+        <Link href={href} className={classes} {...props}>
           {content}
         </Link>
       );
@@ -88,7 +89,6 @@ export default function Button({
         onClick={onClick}
         disabled={disabled}
         className={classes}
-        data-cursor-target
         {...props}
       >
         {content}

@@ -64,7 +64,7 @@ src/
 │   ├── about/              # Story, Philosophy, Timeline, TechStack
 │   ├── experience/         # ExperienceCard, EducationCard
 │   ├── contact/            # ContactForm, SocialLinks
-│   └── shared/             # CommandPalette, Terminal, Button, etc.
+│   └── shared/             # CommandPalette, Button, SpotlightCard, etc.
 │
 ├── data/                   # Centralized content/data
 │   ├── projects.js         # All project data
@@ -105,7 +105,7 @@ src/
 
 - **Interactive Architecture Viewer** — Visualize system architecture for case studies
 - **Command Palette** (`Ctrl+K`) — Quick navigation across the site
-- **Mini Terminal Easter Egg** — Engineering-flavored hidden feature
+- **One-Click Resume Download** — Direct access to verifiable PDF resume
 - **Engineering Case Studies** — 9-part project deep-dives
 - **"How I Think" Section** — Visual engineering thought process
 - **Scroll Reveal Animations** — Framer Motion powered entrances
@@ -132,7 +132,7 @@ See [CONTENT_MODEL.md](./docs/CONTENT_MODEL.md) for the complete data schema.
 
 | Variable | Description | Required |
 |----------|-------------|----------|
-| `NEXT_PUBLIC_FORMSPREE_ID` | Formspree form endpoint ID | For contact form |
+| `NEXT_PUBLIC_FORMSPREE_KEY` | Formspree form endpoint ID | For contact form |
 | `NEXT_PUBLIC_SITE_URL` | Production site URL | For SEO |
 
 ---

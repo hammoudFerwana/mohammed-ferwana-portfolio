@@ -8,7 +8,7 @@ import { cn } from '@/lib/utils';
 
 export default function CommandPalette() {
   const router = useRouter();
-  const { isCommandPaletteOpen, closeCommandPalette, openTerminal, openResumeModal } = useOverlay();
+  const { isCommandPaletteOpen, closeCommandPalette } = useOverlay();
   const [query, setQuery] = useState('');
   const [selectedIndex, setSelectedIndex] = useState(0);
   const inputRef = useRef(null);
@@ -61,12 +61,13 @@ export default function CommandPalette() {
       router.push(cmd.target);
     } else if (cmd.action === 'external') {
       window.open(cmd.target, '_blank', 'noopener,noreferrer');
-    } else if (cmd.action === 'download') {
-      window.open(cmd.target, '_blank');
-    } else if (cmd.action === 'terminal') {
-      openTerminal();
-    } else if (cmd.action === 'resume') {
-      openResumeModal();
+    } else if (cmd.action === 'download' || cmd.action === 'resume') {
+      const link = document.createElement('a');
+      link.href = cmd.target || '/resume/Mohammed_Ferwana_Resume.pdf';
+      link.download = 'Mohammed_Ferwana_Resume.pdf';
+      document.body.appendChild(link);
+      link.click();
+      document.body.removeChild(link);
     }
   };
 

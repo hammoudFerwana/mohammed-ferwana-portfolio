@@ -11,8 +11,8 @@
 ```javascript
 const siteMetadata = {
   title: 'Mohammed Ferwana — Backend Engineer',
-  description: 'Backend Engineer building scalable systems, reliable APIs, and thoughtful software architecture.',
-  siteUrl: 'https://mohammedferwana.dev', // Update with actual domain
+  description: 'Backend engineer in Gaza building multi-tenant REST APIs with guarded state machines, tenant isolation and tested business rules.',
+  siteUrl: '[VERCEL_URL]', // Update with actual domain
   ogImage: '/images/og-image.png',
   locale: 'en_US',
   type: 'website',
@@ -36,7 +36,7 @@ const siteMetadata = {
 
 | Page | Meta Description |
 |------|-----------------|
-| Home | Backend Engineer building scalable systems, reliable APIs, and thoughtful software architecture. |
+| Home | Backend engineer in Gaza building multi-tenant REST APIs with guarded state machines, tenant isolation and tested business rules. |
 | Projects | Engineering projects featuring backend systems, API design, and architecture case studies. |
 | About | The engineering journey of Mohammed Ferwana — from software engineering to backend systems and technical leadership. |
 | Experience | Professional experience, training, and education in backend engineering and software development. |
@@ -48,9 +48,9 @@ const siteMetadata = {
 
 ```html
 <meta property="og:title" content="Mohammed Ferwana — Backend Engineer" />
-<meta property="og:description" content="Backend Engineer building scalable systems..." />
-<meta property="og:image" content="https://mohammedferwana.dev/images/og-image.png" />
-<meta property="og:url" content="https://mohammedferwana.dev" />
+<meta property="og:description" content="Backend engineer in Gaza building multi-tenant REST APIs..." />
+<meta property="og:image" content="[VERCEL_URL]/images/og-image.png" />
+<meta property="og:url" content="[VERCEL_URL]" />
 <meta property="og:type" content="website" />
 <meta property="og:locale" content="en_US" />
 ```
@@ -69,8 +69,8 @@ const siteMetadata = {
 ```html
 <meta name="twitter:card" content="summary_large_image" />
 <meta name="twitter:title" content="Mohammed Ferwana — Backend Engineer" />
-<meta name="twitter:description" content="Backend Engineer building scalable systems..." />
-<meta name="twitter:image" content="https://mohammedferwana.dev/images/og-image.png" />
+<meta name="twitter:description" content="Backend engineer in Gaza building multi-tenant REST APIs..." />
+<meta name="twitter:image" content="[VERCEL_URL]/images/og-image.png" />
 ```
 
 ---
@@ -85,8 +85,8 @@ const siteMetadata = {
   "@type": "Person",
   "name": "Mohammed Ferwana",
   "jobTitle": "Backend Engineer",
-  "description": "Backend Engineer building scalable systems, reliable APIs, and thoughtful software architecture.",
-  "url": "https://mohammedferwana.dev",
+  "description": "Backend engineer in Gaza building multi-tenant REST APIs with guarded state machines, tenant isolation and tested business rules.",
+  "url": "[VERCEL_URL]",
   "email": "mohammedferwana2@gmail.com",
   "sameAs": [
     "https://www.linkedin.com/in/mohammed-ferwana/",
@@ -106,7 +106,7 @@ const siteMetadata = {
   "@context": "https://schema.org",
   "@type": "WebSite",
   "name": "Mohammed Ferwana — Backend Engineer",
-  "url": "https://mohammedferwana.dev"
+  "url": "[VERCEL_URL]"
 }
 ```
 
@@ -120,7 +120,7 @@ const siteMetadata = {
 // public/robots.txt
 User-agent: *
 Allow: /
-Sitemap: https://mohammedferwana.dev/sitemap.xml
+Sitemap: [VERCEL_URL]/sitemap.xml
 ```
 
 ### Sitemap
@@ -130,15 +130,15 @@ Next.js can auto-generate sitemaps. Create `app/sitemap.js`:
 ```javascript
 export default function sitemap() {
   return [
-    { url: 'https://mohammedferwana.dev', lastModified: new Date() },
-    { url: 'https://mohammedferwana.dev/projects', lastModified: new Date() },
-    { url: 'https://mohammedferwana.dev/about', lastModified: new Date() },
-    { url: 'https://mohammedferwana.dev/experience', lastModified: new Date() },
-    { url: 'https://mohammedferwana.dev/contact', lastModified: new Date() },
-    { url: 'https://mohammedferwana.dev/lab', lastModified: new Date() },
+    { url: '[VERCEL_URL]', lastModified: new Date() },
+    { url: '[VERCEL_URL]/projects', lastModified: new Date() },
+    { url: '[VERCEL_URL]/about', lastModified: new Date() },
+    { url: '[VERCEL_URL]/experience', lastModified: new Date() },
+    { url: '[VERCEL_URL]/contact', lastModified: new Date() },
+    { url: '[VERCEL_URL]/lab', lastModified: new Date() },
     // Dynamic project pages
     ...projects.map((project) => ({
-      url: `https://mohammedferwana.dev/projects/${project.slug}`,
+      url: `[VERCEL_URL]/projects/${project.slug}`,
       lastModified: new Date(),
     })),
   ];
@@ -152,7 +152,7 @@ Each page should have a canonical URL via Next.js metadata:
 ```javascript
 export const metadata = {
   alternates: {
-    canonical: 'https://mohammedferwana.dev/about',
+    canonical: '[VERCEL_URL]/about',
   },
 };
 ```

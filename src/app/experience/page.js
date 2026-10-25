@@ -5,11 +5,10 @@ import CareerTimeline from '@/components/experience/CareerTimeline';
 import Button from '@/components/shared/Button';
 import ResumeRequestButton from '@/components/shared/ResumeRequestButton';
 import { experiences, education } from '@/data/experience';
-import { siteMetadata } from '@/data/siteMetadata';
 
 export const metadata = {
   title: 'Engineering Experience & Background',
-  description: 'Professional experience, technical leadership, and engineering education of Mohammed Ferwana.',
+  description: 'Experience, training and education of Mohammed Ferwana, Backend Engineer.',
 };
 
 export default function ExperiencePage() {
@@ -44,7 +43,7 @@ export default function ExperiencePage() {
           as="h1"
           eyebrow="CAREER & BACKGROUND"
           title="Experience & Education"
-          description="A track record of backend delivery, engineering leadership, and foundational computer systems education."
+          description="Work, training and education, newest first."
         />
       </RevealOnScroll>
 
@@ -65,7 +64,7 @@ export default function ExperiencePage() {
                 Ready to Discuss Engineering Opportunities?
               </h2>
               <p className="text-sm text-text-secondary leading-relaxed">
-                Currently open to backend engineering roles, scalable systems contracts, and technical consulting.
+                Currently open to backend engineering roles, backend contracts, and technical consulting.
               </p>
             </div>
             <div className="flex flex-wrap items-center gap-3 shrink-0">

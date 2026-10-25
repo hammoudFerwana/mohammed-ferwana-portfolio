@@ -1,19 +1,21 @@
 'use client';
 
 import Image from 'next/image';
-import Link from 'next/link';
 import Button from '@/components/shared/Button';
 import RevealOnScroll from '@/components/shared/RevealOnScroll';
 import CounterTicker from '@/components/shared/CounterTicker';
 import TextScramble from '@/components/shared/TextScramble';
-import { useOverlay } from '@/context/OverlayContext';
-import { siteMetadata } from '@/data/siteMetadata';
 import { metrics } from '@/data/metrics';
 import InteractivePortraitCard from '@/components/home/InteractivePortraitCard';
 
-export default function HeroSection() {
-  const { openResumeModal } = useOverlay();
+const formattedTestRunDate = new Date(`${metrics.testRunDate}T00:00:00Z`).toLocaleDateString('en-GB', {
+  day: 'numeric',
+  month: 'short',
+  year: 'numeric',
+  timeZone: 'UTC',
+});
 
+export default function HeroSection() {
   return (
     <section className="relative min-h-[92dvh] flex flex-col justify-center pt-28 pb-16 overflow-hidden">
       {/* Background Animated Aurora Mesh (3 Orbs, GPU-accelerated) */}
@@ -69,15 +71,12 @@ export default function HeroSection() {
                 <p className="font-mono text-sm sm:text-base text-accent font-medium tracking-tight">
                   <TextScramble text="Backend Engineer" speed={35} delay={400} />
                 </p>
-                <h2 className="text-xl sm:text-2xl text-text-secondary font-medium tracking-tight">
-                  Building Scalable & Reliable Systems
-                </h2>
               </div>
             </RevealOnScroll>
 
             <RevealOnScroll delay={0.45}>
               <p className="text-base sm:text-lg text-text-secondary leading-relaxed max-w-xl text-balance">
-                I design robust backend architectures, engineer predictable RESTful APIs, and translate complex domain workflows into maintainable, production-ready systems.
+                I build multi-tenant REST APIs with guarded state machines, tenant isolation and tested business rules.
               </p>
             </RevealOnScroll>
 
@@ -88,12 +87,13 @@ export default function HeroSection() {
                   Explore My Work →
                 </Button>
                 <Button
-                  onClick={openResumeModal}
+                  href="/resume/Mohammed_Ferwana_Resume.pdf"
+                  download="Mohammed_Ferwana_Resume.pdf"
                   variant="secondary"
                   size="lg"
                   magnetic
                 >
-                  Request Resume
+                  Download Resume
                 </Button>
                 <Button href="/contact" variant="ghost" size="lg" magnetic>
                   Let&apos;s Talk →
@@ -124,13 +124,7 @@ export default function HeroSection() {
                   <div className="flex items-center gap-2 text-xs">
                     <span className="w-1.5 h-1.5 rounded-full bg-functional-success shrink-0" />
                     <span className="text-text-secondary font-mono text-[11px]">
-                      <CounterTicker value={metrics.integrationTests} className="text-text-primary font-semibold" /> integration tests · <CounterTicker value={metrics.testSuites} className="text-text-primary font-semibold" /> suites
-                    </span>
-                  </div>
-                  <div className="flex items-center gap-2 text-xs">
-                    <span className="w-1.5 h-1.5 rounded-full bg-functional-success shrink-0" />
-                    <span className="text-text-secondary font-mono text-[11px]">
-                      Concurrency: <CounterTicker value={metrics.concurrentRequests} className="text-text-primary font-semibold" /> requests, no collisions or gaps
+                      <CounterTicker value={metrics.integrationTests} className="text-text-primary font-semibold" /> tests passing (<CounterTicker value={metrics.testSuites} className="text-text-primary font-semibold" /> suites, run {formattedTestRunDate})
                     </span>
                   </div>
                   <div className="flex items-center gap-2 text-xs">
@@ -141,11 +135,11 @@ export default function HeroSection() {
                   </div>
                   <div className="flex items-center justify-between gap-2 text-xs pt-1 border-t border-border-subtle/50">
                     <span className="text-text-secondary font-mono text-[11px]">
-                      Portfolio CI: lint and build
+                      Portfolio CI: lint, test and build
                     </span>
                     <Image
                       src={`https://github.com/hammoudFerwana/mohammed-ferwana-portfolio/actions/workflows/ci.yml/badge.svg?branch=${metrics.ciBadgeBranch}`}
-                      alt="Portfolio CI: lint and build"
+                      alt="Portfolio CI: lint, test and build"
                       width={106}
                       height={20}
                       unoptimized

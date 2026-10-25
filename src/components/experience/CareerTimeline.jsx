@@ -114,7 +114,7 @@ export default function CareerTimeline({ experiences = [], education = [] }) {
         <AnimatePresence mode="popLayout">
           {/* ── Professional Experiences ── */}
           {showWork &&
-            experiences.map((exp, idx) => {
+            experiences.map((exp) => {
               const isExpanded = expandedCards[exp.id] ?? true; // default open for full clarity
               const visibleResponsibilities = isExpanded
                 ? exp.responsibilities
@@ -192,8 +192,8 @@ export default function CareerTimeline({ experiences = [], education = [] }) {
                               <span>{isExpanded ? 'Collapse' : `Show all (${exp.responsibilities.length})`}</span>
                               <span
                                 className={cn(
-                                  'transition-transform duration-300 text-[10px]',
-                                  isExpanded ? 'rotate-180' : 'rotate-0'
+                                   'transition-transform duration-300 text-[10px]',
+                                   isExpanded ? 'rotate-180' : 'rotate-0'
                                 )}
                               >
                                 ▼
@@ -291,9 +291,16 @@ export default function CareerTimeline({ experiences = [], education = [] }) {
                 <SpotlightCard className="rounded-2xl bg-bg-secondary border border-border-default hover:border-border-strong p-6 sm:p-8 space-y-4 transition-all duration-300">
                   <div className="flex flex-col sm:flex-row sm:items-start justify-between gap-2">
                     <div>
-                      <Badge variant="accent" size="sm">
-                        {edu.status}
-                      </Badge>
+                      <div className="flex items-center gap-2">
+                        <Badge variant="accent" size="sm">
+                          {edu.status}
+                        </Badge>
+                        {edu.cgpa && (
+                          <Badge variant="subtle" size="sm">
+                            {edu.cgpa}
+                          </Badge>
+                        )}
+                      </div>
                       <h3 className="text-lg sm:text-xl font-bold text-text-primary tracking-tight mt-2">
                         {edu.degree}
                       </h3>
@@ -312,7 +319,7 @@ export default function CareerTimeline({ experiences = [], education = [] }) {
 
                   <div className="pt-2 border-t border-border-subtle/70 text-xs font-mono text-text-muted flex items-center gap-2">
                     <span className="text-accent font-semibold">Specialization:</span>
-                    <span>Distributed Systems • Database Engines • Algorithms</span>
+                    <span>Backend Systems • Database Engines • Algorithms</span>
                   </div>
                 </SpotlightCard>
               </motion.div>

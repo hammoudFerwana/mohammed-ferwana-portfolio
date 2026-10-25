@@ -27,7 +27,7 @@ export default function AboutTimeline() {
         <SectionHeading
           eyebrow="TIMELINE"
           title="Engineering Journey"
-          description="Verified milestones tracing academic training, practical immersion, team leadership, and production-oriented backend delivery."
+          description="Milestones from university, training, the TAQAT internship and Sawn."
         />
       </RevealOnScroll>
 

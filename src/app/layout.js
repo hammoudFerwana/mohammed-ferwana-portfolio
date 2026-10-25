@@ -5,14 +5,19 @@ import { OverlayProvider } from '@/context/OverlayContext';
 import Navbar from '@/components/layout/Navbar';
 import Footer from '@/components/layout/Footer';
 import CommandPalette from '@/components/overlays/CommandPalette';
-import MiniTerminal from '@/components/overlays/MiniTerminal';
-import ResumeModal from '@/components/overlays/ResumeModal';
-import KineticCursor from '@/components/shared/KineticCursor';
 import SmoothScrollProvider from '@/components/shared/SmoothScrollProvider';
 import './globals.css';
 
+const metadataBaseUrl = (() => {
+  try {
+    return new URL(siteMetadata.siteUrl);
+  } catch {
+    return new URL('https://portfolio.local');
+  }
+})();
+
 export const metadata = {
-  metadataBase: new URL(siteMetadata.siteUrl),
+  metadataBase: metadataBaseUrl,
   title: {
     default: `${siteMetadata.name} | ${siteMetadata.title}`,
     template: `%s | ${siteMetadata.name}`,
@@ -28,7 +33,7 @@ export const metadata = {
     'PostgreSQL',
     'System Architecture',
     'REST APIs',
-    'Palestine',
+    'Gaza, Palestine',
   ],
   authors: [{ name: siteMetadata.name, url: siteMetadata.siteUrl }],
   creator: siteMetadata.name,
@@ -81,9 +86,6 @@ export default function RootLayout({ children }) {
             </main>
             <Footer />
             <CommandPalette />
-            <MiniTerminal />
-            <ResumeModal />
-            <KineticCursor />
           </SmoothScrollProvider>
         </OverlayProvider>
       </body>

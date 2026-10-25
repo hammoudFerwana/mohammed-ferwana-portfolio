@@ -1,11 +1,11 @@
 export const siteMetadata = {
   name: 'Mohammed Ferwana',
   title: 'Backend Engineer',
-  tagline: 'Building Scalable & Reliable Systems',
-  description: 'Backend Engineer focused on scalable systems, reliable REST APIs, database architecture, and engineering leadership.',
-  siteUrl: process.env.NEXT_PUBLIC_SITE_URL || 'https://mohammedferwana.dev',
+  tagline: 'Backend engineer. Node.js, Express, MongoDB.',
+  description: 'Backend engineer in Gaza building multi-tenant REST APIs with guarded state machines, tenant isolation and tested business rules.',
+  siteUrl: process.env.NEXT_PUBLIC_SITE_URL || '[VERCEL_URL]',
   email: 'mohammedferwana2@gmail.com',
-  location: 'Palestine',
+  location: 'Gaza, Palestine',
   social: {
     linkedin: 'https://www.linkedin.com/in/mohammed-ferwana/',
     github: 'https://github.com/hammoudFerwana',

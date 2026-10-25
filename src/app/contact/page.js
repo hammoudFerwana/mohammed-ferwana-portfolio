@@ -7,7 +7,7 @@ import ContactInfo from '@/components/contact/ContactInfo';
 export const metadata = {
   title: 'Contact & Collaboration',
   description:
-    'Get in touch with Mohammed Ferwana for backend engineering opportunities, scalable system architecture consulting, or technical collaboration.',
+    'Get in touch with Mohammed Ferwana for backend engineering roles or technical collaboration.',
 };
 
 export default function ContactPage() {
@@ -48,16 +48,16 @@ export default function ContactPage() {
 
       {/* ── Contact Content Grid ── */}
       <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-12 mt-12 items-start">
-        {/* Left: Interactive Contact Form */}
+        {/* Contact Form (Left 7 cols) */}
         <div className="lg:col-span-7">
-          <RevealOnScroll delay={0.08}>
+          <RevealOnScroll delay={0.1}>
             <ContactForm />
           </RevealOnScroll>
         </div>
 
-        {/* Right: Direct Channels & Status */}
+        {/* Contact Info (Right 5 cols) */}
         <div className="lg:col-span-5">
-          <RevealOnScroll delay={0.16}>
+          <RevealOnScroll delay={0.2}>
             <ContactInfo />
           </RevealOnScroll>
         </div>

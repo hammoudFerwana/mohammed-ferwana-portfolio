@@ -28,7 +28,7 @@ Software Engineering → Discovery of Backend → Building Real Systems → Lead
 **Content direction:**
 - Where Mohammed is coming from (university, engineering foundation)
 - Why backend specifically (what drew him to server-side systems)
-- What kind of systems he likes building (scalable, reliable, well-architected)
+- What kind of systems he likes building (reliable, well-architected)
 - How his engineering mindset developed (through real projects, not theory)
 - How leadership became part of his engineering journey (TeamLine, PCD)
 - What he is currently working toward
@@ -54,7 +54,6 @@ Principles presented as a structured list:
 | Design for maintainability | Code is read more than it is written |
 | Validate assumptions | Test your understanding, not just your code |
 | Test behavior, not just happy paths | Edge cases reveal system quality |
-| Improve systems based on evidence | Optimize what you can measure |
 | Take ownership of engineering decisions | Explain why, not just what |
 
 **Layout:** Each principle as a card or row with the principle as heading and description below.

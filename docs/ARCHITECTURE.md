@@ -58,9 +58,8 @@ Server Components (default)          Client Components ('use client')
 • Page layouts                      • Navbar (scroll state, mobile menu)
 • Section containers                • ContactForm (form state, validation)
 • Static content rendering          • CommandPalette (keyboard events, search)
-• SEO metadata                      • MiniTerminal (input handling)
-• Data imports                      • RevealOnScroll (IntersectionObserver)
-                                    • ArchitectureViewer (click interactions)
+• SEO metadata                      • RevealOnScroll (IntersectionObserver)
+• Data imports                      • ArchitectureViewer (click interactions)
                                     • MobileMenu (toggle state)
                                     • AnimatedButton (hover physics)
 ```
@@ -138,14 +137,10 @@ RootLayout
 │   ├── FooterNav
 │   └── FooterSocial
 │
-├── CommandPalette (client — global overlay)
-│   ├── SearchInput
-│   └── CommandList
-│       └── CommandItem
-│
-└── MiniTerminal (client — global overlay)
-    ├── TerminalInput
-    └── TerminalOutput
+└── CommandPalette (client — global overlay)
+    ├── SearchInput
+    └── CommandList
+        └── CommandItem
 ```
 
 ---
@@ -234,7 +229,6 @@ export async function generateStaticParams() {
 |-------|----------|--------|
 | Mobile menu open/close | `useState` in Navbar | Local UI state |
 | Command palette open/close | `useState` in CommandPalette | Local UI state |
-| Terminal open/close | `useState` in MiniTerminal | Local UI state |
 | Contact form fields | `useState` in ContactForm | Form state |
 | Form submission status | `useState` in ContactForm | Loading/success/error |
 | Active route | Next.js `usePathname()` | Built-in |

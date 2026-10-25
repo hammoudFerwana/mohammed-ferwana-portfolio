@@ -16,7 +16,7 @@ const project = {
   title: 'string',                 // Project name (e.g., 'InsurFlow')
   description: 'string',           // 1-2 sentence summary
   role: 'string',                  // Mohammed's role (e.g., 'Backend Engineer / Backend Owner')
-  category: 'string',             // 'enterprise' | 'platform' | 'education' | 'volunteer'
+  category: 'string',             // 'B2B Claims Engine' | 'Platform' | 'Education' | 'Volunteer'
   tier: 'number',                  // 1 = Featured case study, 2 = Supporting project
   technologies: ['string'],        // Array of technologies used
 
@@ -186,15 +186,16 @@ const techStack = {
 const siteMetadata = {
   name: 'Mohammed Ferwana',
   title: 'Backend Engineer',
-  tagline: 'Building Scalable & Reliable Systems',
-  description: 'Backend Engineer focused on scalable systems, reliable APIs, and software architecture.',
-  siteUrl: 'https://mohammedferwana.dev',  // Update with actual domain
+  tagline: 'Backend engineer. Node.js, Express, MongoDB.',
+  description: 'Backend engineer in Gaza building multi-tenant REST APIs with guarded state machines, tenant isolation and tested business rules.',
+  siteUrl: '[VERCEL_URL]',
   email: 'mohammedferwana2@gmail.com',
+  location: 'Gaza, Palestine',
   social: {
     linkedin: 'https://www.linkedin.com/in/mohammed-ferwana/',
     github: 'https://github.com/hammoudFerwana',
   },
-  ogImage: '/images/og-image.png',         // Open Graph preview image
+  ogImage: '/images/portrait.jpg',
 };
 ```
 

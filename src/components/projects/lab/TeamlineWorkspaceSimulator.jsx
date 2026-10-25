@@ -4,7 +4,6 @@ import { useState, useCallback, useId } from 'react';
 import { useReducedMotion } from 'framer-motion';
 import Badge from '@/components/shared/Badge';
 import { cn } from '@/lib/utils';
-import { soundManager } from '@/lib/soundFx';
 
 const INITIAL_TASK = {
   id: 'TL-104',
@@ -16,14 +15,14 @@ const INITIAL_TASK = {
 };
 
 const CONNECTED_CLIENTS = [
-  { id: 'c1', name: 'Mohammed (Team Lead)', role: 'lead', latency: '4ms', status: 'online' },
-  { id: 'c2', name: 'Frontend Dev (Client A)', role: 'member', latency: '9ms', status: 'online' },
-  { id: 'c3', name: 'QA Engineer (Client B)', role: 'member', latency: '12ms', status: 'online' },
+  { id: 'c1', name: 'Mohammed (Team Lead)', role: 'lead', status: 'online' },
+  { id: 'c2', name: 'Teammate A', role: 'member', status: 'online' },
+  { id: 'c3', name: 'Teammate B', role: 'member', status: 'online' },
 ];
 
 export default function TeamlineWorkspaceSimulator() {
   const [task, setTask] = useState(INITIAL_TASK);
-  const [activeClients, setActiveClients] = useState(CONNECTED_CLIENTS);
+  const [activeClients] = useState(CONNECTED_CLIENTS);
   const [socketLog, setSocketLog] = useState([]);
   const [isProcessing, setIsProcessing] = useState(false);
   const [occResult, setOccResult] = useState(null);
@@ -36,7 +35,6 @@ export default function TeamlineWorkspaceSimulator() {
     async (targetColumn) => {
       if (isProcessing || task.column === targetColumn) return;
       setIsProcessing(true);
-      soundManager.playClick();
 
       const newVersion = task.version + 1;
       const now = new Date().toLocaleTimeString('en-US', {
@@ -49,9 +47,9 @@ export default function TeamlineWorkspaceSimulator() {
       // 1. Simulate API Route + Auth
       await new Promise((r) => setTimeout(r, shouldReduceMotion ? 30 : 150));
 
-      // 2. Broadcast via WebSocket
+      // 2. Notify workspace members (simulated)
       const packet = {
-        id: `${Date.now()}-${Math.random()}`,
+        id: `${Date.now()}-${newVersion}`,
         event: 'TASK_MOVED',
         channel: 'workspace_taqat_internal',
         payload: {
@@ -61,7 +59,6 @@ export default function TeamlineWorkspaceSimulator() {
           version: newVersion,
           actor: 'Mohammed Ferwana',
         },
-        propagationMs: +(5.2 + Math.random() * 3.4).toFixed(1),
         timestamp: now,
       };
 
@@ -74,10 +71,9 @@ export default function TeamlineWorkspaceSimulator() {
       setSocketLog((prev) => [packet, ...prev].slice(0, 15));
       setOccResult({
         type: 'success',
-        message: `Task ${task.id} atomically moved to ${targetColumn}. Broadcast to 3 active peers.`,
+        message: `Task ${task.id} atomically moved to ${targetColumn}. Broadcast to workspace members.`,
       });
 
-      soundManager.playSuccess();
       setIsProcessing(false);
     },
     [isProcessing, shouldReduceMotion, task]
@@ -86,7 +82,6 @@ export default function TeamlineWorkspaceSimulator() {
   const simulateOccConflict = useCallback(async () => {
     if (isProcessing) return;
     setIsProcessing(true);
-    soundManager.playClick();
 
     await new Promise((r) => setTimeout(r, shouldReduceMotion ? 40 : 200));
 
@@ -98,7 +93,7 @@ export default function TeamlineWorkspaceSimulator() {
     });
 
     const conflictPacket = {
-      id: `${Date.now()}-${Math.random()}`,
+      id: `${Date.now()}-conflict-${task.version}`,
       event: 'MUTATION_REJECTED',
       channel: 'workspace_taqat_internal',
       payload: {
@@ -107,7 +102,6 @@ export default function TeamlineWorkspaceSimulator() {
         incomingVersion: task.version - 1,
         status: 409,
       },
-      propagationMs: +(2.1 + Math.random() * 1.5).toFixed(1),
       timestamp: now,
     };
 
@@ -117,12 +111,10 @@ export default function TeamlineWorkspaceSimulator() {
       message: `Race condition detected: Client B submitted stale __v:${task.version - 1}. Rejected with HTTP 409 to prevent lost update.`,
     });
 
-    soundManager.playWarning();
     setIsProcessing(false);
   }, [isProcessing, shouldReduceMotion, task.version]);
 
   const resetSimulator = useCallback(() => {
-    soundManager.playWarning();
     setTask(INITIAL_TASK);
     setSocketLog([]);
     setOccResult(null);
@@ -139,11 +131,11 @@ export default function TeamlineWorkspaceSimulator() {
               Real-time Kanban Sync & Concurrency Lab
             </h3>
             <Badge variant="success" size="sm">
-              Live WebSockets
+              Simulation
             </Badge>
           </div>
           <p className="text-xs sm:text-sm text-text-secondary">
-            Simulates multi-client real-time synchronization, workspace room scoping, and Optimistic Concurrency Control (<code className="text-accent bg-bg-tertiary px-1 py-0.5 rounded">__v</code> guards) across collaborative sprint boards.
+            Simulates multi-client real-time task updates, workspace scoping, and Optimistic Concurrency Control (<code className="text-accent bg-bg-tertiary px-1 py-0.5 rounded">__v</code> guards) across task boards.
           </p>
         </div>
 
@@ -167,7 +159,7 @@ export default function TeamlineWorkspaceSimulator() {
               : 'text-text-muted hover:text-text-primary'
           )}
         >
-          Board & Peers View
+          Board View
         </button>
         <button
           onClick={() => setActiveTab('packets')}
@@ -178,7 +170,7 @@ export default function TeamlineWorkspaceSimulator() {
               : 'text-text-muted hover:text-text-primary'
           )}
         >
-          Socket Frame Stream ({socketLog.length})
+          Update Log ({socketLog.length})
         </button>
         <button
           onClick={() => setActiveTab('contracts')}
@@ -189,7 +181,7 @@ export default function TeamlineWorkspaceSimulator() {
               : 'text-text-muted hover:text-text-primary'
           )}
         >
-          OCC & Room Architecture
+          Version Guard
         </button>
       </div>
 
@@ -199,15 +191,14 @@ export default function TeamlineWorkspaceSimulator() {
           {/* Simulated Active Peers Header */}
           <div className="flex flex-wrap items-center justify-between gap-3 p-3 rounded-lg bg-bg-primary/90 border border-border-subtle font-mono text-xs">
             <div className="flex items-center gap-2">
-              <span className="text-text-muted">Tenant Channel:</span>
-              <span className="text-text-primary font-bold">ws://teamline.io/rooms/workspace_taqat</span>
+              <span className="text-text-muted">Workspace:</span>
+              <span className="text-text-primary font-bold">TAQAT demo</span>
             </div>
             <div className="flex items-center gap-3">
               {activeClients.map((client) => (
                 <div key={client.id} className="flex items-center gap-1.5 text-[11px] text-text-secondary">
                   <span className="w-1.5 h-1.5 rounded-full bg-functional-success" />
                   <span className="font-medium">{client.name}</span>
-                  <span className="text-text-muted">({client.latency})</span>
                 </div>
               ))}
             </div>
@@ -347,15 +338,15 @@ export default function TeamlineWorkspaceSimulator() {
       {activeTab === 'packets' && (
         <div className="space-y-3">
           <div className="flex items-center justify-between text-xs font-mono text-text-muted px-1">
-            <span>WebSocket Frame Ingestion Log</span>
-            <span>Room Broadcast Fan-Out</span>
+            <span>Simulated update log</span>
+            <span>Workspace members</span>
           </div>
 
           <div className="h-64 overflow-y-auto space-y-2 pr-1 font-mono text-xs">
             {socketLog.length === 0 ? (
               <div className="h-full flex flex-col items-center justify-center text-text-muted text-center p-4">
-                <span>No frames broadcast yet.</span>
-                <span className="text-[11px] mt-1">Move a task or trigger a conflict in the Board tab to inspect wire packets.</span>
+                <span>No updates yet.</span>
+                <span className="text-[11px] mt-1">Move a task or trigger a conflict in the Board tab to see the updates.</span>
               </div>
             ) : (
               socketLog.map((packet) => (
@@ -375,7 +366,7 @@ export default function TeamlineWorkspaceSimulator() {
                       >
                         {packet.event}
                       </span>
-                      <span className="text-text-muted">room: [{packet.channel}]</span>
+                      <span className="text-text-muted">workspace: [{packet.channel}]</span>
                     </div>
                     <span className="text-text-muted">{packet.timestamp}</span>
                   </div>
@@ -384,8 +375,8 @@ export default function TeamlineWorkspaceSimulator() {
                     {JSON.stringify(packet.payload, null, 2)}
                   </pre>
 
-                  <div className="text-[10px] text-accent text-right">
-                    Delivered to 3 sockets in {packet.propagationMs}ms
+                  <div className="text-[10px] text-text-muted text-right font-mono">
+                    Sent to workspace members [{packet.channel}]
                   </div>
                 </div>
               ))
@@ -408,7 +399,7 @@ export default function TeamlineWorkspaceSimulator() {
 
           <div className="rounded-lg bg-bg-secondary p-3 font-mono text-[11px] overflow-x-auto border border-border-subtle">
             <pre className="text-text-secondary leading-relaxed">
-{`// task.service.js — Optimistic Concurrency & Room Broadcast
+{`// Illustrative sketch of the version guard, not copied from the TeamLine repo
 async function updateTaskStatus(workspaceId, taskId, targetStatus, expectedVersion) {
   // 1. Atomic Version-Guarded Mutation
   const updatedTask = await Task.findOneAndUpdate(
@@ -420,14 +411,6 @@ async function updateTaskStatus(workspaceId, taskId, targetStatus, expectedVersi
   if (!updatedTask) {
     throw new AppError(409, 'OPTIMISTIC_CONCURRENCY_VIOLATION');
   }
-
-  // 2. Room-Scoped WebSocket Fan-Out
-  io.to(\`workspace_\${workspaceId}\`).emit('TASK_MOVED', {
-    taskId: updatedTask._id,
-    status: updatedTask.status,
-    version: updatedTask.__v,
-    updatedAt: new Date().toISOString()
-  });
 
   return updatedTask;
 }`}

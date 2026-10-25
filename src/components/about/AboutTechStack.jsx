@@ -9,7 +9,7 @@ export default function AboutTechStack() {
         <SectionHeading
           eyebrow="TOOLS I USE"
           title="Technical Stack & Domains"
-          description="Technologies, databases, and architectural patterns verified and applied across production-oriented systems and rigorous training."
+          description="Technologies I have used in shipped projects and training."
         />
       </RevealOnScroll>
 

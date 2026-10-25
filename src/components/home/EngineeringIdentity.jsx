@@ -14,15 +14,15 @@ export default function EngineeringIdentity() {
     },
     {
       number: '02',
-      title: 'Predictable & Hardened REST APIs',
-      description: 'APIs are long-term contracts. I build RESTful endpoints with strict schema validations, structured RFC-compliant error responses, and defense-in-depth security including JWT token rotation and granular RBAC.',
+      title: 'Predictable REST APIs',
+      description: 'APIs are long-term contracts. I build RESTful endpoints with strict schema validations, structured error responses, and JWT authentication and role-based access control.',
       highlights: ['Declarative RBAC Middleware', 'Schema Validation', 'Stateless JWT Lifecycle'],
     },
     {
       number: '03',
       title: 'Engineering Ownership & Team Leadership',
-      description: 'As a team leader on projects like TeamLine and PCD, I bridge technical architecture with collaborative delivery. I align frontend and backend contracts early, review pull requests, and foster engineering discipline.',
-      highlights: ['API Contract Discipline', 'PR Reviews & Mentorship', 'Sprint Coordination'],
+      description: 'As Team Leader on TeamLine during the TAQAT internship, I agree API contracts with the frontend early and keep the backend aligned with them.',
+      highlights: ['API Contract Discipline', 'Workspace RBAC', 'Real-time Task Updates'],
     },
   ];
 

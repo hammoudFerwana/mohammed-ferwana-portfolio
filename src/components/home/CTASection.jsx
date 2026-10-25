@@ -38,7 +38,7 @@ export default function CTASection() {
             </span>
           </h2>
           <p className="mt-4 text-base sm:text-lg text-text-secondary leading-relaxed max-w-2xl mx-auto text-balance">
-            Whether you need a dedicated Backend Engineer, scalable REST API architecture, or database optimization, I am ready to contribute.
+            Whether you need a dedicated Backend Engineer, reliable REST API architecture, or database optimization, I am ready to contribute.
           </p>
         </RevealOnScroll>
 

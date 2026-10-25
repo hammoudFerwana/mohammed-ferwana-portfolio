@@ -3,10 +3,8 @@
 import Link from 'next/link';
 import { navigation } from '@/data/navigation';
 import { siteMetadata } from '@/data/siteMetadata';
-import { useOverlay } from '@/context/OverlayContext';
 
 export default function Footer() {
-  const { openTerminal } = useOverlay();
   const allNavLinks = [...navigation.main, ...navigation.secondary];
 
   return (
@@ -24,7 +22,7 @@ export default function Footer() {
               </span>
             </div>
             <p className="text-sm text-text-secondary max-w-sm leading-relaxed">
-              {siteMetadata.tagline}. Specializing in robust API design, modular architecture, and resilient server-side systems.
+              {siteMetadata.tagline} I build REST APIs with guarded state machines and tenant isolation.
             </p>
             <div className="inline-flex items-center gap-2 px-2.5 py-1 rounded-full bg-functional-success/10 border border-functional-success/20 text-functional-success text-xs font-mono">
               <span className="w-1.5 h-1.5 rounded-full bg-functional-success animate-pulse" />
@@ -51,10 +49,10 @@ export default function Footer() {
             </ul>
           </div>
 
-          {/* Connect & System Column */}
+          {/* Connect & Direct Channels */}
           <div className="space-y-4">
             <h3 className="font-mono text-xs uppercase tracking-widest text-text-muted">
-              Connect & Tools
+              Connect
             </h3>
             <ul className="space-y-2.5 text-sm">
               <li>
@@ -87,36 +85,27 @@ export default function Footer() {
                   {siteMetadata.email}
                 </a>
               </li>
+              <li>
+                <a
+                  href="/resume/Mohammed_Ferwana_Resume.pdf"
+                  download="Mohammed_Ferwana_Resume.pdf"
+                  className="text-text-secondary hover:text-accent transition-colors inline-flex items-center gap-1.5"
+                >
+                  Download Résumé (PDF)
+                  <span className="text-xs text-text-muted">↓</span>
+                </a>
+              </li>
             </ul>
-
-            {/* Terminal Easter Egg Trigger */}
-            <div className="pt-2">
-              <button
-                type="button"
-                onClick={openTerminal}
-                className="group inline-flex items-center gap-2 text-xs font-mono text-text-muted hover:text-accent transition-colors"
-                title="Launch Mini Terminal (Easter Egg)"
-              >
-                <span className="p-1 rounded bg-bg-tertiary border border-border-default group-hover:border-accent/40">
-                  <svg className="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2">
-                    <path strokeLinecap="round" strokeLinejoin="round" d="M8 9l3 3-3 3m5 0h3M5 20h14a2 2 0 002-2V6a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
-                  </svg>
-                </span>
-                <span>$ terminal.sh</span>
-              </button>
-            </div>
           </div>
         </div>
 
         {/* Bottom Bar */}
         <div className="mt-14 pt-8 border-t border-border-subtle flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-text-muted">
-          <p>© {new Date().getFullYear()} {siteMetadata.name}. Built with intention.</p>
+          <p>© {new Date().getFullYear()} {siteMetadata.name}.</p>
           <div className="flex items-center gap-4 font-mono text-[11px]">
             <span>Next.js 14 App Router</span>
             <span>•</span>
             <span>Tailwind CSS</span>
-            <span>•</span>
-            <span>Zero Slop</span>
           </div>
         </div>
       </div>

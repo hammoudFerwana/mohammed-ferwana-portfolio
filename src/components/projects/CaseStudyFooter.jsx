@@ -4,22 +4,20 @@ import Link from 'next/link';
 import Button from '@/components/shared/Button';
 import Badge from '@/components/shared/Badge';
 import RevealOnScroll from '@/components/shared/RevealOnScroll';
-import { useOverlay } from '@/context/OverlayContext';
 import { projects } from '@/data/projects';
 import { siteMetadata } from '@/data/siteMetadata';
 
 /**
  * CaseStudyFooter — End-of-case-study continuation and hiring conversion block.
  *
- * 1. Inter-case study navigation (InsurFlow → TeamLine → SAIOS Academy → All Projects)
+ * 1. Inter-case study navigation (Sawn → TeamLine → All Projects)
  * 2. Discussion & hiring CTA routing to /contact
- * 3. Direct email Resume / CV request action
+ * 3. Direct Resume / CV download action
  *
  * @param {Object} props
  * @param {Object} props.currentProject — Current project data object
  */
 export default function CaseStudyFooter({ currentProject }) {
-  const { openResumeModal } = useOverlay();
   const tier1Projects = projects.filter((p) => p.tier === 1 && p.slug);
   const currentIndex = tier1Projects.findIndex((p) => p.slug === currentProject?.slug);
   const nextProject =
@@ -71,7 +69,7 @@ export default function CaseStudyFooter({ currentProject }) {
                     Explore All Engineering Systems
                   </h3>
                   <p className="text-sm text-text-secondary max-w-xl">
-                    Browse the complete project catalog or review the InsurFlow flagship case study.
+                    Browse the complete project catalog or review the Sawn flagship case study.
                   </p>
                 </div>
                 <div className="flex flex-wrap items-center gap-2.5 shrink-0 pt-2 sm:pt-0">
@@ -79,7 +77,7 @@ export default function CaseStudyFooter({ currentProject }) {
                     All Projects →
                   </Button>
                   <Button href="/projects/insurflow" variant="ghost" size="md">
-                    InsurFlow Case Study
+                    Sawn Case Study
                   </Button>
                 </div>
               </div>
@@ -107,11 +105,12 @@ export default function CaseStudyFooter({ currentProject }) {
                 Start a Conversation →
               </Button>
               <Button
-                onClick={openResumeModal}
+                href="/resume/Mohammed_Ferwana_Resume.pdf"
+                download="Mohammed_Ferwana_Resume.pdf"
                 variant="secondary"
                 size="md"
               >
-                Request Resume
+                Download Resume
               </Button>
             </div>
           </div>
