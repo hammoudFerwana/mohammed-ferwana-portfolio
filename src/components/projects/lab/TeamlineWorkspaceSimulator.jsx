@@ -192,7 +192,7 @@ export default function TeamlineWorkspaceSimulator() {
           <div className="flex flex-wrap items-center justify-between gap-3 p-3 rounded-lg bg-bg-primary/90 border border-border-subtle font-mono text-xs">
             <div className="flex items-center gap-2">
               <span className="text-text-muted">Workspace:</span>
-              <span className="text-text-primary font-bold">workspace: TAQAT demo</span>
+              <span className="text-text-primary font-bold">TAQAT demo</span>
             </div>
             <div className="flex items-center gap-3">
               {activeClients.map((client) => (

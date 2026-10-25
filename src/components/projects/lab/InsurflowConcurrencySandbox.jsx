@@ -52,7 +52,7 @@ export default function InsurflowConcurrencySandbox() {
         if (targetOrg.id === orgA.id) baseA = assignedSeq;
         else baseB = assignedSeq;
 
-        const claimId = `CLM-${targetOrg.code}-${String(assignedSeq).padStart(5, '0')}`;
+        const claimId = `CLM-${targetOrg.code}-${String(assignedSeq).padStart(4, '0')}`;
         const threadId = `worker-pool-${(i % 4) + 1}`;
 
         newEvents.push({
@@ -298,17 +298,16 @@ export default function InsurflowConcurrencySandbox() {
           ) : (
             <div className="h-44 overflow-x-auto rounded bg-bg-secondary p-3 font-mono text-[11px] leading-relaxed border border-border-subtle">
               <pre className="text-text-secondary">
-{`// claim.service.js — Atomic sequence increment implementation
+{`// Illustrative sketch; the real counter runs in claimSchema.pre('save') in claim.model.js
 const counter = await Counter.findOneAndUpdate(
   { organizationId: orgObjectId, entityType: 'CLAIM' },
   { $inc: { seq: 1 } },
   { new: true, upsert: true, setDefaultsOnInsert: true }
 );
 
-const sequentialClaimId = \`CLM-\${orgPrefix}-\${String(counter.seq).padStart(5, '0')}\`;
+const sequentialClaimId = \`CLM-\${orgPrefix}-\${String(counter.seq).padStart(4, '0')}\`;
 
-// Invariant guarantee: MongoDB single-document write atomicity guarantees
-// strictly monotonic integer allocation under arbitrary concurrent workers.`}
+// One atomic $inc on a single counter document per tenant, so concurrent creations never share a number.`}
               </pre>
             </div>
           )}

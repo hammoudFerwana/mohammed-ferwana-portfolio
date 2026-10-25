@@ -21,7 +21,7 @@ export default function HowIThink() {
       num: '02',
       title: 'Model Data & Lifecycle States',
       summary: 'Design database schemas, normalization trade-offs, and state machines.',
-      detail: 'I design document schemas and relational models around access patterns. For complex processes like insurance claims or sprint boards, I formalize finite state machines to ensure invalid transitions are strictly impossible.',
+      detail: 'I design document schemas and relational models around access patterns. For complex processes like insurance claims or task boards, I formalize finite state machines to ensure invalid transitions are strictly impossible.',
       keyTakeaway: 'Data modeling defines the natural ceiling of your system performance.',
     },
     {
