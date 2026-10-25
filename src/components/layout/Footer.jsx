@@ -103,7 +103,7 @@ export default function Footer() {
         <div className="mt-14 pt-8 border-t border-border-subtle flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-text-muted">
           <p>© {new Date().getFullYear()} {siteMetadata.name}.</p>
           <div className="flex items-center gap-4 font-mono text-[11px]">
-            <span>Next.js 14 App Router</span>
+            <span>Next.js 16 App Router</span>
             <span>•</span>
             <span>Tailwind CSS</span>
           </div>

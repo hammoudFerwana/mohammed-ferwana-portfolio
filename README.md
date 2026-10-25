@@ -1,6 +1,6 @@
 # Mohammed Ferwana — Premium Engineering Portfolio
 
-> A sophisticated personal engineering portfolio built with Next.js 14, Tailwind CSS, and Framer Motion. Designed to communicate backend engineering thinking through evidence, architecture, and storytelling.
+> A sophisticated personal engineering portfolio built with Next.js 16, Tailwind CSS, and Framer Motion. Designed to communicate backend engineering thinking through evidence, architecture, and storytelling.
 
 ---
 
