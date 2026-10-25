@@ -20,7 +20,7 @@ const formattedTestRunDate = new Date(`${metrics.testRunDate}T00:00:00Z`).toLoca
  * - Pillar 1 (EVD-001): Workflow Integrity & FSM Transition Gate (409 Conflict)
  * - Pillar 2 (EVD-002 + EVD-003): Multi-Tenant Data Integrity (Concurrency + Compound Unique Index)
  * - Pillar 3 (EVD-004): Stealth Multi-Tenant Security (404 Anti-Enumeration)
- * - Supporting (EVD-007 & EVD-006): Isolated in-memory replica harness & API rate limiting
+ * - Supporting (EVD-007 & EVD-006): Isolated in-memory MongoDB harness & API rate limiting
  */
 export default function InsurflowTestingEvidence() {
   const [activePillar, setActivePillar] = useState('workflow'); // 'workflow' | 'dataintegrity' | 'stealth'
@@ -58,9 +58,9 @@ export default function InsurflowTestingEvidence() {
             <span className="font-mono text-xs text-text-muted font-medium mr-1">
               Test Stack:
             </span>
-            <Badge variant="neutral" size="sm">Jest 29</Badge>
-            <Badge variant="neutral" size="sm">Supertest 6</Badge>
-            <Badge variant="neutral" size="sm">MongoMemoryServer 9</Badge>
+            <Badge variant="neutral" size="sm">Jest</Badge>
+            <Badge variant="neutral" size="sm">Supertest</Badge>
+            <Badge variant="neutral" size="sm">mongodb-memory-server</Badge>
           </div>
           <div className="flex flex-wrap items-center gap-2">
             <span className="font-mono text-[11px] text-text-muted bg-bg-tertiary px-2.5 py-1 rounded border border-border-subtle">
@@ -155,7 +155,7 @@ export default function InsurflowTestingEvidence() {
             {/* Code Excerpt */}
             <div className="space-y-2">
               <div className="flex items-center justify-between text-xs font-mono text-text-muted">
-                <span>tests/claim.statusMachine.test.js (Lines 530–542)</span>
+                <span>tests/claim.statusMachine.test.js (test starts at line 543)</span>
                 <span>Supertest + MongoMemoryServer</span>
               </div>
               <div className="overflow-x-auto rounded-lg bg-bg-primary/95 border border-border-subtle p-4 font-mono text-xs sm:text-[13px] leading-relaxed text-text-secondary">
@@ -180,7 +180,7 @@ export default function InsurflowTestingEvidence() {
             <div className="p-3 rounded-lg bg-bg-tertiary/60 border border-border-subtle text-xs text-text-secondary leading-relaxed">
               <strong className="text-text-primary font-medium">Engineering Guarantee: </strong>
               The claim lifecycle cannot be bypassed through direct endpoint invocation. Every transition is mediated
-              by an immutable transition map at the service layer, returning predictable error envelopes.
+              by a fixed transition map at the service layer, returning predictable error envelopes.
             </div>
           </div>
         )}
@@ -381,10 +381,10 @@ export default function InsurflowTestingEvidence() {
             <span className="font-mono text-xs uppercase tracking-wider text-text-muted font-semibold">
               Test Harness Architecture (EVD-007)
             </span>
-            <Badge variant="neutral" size="sm">In-Memory MongoDB Replica</Badge>
+            <Badge variant="neutral" size="sm">In-Memory MongoDB</Badge>
           </div>
           <p className="text-xs text-text-secondary leading-relaxed">
-            Integration tests run against a self-contained in-memory MongoDB replica via <code className="font-mono text-accent">mongodb-memory-server</code>.
+            Integration tests run against a self-contained in-memory MongoDB via <code className="font-mono text-accent">mongodb-memory-server</code>.
             This ensures tests execute real Mongoose models and compound unique indexes with per-test collection flushes,
             eliminating fragile mocks while maintaining fast, isolated test execution.
           </p>
@@ -400,7 +400,7 @@ export default function InsurflowTestingEvidence() {
           </div>
           <p className="text-xs text-text-secondary leading-relaxed">
             Sensitive authentication and resource endpoints enforce request rate limits and return <code className="font-mono text-functional-warning">HTTP 429 Too Many Requests</code> with
-            code <code className="font-mono text-accent">TOO_MANY_REQUESTS</code> when thresholds are exceeded (<code className="font-mono text-text-muted">tests/rateLimiting.test.js:45-75</code>),
+            code <code className="font-mono text-accent">TOO_MANY_REQUESTS</code> when thresholds are exceeded (<code className="font-mono text-text-muted">tests/rateLimiting.test.js</code>),
             mitigating brute-force and resource exhaustion vectors.
           </p>
         </div>

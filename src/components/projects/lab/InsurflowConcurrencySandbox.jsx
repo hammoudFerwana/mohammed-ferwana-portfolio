@@ -6,15 +6,15 @@ import Badge from '@/components/shared/Badge';
 import { cn } from '@/lib/utils';
 
 const ORGANIZATIONS = [
-  { id: 'ORG_ALLIANZ', label: 'Allianz Global', code: 'ALZ', initialSeq: 1040 },
-  { id: 'ORG_AXA', label: 'AXA Corporate', code: 'AXA', initialSeq: 420 },
+  { id: 'ORG_ALPHA', label: 'Tenant Alpha', code: 'ALPHA', initialSeq: 0 },
+  { id: 'ORG_BETA', label: 'Tenant Beta', code: 'BETA', initialSeq: 0 },
 ];
 
 export default function InsurflowConcurrencySandbox() {
   const [selectedOrg, setSelectedOrg] = useState(ORGANIZATIONS[0].id);
   const [counters, setCounters] = useState({
-    ORG_ALLIANZ: 1040,
-    ORG_AXA: 420,
+    ORG_ALPHA: 0,
+    ORG_BETA: 0,
   });
   const [isRunning, setIsRunning] = useState(false);
   const [simulationLog, setSimulationLog] = useState([]);
@@ -96,8 +96,8 @@ export default function InsurflowConcurrencySandbox() {
 
   const resetCounters = useCallback(() => {
     setCounters({
-      ORG_ALLIANZ: 1040,
-      ORG_AXA: 420,
+      ORG_ALPHA: 0,
+      ORG_BETA: 0,
     });
     setSimulationLog([]);
     setMetrics({

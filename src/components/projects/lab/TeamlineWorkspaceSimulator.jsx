@@ -16,8 +16,8 @@ const INITIAL_TASK = {
 
 const CONNECTED_CLIENTS = [
   { id: 'c1', name: 'Mohammed (Team Lead)', role: 'lead', status: 'online' },
-  { id: 'c2', name: 'Frontend Dev (Client A)', role: 'member', status: 'online' },
-  { id: 'c3', name: 'QA Engineer (Client B)', role: 'member', status: 'online' },
+  { id: 'c2', name: 'Teammate A', role: 'member', status: 'online' },
+  { id: 'c3', name: 'Teammate B', role: 'member', status: 'online' },
 ];
 
 export default function TeamlineWorkspaceSimulator() {
@@ -47,7 +47,7 @@ export default function TeamlineWorkspaceSimulator() {
       // 1. Simulate API Route + Auth
       await new Promise((r) => setTimeout(r, shouldReduceMotion ? 30 : 150));
 
-      // 2. Broadcast via WebSocket
+      // 2. Notify workspace members (simulated)
       const packet = {
         id: `${Date.now()}-${newVersion}`,
         event: 'TASK_MOVED',
@@ -131,11 +131,11 @@ export default function TeamlineWorkspaceSimulator() {
               Real-time Kanban Sync & Concurrency Lab
             </h3>
             <Badge variant="success" size="sm">
-              Live WebSockets
+              Simulation
             </Badge>
           </div>
           <p className="text-xs sm:text-sm text-text-secondary">
-            Simulates multi-client real-time synchronization, workspace room scoping, and Optimistic Concurrency Control (<code className="text-accent bg-bg-tertiary px-1 py-0.5 rounded">__v</code> guards) across collaborative sprint boards.
+            Simulates multi-client real-time task updates, workspace scoping, and Optimistic Concurrency Control (<code className="text-accent bg-bg-tertiary px-1 py-0.5 rounded">__v</code> guards) across task boards.
           </p>
         </div>
 
@@ -159,7 +159,7 @@ export default function TeamlineWorkspaceSimulator() {
               : 'text-text-muted hover:text-text-primary'
           )}
         >
-          Board & Peers View
+          Board View
         </button>
         <button
           onClick={() => setActiveTab('packets')}
@@ -170,7 +170,7 @@ export default function TeamlineWorkspaceSimulator() {
               : 'text-text-muted hover:text-text-primary'
           )}
         >
-          Socket Frame Stream ({socketLog.length})
+          Update Log ({socketLog.length})
         </button>
         <button
           onClick={() => setActiveTab('contracts')}
@@ -181,7 +181,7 @@ export default function TeamlineWorkspaceSimulator() {
               : 'text-text-muted hover:text-text-primary'
           )}
         >
-          OCC & Room Architecture
+          Version Guard
         </button>
       </div>
 
@@ -191,8 +191,8 @@ export default function TeamlineWorkspaceSimulator() {
           {/* Simulated Active Peers Header */}
           <div className="flex flex-wrap items-center justify-between gap-3 p-3 rounded-lg bg-bg-primary/90 border border-border-subtle font-mono text-xs">
             <div className="flex items-center gap-2">
-              <span className="text-text-muted">Tenant Channel:</span>
-              <span className="text-text-primary font-bold">ws://teamline.io/rooms/workspace_taqat</span>
+              <span className="text-text-muted">Workspace:</span>
+              <span className="text-text-primary font-bold">workspace: TAQAT demo</span>
             </div>
             <div className="flex items-center gap-3">
               {activeClients.map((client) => (
@@ -338,15 +338,15 @@ export default function TeamlineWorkspaceSimulator() {
       {activeTab === 'packets' && (
         <div className="space-y-3">
           <div className="flex items-center justify-between text-xs font-mono text-text-muted px-1">
-            <span>WebSocket Frame Ingestion Log</span>
-            <span>Room Broadcast Fan-Out</span>
+            <span>Simulated update log</span>
+            <span>Workspace members</span>
           </div>
 
           <div className="h-64 overflow-y-auto space-y-2 pr-1 font-mono text-xs">
             {socketLog.length === 0 ? (
               <div className="h-full flex flex-col items-center justify-center text-text-muted text-center p-4">
-                <span>No frames broadcast yet.</span>
-                <span className="text-[11px] mt-1">Move a task or trigger a conflict in the Board tab to inspect wire packets.</span>
+                <span>No updates yet.</span>
+                <span className="text-[11px] mt-1">Move a task or trigger a conflict in the Board tab to see the updates.</span>
               </div>
             ) : (
               socketLog.map((packet) => (
@@ -366,7 +366,7 @@ export default function TeamlineWorkspaceSimulator() {
                       >
                         {packet.event}
                       </span>
-                      <span className="text-text-muted">room: [{packet.channel}]</span>
+                      <span className="text-text-muted">workspace: [{packet.channel}]</span>
                     </div>
                     <span className="text-text-muted">{packet.timestamp}</span>
                   </div>
@@ -376,7 +376,7 @@ export default function TeamlineWorkspaceSimulator() {
                   </pre>
 
                   <div className="text-[10px] text-text-muted text-right font-mono">
-                    Broadcast to workspace members in room [{packet.channel}]
+                    Sent to workspace members [{packet.channel}]
                   </div>
                 </div>
               ))
@@ -399,7 +399,7 @@ export default function TeamlineWorkspaceSimulator() {
 
           <div className="rounded-lg bg-bg-secondary p-3 font-mono text-[11px] overflow-x-auto border border-border-subtle">
             <pre className="text-text-secondary leading-relaxed">
-{`// task.service.js — Optimistic Concurrency & Room Broadcast
+{`// Illustrative sketch of the version guard, not copied from the TeamLine repo
 async function updateTaskStatus(workspaceId, taskId, targetStatus, expectedVersion) {
   // 1. Atomic Version-Guarded Mutation
   const updatedTask = await Task.findOneAndUpdate(
@@ -411,14 +411,6 @@ async function updateTaskStatus(workspaceId, taskId, targetStatus, expectedVersi
   if (!updatedTask) {
     throw new AppError(409, 'OPTIMISTIC_CONCURRENCY_VIOLATION');
   }
-
-  // 2. Room-Scoped WebSocket Fan-Out
-  io.to(\`workspace_\${workspaceId}\`).emit('TASK_MOVED', {
-    taskId: updatedTask._id,
-    status: updatedTask.status,
-    version: updatedTask.__v,
-    updatedAt: new Date().toISOString()
-  });
 
   return updatedTask;
 }`}
