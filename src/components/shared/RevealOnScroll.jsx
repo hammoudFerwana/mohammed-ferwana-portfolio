@@ -3,6 +3,14 @@
 import { motion, useReducedMotion } from 'framer-motion';
 import { scrollReveal } from '@/lib/animations';
 
+/**
+ * RevealOnScroll: fades content in when it enters the viewport.
+ *
+ * Always renders the same motion.div on server and client. Swapping to a plain
+ * <div> for reduced motion left the server-rendered `opacity: 0` style in the DOM
+ * after hydration, so reduced-motion visitors saw blank sections.
+ * With reduced motion, the element starts in its visible state instead.
+ */
 export default function RevealOnScroll({
   children,
   className = '',
@@ -11,14 +19,6 @@ export default function RevealOnScroll({
   ...props
 }) {
   const prefersReducedMotion = useReducedMotion();
-
-  if (prefersReducedMotion) {
-    return (
-      <div className={className} {...props}>
-        {children}
-      </div>
-    );
-  }
 
   const customVariant = delay > 0 ? {
     ...variant,
@@ -33,7 +33,7 @@ export default function RevealOnScroll({
 
   return (
     <motion.div
-      initial="hidden"
+      initial={prefersReducedMotion ? 'visible' : 'hidden'}
       whileInView="visible"
       viewport={{ once: true, margin: '-40px' }}
       variants={customVariant}

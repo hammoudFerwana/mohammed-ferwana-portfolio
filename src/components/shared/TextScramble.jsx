@@ -1,13 +1,14 @@
 'use client';
 
 import { useState, useEffect, useRef, useCallback } from 'react';
-import { useInView } from 'framer-motion';
+import { useInView, useReducedMotion } from 'framer-motion';
 
 const GLYPHS = 'アイウエオカキクケコサシスセソタチツテ0101XYZ_#@&%<>/*-+=';
 
 /**
  * TextScramble — Cybernetic decoding text reveal effect.
  * Cycles through random glyphs before resolving into deterministic characters.
+ * Does nothing for reduced-motion visitors: they always see the real text.
  */
 export default function TextScramble({
   text,
@@ -21,9 +22,10 @@ export default function TextScramble({
   const ref = useRef(null);
   const isInView = useInView(ref, { once: true, margin: '-20px' });
   const animatingRef = useRef(false);
+  const prefersReducedMotion = useReducedMotion();
 
   const scramble = useCallback(() => {
-    if (animatingRef.current) return;
+    if (prefersReducedMotion || animatingRef.current) return;
     animatingRef.current = true;
 
     let iteration = 0;
@@ -53,7 +55,7 @@ export default function TextScramble({
     }, speed);
 
     return () => clearInterval(interval);
-  }, [text, speed]);
+  }, [text, speed, prefersReducedMotion]);
 
   useEffect(() => {
     let timeoutId;
