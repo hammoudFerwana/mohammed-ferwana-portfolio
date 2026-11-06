@@ -10,7 +10,7 @@ const FILTERS = [
   { id: 'tier1', label: 'Case Studies (Tier 1)' },
   { id: 'leadership', label: 'Team Leadership' },
   { id: 'claims', label: 'B2B & FinTech' },
-  { id: 'platforms', label: 'Workspaces & EdTech' },
+  { id: 'platforms', label: 'Platforms & Marketplaces' },
 ];
 
 export default function ProjectsExplorer({ projects = [] }) {
@@ -32,7 +32,7 @@ export default function ProjectsExplorer({ projects = [] }) {
           project.category?.toLowerCase().includes('claims') || project.id === 'insurflow';
       } else if (activeFilter === 'platforms') {
         matchesFilter =
-          project.category === 'Platform' || project.category === 'Education';
+          project.category === 'Platform' || project.category === 'Education' || project.category === 'Marketplace';
       }
 
       if (!matchesFilter) return false;
@@ -70,7 +70,7 @@ export default function ProjectsExplorer({ projects = [] }) {
         ).length;
       } else if (f.id === 'platforms') {
         acc[f.id] = projects.filter(
-          (p) => p.category === 'Platform' || p.category === 'Education'
+          (p) => p.category === 'Platform' || p.category === 'Education' || p.category === 'Marketplace'
         ).length;
       }
       return acc;
