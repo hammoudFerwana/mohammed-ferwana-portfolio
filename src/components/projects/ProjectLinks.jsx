@@ -12,7 +12,7 @@ import Button from '@/components/shared/Button';
  */
 export default function ProjectLinks({ links = {}, projectSlug }) {
   const hasLinks = Boolean(links?.github || links?.live || links?.dashboard);
-  const isPrivateRepo = projectSlug === 'insurflow';
+  const isPrivateRepo = projectSlug === 'insurflow' || projectSlug === 'saios-academy';
 
   if (!hasLinks && !isPrivateRepo) return null;
 
