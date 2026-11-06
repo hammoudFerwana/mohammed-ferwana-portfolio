@@ -33,8 +33,14 @@ export default function ProjectCard({ project, priority = false }) {
                 {project.category}
               </Badge>
               {project.leadership && (
-                <Badge variant="success" size="sm">
-                  Leadership
+                <Badge
+                  variant={project.leadership.type === 'collaboration' ? 'accent' : 'success'}
+                  size="sm"
+                >
+                  {project.leadership.badge ||
+                    (project.leadership.type === 'collaboration'
+                      ? 'Collaboration'
+                      : 'Leadership')}
                 </Badge>
               )}
             </div>
