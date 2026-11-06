@@ -64,7 +64,7 @@ export default function ExperiencePage() {
                 Ready to Discuss Engineering Opportunities?
               </h2>
               <p className="text-sm text-text-secondary leading-relaxed">
-                Currently open to backend engineering roles, backend contracts, and technical consulting.
+                Open to remote backend roles, internships and freelance projects.
               </p>
             </div>
             <div className="flex flex-wrap items-center gap-3 shrink-0">

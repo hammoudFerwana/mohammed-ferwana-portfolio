@@ -105,7 +105,7 @@ export default function ContactInfo() {
           Available for Backend Engineering Opportunities
         </h3>
         <p className="text-xs sm:text-sm text-text-secondary leading-relaxed">
-          Actively open to full-time roles, contract engineering, and backend architecture consulting.
+          Open to remote backend roles, internships and freelance projects.
         </p>
       </div>
 
