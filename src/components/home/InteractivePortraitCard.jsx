@@ -322,7 +322,7 @@ export default function InteractivePortraitCard() {
           {/* Technical Specs Footer */}
           <div className="relative z-10 pt-2 border-t border-border-subtle flex items-center justify-between text-[10px] font-mono text-text-muted">
             <span className="text-accent font-semibold">VERIFIED ARCHITECTURE</span>
-            <span className="text-text-secondary">Sawn · TeamLine · SAIOS</span>
+            <span className="text-text-secondary">Sawn & TeamLine</span>
           </div>
         </div>
       </div>
