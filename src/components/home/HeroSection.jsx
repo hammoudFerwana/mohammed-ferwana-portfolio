@@ -4,7 +4,7 @@ import Image from 'next/image';
 import Button from '@/components/shared/Button';
 import RevealOnScroll from '@/components/shared/RevealOnScroll';
 import CounterTicker from '@/components/shared/CounterTicker';
-import TextScramble from '@/components/shared/TextScramble';
+
 import { metrics } from '@/data/metrics';
 import InteractivePortraitCard from '@/components/home/InteractivePortraitCard';
 
@@ -36,11 +36,7 @@ export default function HeroSection() {
         <RevealOnScroll delay={0.05}>
           <div className="inline-flex items-center gap-2 font-mono text-[11px] sm:text-xs text-text-muted tracking-widest uppercase bg-bg-secondary/70 border border-border-default px-3.5 py-1.5 rounded-full mb-8 shadow-inner hover:border-accent/40 transition-colors duration-300">
             <span className="w-2 h-2 rounded-full bg-functional-success animate-pulse-ring shrink-0" />
-            <TextScramble
-              text="Node.js · Express · MongoDB · REST APIs · System Architecture"
-              speed={28}
-              delay={200}
-            />
+            <span>Node.js · Express · MongoDB · REST APIs</span>
           </div>
         </RevealOnScroll>
 
@@ -69,7 +65,7 @@ export default function HeroSection() {
             <RevealOnScroll delay={0.35}>
               <div className="space-y-2">
                 <p className="font-mono text-sm sm:text-base text-accent font-medium tracking-tight">
-                  <TextScramble text="Backend Engineer" speed={35} delay={400} />
+                  Backend Engineer
                 </p>
               </div>
             </RevealOnScroll>
