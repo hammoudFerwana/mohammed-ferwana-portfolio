@@ -153,7 +153,7 @@ export const projects = [
     id: 'teamline',
     slug: 'teamline',
     title: 'TeamLine',
-    description: 'Team workspace platform built during the TAQAT internship (2026).',
+    description: 'Team workspace platform built in the TAQAT CodeMap 2026 program.',
     role: 'Backend Developer & Team Leader',
     category: 'Platform',
     tier: 1,
@@ -222,11 +222,11 @@ export const projects = [
       {
         title: 'API Contracts & Workspace Boundaries',
         description: 'Established explicit frontend/backend API contracts early, ensuring clear interface boundaries between team members.',
-        context: 'Served as Team Leader during the TAQAT internship (2026).',
+        context: 'Served as Team Leader in the TAQAT CodeMap 2026 program.',
       },
     ],
     leadership: {
-      description: 'Served as Backend Developer and Team Leader during the TAQAT internship (2026), building TeamLine.',
+      description: 'Served as Backend Developer and Team Leader in the TAQAT CodeMap 2026 program, building TeamLine.',
       responsibilities: [
         'Designed REST APIs and defined endpoint specifications.',
         'Implemented workspace role-based access control (RBAC).',

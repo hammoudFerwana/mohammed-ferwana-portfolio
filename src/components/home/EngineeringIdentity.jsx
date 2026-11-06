@@ -21,7 +21,7 @@ export default function EngineeringIdentity() {
     {
       number: '03',
       title: 'Engineering Ownership & Team Leadership',
-      description: 'As Team Leader on TeamLine during the TAQAT internship, I agree API contracts with the frontend early and keep the backend aligned with them.',
+      description: 'As Team Leader on TeamLine in the TAQAT CodeMap 2026 program, I agree API contracts with the frontend early and keep the backend aligned with them.',
       highlights: ['API Contract Discipline', 'Workspace RBAC', 'Real-time Task Updates'],
     },
   ];

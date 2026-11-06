@@ -13,12 +13,12 @@ export const experiences = [
     type: 'work',
     title: 'Backend Developer Trainee',
     organization: 'Aristo Software',
-    period: 'May 2026 – Present',
+    period: 'Completed May 2026',
     location: 'Remote',
     project: null,
     projectSlug: null,
     isLeadership: false,
-    description: 'Backend Developer Trainee through the Khireej Qader program (90 hours), May 2026 to present.',
+    description: 'Backend Developer Trainee in the Khireej Qader program (Season Five), 90 hours of backend training with Node.js, completed May 2026.',
     responsibilities: [
       'Building backend endpoints with Node.js and Express.',
       'Writing MongoDB queries and data models.',
@@ -54,7 +54,7 @@ export const experiences = [
     project: 'TeamLine',
     projectSlug: 'teamline',
     isLeadership: true,
-    description: 'Backend Developer and Team Leader during the TAQAT internship (2026), building TeamLine, a team workspace platform.',
+    description: 'Backend Developer and Team Leader in the TAQAT CodeMap 2026 program, building TeamLine, a team workspace platform.',
     responsibilities: [
       'Designed REST APIs with JWT authentication and workspace role-based access control (RBAC).',
       'Built real-time task updates and version-guarded task moves.',
