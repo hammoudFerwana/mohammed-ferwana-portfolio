@@ -18,7 +18,7 @@ export const projects = [
     category: 'B2B Claims Engine',
     tier: 1,
     featured: true,
-    image: '/images/projects/insurflow.jpg',
+    image: null,
     technologies: ['Node.js', 'Express.js', 'MongoDB Atlas', 'Mongoose', 'JWT', 'RBAC', 'REST APIs', 'Jest'],
     links: {
       github: null,
@@ -158,7 +158,7 @@ export const projects = [
     category: 'Platform',
     tier: 1,
     featured: true,
-    image: '/images/projects/teamline.jpg',
+    image: null,
     technologies: ['Node.js', 'Express.js', 'MongoDB', 'Mongoose', 'JWT', 'RBAC', 'REST APIs'],
     links: {
       github: null,
