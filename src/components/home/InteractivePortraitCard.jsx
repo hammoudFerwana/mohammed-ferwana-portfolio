@@ -8,7 +8,6 @@ export default function InteractivePortraitCard() {
   const cardRef = useRef(null);
 
   // 3D physics state with requestAnimationFrame interpolation
-  const [isFlipped, setIsFlipped] = useState(false);
   const [isHovered, setIsHovered] = useState(false);
   const [reducedMotion, setReducedMotion] = useState(false);
 
@@ -53,9 +52,7 @@ export default function InteractivePortraitCard() {
       state.glareOpacity = lerp(state.glareOpacity, state.targetGlareOpacity, 0.15);
 
       if (cardRef.current) {
-        // Base tilt + flip rotation
-        const flipAngle = isFlipped ? 180 : 0;
-        cardRef.current.style.transform = `perspective(1100px) rotateX(${state.currentRotX.toFixed(2)}deg) rotateY(${(state.currentRotY + flipAngle).toFixed(2)}deg) scale3d(${isHovered ? 1.025 : 1}, ${isHovered ? 1.025 : 1}, 1)`;
+        cardRef.current.style.transform = `perspective(1100px) rotateX(${state.currentRotX.toFixed(2)}deg) rotateY(${state.currentRotY.toFixed(2)}deg) scale3d(${isHovered ? 1.025 : 1}, ${isHovered ? 1.025 : 1}, 1)`;
       }
 
       const glareEl = cardRef.current?.querySelector('.specular-glare');
@@ -75,7 +72,7 @@ export default function InteractivePortraitCard() {
         cancelAnimationFrame(state.rafId);
       }
     };
-  }, [reducedMotion, isFlipped, isHovered]);
+  }, [reducedMotion, isHovered]);
 
   // Mouse Move Event Listener
   const handleMouseMove = useCallback((e) => {
@@ -109,11 +106,6 @@ export default function InteractivePortraitCard() {
     s.targetGlareOpacity = 0;
   }, []);
 
-  const toggleFlip = (e) => {
-    e.stopPropagation();
-    setIsFlipped((prev) => !prev);
-  };
-
   return (
     <div
       ref={containerRef}
@@ -132,15 +124,14 @@ export default function InteractivePortraitCard() {
         aria-hidden="true"
       />
 
-      {/* Main Flip Card Shell */}
+      {/* Main Card Shell */}
       <div
         ref={cardRef}
-        className="relative w-full aspect-square rounded-2xl shadow-2xl transition-shadow duration-500 cursor-pointer"
+        className="relative w-full aspect-square rounded-2xl shadow-2xl transition-shadow duration-500"
         style={{
           transformStyle: 'preserve-3d',
           transition: reducedMotion ? 'transform 0.3s ease' : 'box-shadow 0.5s ease',
         }}
-        onClick={toggleFlip}
         role="region"
         aria-label="Engineering Identity Card of Mohammed Ferwana"
       >
@@ -150,8 +141,6 @@ export default function InteractivePortraitCard() {
         <div
           className="absolute inset-0 w-full h-full rounded-2xl overflow-hidden bg-bg-secondary border border-border-strong backdrop-blur-md"
           style={{
-            backfaceVisibility: 'hidden',
-            WebkitBackfaceVisibility: 'hidden',
             transform: 'rotateY(0deg)',
           }}
         >
@@ -201,36 +190,6 @@ export default function InteractivePortraitCard() {
             <div className="absolute -bottom-1 -right-1 w-3 h-3 border-b-2 border-r-2 border-accent/70 rounded-br" />
           </div>
 
-          {/* Top Status Bar & Flip Button (Depth Layer 2: translateZ 38px) */}
-          <div
-            className="absolute top-3.5 left-3.5 right-3.5 flex items-center justify-between z-20 pointer-events-auto"
-            style={{ transform: 'translateZ(38px)' }}
-          >
-            {/* Flip / Inspect Specs Action Pill */}
-            <button
-              onClick={toggleFlip}
-              type="button"
-              className="group/btn ml-auto inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-bg-primary/85 hover:bg-accent/20 backdrop-blur-md border border-border-default hover:border-accent/40 text-[10px] font-mono text-text-secondary hover:text-accent transition-all duration-200 shadow-sm"
-              title="Flip the card"
-              aria-label="Inspect Technical Specs"
-            >
-              <svg
-                className="w-3 h-3 group-hover/btn:rotate-180 transition-transform duration-500 text-accent"
-                fill="none"
-                viewBox="0 0 24 24"
-                stroke="currentColor"
-              >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth={2}
-                  d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"
-                />
-              </svg>
-              <span>SPECS</span>
-            </button>
-          </div>
-
           {/* Bottom Identity & Origin Pill (Depth Layer 3: translateZ 46px) */}
           <div
             className="absolute bottom-3.5 left-3.5 right-3.5 z-20"
@@ -246,83 +205,9 @@ export default function InteractivePortraitCard() {
               </div>
               <div className="text-right">
                 <span className="text-accent font-medium text-[11px] block">Gaza, Palestine</span>
-                <span className="text-[9px] text-text-muted tracking-wide">Remote / Hybrid</span>
+                <span className="text-[9px] text-text-muted tracking-wide">Remote</span>
               </div>
             </div>
-          </div>
-        </div>
-
-        {/* ========================================================
-            BACK FACE (Architectural Kernel & Tech Specs HUD)
-            ======================================================== */}
-        <div
-          className="absolute inset-0 w-full h-full rounded-2xl overflow-hidden bg-bg-secondary/95 border border-accent/30 p-5 flex flex-col justify-between backdrop-blur-xl shadow-2xl"
-          style={{
-            backfaceVisibility: 'hidden',
-            WebkitBackfaceVisibility: 'hidden',
-            transform: 'rotateY(180deg)',
-          }}
-        >
-          {/* Subtle Grid Blueprint Background */}
-          <div
-            className="absolute inset-0 opacity-[0.04] pointer-events-none"
-            style={{
-              backgroundImage:
-                'radial-gradient(circle at 1px 1px, #ffffff 1px, transparent 0)',
-              backgroundSize: '16px 16px',
-            }}
-            aria-hidden="true"
-          />
-
-          {/* Header Bar */}
-          <div className="relative z-10 flex items-center justify-between pb-3 border-b border-border-subtle">
-            <div className="flex items-center gap-2 font-mono text-[11px]">
-              <span className="w-2 h-2 rounded-full bg-accent shrink-0" />
-              <span className="font-bold text-text-primary tracking-wider uppercase">ARCH_KERNEL_SPECS</span>
-            </div>
-            <button
-              onClick={toggleFlip}
-              type="button"
-              className="inline-flex items-center gap-1 text-[10px] font-mono text-accent hover:text-accent-hover bg-accent/10 px-2 py-0.5 rounded border border-accent/20 transition-colors"
-              aria-label="Return to portrait"
-            >
-              <span>↩ PORTRAIT</span>
-            </button>
-          </div>
-
-          {/* System Metrics Bento */}
-          <div className="relative z-10 space-y-2.5 my-auto font-mono text-xs">
-            {/* Metric 1 */}
-            <div className="p-2.5 rounded-lg bg-bg-tertiary/70 border border-border-subtle hover:border-accent/30 transition-colors">
-              <div className="text-[10px] text-text-muted uppercase tracking-wider mb-1">CORE PARADIGM</div>
-              <div className="text-text-primary font-medium text-[11px] flex items-center justify-between">
-                <span>Modular Monolith & Deterministic FSM</span>
-                <span className="text-functional-success text-[10px]">VERIFIED</span>
-              </div>
-            </div>
-
-            {/* Metric 2 */}
-            <div className="p-2.5 rounded-lg bg-bg-tertiary/70 border border-border-subtle hover:border-accent/30 transition-colors">
-              <div className="text-[10px] text-text-muted uppercase tracking-wider mb-1">CONCURRENCY & SAFETY</div>
-              <div className="text-text-primary font-medium text-[11px] flex items-center justify-between">
-                <span>Guarded FSM · Zero Collisions</span>
-                <span className="text-accent text-[10px]">ATOMIC UPDATES</span>
-              </div>
-            </div>
-
-            {/* Metric 3 */}
-            <div className="p-2.5 rounded-lg bg-bg-tertiary/70 border border-border-subtle hover:border-accent/30 transition-colors">
-              <div className="text-[10px] text-text-muted uppercase tracking-wider mb-1">PRODUCTION STACK</div>
-              <div className="text-text-primary font-medium text-[11px]">
-                Node.js · Express · MongoDB · Mongoose · Jest · Docker
-              </div>
-            </div>
-          </div>
-
-          {/* Technical Specs Footer */}
-          <div className="relative z-10 pt-2 border-t border-border-subtle flex items-center justify-between text-[10px] font-mono text-text-muted">
-            <span className="text-accent font-semibold">VERIFIED ARCHITECTURE</span>
-            <span className="text-text-secondary">Sawn · Pal-Store · SAIOS</span>
           </div>
         </div>
       </div>

@@ -93,12 +93,6 @@ export default function CareerTimeline({ experiences = [], education = [] }) {
             );
           })}
         </div>
-
-        {/* Telemetry Indicator */}
-        <div className="flex items-center gap-2 text-xs font-mono text-text-muted px-2">
-          <span className="inline-block w-2 h-2 rounded-full bg-emerald-400 animate-pulse" aria-hidden="true" />
-          <span>Verified Track Record</span>
-        </div>
       </div>
 
       {/* ── Kinetic Vertical Timeline Track ── */}
@@ -181,7 +175,7 @@ export default function CareerTimeline({ experiences = [], education = [] }) {
                       <div className="space-y-3 pt-3 border-t border-border-subtle">
                         <div className="flex items-center justify-between">
                           <span className="font-mono text-xs uppercase tracking-wider text-text-muted font-semibold block">
-                            Key Contributions & System Impact
+                            What I work on
                           </span>
                           {exp.responsibilities.length > 2 && (
                             <button
@@ -319,7 +313,7 @@ export default function CareerTimeline({ experiences = [], education = [] }) {
 
                   <div className="pt-2 border-t border-border-subtle/70 text-xs font-mono text-text-muted flex items-center gap-2">
                     <span className="text-accent font-semibold">Specialization:</span>
-                    <span>Backend Systems • Database Engines • Algorithms</span>
+                    <span>Backend Systems • Databases • Algorithms</span>
                   </div>
                 </SpotlightCard>
               </motion.div>

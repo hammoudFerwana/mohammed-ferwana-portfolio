@@ -27,7 +27,7 @@ export default function AboutTimeline() {
         <SectionHeading
           eyebrow="TIMELINE"
           title="Engineering Journey"
-          description="Milestones from university, training, the TAQAT internship and Sawn."
+          description="Milestones from university, training, the TAQAT CodeMap program and Sawn."
         />
       </RevealOnScroll>
 

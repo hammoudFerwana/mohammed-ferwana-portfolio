@@ -128,14 +128,8 @@ export default async function CaseStudyPage({ params }) {
                 {project.category}
               </Badge>
               {project.leadership && (
-                <Badge
-                  variant={project.leadership.type === 'collaboration' ? 'accent' : 'success'}
-                  size="md"
-                >
-                  {project.leadership.badge ||
-                    (project.leadership.type === 'collaboration'
-                      ? 'Collaboration'
-                      : 'Leadership')}
+                <Badge variant="success" size="md">
+                  Leadership
                 </Badge>
               )}
             </div>

@@ -40,7 +40,7 @@ export default function ProjectsPage() {
                 Looking for a Backend Engineer?
               </h2>
               <p className="text-sm text-text-secondary leading-relaxed">
-                Whether you need reliable REST API architecture, database optimization, or a dedicated engineer for your team, let&apos;s talk.
+                Whether you need a backend engineer on your team or a REST API for your product, let&apos;s talk.
               </p>
             </div>
             <div className="flex flex-wrap items-center gap-3 shrink-0">

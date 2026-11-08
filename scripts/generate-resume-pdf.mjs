@@ -218,7 +218,7 @@ const resumeHtml = `<!DOCTYPE html>
     <div class="item">
       <div class="item-header">
         <div>
-          <span class="item-title">TAQAT (internship)</span>
+          <span class="item-title">TAQAT (CodeMap 2026 program)</span>
           <span class="item-subtitle"> — Backend Developer &amp; Team Leader, TeamLine</span>
         </div>
         <div class="item-meta">2026</div>
@@ -238,7 +238,7 @@ const resumeHtml = `<!DOCTYPE html>
           <span class="item-title">Aristo Software</span>
           <span class="item-subtitle"> — Backend Developer Trainee</span>
         </div>
-        <div class="item-meta">May 2026 – Present</div>
+        <div class="item-meta">Completed May 2026</div>
       </div>
       <div class="item-sub">Khireej Qader program (90 hours).</div>
       <ul class="bullets">

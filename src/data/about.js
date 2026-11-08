@@ -40,7 +40,7 @@ export const aboutData = {
         title: 'Backend Developer and Team Leader at TAQAT',
         period: '2026',
         content:
-          'During the TAQAT internship (2026), I served as Backend Developer and Team Leader for TeamLine, a collaborative team workspace platform. I designed REST APIs, implemented workspace role-based access control (RBAC), and built real-time task updates with version-guarded task moves.',
+          'In the TAQAT CodeMap 2026 program, I served as Backend Developer and Team Leader for TeamLine, a collaborative team workspace platform. I designed REST APIs, implemented workspace role-based access control (RBAC), and built real-time task updates with version-guarded task moves.',
       },
       {
         number: '03',
@@ -130,7 +130,7 @@ export const aboutData = {
       type: 'leadership',
       status: 'Completed',
       description:
-        'Backend Developer and Team Leader during the TAQAT internship (2026), building TeamLine. Designed REST APIs, implemented workspace role-based access control (RBAC), and built real-time task updates with version-guarded task moves.',
+        'Backend Developer and Team Leader in the TAQAT CodeMap 2026 program, building TeamLine. Designed REST APIs, implemented workspace role-based access control (RBAC), and built real-time task updates with version-guarded task moves.',
       highlight: 'Designed REST APIs and workspace role-based access control for team collaboration.',
     },
     {

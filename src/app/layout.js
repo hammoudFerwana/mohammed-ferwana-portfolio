@@ -12,7 +12,7 @@ const metadataBaseUrl = (() => {
   try {
     return new URL(siteMetadata.siteUrl);
   } catch {
-    return new URL('https://portfolio.local');
+    return new URL('http://localhost:3000');
   }
 })();
 
