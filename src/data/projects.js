@@ -246,4 +246,17 @@ export const projects = [
       },
     ],
   },
+  {
+    id: 'saios-academy',
+    slug: 'saios-academy',
+    title: 'SAIOS Academy',
+    description: 'Learning management platform at SAIOS Technology. I worked on backend tasks assigned by the team lead: an authentication audit and stabilization, a role and resource-ownership access audit, and account management APIs.',
+    role: 'Backend Developer (assigned tasks)',
+    category: 'Education',
+    tier: 2,
+    featured: false,
+    image: null,
+    technologies: ['Node.js', 'Express.js', 'Mongoose'],
+    links: { github: null, live: null, dashboard: null },
+  },
 ];

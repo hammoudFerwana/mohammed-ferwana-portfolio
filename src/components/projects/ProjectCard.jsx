@@ -80,7 +80,8 @@ export default function ProjectCard({ project, priority = false }) {
       </div>
 
       {/* Card Footer Actions */}
-      <div className="p-6 sm:p-7 pt-0 border-t border-border-subtle/60 flex items-center justify-between gap-3 mt-4">
+      {(isTier1 || project.links?.github || project.links?.live) && (
+        <div className="p-6 sm:p-7 pt-0 border-t border-border-subtle/60 flex items-center justify-between gap-3 mt-4">
         {isTier1 ? (
           <Button href={`/projects/${project.slug}`} variant="outline" size="sm">
             View Architecture Case Study →
@@ -140,7 +141,8 @@ export default function ProjectCard({ project, priority = false }) {
             )}
           </div>
         )}
-      </div>
+        </div>
+      )}
     </SpotlightCard>
   );
 }
