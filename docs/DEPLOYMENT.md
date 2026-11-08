@@ -58,7 +58,7 @@ Development server runs at `http://localhost:3000`.
 NEXT_PUBLIC_FORMSPREE_ID=your_formspree_id
 
 # Site URL (for SEO canonical URLs)
-NEXT_PUBLIC_SITE_URL=https://mohammed-ferwana.vercel.app
+NEXT_PUBLIC_SITE_URL=https://mohammed-ferwana-portfolio.vercel.app
 ```
 
 ---
@@ -172,7 +172,7 @@ All routes should be `○` (static) or `●` (SSG with params).
 
 Run periodically:
 ```bash
-npx lighthouse https://mohammed-ferwana.vercel.app --output html --output-path report.html
+npx lighthouse https://mohammed-ferwana-portfolio.vercel.app --output html --output-path report.html
 ```
 
 ### Target Metrics

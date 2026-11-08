@@ -188,7 +188,11 @@ const siteMetadata = {
   title: 'Backend Engineer',
   tagline: 'Backend engineer. Node.js, Express, MongoDB.',
   description: 'Backend engineer in Gaza building multi-tenant REST APIs with guarded state machines, tenant isolation and tested business rules.',
-  siteUrl: process.env.NEXT_PUBLIC_SITE_URL || 'https://mohammed-ferwana.vercel.app',
+  siteUrl:
+    process.env.NEXT_PUBLIC_SITE_URL ||
+    (process.env.VERCEL_PROJECT_PRODUCTION_URL
+      ? `https://${process.env.VERCEL_PROJECT_PRODUCTION_URL}`
+      : 'http://localhost:3000'),
   email: 'mohammedferwana2@gmail.com',
   location: 'Gaza, Palestine',
   social: {
