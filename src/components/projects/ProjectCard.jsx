@@ -29,11 +29,11 @@ export default function ProjectCard({ project, priority = false }) {
             />
             <div className="absolute inset-0 bg-gradient-to-t from-bg-secondary via-transparent to-transparent opacity-40" />
             <div className="absolute top-3 right-3 flex items-center gap-2">
-              <Badge variant="accent" size="sm">
+              <Badge variant="accent" size="sm" className="bg-bg-primary shadow-sm">
                 {project.category}
               </Badge>
               {project.leadership && (
-                <Badge variant="success" size="sm">
+                <Badge variant="success" size="sm" className="bg-bg-primary shadow-sm">
                   Leadership
                 </Badge>
               )}
