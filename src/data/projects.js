@@ -259,4 +259,17 @@ export const projects = [
     technologies: ['Node.js', 'Express.js', 'Mongoose'],
     links: { github: null, live: null, dashboard: null },
   },
+  {
+    id: 'pal-store',
+    slug: 'pal-store',
+    title: 'Pal-Store (Palestinian Marketplace)',
+    description: 'Graduation project at Al-Azhar University, team of three: a multi-vendor marketplace. My role was requirements analysis and manual testing.',
+    role: 'Requirements analysis and manual testing',
+    category: 'Marketplace',
+    tier: 2,
+    featured: false,
+    image: '/images/projects/pal-store.webp',
+    technologies: [],
+    links: { github: null, live: null, dashboard: null },
+  },
 ];
