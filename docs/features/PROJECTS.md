@@ -47,11 +47,11 @@
 ┌──────────────────────────────────────────┐
 │  [Project Screenshot / Hero Image]       │
 │                                          │
-│  InsurFlow                               │
-│  Enterprise B2B motor insurance claims   │
+│  Sawn (formerly InsurFlow)               │
+│  Multi-tenant B2B motor insurance claims │
 │  platform.                               │
 │                                          │
-│  Role: Backend Engineer / Backend Owner  │
+│  Role: Backend Engineer (Sole Backend)   │
 │                                          │
 │  Node.js  Express  MongoDB  JWT  RBAC   │
 │                                          │
@@ -84,11 +84,11 @@ Every case study page follows this template. **Sections are rendered only when d
 │                                                     │
 │  ← Back to Projects                                │
 │                                                     │
-│  InsurFlow                                          │
-│  Enterprise B2B motor insurance claims platform     │
+│  Sawn (formerly InsurFlow)                          │
+│  Multi-tenant B2B motor insurance claims platform   │
 │                                                     │
-│  Role: Backend Engineer / Backend Owner             │
-│  Category: Enterprise                               │
+│  Role: Backend Engineer (Sole Backend)              │
+│  Category: B2B Claims Engine                        │
 │  Tech: Node.js, Express, MongoDB, JWT, RBAC        │
 │                                                     │
 │  [GitHub] [Dashboard] [Live]                        │
@@ -149,10 +149,10 @@ Every case study page follows this template. **Sections are rendered only when d
 
 | Field | Value |
 |-------|-------|
-| Title | InsurFlow |
-| Description | Enterprise B2B motor insurance claims platform |
-| Role | Backend Engineer / Backend Owner |
-| Category | Enterprise |
+| Title | Sawn (formerly InsurFlow) |
+| Description | Multi-tenant B2B motor-insurance claims platform |
+| Role | Backend Engineer (Sole Backend) |
+| Category | B2B Claims Engine |
 | GitHub | https://github.com/InsurFlow-Team/insurflow-backend |
 | Dashboard | https://insurflow-dashboard.vercel.app |
 | Technologies | To be verified from repo |

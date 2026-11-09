@@ -1,0 +1,170 @@
+import { metrics } from './metrics';
+
+const formattedTestRunDate = new Date(`${metrics.testRunDate}T00:00:00Z`).toLocaleDateString('en-GB', {
+  day: 'numeric',
+  month: 'short',
+  year: 'numeric',
+  timeZone: 'UTC',
+});
+
+export const aboutData = {
+  hero: {
+    eyebrow: 'THE ENGINEER',
+    title: 'About Mohammed Ferwana',
+    role: 'Backend Engineer',
+    summary:
+      'Backend Engineer focused on building reliable and well-architected systems. Grounded in computer systems engineering principles, domain-driven boundaries, and evidence-first reliability.',
+    highlights: [
+      { label: 'Role', value: 'Backend Developer & Team Leader' },
+      { label: 'Education', value: 'B.Sc. Computer Systems Engineering (Al-Azhar)' },
+      { label: 'Core Focus', value: 'REST APIs, State Machines, Data Modeling' },
+      { label: 'Location', value: 'Gaza, Palestine' },
+    ],
+  },
+
+  story: {
+    eyebrow: 'ENGINEERING JOURNEY',
+    title: 'From Computer Systems to Backend Architecture',
+    subtitle:
+      'My progression as an engineer is built on curiosity about how systems behave under the hood, practical project delivery, and technical team leadership.',
+    chapters: [
+      {
+        number: '01',
+        title: 'Foundations & Low-Level Discovery',
+        period: '2022',
+        content:
+          'My journey into software engineering began in 2022 when I enrolled in Computer Systems Engineering at Al-Azhar University. Studying data structures, algorithms, operating systems and computer networks demystified how computers actually execute instructions and manage memory. That foundation shaped my preference for server-side engineering: I found myself far more fascinated by what happens behind the API endpoint — data integrity, atomic updates, and state management — than by purely visual interfaces.',
+      },
+      {
+        number: '02',
+        title: 'Backend Developer and Team Leader at TAQAT',
+        period: '2026',
+        content:
+          'In the TAQAT CodeMap 2026 program, I served as Backend Developer and Team Leader for TeamLine, a collaborative team workspace platform. I designed REST APIs, implemented workspace role-based access control (RBAC), and built real-time task updates with version-guarded task moves.',
+      },
+      {
+        number: '03',
+        title: 'Backend Engineering & Sawn (formerly InsurFlow)',
+        period: '2026',
+        content:
+          `Designing and implementing the backend for Sawn (formerly InsurFlow) — a multi-tenant B2B motor insurance claim management platform — represented a major focus on complex server-side systems. Managing multi-party claims cannot rely on arbitrary database updates; it requires strict lifecycle state machines to prevent illegal state transitions, granular permission middleware, and audit trails. I wrote the test suite: ${metrics.integrationTests} tests passing in ${metrics.testSuites} suites (run ${formattedTestRunDate}).`,
+      },
+      {
+        number: '04',
+        title: 'Where I am Heading',
+        period: 'Looking Ahead → 2027',
+        content:
+          'As I continue working toward my expected university graduation in 2027, my engineering trajectory remains focused on reliable backend systems and data integrity. I believe the best engineering is characterized not by complexity, but by simplicity, defensive boundaries, and verifiable proof.',
+      },
+    ],
+  },
+
+  principles: [
+    {
+      num: '01',
+      title: 'Understand before implementing',
+      tagline: 'Start with the problem, not the solution.',
+      description:
+        'Premature coding creates technical debt before the first commit. I prioritize clarifying domain boundaries, requirements, and data relationships before writing implementation code.',
+      takeaway: 'Clarity at the problem boundary prevents costly architectural rewrites.',
+    },
+    {
+      num: '02',
+      title: 'Prefer simple solutions before complex ones',
+      tagline: 'Complexity is a cost, not a feature.',
+      description:
+        'Every unnecessary abstraction, library, or distributed component adds operational friction. I build the simplest correct solution that meets system requirements cleanly.',
+      takeaway: 'Simplicity is a disciplined design choice, not a lack of sophistication.',
+    },
+    {
+      num: '03',
+      title: 'Design for maintainability',
+      tagline: 'Code is read far more than it is written.',
+      description:
+        'Software lives and evolves across teams and time. I enforce modular domain separation, explicit naming, and clear boundaries between routing, controllers, services, and persistence.',
+      takeaway: 'Maintainable architecture is respectful communication with your future team.',
+    },
+    {
+      num: '04',
+      title: 'Validate assumptions',
+      tagline: 'Test your understanding, not just your code.',
+      description:
+        'System failures frequently stem from unverified assumptions about input data or client payloads. I validate all inbound requests at the perimeter with strict schema definitions.',
+      takeaway: 'Never assume incoming data conforms to your expectations.',
+    },
+    {
+      num: '05',
+      title: 'Test behavior, not just happy paths',
+      tagline: 'Edge cases reveal system quality.',
+      description:
+        'A system is only as reliable as its error handling. I write automated integration tests targeting unauthorized roles, malformed payloads, state conflicts, and boundary conditions.',
+      takeaway: 'True confidence comes from proving how software behaves under failure conditions.',
+    },
+    {
+      num: '06',
+      title: 'Take ownership of engineering decisions',
+      tagline: 'Explain why, not just what.',
+      description:
+        'Every technical choice entails tradeoffs. I take ownership by documenting why an architecture or data model was chosen, acknowledging constraints, and guiding team consensus.',
+      takeaway: 'Disciplined engineering means taking full responsibility for the tradeoffs you choose.',
+    },
+  ],
+
+  timeline: [
+    {
+      year: '2022',
+      period: '2022',
+      title: 'Enrolled in Computer Systems Engineering',
+      organization: 'Al-Azhar University',
+      type: 'academic',
+      status: 'Completed',
+      description:
+        'Began B.Sc. studies in Computer Systems Engineering, with coursework in data structures and algorithms, operating systems, databases and computer networks.',
+      highlight: 'Discovered passion for backend systems and low-level computer operation.',
+    },
+    {
+      year: '2026',
+      period: '2026',
+      title: 'Backend Developer & Team Leader',
+      organization: 'TAQAT (TeamLine)',
+      type: 'leadership',
+      status: 'Completed',
+      description:
+        'Backend Developer and Team Leader in the TAQAT CodeMap 2026 program, building TeamLine. Designed REST APIs, implemented workspace role-based access control (RBAC), and built real-time task updates with version-guarded task moves.',
+      highlight: 'Designed REST APIs and workspace role-based access control for team collaboration.',
+    },
+    {
+      year: '2026',
+      period: '2026',
+      title: 'Backend Engineering & Sawn (formerly InsurFlow)',
+      organization: 'Sawn (formerly InsurFlow)',
+      type: 'systems',
+      status: 'Active',
+      description:
+        `Built the core backend for Sawn (formerly InsurFlow), a multi-tenant motor claims management system. Implemented finite state machine transitions, MongoDB indexing, and ${metrics.integrationTests} automated tests (run ${formattedTestRunDate}).`,
+      highlight: `${metrics.integrationTests} automated tests across ${metrics.testSuites} test suites (run ${formattedTestRunDate}), all passing, covering the claim lifecycle.`,
+    },
+    {
+      year: '2026',
+      period: '2026 – Nov 2026',
+      title: 'Market Ready Developer Program',
+      organization: 'Gaza Sky Geeks (GSG)',
+      type: 'training',
+      status: 'Active',
+      description:
+        'Taking the Market Ready Developer program at Gaza Sky Geeks (GSG); completing November 2026.',
+      highlight: 'Completing November 2026.',
+    },
+    {
+      year: '2027',
+      period: 'Expected 2027',
+      title: 'Graduation — B.Sc. in Computer Systems Engineering',
+      organization: 'Al-Azhar University',
+      type: 'academic',
+      status: 'Expected',
+      description:
+        'Anticipated completion of undergraduate engineering curriculum, continuing direct trajectory into server-side engineering and database design.',
+      highlight: 'Expected graduation milestone.',
+    },
+  ],
+};

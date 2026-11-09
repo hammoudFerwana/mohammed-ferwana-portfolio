@@ -12,8 +12,8 @@
 │  ┌──────────────────────┐  ┌──────────┐  ┌──────────────┐ │
 │  │  MOHAMMED FERWANA    │  │  PAGES   │  │  CONNECT     │ │
 │  │  Backend Engineer    │  │  Home    │  │  GitHub      │ │
-│  │  Building Scalable & │  │  Projects│  │  LinkedIn    │ │
-│  │  Reliable Systems    │  │  About   │  │  Email       │ │
+│  │  Node.js · Express   │  │  Projects│  │  LinkedIn    │ │
+│  │  MongoDB Backend     │  │  About   │  │  Email       │ │
 │  │                      │  │  Exp.    │  │              │ │
 │  │                      │  │  Contact │  │              │ │
 │  │                      │  │  Lab     │  │              │ │
@@ -35,7 +35,7 @@ Mobile: single column, stacked sections.
 ### Brand Block
 - **Name:** Mohammed Ferwana
 - **Title:** Backend Engineer
-- **Tagline:** Building Scalable & Reliable Systems
+- **Tagline:** Backend engineer. Node.js, Express, MongoDB.
 
 ### Navigation Links
 Same as primary navigation:

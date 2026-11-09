@@ -1,6 +1,6 @@
 # Repository Git Workflow & Contribution Guide
 
-This guide documents the enterprise-grade Git strategy practiced in this repository, adhering to Principal Engineering standards.
+This guide documents the Gitflow strategy used in this repository.
 
 ## Remote Repository
 - **Remote URL**: `https://github.com/hammoudFerwana/mohammed-ferwana-portfolio.git`
