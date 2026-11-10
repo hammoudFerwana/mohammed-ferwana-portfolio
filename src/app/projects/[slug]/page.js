@@ -16,6 +16,8 @@ import LeadershipCard from '@/components/projects/LeadershipCard';
 import InsurflowEvidence from '@/components/projects/InsurflowEvidence';
 import CaseStudyFooter from '@/components/projects/CaseStudyFooter';
 
+export const dynamicParams = false;
+
 const FsmSimulator = dynamic(
   () => import('@/components/projects/lab/FsmSimulator'),
   {
