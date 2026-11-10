@@ -6,8 +6,7 @@
 
 import { claimFsm } from './claimFsm';
 
-// Switch to 'main' after the first production release merge
-export const ciBadgeBranch = 'develop';
+export const ciBadgeBranch = 'main';
 
 export const metrics = {
   integrationTests: 616,
