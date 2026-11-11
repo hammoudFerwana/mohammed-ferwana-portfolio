@@ -163,7 +163,7 @@ export default function ProjectsExplorer({ projects = [] }) {
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
               placeholder="Search stack (e.g. MongoDB, FSM, Jest)..."
-              className="w-full pl-9 pr-8 py-2 rounded-xl bg-bg-primary/80 border border-border-subtle focus:border-accent text-xs font-mono text-text-primary placeholder:text-text-muted focus:outline-hidden focus:ring-1 focus:ring-accent transition-all duration-200"
+              className="w-full pl-9 pr-8 py-2 rounded-xl bg-bg-primary/80 border border-border-subtle focus:border-accent text-xs font-mono text-text-primary placeholder:text-text-muted transition-all duration-200"
             />
             {searchQuery && (
               <button
@@ -182,7 +182,7 @@ export default function ProjectsExplorer({ projects = [] }) {
       <div className="flex items-center justify-between text-xs font-mono text-text-muted px-2">
         <div className="flex items-center gap-2">
           <span
-            className="inline-block w-2 h-2 rounded-full bg-emerald-400 animate-pulse"
+            className="inline-block w-2 h-2 rounded-full bg-success animate-pulse"
             aria-hidden="true"
           />
           <span>
@@ -256,7 +256,7 @@ export default function ProjectsExplorer({ projects = [] }) {
               </div>
               <button
                 onClick={handleReset}
-                className="inline-flex items-center gap-2 px-4 py-2 rounded-xl bg-accent text-white text-xs font-medium hover:bg-accent-hover transition-colors shadow-xs"
+                className="inline-flex items-center gap-2 px-4 py-2 rounded-xl bg-btn text-btn-fg text-xs font-medium hover:bg-accent-hover transition-colors shadow-xs"
               >
                 Reset All Filters
               </button>

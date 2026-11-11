@@ -179,11 +179,11 @@ export default function InsurflowConcurrencySandbox() {
               <button
                 onClick={() => runConcurrentBurst(15, false)}
                 disabled={isRunning}
-                className="w-full py-2.5 px-3 rounded-lg bg-accent text-bg-primary font-mono text-xs font-bold hover:bg-accent/90 transition-all disabled:opacity-50 flex items-center justify-center gap-2 shadow-xs"
+                className="w-full py-2.5 px-3 rounded-lg bg-btn text-btn-fg font-mono text-xs font-bold hover:bg-accent/90 transition-all disabled:opacity-50 flex items-center justify-center gap-2 shadow-xs"
               >
                 {isRunning ? (
                   <>
-                    <span className="w-3 h-3 border-2 border-bg-primary border-t-transparent rounded-full animate-spin" />
+                    <span className="w-3 h-3 border-2 border-btn-fg border-t-transparent rounded-full animate-spin" />
                     Executing Injections...
                   </>
                 ) : (

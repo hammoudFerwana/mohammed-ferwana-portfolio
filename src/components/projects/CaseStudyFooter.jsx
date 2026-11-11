@@ -43,7 +43,7 @@ export default function CaseStudyFooter({ currentProject }) {
                     </Badge>
                   </div>
                   <h3 className="text-lg sm:text-xl font-bold text-text-primary tracking-tight group-hover:text-accent transition-colors">
-                    <Link href={`/projects/${nextProject.slug}`} className="focus-visible:outline-hidden focus-visible:underline">
+                    <Link href={`/projects/${nextProject.slug}`} className="focus-visible:underline">
                       {nextProject.title} — {nextProject.description}
                     </Link>
                   </h3>

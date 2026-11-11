@@ -26,7 +26,7 @@ export default function HeroSection() {
           style={{ animationDelay: '-6s' }}
         />
         <div
-          className="absolute bottom-1/4 left-1/2 -translate-x-1/2 translate-y-1/4 w-[380px] h-[320px] bg-cyan-500/5 blur-[120px] rounded-full animate-aurora"
+          className="absolute bottom-1/4 left-1/2 -translate-x-1/2 translate-y-1/4 w-[380px] h-[320px] bg-sea/5 blur-[120px] rounded-full animate-aurora"
           style={{ animationDelay: '-11s' }}
         />
       </div>
@@ -53,7 +53,7 @@ export default function HeroSection() {
                 <span
                   className="text-4xl sm:text-6xl md:text-7xl font-bold tracking-[-0.04em] leading-[1.08] text-transparent bg-clip-text animate-shimmer inline-block"
                   style={{
-                    backgroundImage: 'linear-gradient(110deg, #f5f5f7 0%, #8b5cf6 35%, #6366f1 65%, #f5f5f7 100%)',
+                    backgroundImage: 'linear-gradient(110deg, var(--hz-ink) 0%, var(--hz-violet) 35%, var(--hz-sea) 65%, var(--hz-ink) 100%)',
                     backgroundSize: '250% 100%',
                   }}
                 >

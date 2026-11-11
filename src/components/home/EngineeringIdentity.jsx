@@ -42,10 +42,10 @@ export default function EngineeringIdentity() {
               <motion.div
                 whileHover={{ y: -6, transition: { duration: 0.4, ease: [0.32, 0.72, 0, 1] } }}
                 whileTap={{ scale: 0.99 }}
-                className="h-full rounded-[1.75rem] bg-white/[0.03] ring-1 ring-white/[0.07] p-1.5 transition-all duration-300 hover:ring-white/[0.18] group"
+                className="h-full rounded-[1.75rem] bg-raised/60 ring-1 ring-line p-1.5 transition-all duration-300 hover:ring-border-strong group"
               >
                 {/* Inner Core: Concentric Machine-finished Core */}
-                <div className="h-full rounded-[calc(1.75rem-0.375rem)] bg-bg-secondary shadow-[inset_0_1px_1px_rgba(255,255,255,0.06)] p-6 sm:p-8 flex flex-col justify-between">
+                <div className="h-full rounded-[calc(1.75rem-0.375rem)] bg-bg-secondary ring-1 ring-border-subtle p-6 sm:p-8 flex flex-col justify-between">
                   <div className="space-y-4">
                     <div className="flex items-center justify-between font-mono text-xs text-text-muted">
                       <span className="text-accent font-semibold transition-transform duration-300 group-hover:scale-110 inline-block">

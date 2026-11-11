@@ -33,8 +33,8 @@ export default function Navbar() {
           className={cn(
             'pointer-events-auto flex items-center justify-between gap-4 sm:gap-6 md:gap-8 rounded-full px-4 sm:px-6 py-2.5 transition-all duration-400 ease-[cubic-bezier(0.32,0.72,0,1)] w-full max-w-5xl',
             isScrolled
-              ? 'bg-bg-primary/75 backdrop-blur-xl border border-white/15 shadow-[0_8px_32px_rgba(0,0,0,0.4)]'
-              : 'bg-bg-primary/60 backdrop-blur-lg border border-white/10 shadow-[0_4px_20px_rgba(0,0,0,0.2)]'
+              ? 'bg-bg-primary/75 backdrop-blur-xl border border-border-strong shadow-lg'
+              : 'bg-bg-primary/60 backdrop-blur-lg border border-border-default shadow-md'
           )}
         >
           {/* Logo / Brand */}

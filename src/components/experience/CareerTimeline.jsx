@@ -181,7 +181,7 @@ export default function CareerTimeline({ experiences = [], education = [] }) {
                             <button
                               type="button"
                               onClick={() => toggleExpand(exp.id)}
-                              className="text-xs font-mono text-accent hover:text-accent-hover transition-colors flex items-center gap-1.5 focus-visible:outline-hidden focus-visible:underline"
+                              className="text-xs font-mono text-accent hover:text-accent-hover transition-colors flex items-center gap-1.5 focus-visible:underline"
                             >
                               <span>{isExpanded ? 'Collapse' : `Show all (${exp.responsibilities.length})`}</span>
                               <span

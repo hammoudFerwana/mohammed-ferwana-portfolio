@@ -57,7 +57,7 @@ export default function InteractivePortraitCard() {
 
       const glareEl = cardRef.current?.querySelector('.specular-glare');
       if (glareEl) {
-        glareEl.style.background = `radial-gradient(circle 260px at ${state.glareX}% ${state.glareY}%, rgba(255, 255, 255, 0.22) 0%, rgba(139, 92, 246, 0.16) 35%, transparent 70%)`;
+        glareEl.style.background = `radial-gradient(circle 260px at ${state.glareX}% ${state.glareY}%, color-mix(in oklab, var(--hz-ink) 22%, transparent) 0%, color-mix(in oklab, var(--hz-violet) 16%, transparent) 35%, transparent 70%)`;
         glareEl.style.opacity = state.glareOpacity.toFixed(3);
       }
 
@@ -117,7 +117,7 @@ export default function InteractivePortraitCard() {
     >
       {/* Dynamic Ambient Glow Field Behind Card */}
       <div
-        className="absolute -inset-2 rounded-3xl bg-linear-to-tr from-accent/35 via-accent-secondary/25 to-cyan-500/20 blur-xl opacity-60 transition-opacity duration-700 pointer-events-none group-hover:opacity-100"
+        className="absolute -inset-2 rounded-3xl bg-linear-to-tr from-accent/35 via-accent-secondary/25 to-sea/20 blur-xl opacity-60 transition-opacity duration-700 pointer-events-none group-hover:opacity-100"
         style={{
           transform: 'translateZ(-50px)',
         }}
@@ -174,7 +174,7 @@ export default function InteractivePortraitCard() {
 
           {/* Micro Tactical Brackets (Depth Layer 1: translateZ 25px) */}
           <div
-            className="absolute inset-3 pointer-events-none border border-white/5 rounded-xl transition-all duration-300"
+            className="absolute inset-3 pointer-events-none border border-border-subtle rounded-xl transition-all duration-300"
             style={{
               transform: 'translateZ(25px)',
             }}

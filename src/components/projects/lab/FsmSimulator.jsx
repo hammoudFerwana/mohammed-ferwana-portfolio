@@ -177,7 +177,7 @@ export default function FsmSimulator() {
                 refY="3"
                 orient="auto"
               >
-                <path d="M 0 0 L 6 3 L 0 6 z" fill="#52525b" />
+                <path d="M 0 0 L 6 3 L 0 6 z" fill="var(--hz-ink-muted)" />
               </marker>
               <marker
                 id="arrowhead-allowed"
@@ -187,7 +187,7 @@ export default function FsmSimulator() {
                 refY="3"
                 orient="auto"
               >
-                <path d="M 0 0 L 6 3 L 0 6 z" fill="#22c55e" />
+                <path d="M 0 0 L 6 3 L 0 6 z" fill="var(--hz-success)" />
               </marker>
               <marker
                 id="arrowhead-warning"
@@ -197,7 +197,7 @@ export default function FsmSimulator() {
                 refY="3"
                 orient="auto"
               >
-                <path d="M 0 0 L 6 3 L 0 6 z" fill="#f59e0b" />
+                <path d="M 0 0 L 6 3 L 0 6 z" fill="var(--hz-warning)" />
               </marker>
               <marker
                 id="arrowhead-danger"
@@ -207,7 +207,7 @@ export default function FsmSimulator() {
                 refY="3"
                 orient="auto"
               >
-                <path d="M 0 0 L 6 3 L 0 6 z" fill="#ef4444" />
+                <path d="M 0 0 L 6 3 L 0 6 z" fill="var(--hz-error)" />
               </marker>
             </defs>
 
@@ -216,44 +216,44 @@ export default function FsmSimulator() {
               {/* Primary Pipeline Happy Path (Horizontal) */}
               <path
                 d="M 83 75 L 102 75"
-                stroke={allowedTargets.includes('PENDING_ACCEPTANCE') && currentState === 'NEW' ? '#22c55e' : '#27272a'}
+                stroke={allowedTargets.includes('PENDING_ACCEPTANCE') && currentState === 'NEW' ? 'var(--hz-success)' : 'var(--hz-line)'}
                 markerEnd={allowedTargets.includes('PENDING_ACCEPTANCE') && currentState === 'NEW' ? 'url(#arrowhead-allowed)' : 'url(#arrowhead-subtle)'}
               />
               <path
                 d="M 248 75 L 266 75"
-                stroke={allowedTargets.includes('ASSIGNED') && currentState === 'PENDING_ACCEPTANCE' ? '#22c55e' : '#27272a'}
+                stroke={allowedTargets.includes('ASSIGNED') && currentState === 'PENDING_ACCEPTANCE' ? 'var(--hz-success)' : 'var(--hz-line)'}
                 markerEnd={allowedTargets.includes('ASSIGNED') && currentState === 'PENDING_ACCEPTANCE' ? 'url(#arrowhead-allowed)' : 'url(#arrowhead-subtle)'}
               />
               <path
                 d="M 354 75 L 378 75"
-                stroke={allowedTargets.includes('IN_PROGRESS') && currentState === 'ASSIGNED' ? '#22c55e' : '#27272a'}
+                stroke={allowedTargets.includes('IN_PROGRESS') && currentState === 'ASSIGNED' ? 'var(--hz-success)' : 'var(--hz-line)'}
                 markerEnd={allowedTargets.includes('IN_PROGRESS') && currentState === 'ASSIGNED' ? 'url(#arrowhead-allowed)' : 'url(#arrowhead-subtle)'}
               />
               <path
                 d="M 482 75 L 502 75"
-                stroke={allowedTargets.includes('SUBMITTED') && currentState === 'IN_PROGRESS' ? '#22c55e' : '#27272a'}
+                stroke={allowedTargets.includes('SUBMITTED') && currentState === 'IN_PROGRESS' ? 'var(--hz-success)' : 'var(--hz-line)'}
                 markerEnd={allowedTargets.includes('SUBMITTED') && currentState === 'IN_PROGRESS' ? 'url(#arrowhead-allowed)' : 'url(#arrowhead-subtle)'}
               />
               <path
                 d="M 598 75 L 618 75"
-                stroke={allowedTargets.includes('UNDER_REVIEW') && currentState === 'SUBMITTED' ? '#22c55e' : '#27272a'}
+                stroke={allowedTargets.includes('UNDER_REVIEW') && currentState === 'SUBMITTED' ? 'var(--hz-success)' : 'var(--hz-line)'}
                 markerEnd={allowedTargets.includes('UNDER_REVIEW') && currentState === 'SUBMITTED' ? 'url(#arrowhead-allowed)' : 'url(#arrowhead-subtle)'}
               />
               <path
                 d="M 732 75 L 756 75"
-                stroke={allowedTargets.includes('APPROVED') && currentState === 'UNDER_REVIEW' ? '#22c55e' : '#27272a'}
+                stroke={allowedTargets.includes('APPROVED') && currentState === 'UNDER_REVIEW' ? 'var(--hz-success)' : 'var(--hz-line)'}
                 markerEnd={allowedTargets.includes('APPROVED') && currentState === 'UNDER_REVIEW' ? 'url(#arrowhead-allowed)' : 'url(#arrowhead-subtle)'}
               />
               <path
                 d="M 844 75 L 865 75"
-                stroke={allowedTargets.includes('CLOSED') && currentState === 'APPROVED' ? '#22c55e' : '#27272a'}
+                stroke={allowedTargets.includes('CLOSED') && currentState === 'APPROVED' ? 'var(--hz-success)' : 'var(--hz-line)'}
                 markerEnd={allowedTargets.includes('CLOSED') && currentState === 'APPROVED' ? 'url(#arrowhead-allowed)' : 'url(#arrowhead-subtle)'}
               />
 
               {/* Decline Re-Route: PENDING_ACCEPTANCE -> NEW (Upper curved loop) */}
               <path
                 d="M 175 58 C 150 25, 75 25, 50 58"
-                stroke={allowedTargets.includes('NEW') && currentState === 'PENDING_ACCEPTANCE' ? '#f59e0b' : '#3f3f46'}
+                stroke={allowedTargets.includes('NEW') && currentState === 'PENDING_ACCEPTANCE' ? 'var(--hz-warning)' : 'var(--hz-line)'}
                 strokeDasharray="4 3"
                 markerEnd={allowedTargets.includes('NEW') && currentState === 'PENDING_ACCEPTANCE' ? 'url(#arrowhead-warning)' : 'url(#arrowhead-subtle)'}
               />
@@ -261,7 +261,7 @@ export default function FsmSimulator() {
               {/* Correction Loop: UNDER_REVIEW -> CORRECTION_REQUIRED (Lower curve) */}
               <path
                 d="M 660 92 C 640 145, 590 185, 565 218"
-                stroke={allowedTargets.includes('CORRECTION_REQUIRED') && currentState === 'UNDER_REVIEW' ? '#22c55e' : '#3f3f46'}
+                stroke={allowedTargets.includes('CORRECTION_REQUIRED') && currentState === 'UNDER_REVIEW' ? 'var(--hz-success)' : 'var(--hz-line)'}
                 strokeDasharray="4 3"
                 markerEnd={allowedTargets.includes('CORRECTION_REQUIRED') && currentState === 'UNDER_REVIEW' ? 'url(#arrowhead-allowed)' : 'url(#arrowhead-subtle)'}
               />
@@ -269,7 +269,7 @@ export default function FsmSimulator() {
               {/* Correction Loop: CORRECTION_REQUIRED -> IN_PROGRESS (Return curve) */}
               <path
                 d="M 535 218 C 490 180, 460 140, 440 92"
-                stroke={allowedTargets.includes('IN_PROGRESS') && currentState === 'CORRECTION_REQUIRED' ? '#22c55e' : '#3f3f46'}
+                stroke={allowedTargets.includes('IN_PROGRESS') && currentState === 'CORRECTION_REQUIRED' ? 'var(--hz-success)' : 'var(--hz-line)'}
                 strokeDasharray="4 3"
                 markerEnd={allowedTargets.includes('IN_PROGRESS') && currentState === 'CORRECTION_REQUIRED' ? 'url(#arrowhead-allowed)' : 'url(#arrowhead-subtle)'}
               />
@@ -277,23 +277,23 @@ export default function FsmSimulator() {
               {/* Terminal Rejection: UNDER_REVIEW -> REJECTED (Lower curve) */}
               <path
                 d="M 690 92 C 715 145, 765 185, 785 218"
-                stroke={allowedTargets.includes('REJECTED') && currentState === 'UNDER_REVIEW' ? '#ef4444' : '#3f3f46'}
+                stroke={allowedTargets.includes('REJECTED') && currentState === 'UNDER_REVIEW' ? 'var(--hz-error)' : 'var(--hz-line)'}
                 strokeDasharray="4 3"
                 markerEnd={allowedTargets.includes('REJECTED') && currentState === 'UNDER_REVIEW' ? 'url(#arrowhead-danger)' : 'url(#arrowhead-subtle)'}
               />
             </g>
 
             {/* Path Explanatory Annotations */}
-            <text x="110" y="24" fill="#a1a1aa" fontSize="10" fontFamily="monospace">
+            <text x="110" y="24" fill="var(--hz-ink-muted)" fontSize="10" fontFamily="monospace">
               decline re-route
             </text>
-            <text x="615" y="170" fill="#a1a1aa" fontSize="10" fontFamily="monospace">
+            <text x="615" y="170" fill="var(--hz-ink-muted)" fontSize="10" fontFamily="monospace">
               evidence deficit
             </text>
-            <text x="440" y="170" fill="#a1a1aa" fontSize="10" fontFamily="monospace">
+            <text x="440" y="170" fill="var(--hz-ink-muted)" fontSize="10" fontFamily="monospace">
               resumed
             </text>
-            <text x="755" y="170" fill="#ef4444" fontSize="10" fontFamily="monospace">
+            <text x="755" y="170" fill="var(--hz-error)" fontSize="10" fontFamily="monospace">
               rejection
             </text>
 
@@ -307,32 +307,32 @@ export default function FsmSimulator() {
               const isTerminal = terminalStates.includes(state);
               const isError = errorFeedbackState === state;
 
-              let rectStroke = '#3f3f46';
-              let rectFill = '#111118';
-              let textFill = '#a1a1aa';
+              let rectStroke = 'var(--hz-line)';
+              let rectFill = 'var(--hz-surface)';
+              let textFill = 'var(--hz-ink-muted)';
               let strokeWidth = 1.2;
               let strokeDash = undefined;
 
               if (isCurrent) {
-                rectStroke = '#8b5cf6';
-                rectFill = '#22222e';
-                textFill = '#f5f5f7';
+                rectStroke = 'var(--hz-violet)';
+                rectFill = 'var(--hz-raised)';
+                textFill = 'var(--hz-ink)';
                 strokeWidth = 2.4;
               } else if (isError) {
-                rectStroke = '#ef4444';
-                rectFill = 'rgba(239, 68, 68, 0.15)';
-                textFill = '#ef4444';
+                rectStroke = 'var(--hz-error)';
+                rectFill = 'color-mix(in oklab, var(--hz-error) 15%, transparent)';
+                textFill = 'var(--hz-error)';
                 strokeWidth = 2;
               } else if (isAllowed) {
-                rectStroke = '#22c55e';
-                rectFill = 'rgba(34, 197, 94, 0.08)';
-                textFill = '#22c55e';
+                rectStroke = 'var(--hz-success)';
+                rectFill = 'color-mix(in oklab, var(--hz-success) 10%, transparent)';
+                textFill = 'var(--hz-success)';
                 strokeWidth = 1.8;
                 strokeDash = '3 3';
               } else if (isTerminal) {
-                rectStroke = state === 'REJECTED' ? 'rgba(239, 68, 68, 0.4)' : '#52525b';
-                rectFill = '#1a1a24';
-                textFill = state === 'REJECTED' ? '#ef4444' : '#71717a';
+                rectStroke = state === 'REJECTED' ? 'color-mix(in oklab, var(--hz-error) 40%, transparent)' : 'var(--hz-line)';
+                rectFill = 'var(--hz-raised)';
+                textFill = state === 'REJECTED' ? 'var(--hz-error)' : 'var(--hz-ink-muted)';
               }
 
               return (
@@ -367,7 +367,7 @@ export default function FsmSimulator() {
                     height={node.h + 8}
                     rx="10"
                     fill="none"
-                    stroke="#8b5cf6"
+                    stroke="var(--hz-violet)"
                     strokeWidth="2"
                     className="pointer-events-none opacity-0 group-focus-visible:opacity-100"
                   />
@@ -380,7 +380,7 @@ export default function FsmSimulator() {
                       height={node.h + 6}
                       rx="9"
                       fill="none"
-                      stroke="#8b5cf6"
+                      stroke="var(--hz-violet)"
                       strokeWidth="1"
                       strokeOpacity="0.4"
                     />
@@ -418,7 +418,7 @@ export default function FsmSimulator() {
                       cx={node.x - node.w / 2 + 8}
                       cy={node.y - node.h / 2 + 8}
                       r="2.5"
-                      fill="#8b5cf6"
+                      fill="var(--hz-violet)"
                     />
                   )}
                 </g>

@@ -16,7 +16,7 @@ export default function CTASection() {
           style={{ animationDelay: '-5s' }}
         />
         <div
-          className="absolute top-2/3 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[340px] h-[240px] bg-cyan-500/8 blur-[110px] rounded-full animate-aurora"
+          className="absolute top-2/3 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[340px] h-[240px] bg-sea/8 blur-[110px] rounded-full animate-aurora"
           style={{ animationDelay: '-10s' }}
         />
       </div>

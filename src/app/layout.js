@@ -68,12 +68,11 @@ export const metadata = {
 export default function RootLayout({ children }) {
   return (
     <html lang="en" className={`dark ${GeistSans.variable} ${GeistMono.variable}`}>
-      <body className="min-h-screen bg-bg-primary text-text-primary antialiased font-sans flex flex-col selection:bg-accent/30 selection:text-white">
-        <div className="noise-overlay" aria-hidden="true" />
+      <body className="min-h-screen bg-bg text-ink antialiased font-sans flex flex-col selection:bg-violet/30 selection:text-ink">
         {/* Skip to Content Link for Accessibility */}
         <a
           href="#main-content"
-          className="sr-only focus:not-sr-only focus:fixed focus:top-4 focus:left-4 focus:z-50 focus:px-4 focus:py-2 focus:bg-accent focus:text-white focus:rounded-md focus:shadow-lg focus:outline-hidden"
+          className="sr-only focus:not-sr-only focus:fixed focus:top-4 focus:left-4 focus:z-50 focus:px-4 focus:py-2 focus:bg-btn focus:text-btn-fg focus:rounded-md focus:shadow-lg"
         >
           Skip to main content
         </a>

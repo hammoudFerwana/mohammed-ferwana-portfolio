@@ -358,12 +358,12 @@ export default function ContactForm() {
           <button
             type="submit"
             disabled={!isFormValid || isSubmitting}
-            className="w-full sm:w-auto inline-flex items-center justify-center font-medium rounded-lg transition-all duration-200 focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2 focus-visible:ring-offset-bg-primary active:scale-[0.98] disabled:opacity-50 disabled:pointer-events-none disabled:cursor-not-allowed select-none bg-accent hover:bg-accent-hover text-white shadow-xs hover:shadow-accent/25 hover:shadow-lg text-sm px-6 py-3 gap-2"
+            className="w-full sm:w-auto inline-flex items-center justify-center font-medium rounded-lg transition-all duration-200 focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2 focus-visible:ring-offset-bg-primary active:scale-[0.98] disabled:opacity-50 disabled:pointer-events-none disabled:cursor-not-allowed select-none bg-btn hover:bg-accent-hover text-btn-fg shadow-xs hover:shadow-accent/25 hover:shadow-lg text-sm px-6 py-3 gap-2"
           >
             {isSubmitting ? (
               <>
                 <svg
-                  className="animate-spin w-4 h-4 shrink-0 text-white"
+                  className="animate-spin w-4 h-4 shrink-0 text-btn-fg"
                   xmlns="http://www.w3.org/2000/svg"
                   fill="none"
                   viewBox="0 0 24 24"
