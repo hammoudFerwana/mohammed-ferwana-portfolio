@@ -152,7 +152,7 @@ export default function FsmSimulator() {
           <button
             type="button"
             onClick={handleReset}
-            className="px-3 py-1.5 rounded-lg bg-bg-tertiary border border-border-strong text-xs font-mono text-text-primary hover:bg-bg-elevated hover:border-accent transition-colors duration-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-accent"
+            className="px-3 py-1.5 rounded-lg bg-bg-tertiary border border-border-strong text-xs font-mono text-text-primary hover:bg-bg-elevated hover:border-accent transition-colors duration-200 focus:outline-hidden focus-visible:ring-2 focus-visible:ring-accent"
           >
             Reset to NEW
           </button>
@@ -354,7 +354,7 @@ export default function FsmSimulator() {
                     }
                   }}
                   className={cn(
-                    'group cursor-pointer focus:outline-none transition-transform duration-150',
+                    'group cursor-pointer focus:outline-hidden transition-transform duration-150',
                     !shouldReduceMotion && 'hover:scale-[1.03]'
                   )}
                   style={{ transformOrigin: `${node.x}px ${node.y}px` }}

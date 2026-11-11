@@ -76,7 +76,7 @@ export default function HowIThink() {
                   className={cn(
                     'relative w-full text-left p-4 rounded-xl transition-all duration-200 flex items-start gap-4 border',
                     isActive
-                      ? 'bg-bg-secondary border-accent/40 shadow-sm'
+                      ? 'bg-bg-secondary border-accent/40 shadow-xs'
                       : 'bg-transparent border-transparent hover:bg-bg-secondary/40 text-text-secondary'
                   )}
                 >

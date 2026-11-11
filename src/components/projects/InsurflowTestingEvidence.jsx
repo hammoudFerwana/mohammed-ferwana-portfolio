@@ -88,7 +88,7 @@ export default function InsurflowTestingEvidence() {
             className={cn(
               'flex-1 py-2 px-3 text-xs sm:text-sm font-mono font-medium rounded-md transition-all duration-200 text-center',
               activePillar === 'workflow'
-                ? 'bg-bg-tertiary text-text-primary shadow-sm border border-border-default'
+                ? 'bg-bg-tertiary text-text-primary shadow-xs border border-border-default'
                 : 'text-text-muted hover:text-text-secondary'
             )}
           >
@@ -104,7 +104,7 @@ export default function InsurflowTestingEvidence() {
             className={cn(
               'flex-1 py-2 px-3 text-xs sm:text-sm font-mono font-medium rounded-md transition-all duration-200 text-center',
               activePillar === 'dataintegrity'
-                ? 'bg-bg-tertiary text-text-primary shadow-sm border border-border-default'
+                ? 'bg-bg-tertiary text-text-primary shadow-xs border border-border-default'
                 : 'text-text-muted hover:text-text-secondary'
             )}
           >
@@ -120,7 +120,7 @@ export default function InsurflowTestingEvidence() {
             className={cn(
               'flex-1 py-2 px-3 text-xs sm:text-sm font-mono font-medium rounded-md transition-all duration-200 text-center',
               activePillar === 'stealth'
-                ? 'bg-bg-tertiary text-text-primary shadow-sm border border-border-default'
+                ? 'bg-bg-tertiary text-text-primary shadow-xs border border-border-default'
                 : 'text-text-muted hover:text-text-secondary'
             )}
           >

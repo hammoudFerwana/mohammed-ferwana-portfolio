@@ -107,7 +107,7 @@ export default function HeroSection() {
             {/* System Status Widget (Signature engineering element - Frame 850ms) */}
             <RevealOnScroll delay={0.85} className="w-full max-w-sm">
               <div
-                className="w-full rounded-xl bg-bg-secondary/90 border border-border-default p-4 shadow-lg backdrop-blur-sm"
+                className="w-full rounded-xl bg-bg-secondary/90 border border-border-default p-4 shadow-lg backdrop-blur-xs"
                 aria-hidden="true"
               >
                 <div className="flex items-center justify-between pb-3 mb-3 border-b border-border-subtle text-[11px] font-mono">

@@ -61,7 +61,7 @@ export default function CareerTimeline({ experiences = [], education = [] }) {
                 aria-controls="timeline-track"
                 onClick={() => setActiveTab(tab.id)}
                 className={cn(
-                  'relative px-3.5 py-2 rounded-xl text-xs font-mono tracking-tight transition-colors duration-200 whitespace-nowrap flex items-center gap-2 select-none focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent',
+                  'relative px-3.5 py-2 rounded-xl text-xs font-mono tracking-tight transition-colors duration-200 whitespace-nowrap flex items-center gap-2 select-none focus-visible:outline-hidden focus-visible:ring-2 focus-visible:ring-accent',
                   isActive
                     ? 'text-accent font-semibold'
                     : 'text-text-muted hover:text-text-primary'
@@ -75,7 +75,7 @@ export default function CareerTimeline({ experiences = [], education = [] }) {
                         ? { duration: 0 }
                         : { type: 'spring', stiffness: 450, damping: 35 }
                     }
-                    className="absolute inset-0 bg-accent/15 border border-accent/30 rounded-xl -z-0 shadow-sm"
+                    className="absolute inset-0 bg-accent/15 border border-accent/30 rounded-xl -z-0 shadow-xs"
                   />
                 )}
                 <span className="relative z-10">{tab.label}</span>
@@ -99,7 +99,7 @@ export default function CareerTimeline({ experiences = [], education = [] }) {
       <div id="timeline-track" className="relative pl-6 sm:pl-10 space-y-12" role="region" aria-live="polite">
         {/* Animated Continuous Conduit Spine */}
         <div
-          className="absolute left-2.5 sm:left-4 top-4 bottom-4 w-0.5 bg-gradient-to-b from-accent via-accent-secondary/50 to-border-subtle"
+          className="absolute left-2.5 sm:left-4 top-4 bottom-4 w-0.5 bg-linear-to-b from-accent via-accent-secondary/50 to-border-subtle"
           aria-hidden="true"
         >
           <div className="w-full h-full animate-conduit-pulse opacity-60" />
@@ -130,7 +130,7 @@ export default function CareerTimeline({ experiences = [], education = [] }) {
                 >
                   {/* Glowing Node Marker */}
                   <div
-                    className="absolute -left-[30px] sm:-left-[41px] top-6 w-5 h-5 rounded-full bg-bg-primary border-2 border-accent flex items-center justify-center transition-transform group-hover:scale-110 shadow-sm shadow-accent/20"
+                    className="absolute -left-[30px] sm:-left-[41px] top-6 w-5 h-5 rounded-full bg-bg-primary border-2 border-accent flex items-center justify-center transition-transform group-hover:scale-110 shadow-xs shadow-accent/20"
                     aria-hidden="true"
                   >
                     <span className="w-1.5 h-1.5 rounded-full bg-accent group-hover:scale-125 transition-transform" />
@@ -181,7 +181,7 @@ export default function CareerTimeline({ experiences = [], education = [] }) {
                             <button
                               type="button"
                               onClick={() => toggleExpand(exp.id)}
-                              className="text-xs font-mono text-accent hover:text-accent-hover transition-colors flex items-center gap-1.5 focus-visible:outline-none focus-visible:underline"
+                              className="text-xs font-mono text-accent hover:text-accent-hover transition-colors flex items-center gap-1.5 focus-visible:outline-hidden focus-visible:underline"
                             >
                               <span>{isExpanded ? 'Collapse' : `Show all (${exp.responsibilities.length})`}</span>
                               <span
@@ -275,7 +275,7 @@ export default function CareerTimeline({ experiences = [], education = [] }) {
               >
                 {/* Academic Node Marker */}
                 <div
-                  className="absolute -left-[30px] sm:-left-[41px] top-6 w-5 h-5 rounded-full bg-bg-primary border-2 border-accent-secondary flex items-center justify-center transition-transform group-hover:scale-110 shadow-sm shadow-accent-secondary/20"
+                  className="absolute -left-[30px] sm:-left-[41px] top-6 w-5 h-5 rounded-full bg-bg-primary border-2 border-accent-secondary flex items-center justify-center transition-transform group-hover:scale-110 shadow-xs shadow-accent-secondary/20"
                   aria-hidden="true"
                 >
                   <span className="w-1.5 h-1.5 rounded-full bg-accent-secondary group-hover:scale-125 transition-transform" />

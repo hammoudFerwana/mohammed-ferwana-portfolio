@@ -43,7 +43,7 @@ export default function CaseStudyFooter({ currentProject }) {
                     </Badge>
                   </div>
                   <h3 className="text-lg sm:text-xl font-bold text-text-primary tracking-tight group-hover:text-accent transition-colors">
-                    <Link href={`/projects/${nextProject.slug}`} className="focus-visible:outline-none focus-visible:underline">
+                    <Link href={`/projects/${nextProject.slug}`} className="focus-visible:outline-hidden focus-visible:underline">
                       {nextProject.title} — {nextProject.description}
                     </Link>
                   </h3>
@@ -85,7 +85,7 @@ export default function CaseStudyFooter({ currentProject }) {
           )}
 
           {/* ── Hiring & Architecture Discussion CTA ── */}
-          <div className="rounded-2xl bg-bg-secondary border border-border-default p-6 sm:p-8 flex flex-col md:flex-row md:items-center justify-between gap-6 shadow-sm">
+          <div className="rounded-2xl bg-bg-secondary border border-border-default p-6 sm:p-8 flex flex-col md:flex-row md:items-center justify-between gap-6 shadow-xs">
             <div className="space-y-2 max-w-xl">
               <div className="inline-flex items-center gap-2">
                 <span className="w-2 h-2 rounded-full bg-functional-success animate-pulse shrink-0" aria-hidden="true" />

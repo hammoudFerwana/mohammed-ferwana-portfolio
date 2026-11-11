@@ -22,7 +22,7 @@ export default function Button({
   const baseStyles = 'group inline-flex items-center justify-center font-medium rounded-lg transition-all duration-200 ease-[cubic-bezier(0.32,0.72,0,1)] focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2 focus-visible:ring-offset-bg-primary active:scale-[0.97] disabled:opacity-50 disabled:pointer-events-none disabled:cursor-not-allowed select-none cursor-pointer';
 
   const variants = {
-    primary: 'bg-accent hover:bg-accent-hover text-white shadow-sm hover:shadow-accent/25 hover:shadow-lg',
+    primary: 'bg-accent hover:bg-accent-hover text-white shadow-xs hover:shadow-accent/25 hover:shadow-lg',
     secondary: 'bg-bg-secondary hover:bg-bg-tertiary text-text-primary border border-border-default hover:border-border-strong',
     ghost: 'text-text-secondary hover:text-text-primary hover:bg-bg-tertiary/60',
     outline: 'border border-accent/30 text-accent hover:bg-accent/10 hover:border-accent',

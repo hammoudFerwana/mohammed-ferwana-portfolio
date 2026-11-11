@@ -109,7 +109,7 @@ export default function InsurflowConcurrencySandbox() {
   }, []);
 
   return (
-    <div className="rounded-xl border border-border-default bg-bg-secondary p-4 sm:p-6 space-y-6 shadow-sm">
+    <div className="rounded-xl border border-border-default bg-bg-secondary p-4 sm:p-6 space-y-6 shadow-xs">
       {/* ── Section Header ── */}
       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-border-subtle pb-5">
         <div className="space-y-1">
@@ -157,7 +157,7 @@ export default function InsurflowConcurrencySandbox() {
                   className={cn(
                     'p-2.5 rounded-lg border text-left transition-all font-mono text-xs',
                     isSelected
-                      ? 'border-accent bg-accent/10 text-accent font-semibold shadow-sm'
+                      ? 'border-accent bg-accent/10 text-accent font-semibold shadow-xs'
                       : 'border-border-subtle bg-bg-secondary/60 text-text-muted hover:text-text-primary'
                   )}
                 >
@@ -179,7 +179,7 @@ export default function InsurflowConcurrencySandbox() {
               <button
                 onClick={() => runConcurrentBurst(15, false)}
                 disabled={isRunning}
-                className="w-full py-2.5 px-3 rounded-lg bg-accent text-bg-primary font-mono text-xs font-bold hover:bg-accent/90 transition-all disabled:opacity-50 flex items-center justify-center gap-2 shadow-sm"
+                className="w-full py-2.5 px-3 rounded-lg bg-accent text-bg-primary font-mono text-xs font-bold hover:bg-accent/90 transition-all disabled:opacity-50 flex items-center justify-center gap-2 shadow-xs"
               >
                 {isRunning ? (
                   <>

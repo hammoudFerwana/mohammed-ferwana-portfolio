@@ -105,7 +105,7 @@ export default function ProjectsExplorer({ projects = [] }) {
                 aria-controls="projects-grid"
                 onClick={() => setActiveFilter(tab.id)}
                 className={cn(
-                  'relative px-3.5 py-2 rounded-xl text-xs font-mono tracking-tight transition-colors duration-200 whitespace-nowrap flex items-center gap-2 select-none focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent',
+                  'relative px-3.5 py-2 rounded-xl text-xs font-mono tracking-tight transition-colors duration-200 whitespace-nowrap flex items-center gap-2 select-none focus-visible:outline-hidden focus-visible:ring-2 focus-visible:ring-accent',
                   isActive
                     ? 'text-accent font-semibold'
                     : 'text-text-muted hover:text-text-primary'
@@ -119,7 +119,7 @@ export default function ProjectsExplorer({ projects = [] }) {
                         ? { duration: 0 }
                         : { type: 'spring', stiffness: 450, damping: 35 }
                     }
-                    className="absolute inset-0 bg-accent/15 border border-accent/30 rounded-xl -z-0 shadow-sm"
+                    className="absolute inset-0 bg-accent/15 border border-accent/30 rounded-xl -z-0 shadow-xs"
                   />
                 )}
                 <span className="relative z-10">{tab.label}</span>
@@ -163,7 +163,7 @@ export default function ProjectsExplorer({ projects = [] }) {
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
               placeholder="Search stack (e.g. MongoDB, FSM, Jest)..."
-              className="w-full pl-9 pr-8 py-2 rounded-xl bg-bg-primary/80 border border-border-subtle focus:border-accent text-xs font-mono text-text-primary placeholder:text-text-muted focus:outline-none focus:ring-1 focus:ring-accent transition-all duration-200"
+              className="w-full pl-9 pr-8 py-2 rounded-xl bg-bg-primary/80 border border-border-subtle focus:border-accent text-xs font-mono text-text-primary placeholder:text-text-muted focus:outline-hidden focus:ring-1 focus:ring-accent transition-all duration-200"
             />
             {searchQuery && (
               <button
@@ -256,7 +256,7 @@ export default function ProjectsExplorer({ projects = [] }) {
               </div>
               <button
                 onClick={handleReset}
-                className="inline-flex items-center gap-2 px-4 py-2 rounded-xl bg-accent text-white text-xs font-medium hover:bg-accent-hover transition-colors shadow-sm"
+                className="inline-flex items-center gap-2 px-4 py-2 rounded-xl bg-accent text-white text-xs font-medium hover:bg-accent-hover transition-colors shadow-xs"
               >
                 Reset All Filters
               </button>

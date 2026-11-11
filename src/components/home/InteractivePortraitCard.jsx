@@ -117,7 +117,7 @@ export default function InteractivePortraitCard() {
     >
       {/* Dynamic Ambient Glow Field Behind Card */}
       <div
-        className="absolute -inset-2 rounded-3xl bg-gradient-to-tr from-accent/35 via-accent-secondary/25 to-cyan-500/20 blur-xl opacity-60 transition-opacity duration-700 pointer-events-none group-hover:opacity-100"
+        className="absolute -inset-2 rounded-3xl bg-linear-to-tr from-accent/35 via-accent-secondary/25 to-cyan-500/20 blur-xl opacity-60 transition-opacity duration-700 pointer-events-none group-hover:opacity-100"
         style={{
           transform: 'translateZ(-50px)',
         }}
@@ -158,7 +158,7 @@ export default function InteractivePortraitCard() {
 
           {/* Cinematic Vignette Gradient Overlay */}
           <div
-            className="absolute inset-0 bg-gradient-to-t from-bg-primary via-bg-primary/20 to-transparent opacity-80 pointer-events-none"
+            className="absolute inset-0 bg-linear-to-t from-bg-primary via-bg-primary/20 to-transparent opacity-80 pointer-events-none"
             aria-hidden="true"
           />
 

@@ -32,7 +32,7 @@ export default function CTASection() {
             <span className="relative inline-block">
               Together
               <span
-                className="absolute left-0 -bottom-1 w-full h-[3px] bg-gradient-to-r from-accent to-accent-secondary rounded-full"
+                className="absolute left-0 -bottom-1 w-full h-[3px] bg-linear-to-r from-accent to-accent-secondary rounded-full"
                 aria-hidden="true"
               />
             </span>

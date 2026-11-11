@@ -121,7 +121,7 @@ export default function TeamlineWorkspaceSimulator() {
   }, []);
 
   return (
-    <div className="rounded-xl border border-border-default bg-bg-secondary p-4 sm:p-6 space-y-6 shadow-sm">
+    <div className="rounded-xl border border-border-default bg-bg-secondary p-4 sm:p-6 space-y-6 shadow-xs">
       {/* ── Section Header ── */}
       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-border-subtle pb-5">
         <div className="space-y-1">
@@ -225,7 +225,7 @@ export default function TeamlineWorkspaceSimulator() {
             </div>
 
             {/* IN PROGRESS */}
-            <div className="rounded-lg bg-bg-primary/90 border border-accent/30 p-3 space-y-3 shadow-sm">
+            <div className="rounded-lg bg-bg-primary/90 border border-accent/30 p-3 space-y-3 shadow-xs">
               <div className="flex items-center justify-between border-b border-border-subtle pb-2">
                 <span className="font-mono text-xs font-semibold text-accent uppercase">In Progress</span>
                 <span className="font-mono text-[10px] text-accent">Active Task</span>

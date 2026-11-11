@@ -96,7 +96,7 @@ export default function MobileMenu({ isOpen, onClose, links, currentPath }) {
           href="/resume/Mohammed_Ferwana_Resume.pdf"
           download="Mohammed_Ferwana_Resume.pdf"
           onClick={onClose}
-          className="w-full py-2.5 px-4 rounded-xl bg-accent hover:bg-accent-hover text-white font-semibold text-xs flex items-center justify-center gap-2 shadow-sm transition-all duration-200"
+          className="w-full py-2.5 px-4 rounded-xl bg-accent hover:bg-accent-hover text-white font-semibold text-xs flex items-center justify-center gap-2 shadow-xs transition-all duration-200"
         >
           <svg className="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
             <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z" />

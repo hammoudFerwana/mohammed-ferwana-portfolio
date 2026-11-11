@@ -115,7 +115,7 @@ export default function CommandPalette() {
             onKeyDown={handleKeyDown}
             placeholder="Type a command or search projects..."
             aria-label="Search commands, projects, or pages"
-            className="w-full bg-transparent text-sm text-text-primary placeholder:text-text-muted focus:outline-none"
+            className="w-full bg-transparent text-sm text-text-primary placeholder:text-text-muted focus:outline-hidden"
           />
           <kbd className="hidden sm:inline-flex items-center text-[10px] font-mono px-2 py-0.5 rounded bg-bg-tertiary border border-border-default text-text-muted">
             ESC

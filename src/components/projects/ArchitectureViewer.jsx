@@ -119,7 +119,7 @@ export default function ArchitectureViewer({ architecture }) {
                   aria-label={`${node.label} — ${node.type} component. ${node.description}`}
                   aria-pressed={isSelected}
                   className={cn(
-                    'w-full sm:w-80 p-3.5 rounded-xl border text-center font-mono text-xs sm:text-sm font-semibold transition-all duration-200 shadow-sm relative group',
+                    'w-full sm:w-80 p-3.5 rounded-xl border text-center font-mono text-xs sm:text-sm font-semibold transition-all duration-200 shadow-xs relative group',
                     style,
                     isSelected
                       ? 'ring-2 ring-accent scale-[1.02] shadow-accent/20 shadow-lg'
@@ -149,12 +149,12 @@ export default function ArchitectureViewer({ architecture }) {
                 {index < architecture.nodes.length - 1 && (
                   <div className="my-2 flex flex-col items-center relative" aria-hidden="true">
                     <div className="relative w-0.5 h-6 bg-border-strong overflow-hidden rounded-full">
-                      <div className="absolute inset-x-0 top-0 h-3 bg-gradient-to-b from-transparent via-accent to-transparent animate-conduit-pulse" />
+                      <div className="absolute inset-x-0 top-0 h-3 bg-linear-to-b from-transparent via-accent to-transparent animate-conduit-pulse" />
                     </div>
 
                     {/* Connection Label */}
                     {connectionLabel && (
-                      <span className="font-mono text-[9px] text-accent font-medium px-2.5 py-0.5 rounded-full bg-accent/10 border border-accent/25 my-1 select-none shadow-sm">
+                      <span className="font-mono text-[9px] text-accent font-medium px-2.5 py-0.5 rounded-full bg-accent/10 border border-accent/25 my-1 select-none shadow-xs">
                         {connectionLabel}
                       </span>
                     )}

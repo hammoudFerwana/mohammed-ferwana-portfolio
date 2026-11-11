@@ -57,7 +57,7 @@ export default function Navbar() {
           </Link>
 
           {/* Desktop Navigation Links */}
-          <nav className="hidden md:flex items-center gap-1 bg-bg-secondary/60 backdrop-blur-sm border border-border-subtle px-3 py-1.5 rounded-full shadow-inner">
+          <nav className="hidden md:flex items-center gap-1 bg-bg-secondary/60 backdrop-blur-xs border border-border-subtle px-3 py-1.5 rounded-full shadow-inner">
             {allNavLinks.map((item) => {
               const isActive = pathname === item.href;
               return (
@@ -67,7 +67,7 @@ export default function Navbar() {
                   className={cn(
                     'relative px-3.5 py-1.5 text-xs font-medium rounded-full transition-all duration-200 focus-visible:ring-2 focus-visible:ring-accent',
                     isActive
-                      ? 'text-text-primary bg-bg-tertiary shadow-sm'
+                      ? 'text-text-primary bg-bg-tertiary shadow-xs'
                       : 'text-text-secondary hover:text-text-primary hover:bg-bg-tertiary/50'
                   )}
                 >

@@ -34,7 +34,7 @@ export default function AboutTimeline() {
       <div className="relative mt-12 pl-6 sm:pl-8 space-y-12">
         {/* Animated Continuous Conduit Spine */}
         <div
-          className="absolute left-0 top-3 bottom-3 w-0.5 bg-gradient-to-b from-accent via-accent-secondary/50 to-border-subtle"
+          className="absolute left-0 top-3 bottom-3 w-0.5 bg-linear-to-b from-accent via-accent-secondary/50 to-border-subtle"
           aria-hidden="true"
         >
           <div className="w-full h-full animate-conduit-pulse opacity-60" />
@@ -44,7 +44,7 @@ export default function AboutTimeline() {
           <RevealOnScroll key={`${item.year}-${idx}`} delay={0.08 * idx}>
             <div className="relative group">
               {/* Timeline Node Marker */}
-              <div className="absolute -left-[31px] sm:-left-[39px] top-6 w-4 h-4 rounded-full bg-bg-primary border-2 border-accent flex items-center justify-center shadow-sm shadow-accent/20">
+              <div className="absolute -left-[31px] sm:-left-[39px] top-6 w-4 h-4 rounded-full bg-bg-primary border-2 border-accent flex items-center justify-center shadow-xs shadow-accent/20">
                 <span className="w-1.5 h-1.5 rounded-full bg-accent group-hover:scale-125 transition-transform" />
               </div>
 
