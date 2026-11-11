@@ -7,6 +7,7 @@ import { navigation } from '@/data/navigation';
 import { useOverlay } from '@/context/OverlayContext';
 import { cn } from '@/lib/utils';
 import MobileMenu from './MobileMenu';
+import ThemeToggle from '@/components/shared/ThemeToggle';
 
 export default function Navbar() {
   const pathname = usePathname();
@@ -123,6 +124,9 @@ export default function Navbar() {
                 ⌘K
               </kbd>
             </button>
+
+            {/* Theme Toggle (Desktop) */}
+            <ThemeToggle className="hidden md:inline-flex" />
 
             {/* Mobile Menu Button with morphing animation */}
             <button

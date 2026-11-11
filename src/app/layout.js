@@ -2,6 +2,7 @@ import { Mona_Sans } from 'next/font/google';
 import { GeistMono } from 'geist/font/mono';
 import { siteMetadata } from '@/data/siteMetadata';
 import { OverlayProvider } from '@/context/OverlayContext';
+import { ThemeProvider } from '@/context/ThemeContext';
 import Navbar from '@/components/layout/Navbar';
 import Footer from '@/components/layout/Footer';
 import CommandPalette from '@/components/overlays/CommandPalette';
@@ -72,9 +73,14 @@ export const metadata = {
   },
 };
 
+const themeInitScript = `(function(){try{var t=localStorage.getItem('hz-theme');if(t==='light'||t==='dark'){document.documentElement.dataset.theme=t;return;}}catch(e){}try{document.documentElement.dataset.theme=window.matchMedia('(prefers-color-scheme: light)').matches?'light':'dark';}catch(e){document.documentElement.dataset.theme='dark';}})();`;
+
 export default function RootLayout({ children }) {
   return (
-    <html lang="en" className={`dark ${monaSans.variable} ${GeistMono.variable}`}>
+    <html lang="en" suppressHydrationWarning className={`${monaSans.variable} ${GeistMono.variable}`}>
+      <head>
+        <script dangerouslySetInnerHTML={{ __html: themeInitScript }} />
+      </head>
       <body className="min-h-screen bg-bg text-ink antialiased font-sans flex flex-col selection:bg-violet/30 selection:text-ink">
         {/* Skip to Content Link for Accessibility */}
         <a
@@ -84,7 +90,8 @@ export default function RootLayout({ children }) {
           Skip to main content
         </a>
 
-        <OverlayProvider>
+        <ThemeProvider>
+          <OverlayProvider>
           <SmoothScrollProvider>
             <Navbar />
             <main id="main-content" className="flex-1">
@@ -93,7 +100,8 @@ export default function RootLayout({ children }) {
             <Footer />
             <CommandPalette />
           </SmoothScrollProvider>
-        </OverlayProvider>
+          </OverlayProvider>
+        </ThemeProvider>
       </body>
     </html>
   );

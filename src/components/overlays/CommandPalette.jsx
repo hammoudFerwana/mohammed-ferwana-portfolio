@@ -3,20 +3,32 @@
 import { useState, useEffect, useRef } from 'react';
 import { useRouter } from 'next/navigation';
 import { useOverlay } from '@/context/OverlayContext';
+import { useTheme } from '@/context/ThemeContext';
 import { commandGroups } from '@/data/commands';
 import { cn } from '@/lib/utils';
 
 export default function CommandPalette() {
   const router = useRouter();
   const { isCommandPaletteOpen, closeCommandPalette } = useOverlay();
+  const { toggleTheme } = useTheme();
   const [query, setQuery] = useState('');
   const [selectedIndex, setSelectedIndex] = useState(0);
   const inputRef = useRef(null);
 
   // Flatten commands for index-based navigation
-  const allCommands = commandGroups.flatMap((group) =>
-    group.commands.map((cmd) => ({ ...cmd, group: group.group }))
-  );
+  const allCommands = [
+    ...commandGroups.flatMap((group) =>
+      group.commands.map((cmd) => ({ ...cmd, group: group.group }))
+    ),
+    {
+      id: 'act-theme',
+      group: 'Actions & Utilities',
+      label: 'Switch theme',
+      shortcut: 'T',
+      action: 'theme',
+      keywords: ['theme', 'dark', 'light', 'dusk', 'dawn', 'sunrise', 'sunset', 'mode'],
+    },
+  ];
 
   const normalizedQuery = query.trim().toLowerCase();
 
@@ -68,6 +80,8 @@ export default function CommandPalette() {
       document.body.appendChild(link);
       link.click();
       document.body.removeChild(link);
+    } else if (cmd.action === 'theme') {
+      toggleTheme();
     }
   };
 
