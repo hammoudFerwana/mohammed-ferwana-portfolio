@@ -9,9 +9,9 @@ import { claimFsm } from './claimFsm';
 export const ciBadgeBranch = 'main';
 
 export const metrics = {
-  integrationTests: 616,
-  testSuites: 39,
-  testRunDate: '2026-10-01',
+  integrationTests: 1248,
+  testSuites: 63,
+  testRunDate: '2026-11-11',
   fsmStates: claimFsm.states.length,
   ciBadgeBranch,
   source: 'Sawn backend, full Jest run',
