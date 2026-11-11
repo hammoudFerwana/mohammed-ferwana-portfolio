@@ -1,4 +1,4 @@
-import { GeistSans } from 'geist/font/sans';
+import { Mona_Sans } from 'next/font/google';
 import { GeistMono } from 'geist/font/mono';
 import { siteMetadata } from '@/data/siteMetadata';
 import { OverlayProvider } from '@/context/OverlayContext';
@@ -7,6 +7,13 @@ import Footer from '@/components/layout/Footer';
 import CommandPalette from '@/components/overlays/CommandPalette';
 import SmoothScrollProvider from '@/components/shared/SmoothScrollProvider';
 import './globals.css';
+
+const monaSans = Mona_Sans({
+  subsets: ['latin'],
+  axes: ['wdth'],
+  display: 'swap',
+  variable: '--font-mona',
+});
 
 const metadataBaseUrl = (() => {
   try {
@@ -67,7 +74,7 @@ export const metadata = {
 
 export default function RootLayout({ children }) {
   return (
-    <html lang="en" className={`dark ${GeistSans.variable} ${GeistMono.variable}`}>
+    <html lang="en" className={`dark ${monaSans.variable} ${GeistMono.variable}`}>
       <body className="min-h-screen bg-bg text-ink antialiased font-sans flex flex-col selection:bg-violet/30 selection:text-ink">
         {/* Skip to Content Link for Accessibility */}
         <a

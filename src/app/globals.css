@@ -18,6 +18,11 @@
   --hz-error: #F87171;
   --hz-info: #60A5FA;
   --ease-out: cubic-bezier(0.22, 1, 0.36, 1);
+  --text-label: 12.5px;
+  --text-body: 17px;
+  --text-h2: clamp(28px, 4vw, 40px);
+  --text-h1: clamp(40px, 5.5vw, 60px);
+  --text-display: clamp(56px, 10vw, 120px);
 }
 
 :root[data-theme="light"] {
@@ -80,8 +85,16 @@
   --color-functional-warning: var(--hz-warning);
   --color-functional-info: var(--hz-info);
 
-  --font-sans: var(--font-geist-sans), system-ui, -apple-system, sans-serif;
-  --font-mono: var(--font-geist-mono), monospace;
+  --font-sans: var(--font-mona), system-ui, sans-serif;
+  --font-mono: var(--font-geist-mono), ui-monospace, monospace;
+
+  --text-label: var(--text-label);
+  --text-label--letter-spacing: 0.08em;
+  --text-body: var(--text-body);
+  --text-body--line-height: 1.6;
+  --text-h2: var(--text-h2);
+  --text-h1: var(--text-h1);
+  --text-display: var(--text-display);
 
   --radius-sm: 6px;
   --radius-md: 8px;
@@ -97,6 +110,29 @@
 }
 
 @layer base {
+  body {
+    font-family: var(--font-sans);
+    font-size: var(--text-body);
+    line-height: 1.6;
+  }
+
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    text-wrap: balance;
+  }
+
+  h1 {
+    font-size: var(--text-h1);
+  }
+
+  h2 {
+    font-size: var(--text-h2);
+  }
+
   button:not(:disabled),
   [role="button"]:not(:disabled) {
     cursor: pointer;
@@ -110,7 +146,6 @@ html {
 body {
   background-color: var(--hz-bg);
   color: var(--hz-ink);
-  font-family: var(--font-geist-sans), system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
   overflow-x: hidden;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
