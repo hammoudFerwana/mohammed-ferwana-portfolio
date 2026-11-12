@@ -44,6 +44,7 @@ export default function RevealOnScroll({
 
   return (
     <m.div
+      data-reveal=""
       initial={prefersReducedMotion ? 'visible' : 'hidden'}
       animate={prefersReducedMotion ? 'visible' : undefined}
       whileInView="visible"

@@ -1,4 +1,5 @@
 import RevealOnScroll from '@/components/shared/RevealOnScroll';
+import InteractivePortraitCard from '@/components/home/InteractivePortraitCard';
 import { aboutData } from '@/data/about';
 
 export default function AboutHero() {
@@ -7,28 +8,36 @@ export default function AboutHero() {
   return (
     <section className="mb-20 md:mb-24">
       <RevealOnScroll>
-        <div className="space-y-6">
-          <div className="inline-flex items-center gap-2">
-            <span className="font-mono text-xs uppercase tracking-widest text-accent font-semibold px-2.5 py-1 rounded bg-accent/10 border border-accent/20">
-              {hero.eyebrow}
-            </span>
-          </div>
+        <div className="space-y-8">
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-10 items-center">
+            <div className="lg:col-span-7 space-y-6">
+              <div className="inline-flex items-center gap-2">
+                <span className="font-mono text-xs uppercase tracking-widest text-accent font-semibold px-2.5 py-1 rounded bg-accent/10 border border-accent/20">
+                  {hero.eyebrow}
+                </span>
+              </div>
 
-          <div className="space-y-3">
-            <h1 className="text-3xl sm:text-4xl md:text-5xl font-bold tracking-tight text-text-primary text-balance">
-              {hero.title}
-            </h1>
-            <p className="text-lg sm:text-xl font-mono text-accent">
-              {hero.role}
-            </p>
-          </div>
+              <div className="space-y-3">
+                <h1 className="text-3xl sm:text-4xl md:text-5xl font-bold tracking-tight text-text-primary text-balance">
+                  {hero.title}
+                </h1>
+                <p className="text-lg sm:text-xl font-mono text-accent">
+                  {hero.role}
+                </p>
+              </div>
 
-          <p className="text-base sm:text-lg text-text-secondary leading-relaxed max-w-3xl">
-            {hero.summary}
-          </p>
+              <p className="text-base sm:text-lg text-text-secondary leading-relaxed max-w-3xl">
+                {hero.summary}
+              </p>
+            </div>
+
+            <div className="lg:col-span-5 flex justify-center lg:justify-end">
+              <InteractivePortraitCard />
+            </div>
+          </div>
 
           {/* Quick Info Grid */}
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3.5 pt-4">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3.5 pt-2">
             {hero.highlights.map((item) => (
               <div
                 key={item.label}

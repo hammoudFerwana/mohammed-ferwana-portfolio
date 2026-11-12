@@ -1,11 +1,7 @@
-'use client';
-
 import Image from 'next/image';
 import Button from '@/components/shared/Button';
-import RevealOnScroll from '@/components/shared/RevealOnScroll';
-
+import GazaClock from '@/components/home/GazaClock';
 import { metrics } from '@/data/metrics';
-import InteractivePortraitCard from '@/components/home/InteractivePortraitCard';
 
 const formattedTestRunDate = new Date(`${metrics.testRunDate}T00:00:00Z`).toLocaleDateString('en-GB', {
   day: 'numeric',
@@ -14,136 +10,151 @@ const formattedTestRunDate = new Date(`${metrics.testRunDate}T00:00:00Z`).toLoca
   timeZone: 'UTC',
 });
 
+const facts = [
+  { label: 'Stack', value: 'Node.js · Express · MongoDB' },
+  { label: 'Study', value: 'Computer Systems Engineering, Al-Azhar University, expected 2027' },
+  { label: 'Base', value: 'Gaza, Palestine · Remote' },
+];
+
 export default function HeroSection() {
   return (
-    <section className="relative min-h-[92dvh] flex flex-col justify-center pt-28 pb-16 overflow-hidden">
-      {/* Background Animated Aurora Mesh (3 Orbs, GPU-accelerated) */}
-      <div className="absolute inset-0 overflow-hidden pointer-events-none in-data-[theme=light]:opacity-35" aria-hidden="true">
-        <div className="absolute top-1/4 left-1/4 -translate-x-1/2 -translate-y-1/2 w-[550px] h-[400px] bg-accent/10 blur-[130px] rounded-full animate-aurora" />
-        <div
-          className="absolute top-1/3 right-1/4 translate-x-1/4 -translate-y-1/2 w-[480px] h-[380px] bg-accent-secondary/10 blur-[140px] rounded-full animate-aurora"
-          style={{ animationDelay: '-6s' }}
+    <section className="pt-[84px] sm:pt-[96px] md:pt-[128px] lg:pt-[96px] pb-[70px]">
+      {/* Full-width Gaza sea port photo band */}
+      <div className="relative w-full h-[clamp(260px,46vh,500px)] border-b border-line overflow-hidden">
+        <Image
+          src="/images/hero/gaza-port.webp"
+          alt="Gaza sea port at sunset, fishing boats inside the harbour wall, with a minaret in the foreground"
+          fill
+          priority
+          sizes="100vw"
+          className="object-cover object-center"
         />
+
+        {/* Bottom gradient for legibility (transparent to bg at ~55%) */}
         <div
-          className="absolute bottom-1/4 left-1/2 -translate-x-1/2 translate-y-1/4 w-[380px] h-[320px] bg-sea/5 blur-[120px] rounded-full animate-aurora"
-          style={{ animationDelay: '-11s' }}
+          aria-hidden="true"
+          className="pointer-events-none absolute inset-0"
+          style={{
+            background: 'linear-gradient(to bottom, transparent 45%, var(--hz-bg) 100%)',
+          }}
         />
+
+        {/* Clock chip & photo credit bar */}
+        <div className="absolute inset-x-0 bottom-0 z-10 pb-4 sm:pb-5">
+          <div className="max-w-7xl mx-auto px-5 sm:px-8 flex flex-col items-start gap-2 sm:flex-row sm:items-end sm:justify-between">
+            <GazaClock />
+
+            <p className="rounded-lg border border-line bg-bg/90 backdrop-blur-sm px-3 py-1.5 font-mono text-[11.5px] leading-snug text-ink-muted max-w-full">
+              Gaza sea port, before the war · Photo:{' '}
+              <a
+                href="https://unsplash.com/photos/a-view-of-a-sunset-over-a-body-of-water-EMH4vCucw-A"
+                rel="noopener"
+                target="_blank"
+                className="text-ink underline decoration-line underline-offset-2 hover:text-violet transition-colors"
+              >
+                Mohammed Ibrahim, Unsplash
+              </a>
+            </p>
+          </div>
+        </div>
       </div>
 
-      <div className="max-w-7xl mx-auto px-5 sm:px-8 w-full relative z-10">
-        {/* Technical Metadata Bar (Frame 0ms - 50ms) */}
-        <RevealOnScroll delay={0.05}>
-          <div className="inline-flex items-center gap-2 font-mono text-[11px] sm:text-xs text-text-muted tracking-widest uppercase bg-bg-secondary/70 border border-border-default px-3.5 py-1.5 rounded-full mb-8 shadow-inner hover:border-accent/40 transition-colors duration-300">
-            <span className="w-2 h-2 rounded-full bg-functional-success animate-pulse-ring shrink-0" />
-            <span>Node.js · Express · MongoDB · REST APIs</span>
-          </div>
-        </RevealOnScroll>
+      {/* Hero content */}
+      <div className="max-w-7xl mx-auto px-5 sm:px-8 mt-[34px]">
+        {/* Full-width name & role block */}
+        <div>
+          <h1 className="font-sans text-[length:var(--text-display)] font-bold leading-[0.9] tracking-[-0.035em] text-ink hyphens-none">
+            Mohammed Ferwana
+          </h1>
 
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-8 items-center">
-          {/* Main Hero Copy (7 cols) */}
-          <div className="lg:col-span-7 space-y-6">
-            <div>
-              <RevealOnScroll delay={0.15}>
-                <h1 className="text-4xl sm:text-6xl md:text-7xl font-bold tracking-[-0.04em] text-text-primary leading-[1.08] text-balance">
-                  Mohammed
-                </h1>
-              </RevealOnScroll>
-              <RevealOnScroll delay={0.25}>
+          <div className="mt-5 flex items-center gap-4">
+            <p className="font-mono text-[15px] text-violet shrink-0">
+              Backend Engineer
+            </p>
+            <span
+              aria-hidden="true"
+              className="h-px flex-1 max-w-xs"
+              style={{
+                background: 'linear-gradient(to right, var(--hz-violet), transparent)',
+              }}
+            />
+          </div>
+        </div>
+
+        {/* Two columns at 900px+, one column below */}
+        <div className="mt-10 grid grid-cols-1 min-[900px]:grid-cols-12 gap-10 min-[900px]:gap-12 items-start">
+          {/* Left: promise + three buttons */}
+          <div className="min-[900px]:col-span-6 space-y-8">
+            <p className="text-[clamp(19px,2vw,23px)] leading-[1.45] text-ink max-w-[34ch]">
+              I build the server side of web and mobile products: the data, the logins, the permissions and the business rules that keep them correct.
+            </p>
+
+            <div className="flex flex-wrap items-center gap-3">
+              <Button href="/projects" variant="primary" size="lg">
+                See my work
+              </Button>
+              <Button href="/contact" variant="secondary" size="lg">
+                Start a project
+              </Button>
+              <Button
+                href="/resume/Mohammed_Ferwana_Resume.pdf"
+                download="Mohammed_Ferwana_Resume.pdf"
+                variant="ghost"
+                size="lg"
+              >
+                Download Resume
+              </Button>
+            </div>
+          </div>
+
+          {/* Right: facts list */}
+          <dl className="min-[900px]:col-span-6 divide-y divide-line border-y border-line">
+            {facts.map((item) => (
+              <div
+                key={item.label}
+                className="py-3.5 grid grid-cols-1 sm:grid-cols-[88px_1fr] gap-1 sm:gap-4 items-baseline"
+              >
+                <dt className="font-mono text-[12px] uppercase tracking-[0.08em] text-ink-muted">
+                  {item.label}
+                </dt>
+                <dd className="text-[15px] leading-snug text-ink">
+                  {item.value}
+                </dd>
+              </div>
+            ))}
+
+            <div className="py-3.5 grid grid-cols-1 sm:grid-cols-[88px_1fr] gap-1 sm:gap-4 items-baseline">
+              <dt className="font-mono text-[12px] uppercase tracking-[0.08em] text-ink-muted">
+                Status
+              </dt>
+              <dd className="text-[15px] leading-snug text-ink flex items-center gap-2.5">
                 <span
-                  className="text-4xl sm:text-6xl md:text-7xl font-bold tracking-[-0.04em] leading-[1.08] text-transparent bg-clip-text animate-shimmer inline-block"
-                  style={{
-                    backgroundImage: 'linear-gradient(110deg, var(--hz-ink) 0%, var(--hz-violet) 35%, var(--hz-sea) 65%, var(--hz-ink) 100%)',
-                    backgroundSize: '250% 100%',
-                  }}
-                >
-                  Ferwana
-                </span>
-              </RevealOnScroll>
+                  aria-hidden="true"
+                  className="inline-block w-2 h-2 rounded-full bg-sun shrink-0"
+                />
+                <span>Open to backend roles, internships and freelance projects</span>
+              </dd>
             </div>
 
-            <RevealOnScroll delay={0.35}>
-              <div className="space-y-2">
-                <p className="font-mono text-sm sm:text-base text-accent font-medium tracking-tight">
-                  Backend Engineer
-                </p>
-              </div>
-            </RevealOnScroll>
-
-            <RevealOnScroll delay={0.45}>
-              <p className="text-base sm:text-lg text-text-secondary leading-relaxed max-w-xl text-balance">
-                I build multi-tenant REST APIs with guarded state machines, tenant isolation and tested business rules.
-              </p>
-            </RevealOnScroll>
-
-            {/* CTAs (Frame 550ms) */}
-            <RevealOnScroll delay={0.55}>
-              <div className="flex flex-wrap items-center gap-3 pt-2">
-                <Button href="/projects" variant="primary" size="lg">
-                  Explore My Work →
-                </Button>
-                <Button
-                  href="/resume/Mohammed_Ferwana_Resume.pdf"
-                  download="Mohammed_Ferwana_Resume.pdf"
-                  variant="secondary"
-                  size="lg"
-                >
-                  Download Resume
-                </Button>
-                <Button href="/contact" variant="ghost" size="lg">
-                  Let&apos;s Talk →
-                </Button>
-              </div>
-            </RevealOnScroll>
-          </div>
-
-          {/* Portrait & System Status Widget (5 cols) */}
-          <div className="lg:col-span-5 flex flex-col items-center lg:items-end gap-6">
-            <RevealOnScroll delay={0.7} className="w-full max-w-sm">
-              <InteractivePortraitCard />
-            </RevealOnScroll>
-
-            {/* System Status Widget (Signature engineering element - Frame 850ms) */}
-            <RevealOnScroll delay={0.85} className="w-full max-w-sm">
-              <div
-                className="w-full rounded-xl bg-bg-secondary/90 border border-border-default p-4 shadow-lg backdrop-blur-xs"
-                aria-hidden="true"
-              >
-                <div className="flex items-center justify-between pb-3 mb-3 border-b border-border-subtle text-[11px] font-mono">
-                  <div className="flex items-center gap-2 text-text-muted uppercase tracking-wider">
-                    <span className="w-2 h-2 rounded-full bg-functional-success animate-pulse-ring shrink-0" />
-                    <span>VERIFIED EVIDENCE</span>
-                  </div>
-                </div>
-                <div className="space-y-2.5">
-                  <div className="flex items-center gap-2 text-xs">
-                    <span className="w-1.5 h-1.5 rounded-full bg-functional-success shrink-0" />
-                    <span className="text-text-secondary font-mono text-[11px]">
-                      <span className="text-text-primary font-semibold">{metrics.integrationTests}</span> tests passing (<span className="text-text-primary font-semibold">{metrics.testSuites}</span> suites, run {formattedTestRunDate})
-                    </span>
-                  </div>
-                  <div className="flex items-center gap-2 text-xs">
-                    <span className="w-1.5 h-1.5 rounded-full bg-functional-success shrink-0" />
-                    <span className="text-text-secondary font-mono text-[11px]">
-                      <span className="text-text-primary font-semibold">{metrics.fsmStates}</span>-state claim lifecycle, guarded transitions
-                    </span>
-                  </div>
-                  <div className="flex items-center justify-between gap-2 text-xs pt-1 border-t border-border-subtle/50">
-                    <span className="text-text-secondary font-mono text-[11px]">
-                      Portfolio CI: lint, test and build
-                    </span>
-                    <Image
-                      src={`https://github.com/hammoudFerwana/mohammed-ferwana-portfolio/actions/workflows/ci.yml/badge.svg?branch=${metrics.ciBadgeBranch}`}
-                      alt="Portfolio CI: lint, test and build"
-                      width={106}
-                      height={20}
-                      unoptimized
-                      className="h-4 sm:h-5 w-auto"
-                    />
-                  </div>
-                </div>
-              </div>
-            </RevealOnScroll>
-          </div>
+            <div className="py-3.5 grid grid-cols-1 sm:grid-cols-[88px_1fr] gap-1 sm:gap-4 items-baseline">
+              <dt className="font-mono text-[12px] uppercase tracking-[0.08em] text-ink-muted">
+                Proof
+              </dt>
+              <dd className="text-[15px] leading-snug text-ink flex flex-wrap items-center justify-between gap-2.5">
+                <span>
+                  {metrics.integrationTests} tests passing on Sawn, run {formattedTestRunDate}
+                </span>
+                <Image
+                  src={`https://github.com/hammoudFerwana/mohammed-ferwana-portfolio/actions/workflows/ci.yml/badge.svg?branch=${metrics.ciBadgeBranch}`}
+                  alt="Portfolio CI: lint, test and build"
+                  width={106}
+                  height={20}
+                  unoptimized
+                  className="h-5 w-auto shrink-0"
+                />
+              </dd>
+            </div>
+          </dl>
         </div>
       </div>
     </section>

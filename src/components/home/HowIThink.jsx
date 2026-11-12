@@ -121,9 +121,10 @@ export default function HowIThink() {
               <AnimatePresence mode="wait">
                 <m.div
                   key={activeStep}
-                  initial={{ opacity: 0, x: 16, filter: 'blur(4px)' }}
-                  animate={{ opacity: 1, x: 0, filter: 'blur(0px)' }}
-                  exit={{ opacity: 0, x: -16, filter: 'blur(4px)' }}
+                  data-reveal=""
+                  initial={{ opacity: 0, x: 16 }}
+                  animate={{ opacity: 1, x: 0 }}
+                  exit={{ opacity: 0, x: -16 }}
                   transition={{ duration: 0.3, ease: [0.32, 0.72, 0, 1] }}
                   className="rounded-2xl bg-bg-secondary border border-border-default p-6 sm:p-8 space-y-6 shadow-xl relative overflow-hidden"
                 >
