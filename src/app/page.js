@@ -1,4 +1,5 @@
 import HeroSection from '@/components/home/HeroSection';
+import StatementSection from '@/components/home/StatementSection';
 import EngineeringIdentity from '@/components/home/EngineeringIdentity';
 import FeaturedProjects from '@/components/home/FeaturedProjects';
 import HowIThink from '@/components/home/HowIThink';
@@ -9,6 +10,7 @@ export default function Home() {
   return (
     <>
       <HeroSection />
+      <StatementSection />
       <EngineeringIdentity />
       <FeaturedProjects />
       <HowIThink />

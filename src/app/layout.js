@@ -80,6 +80,7 @@ export default function RootLayout({ children }) {
     <html lang="en" suppressHydrationWarning className={`${monaSans.variable} ${GeistMono.variable}`}>
       <head>
         <script dangerouslySetInnerHTML={{ __html: themeInitScript }} />
+        <noscript><style>{`[data-reveal]{opacity:1!important;transform:none!important;filter:none!important}`}</style></noscript>
       </head>
       <body className="min-h-screen bg-bg text-ink antialiased font-sans flex flex-col selection:bg-violet/30 selection:text-ink">
         {/* Skip to Content Link for Accessibility */}
