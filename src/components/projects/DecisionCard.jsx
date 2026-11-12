@@ -1,7 +1,7 @@
 'use client';
 
 import { useState } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
+import { m, AnimatePresence } from 'motion/react';
 import SpotlightCard from '@/components/shared/SpotlightCard';
 import { cn } from '@/lib/utils';
 
@@ -21,10 +21,7 @@ export default function DecisionCard({ decision, index = 0 }) {
     <SpotlightCard
       as="div"
       className={cn(
-        'rounded-xl border transition-all duration-300',
-        isExpanded
-          ? 'bg-bg-secondary border-accent/20 shadow-md shadow-accent/5'
-          : 'bg-bg-secondary/60 border-border-default hover:border-border-strong'
+        isExpanded && 'shadow-md shadow-accent/5'
       )}
     >
       <button
@@ -60,7 +57,7 @@ export default function DecisionCard({ decision, index = 0 }) {
       {/* Expanded Content with spring accordion motion */}
       <AnimatePresence initial={false}>
         {isExpanded && (
-          <motion.div
+          <m.div
             initial={{ height: 0, opacity: 0 }}
             animate={{ height: 'auto', opacity: 1 }}
             exit={{ height: 0, opacity: 0 }}
@@ -78,7 +75,7 @@ export default function DecisionCard({ decision, index = 0 }) {
                 </div>
               )}
             </div>
-          </motion.div>
+          </m.div>
         )}
       </AnimatePresence>
     </SpotlightCard>

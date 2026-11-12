@@ -6,7 +6,7 @@ export default function AboutCTA() {
   return (
     <section className="py-16 md:py-24 border-t border-border-subtle" aria-labelledby="evidence-heading">
       <RevealOnScroll>
-        <div className="rounded-2xl bg-gradient-to-b from-bg-secondary to-bg-tertiary/40 border border-border-default p-8 sm:p-12 text-center space-y-6 max-w-4xl mx-auto shadow-lg">
+        <div className="rounded-2xl bg-linear-to-b from-bg-secondary to-bg-tertiary/40 border border-border-default p-8 sm:p-12 text-center space-y-6 max-w-4xl mx-auto shadow-lg">
           <div className="inline-flex items-center gap-2">
             <span className="font-mono text-xs uppercase tracking-widest text-accent font-semibold px-2.5 py-1 rounded bg-accent/10 border border-accent/20">
               PROOF OVER CLAIMS

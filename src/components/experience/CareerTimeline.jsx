@@ -2,7 +2,7 @@
 
 import { useState } from 'react';
 import Link from 'next/link';
-import { motion, AnimatePresence, useReducedMotion } from 'framer-motion';
+import { m, AnimatePresence, useReducedMotion } from 'motion/react';
 import Badge from '@/components/shared/Badge';
 import SpotlightCard from '@/components/shared/SpotlightCard';
 import { cn } from '@/lib/utils';
@@ -61,21 +61,21 @@ export default function CareerTimeline({ experiences = [], education = [] }) {
                 aria-controls="timeline-track"
                 onClick={() => setActiveTab(tab.id)}
                 className={cn(
-                  'relative px-3.5 py-2 rounded-xl text-xs font-mono tracking-tight transition-colors duration-200 whitespace-nowrap flex items-center gap-2 select-none focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent',
+                  'relative px-3.5 py-2 rounded-xl text-xs font-mono tracking-tight transition-colors duration-200 whitespace-nowrap flex items-center gap-2 select-none focus-visible:outline-hidden focus-visible:ring-2 focus-visible:ring-accent',
                   isActive
                     ? 'text-accent font-semibold'
                     : 'text-text-muted hover:text-text-primary'
                 )}
               >
                 {isActive && (
-                  <motion.div
+                  <m.div
                     layoutId="activeCareerTab"
                     transition={
                       shouldReduceMotion
                         ? { duration: 0 }
                         : { type: 'spring', stiffness: 450, damping: 35 }
                     }
-                    className="absolute inset-0 bg-accent/15 border border-accent/30 rounded-xl -z-0 shadow-sm"
+                    className="absolute inset-0 bg-accent/15 border border-accent/30 rounded-xl -z-0 shadow-xs"
                   />
                 )}
                 <span className="relative z-10">{tab.label}</span>
@@ -99,7 +99,7 @@ export default function CareerTimeline({ experiences = [], education = [] }) {
       <div id="timeline-track" className="relative pl-6 sm:pl-10 space-y-12" role="region" aria-live="polite">
         {/* Animated Continuous Conduit Spine */}
         <div
-          className="absolute left-2.5 sm:left-4 top-4 bottom-4 w-0.5 bg-gradient-to-b from-accent via-accent-secondary/50 to-border-subtle"
+          className="absolute left-2.5 sm:left-4 top-4 bottom-4 w-0.5 bg-linear-to-b from-accent via-accent-secondary/50 to-border-subtle"
           aria-hidden="true"
         >
           <div className="w-full h-full animate-conduit-pulse opacity-60" />
@@ -115,7 +115,7 @@ export default function CareerTimeline({ experiences = [], education = [] }) {
                 : exp.responsibilities?.slice(0, 2);
 
               return (
-                <motion.div
+                <m.div
                   key={exp.id}
                   layout={!shouldReduceMotion}
                   initial={shouldReduceMotion ? { opacity: 1 } : { opacity: 0, y: 16 }}
@@ -130,14 +130,14 @@ export default function CareerTimeline({ experiences = [], education = [] }) {
                 >
                   {/* Glowing Node Marker */}
                   <div
-                    className="absolute -left-[30px] sm:-left-[41px] top-6 w-5 h-5 rounded-full bg-bg-primary border-2 border-accent flex items-center justify-center transition-transform group-hover:scale-110 shadow-sm shadow-accent/20"
+                    className="absolute -left-[30px] sm:-left-[41px] top-6 w-5 h-5 rounded-full bg-bg-primary border-2 border-accent flex items-center justify-center transition-transform group-hover:scale-110 shadow-xs shadow-accent/20"
                     aria-hidden="true"
                   >
                     <span className="w-1.5 h-1.5 rounded-full bg-accent group-hover:scale-125 transition-transform" />
                   </div>
 
                   {/* Card Content with 3D Tilt & Spotlight */}
-                  <SpotlightCard className="rounded-2xl bg-bg-secondary border border-border-default hover:border-border-strong p-6 sm:p-8 space-y-5 transition-all duration-300">
+                  <SpotlightCard className="p-6 sm:p-8 space-y-5">
                     {/* Header Row */}
                     <div className="flex flex-col sm:flex-row sm:items-start justify-between gap-3">
                       <div className="space-y-1">
@@ -181,7 +181,7 @@ export default function CareerTimeline({ experiences = [], education = [] }) {
                             <button
                               type="button"
                               onClick={() => toggleExpand(exp.id)}
-                              className="text-xs font-mono text-accent hover:text-accent-hover transition-colors flex items-center gap-1.5 focus-visible:outline-none focus-visible:underline"
+                              className="text-xs font-mono text-accent hover:text-accent-hover transition-colors flex items-center gap-1.5 focus-visible:underline"
                             >
                               <span>{isExpanded ? 'Collapse' : `Show all (${exp.responsibilities.length})`}</span>
                               <span
@@ -197,12 +197,12 @@ export default function CareerTimeline({ experiences = [], education = [] }) {
                         </div>
 
                         <AnimatePresence initial={false}>
-                          <motion.ul
+                          <m.ul
                             layout
                             className="space-y-2.5 text-xs sm:text-sm text-text-secondary"
                           >
                             {visibleResponsibilities.map((resp, i) => (
-                              <motion.li
+                              <m.li
                                 key={i}
                                 initial={{ opacity: 0, y: 4 }}
                                 animate={{ opacity: 1, y: 0 }}
@@ -217,9 +217,9 @@ export default function CareerTimeline({ experiences = [], education = [] }) {
                                   ✓
                                 </span>
                                 <span className="text-text-primary leading-relaxed">{resp}</span>
-                              </motion.li>
+                              </m.li>
                             ))}
-                          </motion.ul>
+                          </m.ul>
                         </AnimatePresence>
                       </div>
                     )}
@@ -253,14 +253,14 @@ export default function CareerTimeline({ experiences = [], education = [] }) {
                       </div>
                     )}
                   </SpotlightCard>
-                </motion.div>
+                </m.div>
               );
             })}
 
           {/* ── Academic Education Stage ── */}
           {showAcademic &&
             education.map((edu) => (
-              <motion.div
+              <m.div
                 key={edu.id}
                 layout={!shouldReduceMotion}
                 initial={shouldReduceMotion ? { opacity: 1 } : { opacity: 0, y: 16 }}
@@ -275,14 +275,14 @@ export default function CareerTimeline({ experiences = [], education = [] }) {
               >
                 {/* Academic Node Marker */}
                 <div
-                  className="absolute -left-[30px] sm:-left-[41px] top-6 w-5 h-5 rounded-full bg-bg-primary border-2 border-accent-secondary flex items-center justify-center transition-transform group-hover:scale-110 shadow-sm shadow-accent-secondary/20"
+                  className="absolute -left-[30px] sm:-left-[41px] top-6 w-5 h-5 rounded-full bg-bg-primary border-2 border-accent-secondary flex items-center justify-center transition-transform group-hover:scale-110 shadow-xs shadow-accent-secondary/20"
                   aria-hidden="true"
                 >
                   <span className="w-1.5 h-1.5 rounded-full bg-accent-secondary group-hover:scale-125 transition-transform" />
                 </div>
 
                 {/* Card Content with Spotlight */}
-                <SpotlightCard className="rounded-2xl bg-bg-secondary border border-border-default hover:border-border-strong p-6 sm:p-8 space-y-4 transition-all duration-300">
+                <SpotlightCard className="p-6 sm:p-8 space-y-4">
                   <div className="flex flex-col sm:flex-row sm:items-start justify-between gap-2">
                     <div>
                       <div className="flex items-center gap-2">
@@ -316,7 +316,7 @@ export default function CareerTimeline({ experiences = [], education = [] }) {
                     <span>Backend Systems • Databases • Algorithms</span>
                   </div>
                 </SpotlightCard>
-              </motion.div>
+              </m.div>
             ))}
         </AnimatePresence>
       </div>

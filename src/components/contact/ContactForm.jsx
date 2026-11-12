@@ -246,7 +246,7 @@ export default function ContactForm() {
             aria-describedby={errors.name ? 'contact-name-error' : undefined}
             placeholder="Jane Doe"
             className={cn(
-              'w-full px-4 py-2.5 rounded-lg bg-bg-tertiary border text-sm text-text-primary placeholder:text-text-muted transition-all duration-200 focus:outline-none focus:ring-2 disabled:opacity-50 disabled:cursor-not-allowed',
+              'w-full px-4 py-2.5 rounded-lg bg-bg-tertiary border text-sm text-text-primary placeholder:text-text-muted transition-all duration-200 focus:outline-hidden focus:ring-2 disabled:opacity-50 disabled:cursor-not-allowed',
               errors.name
                 ? 'border-functional-error focus:ring-functional-error/30 focus:border-functional-error'
                 : 'border-border-default hover:border-border-strong focus:border-accent focus:ring-accent/25'
@@ -278,7 +278,7 @@ export default function ContactForm() {
             aria-describedby={errors.email ? 'contact-email-error' : undefined}
             placeholder="jane@example.com"
             className={cn(
-              'w-full px-4 py-2.5 rounded-lg bg-bg-tertiary border text-sm text-text-primary placeholder:text-text-muted transition-all duration-200 focus:outline-none focus:ring-2 disabled:opacity-50 disabled:cursor-not-allowed',
+              'w-full px-4 py-2.5 rounded-lg bg-bg-tertiary border text-sm text-text-primary placeholder:text-text-muted transition-all duration-200 focus:outline-hidden focus:ring-2 disabled:opacity-50 disabled:cursor-not-allowed',
               errors.email
                 ? 'border-functional-error focus:ring-functional-error/30 focus:border-functional-error'
                 : 'border-border-default hover:border-border-strong focus:border-accent focus:ring-accent/25'
@@ -309,7 +309,7 @@ export default function ContactForm() {
             aria-describedby={errors.subject ? 'contact-subject-error' : undefined}
             placeholder="Backend Engineering Opportunity / Project Discussion"
             className={cn(
-              'w-full px-4 py-2.5 rounded-lg bg-bg-tertiary border text-sm text-text-primary placeholder:text-text-muted transition-all duration-200 focus:outline-none focus:ring-2 disabled:opacity-50 disabled:cursor-not-allowed',
+              'w-full px-4 py-2.5 rounded-lg bg-bg-tertiary border text-sm text-text-primary placeholder:text-text-muted transition-all duration-200 focus:outline-hidden focus:ring-2 disabled:opacity-50 disabled:cursor-not-allowed',
               errors.subject
                 ? 'border-functional-error focus:ring-functional-error/30 focus:border-functional-error'
                 : 'border-border-default hover:border-border-strong focus:border-accent focus:ring-accent/25'
@@ -340,7 +340,7 @@ export default function ContactForm() {
             aria-describedby={errors.message ? 'contact-message-error' : undefined}
             placeholder="Tell me about your project, architecture needs, or collaboration details..."
             className={cn(
-              'w-full px-4 py-3 rounded-lg bg-bg-tertiary border text-sm text-text-primary placeholder:text-text-muted transition-all duration-200 focus:outline-none focus:ring-2 resize-y disabled:opacity-50 disabled:cursor-not-allowed leading-relaxed',
+              'w-full px-4 py-3 rounded-lg bg-bg-tertiary border text-sm text-text-primary placeholder:text-text-muted transition-all duration-200 focus:outline-hidden focus:ring-2 resize-y disabled:opacity-50 disabled:cursor-not-allowed leading-relaxed',
               errors.message
                 ? 'border-functional-error focus:ring-functional-error/30 focus:border-functional-error'
                 : 'border-border-default hover:border-border-strong focus:border-accent focus:ring-accent/25'
@@ -358,12 +358,12 @@ export default function ContactForm() {
           <button
             type="submit"
             disabled={!isFormValid || isSubmitting}
-            className="w-full sm:w-auto inline-flex items-center justify-center font-medium rounded-lg transition-all duration-200 focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2 focus-visible:ring-offset-bg-primary active:scale-[0.98] disabled:opacity-50 disabled:pointer-events-none disabled:cursor-not-allowed select-none bg-accent hover:bg-accent-hover text-white shadow-sm hover:shadow-accent/25 hover:shadow-lg text-sm px-6 py-3 gap-2"
+            className="w-full sm:w-auto inline-flex items-center justify-center font-medium rounded-lg transition-all duration-200 focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2 focus-visible:ring-offset-bg-primary active:scale-[0.98] disabled:opacity-50 disabled:pointer-events-none disabled:cursor-not-allowed select-none bg-btn hover:bg-accent-hover text-btn-fg shadow-xs hover:shadow-accent/25 hover:shadow-lg text-sm px-6 py-3 gap-2"
           >
             {isSubmitting ? (
               <>
                 <svg
-                  className="animate-spin w-4 h-4 shrink-0 text-white"
+                  className="animate-spin w-4 h-4 shrink-0 text-btn-fg"
                   xmlns="http://www.w3.org/2000/svg"
                   fill="none"
                   viewBox="0 0 24 24"

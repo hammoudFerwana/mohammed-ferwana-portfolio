@@ -1,7 +1,7 @@
 'use client';
 
 import { useState, useMemo } from 'react';
-import { motion, AnimatePresence, useReducedMotion } from 'framer-motion';
+import { m, AnimatePresence, useReducedMotion } from 'motion/react';
 import ProjectCard from '@/components/projects/ProjectCard';
 import { cn } from '@/lib/utils';
 
@@ -105,21 +105,21 @@ export default function ProjectsExplorer({ projects = [] }) {
                 aria-controls="projects-grid"
                 onClick={() => setActiveFilter(tab.id)}
                 className={cn(
-                  'relative px-3.5 py-2 rounded-xl text-xs font-mono tracking-tight transition-colors duration-200 whitespace-nowrap flex items-center gap-2 select-none focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent',
+                  'relative px-3.5 py-2 rounded-xl text-xs font-mono tracking-tight transition-colors duration-200 whitespace-nowrap flex items-center gap-2 select-none focus-visible:outline-hidden focus-visible:ring-2 focus-visible:ring-accent',
                   isActive
                     ? 'text-accent font-semibold'
                     : 'text-text-muted hover:text-text-primary'
                 )}
               >
                 {isActive && (
-                  <motion.div
+                  <m.div
                     layoutId="activeFilterPill"
                     transition={
                       shouldReduceMotion
                         ? { duration: 0 }
                         : { type: 'spring', stiffness: 450, damping: 35 }
                     }
-                    className="absolute inset-0 bg-accent/15 border border-accent/30 rounded-xl -z-0 shadow-sm"
+                    className="absolute inset-0 bg-accent/15 border border-accent/30 rounded-xl -z-0 shadow-xs"
                   />
                 )}
                 <span className="relative z-10">{tab.label}</span>
@@ -163,7 +163,7 @@ export default function ProjectsExplorer({ projects = [] }) {
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
               placeholder="Search stack (e.g. MongoDB, FSM, Jest)..."
-              className="w-full pl-9 pr-8 py-2 rounded-xl bg-bg-primary/80 border border-border-subtle focus:border-accent text-xs font-mono text-text-primary placeholder:text-text-muted focus:outline-none focus:ring-1 focus:ring-accent transition-all duration-200"
+              className="w-full pl-9 pr-8 py-2 rounded-xl bg-bg-primary/80 border border-border-subtle focus:border-accent text-xs font-mono text-text-primary placeholder:text-text-muted transition-all duration-200"
             />
             {searchQuery && (
               <button
@@ -182,7 +182,7 @@ export default function ProjectsExplorer({ projects = [] }) {
       <div className="flex items-center justify-between text-xs font-mono text-text-muted px-2">
         <div className="flex items-center gap-2">
           <span
-            className="inline-block w-2 h-2 rounded-full bg-emerald-400 animate-pulse"
+            className="inline-block w-2 h-2 rounded-full bg-success animate-pulse"
             aria-hidden="true"
           />
           <span>
@@ -205,12 +205,12 @@ export default function ProjectsExplorer({ projects = [] }) {
       <div id="projects-grid" role="region" aria-live="polite">
         <AnimatePresence mode="popLayout">
           {filteredProjects.length > 0 ? (
-            <motion.div
+            <m.div
               layout={!shouldReduceMotion}
               className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8"
             >
               {filteredProjects.map((project, idx) => (
-                <motion.div
+                <m.div
                   key={project.id}
                   layout={!shouldReduceMotion}
                   initial={
@@ -231,11 +231,11 @@ export default function ProjectsExplorer({ projects = [] }) {
                   }
                 >
                   <ProjectCard project={project} priority={idx === 0} />
-                </motion.div>
+                </m.div>
               ))}
-            </motion.div>
+            </m.div>
           ) : (
-            <motion.div
+            <m.div
               key="empty-state"
               initial={{ opacity: 0, y: 8 }}
               animate={{ opacity: 1, y: 0 }}
@@ -256,11 +256,11 @@ export default function ProjectsExplorer({ projects = [] }) {
               </div>
               <button
                 onClick={handleReset}
-                className="inline-flex items-center gap-2 px-4 py-2 rounded-xl bg-accent text-white text-xs font-medium hover:bg-accent-hover transition-colors shadow-sm"
+                className="inline-flex items-center gap-2 px-4 py-2 rounded-xl bg-btn text-btn-fg text-xs font-medium hover:bg-accent-hover transition-colors shadow-xs"
               >
                 Reset All Filters
               </button>
-            </motion.div>
+            </m.div>
           )}
         </AnimatePresence>
       </div>

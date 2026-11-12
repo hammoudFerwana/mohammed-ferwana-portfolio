@@ -12,8 +12,8 @@ export default function Badge({
   const variants = {
     accent: 'bg-accent/10 border border-accent/25 text-accent',
     neutral: 'bg-bg-tertiary border border-border-default text-text-secondary',
-    success: 'bg-functional-success/10 border border-functional-success/25 text-functional-success',
-    warning: 'bg-functional-warning/10 border border-functional-warning/25 text-functional-warning',
+    success: 'bg-functional-success/10 in-data-[theme=light]:bg-surface border border-functional-success/25 in-data-[theme=light]:border-functional-success/35 text-functional-success',
+    warning: 'bg-functional-warning/10 in-data-[theme=light]:bg-surface border border-functional-warning/25 in-data-[theme=light]:border-functional-warning/35 text-functional-warning',
     outline: 'border border-border-strong text-text-secondary hover:text-text-primary',
   };
 

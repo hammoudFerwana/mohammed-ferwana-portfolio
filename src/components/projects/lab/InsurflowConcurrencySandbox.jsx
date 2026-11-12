@@ -1,7 +1,7 @@
 'use client';
 
 import { useState, useId, useCallback } from 'react';
-import { useReducedMotion } from 'framer-motion';
+import { useReducedMotion } from 'motion/react';
 import Badge from '@/components/shared/Badge';
 import { cn } from '@/lib/utils';
 
@@ -109,7 +109,7 @@ export default function InsurflowConcurrencySandbox() {
   }, []);
 
   return (
-    <div className="rounded-xl border border-border-default bg-bg-secondary p-4 sm:p-6 space-y-6 shadow-sm">
+    <div className="rounded-xl border border-border-default bg-bg-secondary p-4 sm:p-6 space-y-6 shadow-xs">
       {/* ── Section Header ── */}
       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-border-subtle pb-5">
         <div className="space-y-1">
@@ -157,7 +157,7 @@ export default function InsurflowConcurrencySandbox() {
                   className={cn(
                     'p-2.5 rounded-lg border text-left transition-all font-mono text-xs',
                     isSelected
-                      ? 'border-accent bg-accent/10 text-accent font-semibold shadow-sm'
+                      ? 'border-accent bg-accent/10 text-accent font-semibold shadow-xs'
                       : 'border-border-subtle bg-bg-secondary/60 text-text-muted hover:text-text-primary'
                   )}
                 >
@@ -179,11 +179,11 @@ export default function InsurflowConcurrencySandbox() {
               <button
                 onClick={() => runConcurrentBurst(15, false)}
                 disabled={isRunning}
-                className="w-full py-2.5 px-3 rounded-lg bg-accent text-bg-primary font-mono text-xs font-bold hover:bg-accent/90 transition-all disabled:opacity-50 flex items-center justify-center gap-2 shadow-sm"
+                className="w-full py-2.5 px-3 rounded-lg bg-btn text-btn-fg font-mono text-xs font-bold hover:bg-accent/90 transition-all disabled:opacity-50 flex items-center justify-center gap-2 shadow-xs"
               >
                 {isRunning ? (
                   <>
-                    <span className="w-3 h-3 border-2 border-bg-primary border-t-transparent rounded-full animate-spin" />
+                    <span className="w-3 h-3 border-2 border-btn-fg border-t-transparent rounded-full animate-spin" />
                     Executing Injections...
                   </>
                 ) : (
@@ -216,7 +216,7 @@ export default function InsurflowConcurrencySandbox() {
                 className={cn(
                   'font-mono text-[11px] px-2 py-0.5 rounded transition-colors',
                   activeTab === 'stream'
-                    ? 'bg-accent/20 text-accent font-semibold'
+                    ? 'bg-accent/20 in-data-[theme=light]:bg-surface in-data-[theme=light]:ring-1 in-data-[theme=light]:ring-accent/40 text-accent font-semibold'
                     : 'text-text-muted hover:text-text-primary'
                 )}
               >
@@ -227,7 +227,7 @@ export default function InsurflowConcurrencySandbox() {
                 className={cn(
                   'font-mono text-[11px] px-2 py-0.5 rounded transition-colors',
                   activeTab === 'contract'
-                    ? 'bg-accent/20 text-accent font-semibold'
+                    ? 'bg-accent/20 in-data-[theme=light]:bg-surface in-data-[theme=light]:ring-1 in-data-[theme=light]:ring-accent/40 text-accent font-semibold'
                     : 'text-text-muted hover:text-text-primary'
                 )}
               >
@@ -296,7 +296,7 @@ export default function InsurflowConcurrencySandbox() {
               </div>
             </div>
           ) : (
-            <div className="h-44 overflow-x-auto rounded bg-bg-secondary p-3 font-mono text-[11px] leading-relaxed border border-border-subtle">
+            <div tabIndex={0} className="h-44 overflow-x-auto rounded bg-bg-secondary p-3 font-mono text-[11px] leading-relaxed border border-border-subtle">
               <pre className="text-text-secondary">
 {`// Illustrative sketch; the real counter runs in claimSchema.pre('save') in claim.model.js
 const counter = await Counter.findOneAndUpdate(

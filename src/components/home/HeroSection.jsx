@@ -3,7 +3,6 @@
 import Image from 'next/image';
 import Button from '@/components/shared/Button';
 import RevealOnScroll from '@/components/shared/RevealOnScroll';
-import CounterTicker from '@/components/shared/CounterTicker';
 
 import { metrics } from '@/data/metrics';
 import InteractivePortraitCard from '@/components/home/InteractivePortraitCard';
@@ -19,14 +18,14 @@ export default function HeroSection() {
   return (
     <section className="relative min-h-[92dvh] flex flex-col justify-center pt-28 pb-16 overflow-hidden">
       {/* Background Animated Aurora Mesh (3 Orbs, GPU-accelerated) */}
-      <div className="absolute inset-0 overflow-hidden pointer-events-none" aria-hidden="true">
+      <div className="absolute inset-0 overflow-hidden pointer-events-none in-data-[theme=light]:opacity-35" aria-hidden="true">
         <div className="absolute top-1/4 left-1/4 -translate-x-1/2 -translate-y-1/2 w-[550px] h-[400px] bg-accent/10 blur-[130px] rounded-full animate-aurora" />
         <div
           className="absolute top-1/3 right-1/4 translate-x-1/4 -translate-y-1/2 w-[480px] h-[380px] bg-accent-secondary/10 blur-[140px] rounded-full animate-aurora"
           style={{ animationDelay: '-6s' }}
         />
         <div
-          className="absolute bottom-1/4 left-1/2 -translate-x-1/2 translate-y-1/4 w-[380px] h-[320px] bg-cyan-500/5 blur-[120px] rounded-full animate-aurora"
+          className="absolute bottom-1/4 left-1/2 -translate-x-1/2 translate-y-1/4 w-[380px] h-[320px] bg-sea/5 blur-[120px] rounded-full animate-aurora"
           style={{ animationDelay: '-11s' }}
         />
       </div>
@@ -53,7 +52,7 @@ export default function HeroSection() {
                 <span
                   className="text-4xl sm:text-6xl md:text-7xl font-bold tracking-[-0.04em] leading-[1.08] text-transparent bg-clip-text animate-shimmer inline-block"
                   style={{
-                    backgroundImage: 'linear-gradient(110deg, #f5f5f7 0%, #8b5cf6 35%, #6366f1 65%, #f5f5f7 100%)',
+                    backgroundImage: 'linear-gradient(110deg, var(--hz-ink) 0%, var(--hz-violet) 35%, var(--hz-sea) 65%, var(--hz-ink) 100%)',
                     backgroundSize: '250% 100%',
                   }}
                 >
@@ -76,10 +75,10 @@ export default function HeroSection() {
               </p>
             </RevealOnScroll>
 
-            {/* CTAs (Frame 550ms) with Magnetic Spring Interaction */}
+            {/* CTAs (Frame 550ms) */}
             <RevealOnScroll delay={0.55}>
               <div className="flex flex-wrap items-center gap-3 pt-2">
-                <Button href="/projects" variant="primary" size="lg" magnetic>
+                <Button href="/projects" variant="primary" size="lg">
                   Explore My Work →
                 </Button>
                 <Button
@@ -87,11 +86,10 @@ export default function HeroSection() {
                   download="Mohammed_Ferwana_Resume.pdf"
                   variant="secondary"
                   size="lg"
-                  magnetic
                 >
                   Download Resume
                 </Button>
-                <Button href="/contact" variant="ghost" size="lg" magnetic>
+                <Button href="/contact" variant="ghost" size="lg">
                   Let&apos;s Talk →
                 </Button>
               </div>
@@ -107,7 +105,7 @@ export default function HeroSection() {
             {/* System Status Widget (Signature engineering element - Frame 850ms) */}
             <RevealOnScroll delay={0.85} className="w-full max-w-sm">
               <div
-                className="w-full rounded-xl bg-bg-secondary/90 border border-border-default p-4 shadow-lg backdrop-blur-sm"
+                className="w-full rounded-xl bg-bg-secondary/90 border border-border-default p-4 shadow-lg backdrop-blur-xs"
                 aria-hidden="true"
               >
                 <div className="flex items-center justify-between pb-3 mb-3 border-b border-border-subtle text-[11px] font-mono">
@@ -120,13 +118,13 @@ export default function HeroSection() {
                   <div className="flex items-center gap-2 text-xs">
                     <span className="w-1.5 h-1.5 rounded-full bg-functional-success shrink-0" />
                     <span className="text-text-secondary font-mono text-[11px]">
-                      <CounterTicker value={metrics.integrationTests} className="text-text-primary font-semibold" /> tests passing (<CounterTicker value={metrics.testSuites} className="text-text-primary font-semibold" /> suites, run {formattedTestRunDate})
+                      <span className="text-text-primary font-semibold">{metrics.integrationTests}</span> tests passing (<span className="text-text-primary font-semibold">{metrics.testSuites}</span> suites, run {formattedTestRunDate})
                     </span>
                   </div>
                   <div className="flex items-center gap-2 text-xs">
                     <span className="w-1.5 h-1.5 rounded-full bg-functional-success shrink-0" />
                     <span className="text-text-secondary font-mono text-[11px]">
-                      <CounterTicker value={metrics.fsmStates} className="text-text-primary font-semibold" />-state claim lifecycle, guarded transitions
+                      <span className="text-text-primary font-semibold">{metrics.fsmStates}</span>-state claim lifecycle, guarded transitions
                     </span>
                   </div>
                   <div className="flex items-center justify-between gap-2 text-xs pt-1 border-t border-border-subtle/50">

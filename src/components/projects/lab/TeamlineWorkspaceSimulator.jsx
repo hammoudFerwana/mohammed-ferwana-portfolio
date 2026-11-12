@@ -1,7 +1,7 @@
 'use client';
 
 import { useState, useCallback, useId } from 'react';
-import { useReducedMotion } from 'framer-motion';
+import { useReducedMotion } from 'motion/react';
 import Badge from '@/components/shared/Badge';
 import { cn } from '@/lib/utils';
 
@@ -121,7 +121,7 @@ export default function TeamlineWorkspaceSimulator() {
   }, []);
 
   return (
-    <div className="rounded-xl border border-border-default bg-bg-secondary p-4 sm:p-6 space-y-6 shadow-sm">
+    <div className="rounded-xl border border-border-default bg-bg-secondary p-4 sm:p-6 space-y-6 shadow-xs">
       {/* ── Section Header ── */}
       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-border-subtle pb-5">
         <div className="space-y-1">
@@ -225,7 +225,7 @@ export default function TeamlineWorkspaceSimulator() {
             </div>
 
             {/* IN PROGRESS */}
-            <div className="rounded-lg bg-bg-primary/90 border border-accent/30 p-3 space-y-3 shadow-sm">
+            <div className="rounded-lg bg-bg-primary/90 border border-accent/30 p-3 space-y-3 shadow-xs">
               <div className="flex items-center justify-between border-b border-border-subtle pb-2">
                 <span className="font-mono text-xs font-semibold text-accent uppercase">In Progress</span>
                 <span className="font-mono text-[10px] text-accent">Active Task</span>
@@ -371,7 +371,7 @@ export default function TeamlineWorkspaceSimulator() {
                     <span className="text-text-muted">{packet.timestamp}</span>
                   </div>
 
-                  <pre className="text-[11px] text-text-secondary bg-bg-secondary p-2 rounded overflow-x-auto">
+                  <pre tabIndex={0} className="text-[11px] text-text-secondary bg-bg-secondary p-2 rounded overflow-x-auto">
                     {JSON.stringify(packet.payload, null, 2)}
                   </pre>
 
@@ -397,7 +397,7 @@ export default function TeamlineWorkspaceSimulator() {
             </p>
           </div>
 
-          <div className="rounded-lg bg-bg-secondary p-3 font-mono text-[11px] overflow-x-auto border border-border-subtle">
+          <div tabIndex={0} className="rounded-lg bg-bg-secondary p-3 font-mono text-[11px] overflow-x-auto border border-border-subtle">
             <pre className="text-text-secondary leading-relaxed">
 {`// Illustrative sketch of the version guard, not copied from the TeamLine repo
 async function updateTaskStatus(workspaceId, taskId, targetStatus, expectedVersion) {

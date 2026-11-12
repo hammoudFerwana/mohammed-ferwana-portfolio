@@ -1,7 +1,7 @@
 'use client';
 
 import { useState, useCallback, useRef } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
+import { m, AnimatePresence } from 'motion/react';
 import { cn } from '@/lib/utils';
 import Badge from '@/components/shared/Badge';
 
@@ -61,11 +61,11 @@ export default function ArchitectureViewer({ architecture }) {
   const nodeTypeStyles = {
     client:
       'border-border-strong bg-bg-secondary text-text-primary hover:border-accent/60',
-    api: 'border-accent/40 bg-accent/10 text-accent hover:border-accent',
-    auth: 'border-functional-warning/40 bg-functional-warning/10 text-functional-warning hover:border-functional-warning',
-    logic: 'border-accent-secondary/40 bg-accent-secondary/10 text-text-primary hover:border-accent-secondary',
+    api: 'border-accent/40 bg-accent/10 in-data-[theme=light]:bg-surface text-accent hover:border-accent',
+    auth: 'border-functional-warning/40 bg-functional-warning/10 in-data-[theme=light]:bg-surface text-functional-warning hover:border-functional-warning',
+    logic: 'border-accent-secondary/40 bg-accent-secondary/10 in-data-[theme=light]:bg-surface text-text-primary hover:border-accent-secondary',
     data: 'border-border-strong bg-bg-tertiary text-text-primary hover:border-border-strong',
-    db: 'border-functional-success/40 bg-functional-success/10 text-functional-success hover:border-functional-success',
+    db: 'border-functional-success/40 bg-functional-success/10 in-data-[theme=light]:bg-surface text-functional-success hover:border-functional-success',
     external:
       'border-dashed border-border-strong bg-bg-primary text-text-secondary hover:border-text-secondary',
   };
@@ -116,14 +116,13 @@ export default function ArchitectureViewer({ architecture }) {
                 <button
                   type="button"
                   onClick={() => setSelectedNodeId(node.id)}
-                  aria-label={`${node.label} — ${node.type} component. ${node.description}`}
                   aria-pressed={isSelected}
                   className={cn(
-                    'w-full sm:w-80 p-3.5 rounded-xl border text-center font-mono text-xs sm:text-sm font-semibold transition-all duration-200 shadow-sm relative group',
+                    'w-full sm:w-80 p-3.5 rounded-xl border text-center font-mono text-xs sm:text-sm font-semibold transition-all duration-200 shadow-xs relative group',
                     style,
                     isSelected
                       ? 'ring-2 ring-accent scale-[1.02] shadow-accent/20 shadow-lg'
-                      : 'opacity-85 hover:opacity-100 hover:scale-[1.01]'
+                      : 'hover:scale-[1.01]'
                   )}
                 >
                   <div className="flex items-center justify-between">
@@ -149,12 +148,12 @@ export default function ArchitectureViewer({ architecture }) {
                 {index < architecture.nodes.length - 1 && (
                   <div className="my-2 flex flex-col items-center relative" aria-hidden="true">
                     <div className="relative w-0.5 h-6 bg-border-strong overflow-hidden rounded-full">
-                      <div className="absolute inset-x-0 top-0 h-3 bg-gradient-to-b from-transparent via-accent to-transparent animate-conduit-pulse" />
+                      <div className="absolute inset-x-0 top-0 h-3 bg-linear-to-b from-transparent via-accent to-transparent animate-conduit-pulse" />
                     </div>
 
                     {/* Connection Label */}
                     {connectionLabel && (
-                      <span className="font-mono text-[9px] text-accent font-medium px-2.5 py-0.5 rounded-full bg-accent/10 border border-accent/25 my-1 select-none shadow-sm">
+                      <span className="font-mono text-[9px] text-accent font-medium px-2.5 py-0.5 rounded-full bg-accent/10 border border-accent/25 my-1 select-none shadow-xs">
                         {connectionLabel}
                       </span>
                     )}
@@ -181,7 +180,7 @@ export default function ArchitectureViewer({ architecture }) {
       {/* Component Inspection Panel (Selected or Instructional State with AnimatePresence) */}
       <AnimatePresence mode="wait">
         {selectedNode ? (
-          <motion.div
+          <m.div
             key={selectedNode.id}
             initial={{ opacity: 0, y: 10, filter: 'blur(4px)' }}
             animate={{ opacity: 1, y: 0, filter: 'blur(0px)' }}
@@ -228,9 +227,9 @@ export default function ArchitectureViewer({ architecture }) {
                   </ul>
                 </div>
               )}
-          </motion.div>
+          </m.div>
         ) : (
-          <motion.div
+          <m.div
             key="empty"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
@@ -250,7 +249,7 @@ export default function ArchitectureViewer({ architecture }) {
                 Select a component to explore its responsibilities and architectural role.
               </p>
             </div>
-          </motion.div>
+          </m.div>
         )}
       </AnimatePresence>
     </div>

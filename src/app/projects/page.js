@@ -31,7 +31,7 @@ export default function ProjectsPage() {
       {/* ── Closing Conversion CTA ── */}
       <div className="mt-20 pt-16 border-t border-border-subtle">
         <RevealOnScroll>
-          <div className="rounded-2xl bg-bg-secondary border border-border-default p-6 sm:p-8 md:p-10 flex flex-col sm:flex-row sm:items-center justify-between gap-6 shadow-sm">
+          <div className="rounded-2xl bg-bg-secondary border border-border-default p-6 sm:p-8 md:p-10 flex flex-col sm:flex-row sm:items-center justify-between gap-6 shadow-xs">
             <div className="space-y-2 max-w-xl">
               <span className="font-mono text-xs uppercase tracking-wider text-accent font-semibold px-2 py-0.5 rounded bg-accent/10 border border-accent/20 inline-block">
                 Hiring & Collaboration

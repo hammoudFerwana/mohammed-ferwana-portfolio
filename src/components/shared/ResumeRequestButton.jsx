@@ -5,7 +5,6 @@ import Button from '@/components/shared/Button';
 export default function ResumeRequestButton({
   variant = 'secondary',
   size = 'md',
-  magnetic = false,
   className = '',
   children = 'Download Resume',
 }) {
@@ -15,7 +14,6 @@ export default function ResumeRequestButton({
       download="Mohammed_Ferwana_Resume.pdf"
       variant={variant}
       size={size}
-      magnetic={magnetic}
       className={className}
     >
       {children}

@@ -88,7 +88,7 @@ export default function InsurflowTestingEvidence() {
             className={cn(
               'flex-1 py-2 px-3 text-xs sm:text-sm font-mono font-medium rounded-md transition-all duration-200 text-center',
               activePillar === 'workflow'
-                ? 'bg-bg-tertiary text-text-primary shadow-sm border border-border-default'
+                ? 'bg-bg-tertiary text-text-primary shadow-xs border border-border-default'
                 : 'text-text-muted hover:text-text-secondary'
             )}
           >
@@ -104,7 +104,7 @@ export default function InsurflowTestingEvidence() {
             className={cn(
               'flex-1 py-2 px-3 text-xs sm:text-sm font-mono font-medium rounded-md transition-all duration-200 text-center',
               activePillar === 'dataintegrity'
-                ? 'bg-bg-tertiary text-text-primary shadow-sm border border-border-default'
+                ? 'bg-bg-tertiary text-text-primary shadow-xs border border-border-default'
                 : 'text-text-muted hover:text-text-secondary'
             )}
           >
@@ -120,7 +120,7 @@ export default function InsurflowTestingEvidence() {
             className={cn(
               'flex-1 py-2 px-3 text-xs sm:text-sm font-mono font-medium rounded-md transition-all duration-200 text-center',
               activePillar === 'stealth'
-                ? 'bg-bg-tertiary text-text-primary shadow-sm border border-border-default'
+                ? 'bg-bg-tertiary text-text-primary shadow-xs border border-border-default'
                 : 'text-text-muted hover:text-text-secondary'
             )}
           >
@@ -158,7 +158,7 @@ export default function InsurflowTestingEvidence() {
                 <span>tests/claim.statusMachine.test.js (test starts at line 543)</span>
                 <span>Supertest + MongoMemoryServer</span>
               </div>
-              <div className="overflow-x-auto rounded-lg bg-bg-primary/95 border border-border-subtle p-4 font-mono text-xs sm:text-[13px] leading-relaxed text-text-secondary">
+              <div tabIndex={0} className="overflow-x-auto rounded-lg bg-bg-primary/95 border border-border-subtle p-4 font-mono text-xs sm:text-[13px] leading-relaxed text-text-secondary">
                 <pre className="text-text-secondary">
                   <span className="text-accent-secondary">it</span>(<span className="text-functional-success">&apos;should return 409 when calling /inspection/submit on an ASSIGNED claim&apos;</span>, <span className="text-accent-secondary">async</span> () =&gt; {'{'}{'\n'}
                   {'  '}<span className="text-accent-secondary">await</span> Claim.<span className="text-accent">findByIdAndUpdate</span>(testClaim._id, {'{'}{'\n'}
@@ -261,7 +261,7 @@ export default function InsurflowTestingEvidence() {
                   <span>tests/claim.numbering.test.js, lines 138 to 159 (condensed excerpt)</span>
                   <span>EVD-002: Concurrent Atomic Sequence</span>
                 </div>
-                <div className="overflow-x-auto rounded-lg bg-bg-primary/95 border border-border-subtle p-4 font-mono text-xs sm:text-[13px] leading-relaxed text-text-secondary">
+                <div tabIndex={0} className="overflow-x-auto rounded-lg bg-bg-primary/95 border border-border-subtle p-4 font-mono text-xs sm:text-[13px] leading-relaxed text-text-secondary">
                   <pre className="text-text-secondary">
                     <span className="text-accent-secondary">it</span>(<span className="text-functional-success">&apos;should produce 15 unique sequential numbers under concurrent creation within a single tenant&apos;</span>, <span className="text-accent-secondary">async</span> () =&gt; {'{'}{'\n'}
                     {'  '}<span className="text-accent-secondary">const</span> promises = Array.<span className="text-accent">from</span>({'{'} length: <span className="text-functional-warning">15</span> {'}'}, () =&gt;{'\n'}
@@ -295,7 +295,7 @@ export default function InsurflowTestingEvidence() {
                   <span>tests/claim.numbering.test.js (Lines 192–200)</span>
                   <span>EVD-003: MongoDB Index Catalog Assertion</span>
                 </div>
-                <div className="overflow-x-auto rounded-lg bg-bg-primary/95 border border-border-subtle p-4 font-mono text-xs sm:text-[13px] leading-relaxed text-text-secondary">
+                <div tabIndex={0} className="overflow-x-auto rounded-lg bg-bg-primary/95 border border-border-subtle p-4 font-mono text-xs sm:text-[13px] leading-relaxed text-text-secondary">
                   <pre className="text-text-secondary">
                     <span className="text-accent-secondary">it</span>(<span className="text-functional-success">&apos;should use the compound unique index to prevent duplicate claim numbers within a tenant&apos;</span>, <span className="text-accent-secondary">async</span> () =&gt; {'{'}{'\n'}
                     {'  '}<span className="text-text-muted">{'// Verify the unique index exists on { organizationId, claimNumber }'}</span>{'\n'}
@@ -350,7 +350,7 @@ export default function InsurflowTestingEvidence() {
                 <span>tests/claim.statusMachine.test.js (Lines 658–664)</span>
                 <span>EVD-004: Anti-Enumeration Supertest</span>
               </div>
-              <div className="overflow-x-auto rounded-lg bg-bg-primary/95 border border-border-subtle p-4 font-mono text-xs sm:text-[13px] leading-relaxed text-text-secondary">
+              <div tabIndex={0} className="overflow-x-auto rounded-lg bg-bg-primary/95 border border-border-subtle p-4 font-mono text-xs sm:text-[13px] leading-relaxed text-text-secondary">
                 <pre className="text-text-secondary">
                   <span className="text-accent-secondary">it</span>(<span className="text-functional-success">&apos;should return 404 when adjuster from other org calls /inspection/start&apos;</span>, <span className="text-accent-secondary">async</span> () =&gt; {'{'}{'\n'}
                   {'  '}<span className="text-accent-secondary">const</span> res = <span className="text-accent-secondary">await</span> <span className="text-accent">request</span>(app){'\n'}

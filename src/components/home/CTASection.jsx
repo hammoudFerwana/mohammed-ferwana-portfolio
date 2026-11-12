@@ -1,6 +1,5 @@
 'use client';
 
-import { motion } from 'framer-motion';
 import Button from '@/components/shared/Button';
 import RevealOnScroll from '@/components/shared/RevealOnScroll';
 import { siteMetadata } from '@/data/siteMetadata';
@@ -16,7 +15,7 @@ export default function CTASection() {
           style={{ animationDelay: '-5s' }}
         />
         <div
-          className="absolute top-2/3 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[340px] h-[240px] bg-cyan-500/8 blur-[110px] rounded-full animate-aurora"
+          className="absolute top-2/3 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[340px] h-[240px] bg-sea/8 blur-[110px] rounded-full animate-aurora"
           style={{ animationDelay: '-10s' }}
         />
       </div>
@@ -32,7 +31,7 @@ export default function CTASection() {
             <span className="relative inline-block">
               Together
               <span
-                className="absolute left-0 -bottom-1 w-full h-[3px] bg-gradient-to-r from-accent to-accent-secondary rounded-full"
+                className="absolute left-0 -bottom-1 w-full h-[3px] bg-linear-to-r from-accent to-accent-secondary rounded-full"
                 aria-hidden="true"
               />
             </span>
@@ -49,7 +48,6 @@ export default function CTASection() {
               variant="primary"
               size="lg"
               external
-              magnetic
             >
               Start a Conversation →
             </Button>
@@ -58,7 +56,6 @@ export default function CTASection() {
               variant="secondary"
               size="lg"
               external
-              magnetic
             >
               Connect on LinkedIn ↗
             </Button>
@@ -67,7 +64,6 @@ export default function CTASection() {
               variant="ghost"
               size="lg"
               external
-              magnetic
             >
               GitHub Profile ↗
             </Button>

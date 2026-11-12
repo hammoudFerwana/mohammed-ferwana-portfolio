@@ -11,9 +11,7 @@ export default function ProjectCard({ project, priority = false }) {
   return (
     <SpotlightCard
       as="div"
-      className={cn(
-        'group rounded-2xl bg-bg-secondary border border-border-default hover:border-border-strong overflow-hidden transition-all duration-300 flex flex-col justify-between hover:-translate-y-1 hover:shadow-xl hover:shadow-accent/5'
-      )}
+      className="group overflow-hidden transition-all duration-300 flex flex-col justify-between hover:-translate-y-1 hover:shadow-xl hover:shadow-accent/5"
     >
       <div>
         {/* Project Image */}
@@ -27,13 +25,13 @@ export default function ProjectCard({ project, priority = false }) {
               sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
               className="object-cover object-center group-hover:scale-[1.03] transition-transform duration-500 filter contrast-[1.02]"
             />
-            <div className="absolute inset-0 bg-gradient-to-t from-bg-secondary via-transparent to-transparent opacity-40" />
+            <div className="absolute inset-0 bg-linear-to-t from-bg-secondary via-transparent to-transparent opacity-40" />
             <div className="absolute top-3 right-3 flex items-center gap-2">
-              <Badge variant="accent" size="sm" className="bg-bg-primary shadow-sm">
+              <Badge variant="accent" size="sm" className="bg-bg-primary shadow-xs">
                 {project.category}
               </Badge>
               {project.leadership && (
-                <Badge variant="success" size="sm" className="bg-bg-primary shadow-sm">
+                <Badge variant="success" size="sm" className="bg-bg-primary shadow-xs">
                   Leadership
                 </Badge>
               )}

@@ -1,6 +1,5 @@
 import Link from 'next/link';
 import { cn } from '@/lib/utils';
-import Magnetic from '@/components/shared/Magnetic';
 
 export default function Button({
   children,
@@ -15,14 +14,12 @@ export default function Button({
   disabled = false,
   icon: Icon,
   iconPosition = 'left',
-  magnetic = false,
-  magneticStrength = 0.28,
   ...props
 }) {
   const baseStyles = 'group inline-flex items-center justify-center font-medium rounded-lg transition-all duration-200 ease-[cubic-bezier(0.32,0.72,0,1)] focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2 focus-visible:ring-offset-bg-primary active:scale-[0.97] disabled:opacity-50 disabled:pointer-events-none disabled:cursor-not-allowed select-none cursor-pointer';
 
   const variants = {
-    primary: 'bg-accent hover:bg-accent-hover text-white shadow-sm hover:shadow-accent/25 hover:shadow-lg',
+    primary: 'bg-btn hover:bg-accent-hover text-btn-fg shadow-xs hover:shadow-accent/25 hover:shadow-lg',
     secondary: 'bg-bg-secondary hover:bg-bg-tertiary text-text-primary border border-border-default hover:border-border-strong',
     ghost: 'text-text-secondary hover:text-text-primary hover:bg-bg-tertiary/60',
     outline: 'border border-accent/30 text-accent hover:bg-accent/10 hover:border-accent',
@@ -42,7 +39,7 @@ export default function Button({
     const arrowSymbol = isExternalArrow ? '↗' : '→';
     formattedChildren = children.replace(/[→↗]/g, '').trim();
     trailingArrow = (
-      <span className="ml-1.5 w-5 h-5 rounded-full bg-white/20 inline-flex items-center justify-center text-xs group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform duration-300 ease-[cubic-bezier(0.32,0.72,0,1)] shrink-0">
+      <span className={cn('ml-1.5 w-5 h-5 rounded-full inline-flex items-center justify-center text-xs group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform duration-300 ease-[cubic-bezier(0.32,0.72,0,1)] shrink-0', variant === 'primary' ? 'bg-btn-fg/20' : 'bg-raised')}>
         {arrowSymbol}
       </span>
     );
@@ -93,14 +90,6 @@ export default function Button({
       >
         {content}
       </button>
-    );
-  }
-
-  if (magnetic) {
-    return (
-      <Magnetic strength={magneticStrength} className="inline-block">
-        {element}
-      </Magnetic>
     );
   }
 

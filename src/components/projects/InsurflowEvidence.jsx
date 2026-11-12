@@ -55,7 +55,7 @@ export default function InsurflowEvidence() {
           className={cn(
             'flex-1 py-2 px-3 text-xs sm:text-sm font-mono font-medium rounded-md transition-all duration-200 text-center',
             activeTab === 'schema'
-              ? 'bg-bg-tertiary text-text-primary shadow-sm border border-border-default'
+              ? 'bg-bg-tertiary text-text-primary shadow-xs border border-border-default'
               : 'text-text-muted hover:text-text-secondary'
           )}
         >
@@ -71,7 +71,7 @@ export default function InsurflowEvidence() {
           className={cn(
             'flex-1 py-2 px-3 text-xs sm:text-sm font-mono font-medium rounded-md transition-all duration-200 text-center',
             activeTab === 'fsm'
-              ? 'bg-bg-tertiary text-text-primary shadow-sm border border-border-default'
+              ? 'bg-bg-tertiary text-text-primary shadow-xs border border-border-default'
               : 'text-text-muted hover:text-text-secondary'
           )}
         >
@@ -93,7 +93,7 @@ export default function InsurflowEvidence() {
               <span>claim.model.js (Mongoose Schema Excerpt)</span>
               <span>Multi-Tenant Architecture</span>
             </div>
-            <div className="overflow-x-auto rounded-lg bg-bg-primary/95 border border-border-subtle p-4 font-mono text-xs sm:text-[13px] leading-relaxed text-text-secondary">
+            <div tabIndex={0} className="overflow-x-auto rounded-lg bg-bg-primary/95 border border-border-subtle p-4 font-mono text-xs sm:text-[13px] leading-relaxed text-text-secondary">
               <pre className="text-text-secondary">
                 <span className="text-text-muted">{'// 1. Tenancy, Lifecycle & Embedded Timeline'}</span>{'\n'}
                 <span className="text-accent-secondary">const</span> claimSchema = <span className="text-accent-secondary">new</span> mongoose.<span className="text-accent">Schema</span>({'{'}{'\n'}
@@ -293,7 +293,7 @@ export default function InsurflowEvidence() {
               <span>claim.service.js (Atomic State Transition Guard)</span>
               <span>Defense-in-Depth</span>
             </div>
-            <div className="overflow-x-auto rounded-lg bg-bg-primary/95 border border-border-subtle p-4 font-mono text-xs sm:text-[13px] leading-relaxed text-text-secondary">
+            <div tabIndex={0} className="overflow-x-auto rounded-lg bg-bg-primary/95 border border-border-subtle p-4 font-mono text-xs sm:text-[13px] leading-relaxed text-text-secondary">
               <pre className="text-text-secondary">
                 <span className="text-text-muted">{'// Precondition gate: only ASSIGNED or CORRECTION_REQUIRED can enter IN_PROGRESS'}</span>{'\n'}
                 <span className="text-accent-secondary">const</span> startInspection = <span className="text-accent-secondary">async</span> (claimId, authUser) =&gt; {'{'}{'\n'}
@@ -330,7 +330,7 @@ export default function InsurflowEvidence() {
               <span>Verified API Error Contract (HTTP 409 Conflict)</span>
               <span>Deterministic Failure Handling</span>
             </div>
-            <div className="overflow-x-auto rounded-lg bg-bg-primary/95 border border-border-subtle p-4 font-mono text-xs sm:text-[13px] leading-relaxed">
+            <div tabIndex={0} className="overflow-x-auto rounded-lg bg-bg-primary/95 border border-border-subtle p-4 font-mono text-xs sm:text-[13px] leading-relaxed">
               <pre className="text-functional-error">
                 {'{'}{'\n'}
                 {'  '}<span className="text-text-secondary">&quot;success&quot;</span>: <span className="text-accent-secondary">false</span>,{'\n'}
