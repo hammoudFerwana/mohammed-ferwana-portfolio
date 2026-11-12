@@ -1,13 +1,14 @@
 'use client';
 
 import { useState } from 'react';
-import { m, AnimatePresence } from 'motion/react';
+import { m, AnimatePresence, useReducedMotion } from 'motion/react';
 import SectionHeading from '@/components/shared/SectionHeading';
 import RevealOnScroll from '@/components/shared/RevealOnScroll';
 import { cn } from '@/lib/utils';
 
 export default function HowIThink() {
   const [activeStep, setActiveStep] = useState(0);
+  const shouldReduceMotion = useReducedMotion();
 
   const steps = [
     {
@@ -122,10 +123,10 @@ export default function HowIThink() {
                 <m.div
                   key={activeStep}
                   data-reveal=""
-                  initial={{ opacity: 0, x: 16 }}
+                  initial={shouldReduceMotion ? { opacity: 1 } : { opacity: 0, x: 16 }}
                   animate={{ opacity: 1, x: 0 }}
-                  exit={{ opacity: 0, x: -16 }}
-                  transition={{ duration: 0.3, ease: [0.32, 0.72, 0, 1] }}
+                  exit={shouldReduceMotion ? { opacity: 0 } : { opacity: 0, x: -16 }}
+                  transition={shouldReduceMotion ? { duration: 0 } : { duration: 0.3, ease: [0.32, 0.72, 0, 1] }}
                   className="rounded-2xl bg-bg-secondary border border-border-default p-6 sm:p-8 space-y-6 shadow-xl relative overflow-hidden"
                 >
                   <m.div

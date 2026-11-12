@@ -21,6 +21,7 @@ const ALL_ROUTES = [...OK_ROUTES, ...NOT_FOUND_ROUTES];
 
 const VIEWPORTS = [
   { name: 'mobile', width: 390, height: 844 },
+  { name: 'tablet', width: 768, height: 1024 },
   { name: 'desktop', width: 1440, height: 900 },
 ];
 
@@ -316,5 +317,53 @@ test.describe('Portfolio quality gates', () => {
     await expect(creditLink).toBeVisible();
     await expect(creditLink).toHaveAttribute('target', '_blank');
     await expect(creditLink).toHaveAttribute('rel', /noopener/);
+  });
+
+  test('contact form submits JSON payload to Formspree and shows success state', async ({ page }) => {
+    await page.setViewportSize({ width: 1440, height: 900 });
+    const capturedRequests = [];
+
+    await page.route('https://formspree.io/f/myewyldg', async (route) => {
+      const request = route.request();
+      capturedRequests.push({
+        method: request.method(),
+        url: request.url(),
+        body: request.postDataJSON(),
+      });
+      await route.fulfill({
+        status: 200,
+        contentType: 'application/json',
+        body: JSON.stringify({ ok: true }),
+      });
+    });
+
+    await page.goto('/contact', { waitUntil: 'load' });
+    await page.fill('#contact-name', 'Alex Recruiter');
+    await page.fill('#contact-email', 'alex@example.com');
+    await page.fill('#contact-subject', 'Backend Engineer Role');
+    await page.fill('#contact-message', 'Hello Mohammed, we would like to schedule an interview.');
+
+    const submitButton = page.locator('button[type="submit"]');
+    await expect(submitButton).toBeEnabled();
+    await submitButton.click();
+
+    await expect(page.getByText('Message delivered successfully!')).toBeVisible();
+    expect(capturedRequests).toHaveLength(1);
+    expect(capturedRequests[0].method).toBe('POST');
+    expect(capturedRequests[0].url).toBe('https://formspree.io/f/myewyldg');
+    expect(capturedRequests[0].body).toEqual({
+      name: 'Alex Recruiter',
+      email: 'alex@example.com',
+      subject: 'Backend Engineer Role',
+      message: 'Hello Mohammed, we would like to schedule an interview.',
+    });
+  });
+
+  test('/ at 320x568 has documentElement.scrollWidth <= 320', async ({ page }) => {
+    await page.setViewportSize({ width: 320, height: 568 });
+    await page.goto('/', { waitUntil: 'load' });
+    await page.evaluate(() => document.fonts.ready);
+    const scrollWidth = await page.evaluate(() => document.documentElement.scrollWidth);
+    expect(scrollWidth).toBeLessThanOrEqual(320);
   });
 });

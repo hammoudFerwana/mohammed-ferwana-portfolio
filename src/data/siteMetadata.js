@@ -15,5 +15,5 @@ export const siteMetadata = {
     github: 'https://github.com/hammoudFerwana',
   },
   ogImage: '/images/portrait.jpg',
-  formspreeKey: process.env.NEXT_PUBLIC_FORMSPREE_KEY || '',
+  formspreeKey: process.env.NEXT_PUBLIC_FORMSPREE_KEY || 'myewyldg',
 };

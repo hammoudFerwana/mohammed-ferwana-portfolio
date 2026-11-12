@@ -65,16 +65,8 @@ for (const filePath of files) {
 
   lines.forEach((line, index) => {
     for (const rule of BANNED_RULES) {
-      let lineToCheck = line;
-
-      // Allow-list only the exact string "(e.g. RabbitMQ)" in src/data/projects.js
-      if (relPath === 'src/data/projects.js' && rule.label === 'RabbitMQ') {
-        // temporary: removed in the copy phase
-        lineToCheck = lineToCheck.split('(e.g. RabbitMQ)').join('');
-      }
-
       rule.regex.lastIndex = 0;
-      if (rule.regex.test(lineToCheck)) {
+      if (rule.regex.test(line)) {
         violations.push({
           file: relPath,
           line: index + 1,
