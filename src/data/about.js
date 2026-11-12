@@ -135,6 +135,16 @@ export const aboutData = {
     },
     {
       year: '2026',
+      period: 'Aug – Sep 2026',
+      title: 'Startup MVP Bootcamp, Team Lead',
+      organization: 'Masar x Sanabel',
+      type: 'leadership',
+      status: 'Completed',
+      description: 'Led the Sawn team through an 80-hour, 8-week startup bootcamp, from idea to a working MVP, and built the full backend.',
+      highlight: 'Sawn placed 4th at the final demo day.',
+    },
+    {
+      year: '2026',
       period: '2026',
       title: 'Backend Engineering & Sawn (formerly InsurFlow)',
       organization: 'Sawn (formerly InsurFlow)',
