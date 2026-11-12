@@ -1,6 +1,10 @@
 import Image from 'next/image';
 
-export default function InteractivePortraitCard() {
+export default function InteractivePortraitCard({
+  priority = false,
+  loading,
+  sizes = '(min-width: 1024px) 380px, 300px',
+}) {
   return (
     <div className="relative w-full max-w-sm select-none">
       {/* Dynamic Ambient Glow Field Behind Card */}
@@ -23,7 +27,9 @@ export default function InteractivePortraitCard() {
               alt="Mohammed Ferwana - Backend Engineer"
               width={480}
               height={480}
-              priority
+              priority={priority}
+              loading={priority ? undefined : loading}
+              sizes={sizes}
               className="w-full h-full object-cover object-center filter contrast-[1.03] brightness-95"
             />
           </div>

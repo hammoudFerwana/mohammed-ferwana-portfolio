@@ -149,8 +149,12 @@ test.describe('Portfolio quality gates', () => {
             ).toBeLessThanOrEqual(overflow.innerWidth);
 
             // d. Hidden-text check under reducedMotion: 'reduce'
-            const hiddenText = await collectHiddenTextFailures(page);
-            expect(hiddenText, `Hidden text elements on ${route}: ${JSON.stringify(hiddenText)}`).toEqual([]);
+            await expect
+              .poll(() => collectHiddenTextFailures(page), {
+                timeout: 5000,
+                message: `Hidden text elements on ${route} (${theme}, ${viewport.width}x${viewport.height})`,
+              })
+              .toEqual([]);
 
             // c. Axe accessibility scan (zero serious or critical violations)
             const axeResults = await new AxeBuilder({ page }).analyze();
@@ -365,5 +369,77 @@ test.describe('Portfolio quality gates', () => {
     await page.evaluate(() => document.fonts.ready);
     const scrollWidth = await page.evaluate(() => document.documentElement.scrollWidth);
     expect(scrollWidth).toBeLessThanOrEqual(320);
+  });
+
+  test('/ shows the portrait in the hero', async ({ page }) => {
+    for (const vp of [
+      { width: 390, height: 844 },
+      { width: 1440, height: 900 },
+    ]) {
+      await page.setViewportSize(vp);
+      await page.goto('/', { waitUntil: 'load' });
+      await page.evaluate(() => document.fonts.ready);
+
+      const portrait = page.locator('img[alt="Mohammed Ferwana - Backend Engineer"]');
+      await expect(portrait).toBeVisible();
+
+      const portraitBox = await portrait.boundingBox();
+      expect(portraitBox).not.toBeNull();
+      expect(portraitBox.width).toBeGreaterThan(0);
+      expect(portraitBox.height).toBeGreaterThan(0);
+      expect(portraitBox.x).toBeGreaterThanOrEqual(0);
+      expect(portraitBox.x + portraitBox.width).toBeLessThanOrEqual(vp.width);
+
+      if (vp.width === 1440) {
+        const band = page.locator('img[alt^="Gaza sea port"]').locator('..');
+        const bandBox = await band.boundingBox();
+        expect(bandBox).not.toBeNull();
+        expect(portraitBox.y).toBeLessThan(bandBox.y + bandBox.height);
+        expect(portraitBox.y).toBeGreaterThan(bandBox.y);
+      }
+    }
+  });
+
+  test('/ hero overlays do not hide the clock or the credit', async ({ page }) => {
+    for (const vp of [
+      { width: 1024, height: 768 },
+      { width: 1440, height: 900 },
+    ]) {
+      await page.setViewportSize(vp);
+      await page.goto('/', { waitUntil: 'load' });
+      await page.evaluate(() => document.fonts.ready);
+
+      const clockChip = page.locator('[data-gaza-clock]');
+      const creditLink = page.locator(
+        'a[href="https://unsplash.com/photos/a-view-of-a-sunset-over-a-body-of-water-EMH4vCucw-A"]'
+      );
+
+      await expect(clockChip).toBeVisible();
+      await expect(creditLink).toBeVisible();
+
+      const hitResults = await page.evaluate(() => {
+        const check = (selector) => {
+          const el = document.querySelector(selector);
+          if (!el) return { ok: false, reason: 'missing' };
+          const rect = el.getBoundingClientRect();
+          const cx = rect.left + rect.width / 2;
+          const cy = rect.top + rect.height / 2;
+          const hit = document.elementFromPoint(cx, cy);
+          return {
+            ok: Boolean(hit && (el === hit || el.contains(hit))),
+            hitTag: hit?.tagName?.toLowerCase() ?? null,
+          };
+        };
+        return {
+          clock: check('[data-gaza-clock]'),
+          credit: check(
+            'a[href="https://unsplash.com/photos/a-view-of-a-sunset-over-a-body-of-water-EMH4vCucw-A"]'
+          ),
+        };
+      });
+
+      expect(hitResults.clock.ok, `Clock chip obscured at ${vp.width}x${vp.height}: ${JSON.stringify(hitResults.clock)}`).toBe(true);
+      expect(hitResults.credit.ok, `Credit link obscured at ${vp.width}x${vp.height}: ${JSON.stringify(hitResults.credit)}`).toBe(true);
+    }
   });
 });

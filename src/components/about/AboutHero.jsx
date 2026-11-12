@@ -32,7 +32,7 @@ export default function AboutHero() {
             </div>
 
             <div className="lg:col-span-5 flex justify-center lg:justify-end">
-              <InteractivePortraitCard />
+              <InteractivePortraitCard priority />
             </div>
           </div>
 
