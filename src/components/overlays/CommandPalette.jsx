@@ -3,20 +3,32 @@
 import { useState, useEffect, useRef } from 'react';
 import { useRouter } from 'next/navigation';
 import { useOverlay } from '@/context/OverlayContext';
+import { useTheme } from '@/context/ThemeContext';
 import { commandGroups } from '@/data/commands';
 import { cn } from '@/lib/utils';
 
 export default function CommandPalette() {
   const router = useRouter();
   const { isCommandPaletteOpen, closeCommandPalette } = useOverlay();
+  const { toggleTheme } = useTheme();
   const [query, setQuery] = useState('');
   const [selectedIndex, setSelectedIndex] = useState(0);
   const inputRef = useRef(null);
 
   // Flatten commands for index-based navigation
-  const allCommands = commandGroups.flatMap((group) =>
-    group.commands.map((cmd) => ({ ...cmd, group: group.group }))
-  );
+  const allCommands = [
+    ...commandGroups.flatMap((group) =>
+      group.commands.map((cmd) => ({ ...cmd, group: group.group }))
+    ),
+    {
+      id: 'act-theme',
+      group: 'Actions & Utilities',
+      label: 'Switch theme',
+      shortcut: 'T',
+      action: 'theme',
+      keywords: ['theme', 'dark', 'light', 'dusk', 'dawn', 'sunrise', 'sunset', 'mode'],
+    },
+  ];
 
   const normalizedQuery = query.trim().toLowerCase();
 
@@ -68,6 +80,8 @@ export default function CommandPalette() {
       document.body.appendChild(link);
       link.click();
       document.body.removeChild(link);
+    } else if (cmd.action === 'theme') {
+      toggleTheme();
     }
   };
 
@@ -115,7 +129,7 @@ export default function CommandPalette() {
             onKeyDown={handleKeyDown}
             placeholder="Type a command or search projects..."
             aria-label="Search commands, projects, or pages"
-            className="w-full bg-transparent text-sm text-text-primary placeholder:text-text-muted focus:outline-none"
+            className="w-full bg-transparent text-sm text-text-primary placeholder:text-text-muted"
           />
           <kbd className="hidden sm:inline-flex items-center text-[10px] font-mono px-2 py-0.5 rounded bg-bg-tertiary border border-border-default text-text-muted">
             ESC

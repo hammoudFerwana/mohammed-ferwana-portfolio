@@ -31,7 +31,7 @@ export default function CaseStudySection({
       >
         {/* Section Number & Title */}
         <div className="mb-6 md:mb-8">
-          <span className="font-mono text-3xl md:text-4xl font-bold text-accent/30 select-none block leading-none">
+          <span className="font-mono text-3xl md:text-4xl font-bold text-accent/75 select-none block leading-none">
             {number}
           </span>
           <h2

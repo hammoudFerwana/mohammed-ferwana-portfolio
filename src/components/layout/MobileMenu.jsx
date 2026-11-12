@@ -4,6 +4,7 @@ import { useEffect } from 'react';
 import Link from 'next/link';
 import { siteMetadata } from '@/data/siteMetadata';
 import { cn } from '@/lib/utils';
+import ThemeToggle from '@/components/shared/ThemeToggle';
 
 export default function MobileMenu({ isOpen, onClose, links, currentPath }) {
   useEffect(() => {
@@ -48,16 +49,19 @@ export default function MobileMenu({ isOpen, onClose, links, currentPath }) {
           </span>
         </Link>
 
-        <button
-          type="button"
-          onClick={onClose}
-          aria-label="Close menu"
+        <div className="flex items-center gap-2">
+          <ThemeToggle />
+          <button
+            type="button"
+            onClick={onClose}
+            aria-label="Close menu"
           className="p-2 rounded-full bg-bg-secondary border border-border-default text-text-secondary hover:text-text-primary focus-visible:ring-2 focus-visible:ring-accent"
         >
           <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2">
             <path strokeLinecap="round" strokeLinejoin="round" d="M6 18L18 6M6 6l12 12" />
-          </svg>
-        </button>
+            </svg>
+          </button>
+        </div>
       </div>
 
       {/* Navigation Links with Staggered Reveals */}
@@ -96,7 +100,7 @@ export default function MobileMenu({ isOpen, onClose, links, currentPath }) {
           href="/resume/Mohammed_Ferwana_Resume.pdf"
           download="Mohammed_Ferwana_Resume.pdf"
           onClick={onClose}
-          className="w-full py-2.5 px-4 rounded-xl bg-accent hover:bg-accent-hover text-white font-semibold text-xs flex items-center justify-center gap-2 shadow-sm transition-all duration-200"
+          className="w-full py-2.5 px-4 rounded-xl bg-btn hover:bg-accent-hover text-btn-fg font-semibold text-xs flex items-center justify-center gap-2 shadow-xs transition-all duration-200"
         >
           <svg className="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
             <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z" />

@@ -151,7 +151,7 @@ export default function ContactInfo() {
             );
 
             const baseClass =
-              'w-full text-left group flex items-start gap-4 p-3.5 rounded-xl bg-bg-tertiary/50 border border-border-subtle hover:border-accent/40 hover:bg-bg-tertiary transition-all duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent cursor-pointer';
+              'w-full text-left group flex items-start gap-4 p-3.5 rounded-xl bg-bg-tertiary/50 border border-border-subtle hover:border-accent/40 hover:bg-bg-tertiary transition-all duration-200 focus-visible:outline-hidden focus-visible:ring-2 focus-visible:ring-accent cursor-pointer';
 
             return (
               <li key={channel.platform}>

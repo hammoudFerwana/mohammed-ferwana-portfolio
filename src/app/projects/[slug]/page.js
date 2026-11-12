@@ -182,7 +182,7 @@ export default async function CaseStudyPage({ params }) {
                 sizes="(max-width: 768px) 100vw, 896px"
                 className="object-cover object-center"
               />
-              <div className="absolute inset-0 bg-gradient-to-t from-bg-primary/30 via-transparent to-transparent" />
+              <div className="absolute inset-0 bg-linear-to-t from-bg-primary/30 via-transparent to-transparent" />
             </div>
           )}
         </header>
