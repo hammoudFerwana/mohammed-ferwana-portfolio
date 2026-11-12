@@ -66,9 +66,9 @@ export default function HeroSection() {
 
       {/* Hero content */}
       <div className="max-w-7xl mx-auto px-5 sm:px-8">
-        <div className="grid grid-cols-1 lg:grid-cols-12 lg:gap-x-12 items-start">
+        <div className="grid grid-cols-1 lg:grid-cols-[minmax(0,1fr)_350px] xl:grid-cols-[minmax(0,1fr)_380px] lg:gap-x-12 items-start">
           {/* Text column first in DOM for screen readers */}
-          <div className="lg:col-span-7 mt-8 lg:mt-0 lg:pt-10">
+          <div className="mt-8 lg:mt-0 lg:pt-10">
             <h1 className="font-sans text-[length:var(--text-hero)] font-bold leading-[0.95] tracking-[-0.03em] text-ink text-balance hyphens-none">
               Mohammed Ferwana
             </h1>
@@ -109,7 +109,7 @@ export default function HeroSection() {
           </div>
 
           {/* Portrait card: visually first below lg, overlapping band right on lg+ */}
-          <div className="order-first lg:order-last mt-8 lg:-mt-[150px] lg:col-span-5 lg:justify-self-end w-[min(78vw,300px)] lg:w-full lg:max-w-[380px] relative z-10">
+          <div className="order-first lg:order-last mt-8 lg:-mt-[150px] lg:justify-self-end w-[min(78vw,300px)] lg:w-full lg:max-w-[380px] relative z-10">
             <InteractivePortraitCard loading="eager" />
           </div>
         </div>
