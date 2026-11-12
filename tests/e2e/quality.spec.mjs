@@ -358,4 +358,12 @@ test.describe('Portfolio quality gates', () => {
       message: 'Hello Mohammed, we would like to schedule an interview.',
     });
   });
+
+  test('/ at 320x568 has documentElement.scrollWidth <= 320', async ({ page }) => {
+    await page.setViewportSize({ width: 320, height: 568 });
+    await page.goto('/', { waitUntil: 'load' });
+    await page.evaluate(() => document.fonts.ready);
+    const scrollWidth = await page.evaluate(() => document.documentElement.scrollWidth);
+    expect(scrollWidth).toBeLessThanOrEqual(320);
+  });
 });

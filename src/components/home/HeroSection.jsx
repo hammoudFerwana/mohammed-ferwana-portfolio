@@ -63,7 +63,7 @@ export default function HeroSection() {
       <div className="max-w-7xl mx-auto px-5 sm:px-8 mt-[34px]">
         {/* Full-width name & role block */}
         <div>
-          <h1 className="font-sans text-[length:var(--text-display)] font-bold leading-[0.9] tracking-[-0.035em] text-ink hyphens-none">
+          <h1 className="font-sans text-[44px] min-[380px]:text-[length:var(--text-display)] font-bold leading-[0.9] tracking-[-0.035em] text-ink hyphens-none">
             Mohammed Ferwana
           </h1>
 
