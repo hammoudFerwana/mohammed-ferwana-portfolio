@@ -33,7 +33,7 @@ export default function MobileMenu({ isOpen, onClose, links, currentPath }) {
 
   return (
     <div
-      className="fixed inset-0 z-50 md:hidden bg-bg-primary/92 backdrop-blur-3xl flex flex-col justify-between p-6 transition-all duration-300"
+      className="fixed inset-0 z-50 lg:hidden bg-bg-primary/92 backdrop-blur-3xl flex flex-col justify-between p-6 transition-all duration-300"
       role="dialog"
       aria-modal="true"
       aria-label="Mobile Navigation"

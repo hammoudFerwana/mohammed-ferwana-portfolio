@@ -18,7 +18,7 @@ const facts = [
 
 export default function HeroSection() {
   return (
-    <section className="pt-[84px] sm:pt-[96px] md:pt-[128px] lg:pt-[96px] pb-[70px]">
+    <section className="pt-[84px] sm:pt-[96px] pb-[70px]">
       {/* Full-width Gaza sea port photo band */}
       <div className="relative w-full h-[clamp(260px,46vh,500px)] border-b border-line overflow-hidden">
         <Image
