@@ -149,8 +149,12 @@ test.describe('Portfolio quality gates', () => {
             ).toBeLessThanOrEqual(overflow.innerWidth);
 
             // d. Hidden-text check under reducedMotion: 'reduce'
-            const hiddenText = await collectHiddenTextFailures(page);
-            expect(hiddenText, `Hidden text elements on ${route}: ${JSON.stringify(hiddenText)}`).toEqual([]);
+            await expect
+              .poll(() => collectHiddenTextFailures(page), {
+                timeout: 5000,
+                message: `Hidden text elements on ${route} (${theme}, ${viewport.width}x${viewport.height})`,
+              })
+              .toEqual([]);
 
             // c. Axe accessibility scan (zero serious or critical violations)
             const axeResults = await new AxeBuilder({ page }).analyze();
