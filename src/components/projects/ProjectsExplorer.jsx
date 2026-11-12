@@ -52,6 +52,16 @@ export default function ProjectsExplorer({ projects = [] }) {
     });
   }, [projects, activeFilter, searchQuery]);
 
+  const projectGroups = useMemo(() => {
+    const mainProjects = filteredProjects.filter((p) => p.tier === 1);
+    const otherWork = filteredProjects.filter((p) => p.tier === 2);
+
+    return [
+      { id: 'group-main-projects', heading: 'Main projects', items: mainProjects },
+      { id: 'group-other-work', heading: 'Other work', items: otherWork },
+    ].filter((group) => group.items.length > 0);
+  }, [filteredProjects]);
+
   // Compute counts for each filter pill
   const filterCounts = useMemo(() => {
     return FILTERS.reduce((acc, f) => {
@@ -204,37 +214,56 @@ export default function ProjectsExplorer({ projects = [] }) {
       {/* ── Filtered Animated Cards Grid ── */}
       <div id="projects-grid" role="region" aria-live="polite">
         <AnimatePresence mode="popLayout">
-          {filteredProjects.length > 0 ? (
-            <m.div
-              layout={!shouldReduceMotion}
-              className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8"
-            >
-              {filteredProjects.map((project, idx) => (
-                <m.div
-                  key={project.id}
-                  data-reveal=""
-                  layout={!shouldReduceMotion}
-                  initial={
-                    shouldReduceMotion ? { opacity: 1 } : { opacity: 0, scale: 0.96 }
-                  }
-                  animate={{ opacity: 1, scale: 1 }}
-                  exit={
-                    shouldReduceMotion ? { opacity: 0 } : { opacity: 0, scale: 0.94 }
-                  }
-                  transition={
-                    shouldReduceMotion
-                      ? { duration: 0 }
-                      : {
-                          duration: 0.28,
-                          ease: [0.16, 1, 0.3, 1],
-                          layout: { duration: 0.32, ease: [0.32, 0.72, 0, 1] },
-                        }
-                  }
+          {projectGroups.length > 0 ? (
+            <div className="space-y-12">
+              {projectGroups.map((group) => (
+                <section
+                  key={group.id}
+                  aria-labelledby={group.id}
+                  className="space-y-6"
                 >
-                  <ProjectCard project={project} priority={idx === 0} />
-                </m.div>
+                  <h2
+                    id={group.id}
+                    className="text-xl sm:text-2xl font-bold text-text-primary tracking-tight"
+                  >
+                    {group.heading}
+                  </h2>
+                  <m.div
+                    layout={!shouldReduceMotion}
+                    className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8"
+                  >
+                    {group.items.map((project, idx) => (
+                      <m.div
+                        key={project.id}
+                        data-reveal=""
+                        layout={!shouldReduceMotion}
+                        initial={
+                          shouldReduceMotion ? { opacity: 1 } : { opacity: 0, scale: 0.96 }
+                        }
+                        animate={{ opacity: 1, scale: 1 }}
+                        exit={
+                          shouldReduceMotion ? { opacity: 0 } : { opacity: 0, scale: 0.94 }
+                        }
+                        transition={
+                          shouldReduceMotion
+                            ? { duration: 0 }
+                            : {
+                                duration: 0.28,
+                                ease: [0.16, 1, 0.3, 1],
+                                layout: { duration: 0.32, ease: [0.32, 0.72, 0, 1] },
+                              }
+                        }
+                      >
+                        <ProjectCard
+                          project={project}
+                          priority={group.id === 'group-main-projects' && idx === 0}
+                        />
+                      </m.div>
+                    ))}
+                  </m.div>
+                </section>
               ))}
-            </m.div>
+            </div>
           ) : (
             <m.div
               key="empty-state"
