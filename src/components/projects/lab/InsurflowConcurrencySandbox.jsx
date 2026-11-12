@@ -122,6 +122,18 @@ export default function InsurflowConcurrencySandbox() {
               Concurrency Proof
             </Badge>
           </div>
+          <p className="text-xs text-text-muted">
+            Simulation in your browser of the behavior proven by{' '}
+            <a
+              href="https://github.com/InsurFlow-Team/insurflow-backend/blob/7f39380f64f7f82f705fabca3c22ac2432f6dad9/tests/claim.numbering.test.js#L138"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="font-mono text-accent underline underline-offset-2 hover:text-accent-hover transition-colors"
+            >
+              tests/claim.numbering.test.js
+            </a>
+            : 15 concurrent creations get numbers 1 to 15 with no gaps. It does not call the live API.
+          </p>
           <p className="text-xs sm:text-sm text-text-secondary">
             Simulates concurrent claim filings using tenant-scoped MongoDB <code className="text-accent bg-bg-tertiary px-1 py-0.5 rounded">$inc</code> atomic operations, verified by an automated test of 15 concurrent creations in one tenant.
           </p>
@@ -208,7 +220,7 @@ export default function InsurflowConcurrencySandbox() {
         <div className="lg:col-span-2 rounded-lg bg-bg-primary/80 border border-border-subtle p-4 space-y-4">
           <div className="flex items-center justify-between border-b border-border-subtle pb-2.5">
             <span className="font-mono text-xs uppercase tracking-wider text-text-muted font-semibold">
-              Live Invariant Proofs
+              Simulated invariants
             </span>
             <div className="flex gap-2">
               <button

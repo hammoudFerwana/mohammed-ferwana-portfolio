@@ -5,6 +5,11 @@ import Badge from '@/components/shared/Badge';
 import { cn } from '@/lib/utils';
 import { metrics } from '@/data/metrics';
 
+const STATUS_MACHINE_LINE_544_URL =
+  'https://github.com/InsurFlow-Team/insurflow-backend/blob/7f39380f64f7f82f705fabca3c22ac2432f6dad9/tests/claim.statusMachine.test.js#L544';
+const NUMBERING_TEST_URL =
+  'https://github.com/InsurFlow-Team/insurflow-backend/blob/7f39380f64f7f82f705fabca3c22ac2432f6dad9/tests/claim.numbering.test.js#L138';
+
 const formattedTestRunDate = new Date(`${metrics.testRunDate}T00:00:00Z`).toLocaleDateString('en-GB', {
   day: 'numeric',
   month: 'short',
@@ -37,7 +42,15 @@ export default function InsurflowTestingEvidence() {
                 Verified Test Evidence
               </Badge>
               <span className="font-mono text-xs text-text-muted">
-                tests/claim.statusMachine.test.js & claim.numbering.test.js
+                tests/claim.statusMachine.test.js &amp;{' '}
+                <a
+                  href={NUMBERING_TEST_URL}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-accent underline underline-offset-2 hover:text-accent-hover transition-colors"
+                >
+                  claim.numbering.test.js
+                </a>
               </span>
             </div>
             <span className="font-mono text-xs text-functional-success flex items-center gap-1.5">
@@ -155,7 +168,17 @@ export default function InsurflowTestingEvidence() {
             {/* Code Excerpt */}
             <div className="space-y-2">
               <div className="flex items-center justify-between text-xs font-mono text-text-muted">
-                <span>tests/claim.statusMachine.test.js (test starts at line 543)</span>
+                <span>
+                  tests/claim.statusMachine.test.js{' '}
+                  <a
+                    href={STATUS_MACHINE_LINE_544_URL}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="text-accent underline underline-offset-2 hover:text-accent-hover transition-colors"
+                  >
+                    (line 544 at commit 7f39380)
+                  </a>
+                </span>
                 <span>Supertest + MongoMemoryServer</span>
               </div>
               <div tabIndex={0} className="overflow-x-auto rounded-lg bg-bg-primary/95 border border-border-subtle p-4 font-mono text-xs sm:text-[13px] leading-relaxed text-text-secondary">
@@ -178,7 +201,7 @@ export default function InsurflowTestingEvidence() {
             </div>
 
             <div className="p-3 rounded-lg bg-bg-tertiary/60 border border-border-subtle text-xs text-text-secondary leading-relaxed">
-              <strong className="text-text-primary font-medium">Engineering Guarantee: </strong>
+              <strong className="text-text-primary font-medium">What the tests prove: </strong>
               The claim lifecycle cannot be bypassed through direct endpoint invocation. Every transition is mediated
               by a fixed transition map at the service layer, returning predictable error envelopes.
             </div>
@@ -258,7 +281,17 @@ export default function InsurflowTestingEvidence() {
                 className="space-y-3"
               >
                 <div className="flex items-center justify-between text-xs font-mono text-text-muted">
-                  <span>tests/claim.numbering.test.js, lines 138 to 159 (condensed excerpt)</span>
+                  <span>
+                    <a
+                      href={NUMBERING_TEST_URL}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="text-accent underline underline-offset-2 hover:text-accent-hover transition-colors"
+                    >
+                      tests/claim.numbering.test.js
+                    </a>
+                    , lines 138 to 159 (condensed excerpt)
+                  </span>
                   <span>EVD-002: Concurrent Atomic Sequence</span>
                 </div>
                 <div tabIndex={0} className="overflow-x-auto rounded-lg bg-bg-primary/95 border border-border-subtle p-4 font-mono text-xs sm:text-[13px] leading-relaxed text-text-secondary">
@@ -292,7 +325,17 @@ export default function InsurflowTestingEvidence() {
                 className="space-y-3"
               >
                 <div className="flex items-center justify-between text-xs font-mono text-text-muted">
-                  <span>tests/claim.numbering.test.js (Lines 192–200)</span>
+                  <span>
+                    <a
+                      href={NUMBERING_TEST_URL}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="text-accent underline underline-offset-2 hover:text-accent-hover transition-colors"
+                    >
+                      tests/claim.numbering.test.js
+                    </a>{' '}
+                    (Lines 192–200)
+                  </span>
                   <span>EVD-003: MongoDB Index Catalog Assertion</span>
                 </div>
                 <div tabIndex={0} className="overflow-x-auto rounded-lg bg-bg-primary/95 border border-border-subtle p-4 font-mono text-xs sm:text-[13px] leading-relaxed text-text-secondary">
@@ -312,7 +355,7 @@ export default function InsurflowTestingEvidence() {
             )}
 
             <div className="p-3 rounded-lg bg-bg-tertiary/60 border border-border-subtle text-xs text-text-secondary leading-relaxed">
-              <strong className="text-text-primary font-medium">Engineering Guarantee: </strong>
+              <strong className="text-text-primary font-medium">What the tests prove: </strong>
               Even if application concurrency control were to fail under an unexpected edge case, the database engine
               strictly rejects duplicate <code className="font-mono text-accent">claimNumber</code> values within the same
               tenant organization via the unique compound B-tree index.
