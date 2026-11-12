@@ -128,12 +128,13 @@ export default function HowIThink() {
                   className="rounded-2xl bg-bg-secondary border border-border-default p-6 sm:p-8 space-y-6 shadow-xl relative overflow-hidden"
                 >
                   <m.div
+                    aria-hidden="true"
                     initial={{ opacity: 0.03, scale: 0.95 }}
                     animate={{ opacity: 0.08, scale: 1 }}
                     transition={{ duration: 0.4 }}
                     className="absolute top-0 right-0 p-8 font-mono text-8xl font-black text-text-primary select-none pointer-events-none"
                   >
-                    {steps[activeStep].num}
+                    <svg aria-hidden="true" viewBox="0 0 140 100" className="w-28 h-20 fill-current"><text x="100%" y="82%" textAnchor="end" fontFamily="var(--font-mono)" fontWeight="900" fontSize="88">{steps[activeStep].num}</text></svg>
                   </m.div>
 
                   <div className="space-y-2">

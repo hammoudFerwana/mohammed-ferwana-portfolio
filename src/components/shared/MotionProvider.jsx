@@ -1,15 +1,17 @@
 'use client';
 
-import { LazyMotion, domMax } from 'motion/react';
+import { LazyMotion, MotionConfig, domMax } from 'motion/react';
 
 /**
- * MotionProvider — Provides LazyMotion features across the app.
+ * MotionProvider — Provides LazyMotion features and global reduced-motion policy across the app.
  * Uses domMax because CareerTimeline, HowIThink, and ProjectsExplorer use layout / layoutId.
  */
 export default function MotionProvider({ children }) {
   return (
     <LazyMotion features={domMax} strict>
-      {children}
+      <MotionConfig reducedMotion="user">
+        {children}
+      </MotionConfig>
     </LazyMotion>
   );
 }

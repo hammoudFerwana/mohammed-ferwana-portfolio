@@ -371,7 +371,7 @@ export default function TeamlineWorkspaceSimulator() {
                     <span className="text-text-muted">{packet.timestamp}</span>
                   </div>
 
-                  <pre className="text-[11px] text-text-secondary bg-bg-secondary p-2 rounded overflow-x-auto">
+                  <pre tabIndex={0} className="text-[11px] text-text-secondary bg-bg-secondary p-2 rounded overflow-x-auto">
                     {JSON.stringify(packet.payload, null, 2)}
                   </pre>
 
@@ -397,7 +397,7 @@ export default function TeamlineWorkspaceSimulator() {
             </p>
           </div>
 
-          <div className="rounded-lg bg-bg-secondary p-3 font-mono text-[11px] overflow-x-auto border border-border-subtle">
+          <div tabIndex={0} className="rounded-lg bg-bg-secondary p-3 font-mono text-[11px] overflow-x-auto border border-border-subtle">
             <pre className="text-text-secondary leading-relaxed">
 {`// Illustrative sketch of the version guard, not copied from the TeamLine repo
 async function updateTaskStatus(workspaceId, taskId, targetStatus, expectedVersion) {

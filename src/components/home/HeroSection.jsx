@@ -18,7 +18,7 @@ export default function HeroSection() {
   return (
     <section className="relative min-h-[92dvh] flex flex-col justify-center pt-28 pb-16 overflow-hidden">
       {/* Background Animated Aurora Mesh (3 Orbs, GPU-accelerated) */}
-      <div className="absolute inset-0 overflow-hidden pointer-events-none" aria-hidden="true">
+      <div className="absolute inset-0 overflow-hidden pointer-events-none in-data-[theme=light]:opacity-35" aria-hidden="true">
         <div className="absolute top-1/4 left-1/4 -translate-x-1/2 -translate-y-1/2 w-[550px] h-[400px] bg-accent/10 blur-[130px] rounded-full animate-aurora" />
         <div
           className="absolute top-1/3 right-1/4 translate-x-1/4 -translate-y-1/2 w-[480px] h-[380px] bg-accent-secondary/10 blur-[140px] rounded-full animate-aurora"

@@ -61,11 +61,11 @@ export default function ArchitectureViewer({ architecture }) {
   const nodeTypeStyles = {
     client:
       'border-border-strong bg-bg-secondary text-text-primary hover:border-accent/60',
-    api: 'border-accent/40 bg-accent/10 text-accent hover:border-accent',
-    auth: 'border-functional-warning/40 bg-functional-warning/10 text-functional-warning hover:border-functional-warning',
-    logic: 'border-accent-secondary/40 bg-accent-secondary/10 text-text-primary hover:border-accent-secondary',
+    api: 'border-accent/40 bg-accent/10 in-data-[theme=light]:bg-surface text-accent hover:border-accent',
+    auth: 'border-functional-warning/40 bg-functional-warning/10 in-data-[theme=light]:bg-surface text-functional-warning hover:border-functional-warning',
+    logic: 'border-accent-secondary/40 bg-accent-secondary/10 in-data-[theme=light]:bg-surface text-text-primary hover:border-accent-secondary',
     data: 'border-border-strong bg-bg-tertiary text-text-primary hover:border-border-strong',
-    db: 'border-functional-success/40 bg-functional-success/10 text-functional-success hover:border-functional-success',
+    db: 'border-functional-success/40 bg-functional-success/10 in-data-[theme=light]:bg-surface text-functional-success hover:border-functional-success',
     external:
       'border-dashed border-border-strong bg-bg-primary text-text-secondary hover:border-text-secondary',
   };
@@ -116,14 +116,13 @@ export default function ArchitectureViewer({ architecture }) {
                 <button
                   type="button"
                   onClick={() => setSelectedNodeId(node.id)}
-                  aria-label={`${node.label} — ${node.type} component. ${node.description}`}
                   aria-pressed={isSelected}
                   className={cn(
                     'w-full sm:w-80 p-3.5 rounded-xl border text-center font-mono text-xs sm:text-sm font-semibold transition-all duration-200 shadow-xs relative group',
                     style,
                     isSelected
                       ? 'ring-2 ring-accent scale-[1.02] shadow-accent/20 shadow-lg'
-                      : 'opacity-85 hover:opacity-100 hover:scale-[1.01]'
+                      : 'hover:scale-[1.01]'
                   )}
                 >
                   <div className="flex items-center justify-between">

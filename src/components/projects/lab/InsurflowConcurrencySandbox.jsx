@@ -216,7 +216,7 @@ export default function InsurflowConcurrencySandbox() {
                 className={cn(
                   'font-mono text-[11px] px-2 py-0.5 rounded transition-colors',
                   activeTab === 'stream'
-                    ? 'bg-accent/20 text-accent font-semibold'
+                    ? 'bg-accent/20 in-data-[theme=light]:bg-surface in-data-[theme=light]:ring-1 in-data-[theme=light]:ring-accent/40 text-accent font-semibold'
                     : 'text-text-muted hover:text-text-primary'
                 )}
               >
@@ -227,7 +227,7 @@ export default function InsurflowConcurrencySandbox() {
                 className={cn(
                   'font-mono text-[11px] px-2 py-0.5 rounded transition-colors',
                   activeTab === 'contract'
-                    ? 'bg-accent/20 text-accent font-semibold'
+                    ? 'bg-accent/20 in-data-[theme=light]:bg-surface in-data-[theme=light]:ring-1 in-data-[theme=light]:ring-accent/40 text-accent font-semibold'
                     : 'text-text-muted hover:text-text-primary'
                 )}
               >
@@ -296,7 +296,7 @@ export default function InsurflowConcurrencySandbox() {
               </div>
             </div>
           ) : (
-            <div className="h-44 overflow-x-auto rounded bg-bg-secondary p-3 font-mono text-[11px] leading-relaxed border border-border-subtle">
+            <div tabIndex={0} className="h-44 overflow-x-auto rounded bg-bg-secondary p-3 font-mono text-[11px] leading-relaxed border border-border-subtle">
               <pre className="text-text-secondary">
 {`// Illustrative sketch; the real counter runs in claimSchema.pre('save') in claim.model.js
 const counter = await Counter.findOneAndUpdate(

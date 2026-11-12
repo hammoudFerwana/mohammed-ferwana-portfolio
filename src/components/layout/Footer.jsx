@@ -24,7 +24,7 @@ export default function Footer() {
             <p className="text-sm text-text-secondary max-w-sm leading-relaxed">
               {siteMetadata.tagline} I build REST APIs with guarded state machines and tenant isolation.
             </p>
-            <div className="inline-flex items-center gap-2 px-2.5 py-1 rounded-full bg-functional-success/10 border border-functional-success/20 text-functional-success text-xs font-mono">
+            <div className="inline-flex items-center gap-2 px-2.5 py-1 rounded-full bg-functional-success/10 in-data-[theme=light]:bg-surface border border-functional-success/20 in-data-[theme=light]:border-functional-success/35 text-functional-success text-xs font-mono">
               <span className="w-1.5 h-1.5 rounded-full bg-functional-success animate-pulse" />
               Available for Backend Engineering Opportunities
             </div>

@@ -458,7 +458,7 @@ export default function FsmSimulator() {
               </div>
 
               {/* Response Payload Pre Box */}
-              <div className="overflow-x-auto rounded bg-bg-secondary p-3 font-mono text-xs leading-relaxed">
+              <div tabIndex={0} className="overflow-x-auto rounded bg-bg-secondary p-3 font-mono text-xs leading-relaxed">
                 <pre
                   className={
                     activeResponse.status === 200

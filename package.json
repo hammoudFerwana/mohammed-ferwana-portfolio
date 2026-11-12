@@ -8,6 +8,9 @@
     "start": "next start",
     "lint": "eslint .",
     "test": "node --test src/lib/fsm.test.mjs",
+    "test:e2e": "playwright test",
+    "check:facts": "node scripts/check-facts.mjs",
+    "lhci": "lhci autorun",
     "build:resume": "node scripts/generate-resume-pdf.mjs"
   },
   "dependencies": {
@@ -22,6 +25,9 @@
     "tailwind-merge": "^2.6.0"
   },
   "devDependencies": {
+    "@axe-core/playwright": "^4.14.0",
+    "@lhci/cli": "^0.16.1",
+    "@playwright/test": "^1.65.0",
     "@tailwindcss/postcss": "^4.3.5",
     "eslint": "9.39.5",
     "eslint-config-next": "16.4.3",
