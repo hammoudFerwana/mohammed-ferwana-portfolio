@@ -117,6 +117,7 @@ export default function CareerTimeline({ experiences = [], education = [] }) {
               return (
                 <m.div
                   key={exp.id}
+                  data-reveal=""
                   layout={!shouldReduceMotion}
                   initial={shouldReduceMotion ? { opacity: 1 } : { opacity: 0, y: 16 }}
                   animate={{ opacity: 1, y: 0 }}
@@ -262,6 +263,7 @@ export default function CareerTimeline({ experiences = [], education = [] }) {
             education.map((edu) => (
               <m.div
                 key={edu.id}
+                data-reveal=""
                 layout={!shouldReduceMotion}
                 initial={shouldReduceMotion ? { opacity: 1 } : { opacity: 0, y: 16 }}
                 animate={{ opacity: 1, y: 0 }}

@@ -232,4 +232,89 @@ test.describe('Portfolio quality gates', () => {
     const afterReload = await page.evaluate(() => document.documentElement.dataset.theme);
     expect(afterReload).toBe(expectedNext);
   });
+
+  test('core routes render all visible text at opacity > 0.9 with JavaScript disabled', async ({ browser }) => {
+    const context = await browser.newContext({
+      javaScriptEnabled: false,
+      viewport: { width: 1440, height: 900 },
+    });
+    const page = await context.newPage();
+    try {
+      for (const route of ['/', '/about', '/experience', '/projects']) {
+        const res = await page.goto(route, { waitUntil: 'domcontentloaded' });
+        expect(res?.status(), `Expected 200 for ${route} with JS disabled`).toBe(200);
+        const hiddenText = await collectHiddenTextFailures(page);
+        expect(
+          hiddenText,
+          `Hidden text with JS disabled on ${route}: ${JSON.stringify(hiddenText)}`
+        ).toEqual([]);
+      }
+    } finally {
+      await context.close();
+    }
+  });
+
+  test('server HTML of / renders Mohammed Ferwana in h1 without inline opacity:0', async ({ request, browser }) => {
+    const res = await request.get('/');
+    expect(res.status()).toBe(200);
+    const html = await res.text();
+    expect(html).toMatch(/<h1[^>]*>[^<]*Mohammed Ferwana[^<]*<\/h1>/);
+
+    const context = await browser.newContext({ javaScriptEnabled: false });
+    const page = await context.newPage();
+    try {
+      await page.setContent(html, { waitUntil: 'domcontentloaded' });
+      const h1Check = await page.evaluate(() => {
+        const h1 = document.querySelector('h1');
+        if (!h1) return { found: false, text: '', badAncestors: [] };
+        const badAncestors = [];
+        let node = h1;
+        while (node && node !== document.documentElement) {
+          const inlineStyle = node.getAttribute('style') || '';
+          if (/opacity\s*:\s*0(?:\s*;|$)/i.test(inlineStyle)) {
+            badAncestors.push({ tag: node.tagName.toLowerCase(), style: inlineStyle });
+          }
+          node = node.parentElement;
+        }
+        return {
+          found: true,
+          text: h1.textContent.trim(),
+          badAncestors,
+        };
+      });
+
+      expect(h1Check.found).toBe(true);
+      expect(h1Check.text).toBe('Mohammed Ferwana');
+      expect(h1Check.badAncestors).toEqual([]);
+    } finally {
+      await context.close();
+    }
+  });
+
+  test('home hero displays live Gaza clock and Unsplash photo credit', async ({ page }) => {
+    await page.setViewportSize({ width: 1440, height: 900 });
+    await page.goto('/', { waitUntil: 'load' });
+
+    const clockTime = page.locator('[data-gaza-time]');
+    await expect(clockTime).toBeVisible();
+    await expect(clockTime).not.toHaveText('--:--');
+
+    const displayedTime = (await clockTime.textContent())?.trim();
+    const now = new Date();
+    const formatter = new Intl.DateTimeFormat('en-GB', {
+      timeZone: 'Asia/Gaza',
+      hour: '2-digit',
+      minute: '2-digit',
+    });
+    const currentGazaTime = formatter.format(now);
+    const previousMinuteGazaTime = formatter.format(new Date(now.getTime() - 60_000));
+    expect([currentGazaTime, previousMinuteGazaTime]).toContain(displayedTime);
+
+    const creditLink = page.locator(
+      'a[href="https://unsplash.com/photos/a-view-of-a-sunset-over-a-body-of-water-EMH4vCucw-A"]'
+    );
+    await expect(creditLink).toBeVisible();
+    await expect(creditLink).toHaveAttribute('target', '_blank');
+    await expect(creditLink).toHaveAttribute('rel', /noopener/);
+  });
 });

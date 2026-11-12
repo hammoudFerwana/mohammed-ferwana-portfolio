@@ -182,9 +182,9 @@ export default function ArchitectureViewer({ architecture }) {
         {selectedNode ? (
           <m.div
             key={selectedNode.id}
-            initial={{ opacity: 0, y: 10, filter: 'blur(4px)' }}
-            animate={{ opacity: 1, y: 0, filter: 'blur(0px)' }}
-            exit={{ opacity: 0, y: -10, filter: 'blur(4px)' }}
+            initial={{ opacity: 0, y: 10 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: -10 }}
             transition={{ duration: 0.25, ease: [0.32, 0.72, 0, 1] }}
             className="rounded-xl bg-bg-tertiary/70 border border-border-default p-5 sm:p-6 space-y-4 shadow-inner"
             aria-live="polite"

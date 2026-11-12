@@ -212,6 +212,7 @@ export default function ProjectsExplorer({ projects = [] }) {
               {filteredProjects.map((project, idx) => (
                 <m.div
                   key={project.id}
+                  data-reveal=""
                   layout={!shouldReduceMotion}
                   initial={
                     shouldReduceMotion ? { opacity: 1 } : { opacity: 0, scale: 0.96 }

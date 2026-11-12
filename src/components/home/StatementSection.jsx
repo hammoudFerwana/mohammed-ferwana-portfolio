@@ -2,7 +2,7 @@ export default function StatementSection() {
   return (
     <section className="py-16 sm:py-20 border-t border-line">
       <div className="max-w-7xl mx-auto px-5 sm:px-8">
-        <div className="statement-reveal">
+        <div data-reveal="" className="statement-reveal">
           <div className="flex items-center gap-3 mb-6">
             <span aria-hidden="true" className="w-[28px] h-px bg-sun shrink-0" />
             <p className="font-mono text-[12px] uppercase tracking-[0.08em] text-ink-muted">
