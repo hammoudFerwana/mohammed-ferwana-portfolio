@@ -1,6 +1,5 @@
 import Link from 'next/link';
 import { cn } from '@/lib/utils';
-import Magnetic from '@/components/shared/Magnetic';
 
 export default function Button({
   children,
@@ -15,8 +14,6 @@ export default function Button({
   disabled = false,
   icon: Icon,
   iconPosition = 'left',
-  magnetic = false,
-  magneticStrength = 0.28,
   ...props
 }) {
   const baseStyles = 'group inline-flex items-center justify-center font-medium rounded-lg transition-all duration-200 ease-[cubic-bezier(0.32,0.72,0,1)] focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2 focus-visible:ring-offset-bg-primary active:scale-[0.97] disabled:opacity-50 disabled:pointer-events-none disabled:cursor-not-allowed select-none cursor-pointer';
@@ -93,14 +90,6 @@ export default function Button({
       >
         {content}
       </button>
-    );
-  }
-
-  if (magnetic) {
-    return (
-      <Magnetic strength={magneticStrength} className="inline-block">
-        {element}
-      </Magnetic>
     );
   }
 

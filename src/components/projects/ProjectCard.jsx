@@ -11,9 +11,7 @@ export default function ProjectCard({ project, priority = false }) {
   return (
     <SpotlightCard
       as="div"
-      className={cn(
-        'group rounded-2xl bg-bg-secondary border border-border-default hover:border-border-strong overflow-hidden transition-all duration-300 flex flex-col justify-between hover:-translate-y-1 hover:shadow-xl hover:shadow-accent/5'
-      )}
+      className="group overflow-hidden transition-all duration-300 flex flex-col justify-between hover:-translate-y-1 hover:shadow-xl hover:shadow-accent/5"
     >
       <div>
         {/* Project Image */}

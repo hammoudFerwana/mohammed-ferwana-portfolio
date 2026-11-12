@@ -49,7 +49,6 @@ export default function CTASection() {
               variant="primary"
               size="lg"
               external
-              magnetic
             >
               Start a Conversation →
             </Button>
@@ -58,7 +57,6 @@ export default function CTASection() {
               variant="secondary"
               size="lg"
               external
-              magnetic
             >
               Connect on LinkedIn ↗
             </Button>
@@ -67,7 +65,6 @@ export default function CTASection() {
               variant="ghost"
               size="lg"
               external
-              magnetic
             >
               GitHub Profile ↗
             </Button>

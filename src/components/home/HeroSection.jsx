@@ -3,7 +3,6 @@
 import Image from 'next/image';
 import Button from '@/components/shared/Button';
 import RevealOnScroll from '@/components/shared/RevealOnScroll';
-import CounterTicker from '@/components/shared/CounterTicker';
 
 import { metrics } from '@/data/metrics';
 import InteractivePortraitCard from '@/components/home/InteractivePortraitCard';
@@ -76,10 +75,10 @@ export default function HeroSection() {
               </p>
             </RevealOnScroll>
 
-            {/* CTAs (Frame 550ms) with Magnetic Spring Interaction */}
+            {/* CTAs (Frame 550ms) */}
             <RevealOnScroll delay={0.55}>
               <div className="flex flex-wrap items-center gap-3 pt-2">
-                <Button href="/projects" variant="primary" size="lg" magnetic>
+                <Button href="/projects" variant="primary" size="lg">
                   Explore My Work →
                 </Button>
                 <Button
@@ -87,11 +86,10 @@ export default function HeroSection() {
                   download="Mohammed_Ferwana_Resume.pdf"
                   variant="secondary"
                   size="lg"
-                  magnetic
                 >
                   Download Resume
                 </Button>
-                <Button href="/contact" variant="ghost" size="lg" magnetic>
+                <Button href="/contact" variant="ghost" size="lg">
                   Let&apos;s Talk →
                 </Button>
               </div>
@@ -120,13 +118,13 @@ export default function HeroSection() {
                   <div className="flex items-center gap-2 text-xs">
                     <span className="w-1.5 h-1.5 rounded-full bg-functional-success shrink-0" />
                     <span className="text-text-secondary font-mono text-[11px]">
-                      <CounterTicker value={metrics.integrationTests} className="text-text-primary font-semibold" /> tests passing (<CounterTicker value={metrics.testSuites} className="text-text-primary font-semibold" /> suites, run {formattedTestRunDate})
+                      <span className="text-text-primary font-semibold">{metrics.integrationTests}</span> tests passing (<span className="text-text-primary font-semibold">{metrics.testSuites}</span> suites, run {formattedTestRunDate})
                     </span>
                   </div>
                   <div className="flex items-center gap-2 text-xs">
                     <span className="w-1.5 h-1.5 rounded-full bg-functional-success shrink-0" />
                     <span className="text-text-secondary font-mono text-[11px]">
-                      <CounterTicker value={metrics.fsmStates} className="text-text-primary font-semibold" />-state claim lifecycle, guarded transitions
+                      <span className="text-text-primary font-semibold">{metrics.fsmStates}</span>-state claim lifecycle, guarded transitions
                     </span>
                   </div>
                   <div className="flex items-center justify-between gap-2 text-xs pt-1 border-t border-border-subtle/50">

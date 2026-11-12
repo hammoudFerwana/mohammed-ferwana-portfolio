@@ -137,7 +137,7 @@ export default function CareerTimeline({ experiences = [], education = [] }) {
                   </div>
 
                   {/* Card Content with 3D Tilt & Spotlight */}
-                  <SpotlightCard className="rounded-2xl bg-bg-secondary border border-border-default hover:border-border-strong p-6 sm:p-8 space-y-5 transition-all duration-300">
+                  <SpotlightCard className="p-6 sm:p-8 space-y-5">
                     {/* Header Row */}
                     <div className="flex flex-col sm:flex-row sm:items-start justify-between gap-3">
                       <div className="space-y-1">
@@ -282,7 +282,7 @@ export default function CareerTimeline({ experiences = [], education = [] }) {
                 </div>
 
                 {/* Card Content with Spotlight */}
-                <SpotlightCard className="rounded-2xl bg-bg-secondary border border-border-default hover:border-border-strong p-6 sm:p-8 space-y-4 transition-all duration-300">
+                <SpotlightCard className="p-6 sm:p-8 space-y-4">
                   <div className="flex flex-col sm:flex-row sm:items-start justify-between gap-2">
                     <div>
                       <div className="flex items-center gap-2">

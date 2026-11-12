@@ -21,10 +21,7 @@ export default function DecisionCard({ decision, index = 0 }) {
     <SpotlightCard
       as="div"
       className={cn(
-        'rounded-xl border transition-all duration-300',
-        isExpanded
-          ? 'bg-bg-secondary border-accent/20 shadow-md shadow-accent/5'
-          : 'bg-bg-secondary/60 border-border-default hover:border-border-strong'
+        isExpanded && 'shadow-md shadow-accent/5'
       )}
     >
       <button

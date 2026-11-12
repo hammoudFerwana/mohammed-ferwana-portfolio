@@ -6,7 +6,6 @@ import { ThemeProvider } from '@/context/ThemeContext';
 import Navbar from '@/components/layout/Navbar';
 import Footer from '@/components/layout/Footer';
 import CommandPalette from '@/components/overlays/CommandPalette';
-import SmoothScrollProvider from '@/components/shared/SmoothScrollProvider';
 import './globals.css';
 
 const monaSans = Mona_Sans({
@@ -92,14 +91,12 @@ export default function RootLayout({ children }) {
 
         <ThemeProvider>
           <OverlayProvider>
-          <SmoothScrollProvider>
             <Navbar />
             <main id="main-content" className="flex-1">
               {children}
             </main>
             <Footer />
             <CommandPalette />
-          </SmoothScrollProvider>
           </OverlayProvider>
         </ThemeProvider>
       </body>

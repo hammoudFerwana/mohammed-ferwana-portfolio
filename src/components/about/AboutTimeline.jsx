@@ -49,7 +49,7 @@ export default function AboutTimeline() {
               </div>
 
               {/* Milestone Card with 3D Tilt */}
-              <SpotlightCard className="rounded-2xl bg-bg-secondary border border-border-default hover:border-border-strong p-6 sm:p-7 space-y-3 transition-all duration-300">
+              <SpotlightCard className="p-6 sm:p-7 space-y-3">
                 <div className="flex flex-wrap items-center justify-between gap-2">
                   <div className="flex items-center gap-2">
                     <span className="font-mono text-xs font-semibold text-accent px-2 py-0.5 rounded bg-accent/10 border border-accent/25">
