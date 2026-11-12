@@ -189,7 +189,7 @@ const resumeHtml = `<!DOCTYPE html>
   <section>
     <h2>SUMMARY</h2>
     <p class="summary-text">
-      Backend Engineer working in Node.js, Express and MongoDB. Sole backend engineer on Sawn, a multi-tenant motor-insurance claims platform: a 10-state claim lifecycle with atomic transitions, tenant isolation from the JWT, per-tenant claim numbering, and 616 passing tests. Computer Systems Engineering student at Al-Azhar University (CGPA 93.3).
+      Backend Engineer working in Node.js, Express and MongoDB. Co-founder and sole backend engineer on Sawn, a multi-tenant motor-insurance claims platform: a 10-state claim lifecycle with atomic transitions, tenant isolation from the JWT, per-tenant claim numbering, and 1248 passing tests. Computer Systems Engineering student at Al-Azhar University (CGPA 93.3).
     </p>
   </section>
 
@@ -199,20 +199,31 @@ const resumeHtml = `<!DOCTYPE html>
     <div class="item">
       <div class="item-header">
         <div>
-          <span class="item-title">Sawn (formerly InsurFlow)</span>
-          <span class="item-subtitle"> — Sole Backend Engineer</span>
+          <span class="item-title">Sawn</span>
+          <span class="item-subtitle"> — Co-founder &amp; Backend Engineer</span>
         </div>
-        <div class="item-meta">2026</div>
+        <div class="item-meta">Aug 2026 – Present</div>
       </div>
-      <div class="item-sub">Multi-tenant B2B SaaS for motor-insurance claims. Team of four: 2 frontend, 1 mobile, 1 backend. API live on Render with MongoDB Atlas.</div>
+      <div class="item-sub">Multi-tenant B2B SaaS for motor-insurance claims. Team of four: 2 frontend, 1 mobile, 1 backend. API live on Render with MongoDB Atlas. Code: <a href="https://github.com/InsurFlow-Team/insurflow-backend" style="color:inherit;text-decoration:none;">github.com/InsurFlow-Team/insurflow-backend</a></div>
       <ul class="bullets">
         <li>Designed the 10-state claim lifecycle: every transition is one atomic findOneAndUpdate filtered by organizationId and expected status; invalid moves return 409.</li>
         <li>Enforced tenant isolation: organizationId comes from the JWT, never from the client, and leads every compound index; cross-tenant access returns 404 to prevent ID enumeration.</li>
         <li>Built per-tenant claim numbers (CLM-&lt;ORG&gt;-0001) from an atomic counter; a test creates 15 claims concurrently and checks numbers 1 to 15 with no gaps.</li>
         <li>Found and fixed a project-wide Express 5 bug: req.query is a getter, so validation middleware silently skipped Joi transforms.</li>
-        <li>616 tests passing in 39 suites (Jest, Supertest, mongodb-memory-server; run 1 Oct 2026).</li>
+        <li>1248 tests passing in 63 suites (Jest, Supertest, mongodb-memory-server; run 11 Nov 2026).</li>
       </ul>
       <div class="item-stack"><strong>Stack:</strong> Node.js, Express 5, MongoDB, Mongoose, Joi, JWT, Cloudinary, FCM, Jest</div>
+    </div>
+
+    <div class="item">
+      <div class="item-header">
+        <div>
+          <span class="item-title">Startup MVP Bootcamp, Masar x Sanabel</span>
+          <span class="item-subtitle"> — Team Lead &amp; Backend Engineer</span>
+        </div>
+        <div class="item-meta">Aug – Sep 2026</div>
+      </div>
+      <div class="item-sub">80-hour program. Led the Sawn team from idea to a working MVP; Sawn placed 4th at the final demo day.</div>
     </div>
 
     <div class="item">
@@ -224,6 +235,7 @@ const resumeHtml = `<!DOCTYPE html>
         <div class="item-meta">2026</div>
       </div>
       <div class="item-sub">TeamLine: team workspace platform with boards and tasks.</div>
+      <div class="item-sub">Code: <a href="https://github.com/Team-line/TeamLine-Backend" style="color:inherit;text-decoration:none;">github.com/Team-line/TeamLine-Backend</a></div>
       <ul class="bullets">
         <li>Led the team as Team Leader and built the backend.</li>
         <li>Implemented JWT authentication with bcrypt and workspace roles (Lead, Member, Viewer) across 20+ protected endpoints.</li>
@@ -267,7 +279,7 @@ const resumeHtml = `<!DOCTYPE html>
           <span class="item-title">Masar Tech</span>
           <span class="item-subtitle"> — Backend Engineering Bootcamp, Batch 2</span>
         </div>
-        <div class="item-meta">Accepted, 2026</div>
+        <div class="item-meta">In progress, 2026</div>
       </div>
     </div>
 
