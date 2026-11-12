@@ -6,6 +6,7 @@ import { ThemeProvider } from '@/context/ThemeContext';
 import Navbar from '@/components/layout/Navbar';
 import Footer from '@/components/layout/Footer';
 import CommandPalette from '@/components/overlays/CommandPalette';
+import MotionProvider from '@/components/shared/MotionProvider';
 import './globals.css';
 
 const monaSans = Mona_Sans({
@@ -91,12 +92,14 @@ export default function RootLayout({ children }) {
 
         <ThemeProvider>
           <OverlayProvider>
+            <MotionProvider>
             <Navbar />
             <main id="main-content" className="flex-1">
               {children}
             </main>
             <Footer />
             <CommandPalette />
+            </MotionProvider>
           </OverlayProvider>
         </ThemeProvider>
       </body>

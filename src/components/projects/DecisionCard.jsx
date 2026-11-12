@@ -1,7 +1,7 @@
 'use client';
 
 import { useState } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
+import { m, AnimatePresence } from 'motion/react';
 import SpotlightCard from '@/components/shared/SpotlightCard';
 import { cn } from '@/lib/utils';
 
@@ -57,7 +57,7 @@ export default function DecisionCard({ decision, index = 0 }) {
       {/* Expanded Content with spring accordion motion */}
       <AnimatePresence initial={false}>
         {isExpanded && (
-          <motion.div
+          <m.div
             initial={{ height: 0, opacity: 0 }}
             animate={{ height: 'auto', opacity: 1 }}
             exit={{ height: 0, opacity: 0 }}
@@ -75,7 +75,7 @@ export default function DecisionCard({ decision, index = 0 }) {
                 </div>
               )}
             </div>
-          </motion.div>
+          </m.div>
         )}
       </AnimatePresence>
     </SpotlightCard>

@@ -2,7 +2,7 @@
 
 import { useState } from 'react';
 import Link from 'next/link';
-import { motion, AnimatePresence, useReducedMotion } from 'framer-motion';
+import { m, AnimatePresence, useReducedMotion } from 'motion/react';
 import Badge from '@/components/shared/Badge';
 import SpotlightCard from '@/components/shared/SpotlightCard';
 import { cn } from '@/lib/utils';
@@ -68,7 +68,7 @@ export default function CareerTimeline({ experiences = [], education = [] }) {
                 )}
               >
                 {isActive && (
-                  <motion.div
+                  <m.div
                     layoutId="activeCareerTab"
                     transition={
                       shouldReduceMotion
@@ -115,7 +115,7 @@ export default function CareerTimeline({ experiences = [], education = [] }) {
                 : exp.responsibilities?.slice(0, 2);
 
               return (
-                <motion.div
+                <m.div
                   key={exp.id}
                   layout={!shouldReduceMotion}
                   initial={shouldReduceMotion ? { opacity: 1 } : { opacity: 0, y: 16 }}
@@ -197,12 +197,12 @@ export default function CareerTimeline({ experiences = [], education = [] }) {
                         </div>
 
                         <AnimatePresence initial={false}>
-                          <motion.ul
+                          <m.ul
                             layout
                             className="space-y-2.5 text-xs sm:text-sm text-text-secondary"
                           >
                             {visibleResponsibilities.map((resp, i) => (
-                              <motion.li
+                              <m.li
                                 key={i}
                                 initial={{ opacity: 0, y: 4 }}
                                 animate={{ opacity: 1, y: 0 }}
@@ -217,9 +217,9 @@ export default function CareerTimeline({ experiences = [], education = [] }) {
                                   ✓
                                 </span>
                                 <span className="text-text-primary leading-relaxed">{resp}</span>
-                              </motion.li>
+                              </m.li>
                             ))}
-                          </motion.ul>
+                          </m.ul>
                         </AnimatePresence>
                       </div>
                     )}
@@ -253,14 +253,14 @@ export default function CareerTimeline({ experiences = [], education = [] }) {
                       </div>
                     )}
                   </SpotlightCard>
-                </motion.div>
+                </m.div>
               );
             })}
 
           {/* ── Academic Education Stage ── */}
           {showAcademic &&
             education.map((edu) => (
-              <motion.div
+              <m.div
                 key={edu.id}
                 layout={!shouldReduceMotion}
                 initial={shouldReduceMotion ? { opacity: 1 } : { opacity: 0, y: 16 }}
@@ -316,7 +316,7 @@ export default function CareerTimeline({ experiences = [], education = [] }) {
                     <span>Backend Systems • Databases • Algorithms</span>
                   </div>
                 </SpotlightCard>
-              </motion.div>
+              </m.div>
             ))}
         </AnimatePresence>
       </div>

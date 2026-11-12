@@ -1,7 +1,7 @@
 'use client';
 
 import { useState, useMemo } from 'react';
-import { motion, AnimatePresence, useReducedMotion } from 'framer-motion';
+import { m, AnimatePresence, useReducedMotion } from 'motion/react';
 import ProjectCard from '@/components/projects/ProjectCard';
 import { cn } from '@/lib/utils';
 
@@ -112,7 +112,7 @@ export default function ProjectsExplorer({ projects = [] }) {
                 )}
               >
                 {isActive && (
-                  <motion.div
+                  <m.div
                     layoutId="activeFilterPill"
                     transition={
                       shouldReduceMotion
@@ -205,12 +205,12 @@ export default function ProjectsExplorer({ projects = [] }) {
       <div id="projects-grid" role="region" aria-live="polite">
         <AnimatePresence mode="popLayout">
           {filteredProjects.length > 0 ? (
-            <motion.div
+            <m.div
               layout={!shouldReduceMotion}
               className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8"
             >
               {filteredProjects.map((project, idx) => (
-                <motion.div
+                <m.div
                   key={project.id}
                   layout={!shouldReduceMotion}
                   initial={
@@ -231,11 +231,11 @@ export default function ProjectsExplorer({ projects = [] }) {
                   }
                 >
                   <ProjectCard project={project} priority={idx === 0} />
-                </motion.div>
+                </m.div>
               ))}
-            </motion.div>
+            </m.div>
           ) : (
-            <motion.div
+            <m.div
               key="empty-state"
               initial={{ opacity: 0, y: 8 }}
               animate={{ opacity: 1, y: 0 }}
@@ -260,7 +260,7 @@ export default function ProjectsExplorer({ projects = [] }) {
               >
                 Reset All Filters
               </button>
-            </motion.div>
+            </m.div>
           )}
         </AnimatePresence>
       </div>

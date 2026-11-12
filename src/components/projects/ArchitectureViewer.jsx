@@ -1,7 +1,7 @@
 'use client';
 
 import { useState, useCallback, useRef } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
+import { m, AnimatePresence } from 'motion/react';
 import { cn } from '@/lib/utils';
 import Badge from '@/components/shared/Badge';
 
@@ -181,7 +181,7 @@ export default function ArchitectureViewer({ architecture }) {
       {/* Component Inspection Panel (Selected or Instructional State with AnimatePresence) */}
       <AnimatePresence mode="wait">
         {selectedNode ? (
-          <motion.div
+          <m.div
             key={selectedNode.id}
             initial={{ opacity: 0, y: 10, filter: 'blur(4px)' }}
             animate={{ opacity: 1, y: 0, filter: 'blur(0px)' }}
@@ -228,9 +228,9 @@ export default function ArchitectureViewer({ architecture }) {
                   </ul>
                 </div>
               )}
-          </motion.div>
+          </m.div>
         ) : (
-          <motion.div
+          <m.div
             key="empty"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
@@ -250,7 +250,7 @@ export default function ArchitectureViewer({ architecture }) {
                 Select a component to explore its responsibilities and architectural role.
               </p>
             </div>
-          </motion.div>
+          </m.div>
         )}
       </AnimatePresence>
     </div>

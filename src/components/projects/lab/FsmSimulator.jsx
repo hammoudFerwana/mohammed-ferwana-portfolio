@@ -1,7 +1,7 @@
 'use client';
 
 import { useState, useCallback, useId } from 'react';
-import { useReducedMotion } from 'framer-motion';
+import { useReducedMotion } from 'motion/react';
 import { states, transitions, terminalStates } from '@/data/claimFsm';
 import {
   canTransition,

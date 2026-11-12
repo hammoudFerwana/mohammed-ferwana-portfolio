@@ -1,6 +1,5 @@
 'use client';
 
-import { motion } from 'framer-motion';
 import Button from '@/components/shared/Button';
 import RevealOnScroll from '@/components/shared/RevealOnScroll';
 import { siteMetadata } from '@/data/siteMetadata';

@@ -1,7 +1,7 @@
 'use client';
 
 import { useState, useCallback, useId } from 'react';
-import { useReducedMotion } from 'framer-motion';
+import { useReducedMotion } from 'motion/react';
 import Badge from '@/components/shared/Badge';
 import { cn } from '@/lib/utils';
 

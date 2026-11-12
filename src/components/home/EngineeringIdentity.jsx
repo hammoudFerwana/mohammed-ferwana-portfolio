@@ -1,6 +1,6 @@
 'use client';
 
-import { motion } from 'framer-motion';
+import { m } from 'motion/react';
 import SectionHeading from '@/components/shared/SectionHeading';
 import RevealOnScroll from '@/components/shared/RevealOnScroll';
 
@@ -39,7 +39,7 @@ export default function EngineeringIdentity() {
           {pillars.map((pillar, idx) => (
             <RevealOnScroll key={pillar.number} delay={0.1 * (idx + 1)}>
               {/* Outer Shell: Double-Bezel Architecture */}
-              <motion.div
+              <m.div
                 whileHover={{ y: -6, transition: { duration: 0.4, ease: [0.32, 0.72, 0, 1] } }}
                 whileTap={{ scale: 0.99 }}
                 className="h-full rounded-[1.75rem] bg-raised/60 ring-1 ring-line p-1.5 transition-all duration-300 hover:ring-border-strong group"
@@ -77,7 +77,7 @@ export default function EngineeringIdentity() {
                     </div>
                   </div>
                 </div>
-              </motion.div>
+              </m.div>
             </RevealOnScroll>
           ))}
         </div>

@@ -1,7 +1,7 @@
 'use client';
 
 import { useState } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
+import { m, AnimatePresence } from 'motion/react';
 import SectionHeading from '@/components/shared/SectionHeading';
 import RevealOnScroll from '@/components/shared/RevealOnScroll';
 import { cn } from '@/lib/utils';
@@ -81,7 +81,7 @@ export default function HowIThink() {
                   )}
                 >
                   {isActive && (
-                    <motion.div
+                    <m.div
                       layoutId="activeBar"
                       className="absolute left-0 top-2 bottom-2 w-1 bg-accent rounded-r-full"
                       transition={{ type: 'spring', stiffness: 500, damping: 35 }}
@@ -119,7 +119,7 @@ export default function HowIThink() {
           <div className="lg:col-span-7">
             <RevealOnScroll delay={0.1}>
               <AnimatePresence mode="wait">
-                <motion.div
+                <m.div
                   key={activeStep}
                   initial={{ opacity: 0, x: 16, filter: 'blur(4px)' }}
                   animate={{ opacity: 1, x: 0, filter: 'blur(0px)' }}
@@ -127,14 +127,14 @@ export default function HowIThink() {
                   transition={{ duration: 0.3, ease: [0.32, 0.72, 0, 1] }}
                   className="rounded-2xl bg-bg-secondary border border-border-default p-6 sm:p-8 space-y-6 shadow-xl relative overflow-hidden"
                 >
-                  <motion.div
+                  <m.div
                     initial={{ opacity: 0.03, scale: 0.95 }}
                     animate={{ opacity: 0.08, scale: 1 }}
                     transition={{ duration: 0.4 }}
                     className="absolute top-0 right-0 p-8 font-mono text-8xl font-black text-text-primary select-none pointer-events-none"
                   >
                     {steps[activeStep].num}
-                  </motion.div>
+                  </m.div>
 
                   <div className="space-y-2">
                     <div className="flex items-center gap-2 font-mono text-xs text-accent">
@@ -160,7 +160,7 @@ export default function HowIThink() {
                       {steps[activeStep].keyTakeaway}
                     </p>
                   </div>
-                </motion.div>
+                </m.div>
               </AnimatePresence>
             </RevealOnScroll>
           </div>
