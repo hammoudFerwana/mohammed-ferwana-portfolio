@@ -21,7 +21,7 @@ export const projects = [
     image: '/images/projects/sawn.webp',
     technologies: ['Node.js', 'Express.js', 'MongoDB Atlas', 'Mongoose', 'JWT', 'RBAC', 'REST APIs', 'Jest'],
     links: {
-      github: null,
+      github: 'https://github.com/InsurFlow-Team/insurflow-backend',
       live: null,
       dashboard: 'https://insurflow-dashboard.vercel.app',
     },
@@ -141,7 +141,7 @@ export const projects = [
     whatIWouldImprove: [
       {
         area: 'Asynchronous Event Pipeline',
-        description: 'Future consideration: Integrate an asynchronous message queue (e.g. RabbitMQ) for long-running notifications, webhook callbacks, and PDF report generation.',
+        description: 'Future consideration: Integrate an asynchronous message queue for long-running notifications, webhook callbacks, and PDF report generation.',
       },
       {
         area: 'Caching Layer',
@@ -161,7 +161,7 @@ export const projects = [
     image: '/images/projects/teamline.webp',
     technologies: ['Node.js', 'Express.js', 'MongoDB', 'Mongoose', 'JWT', 'RBAC', 'REST APIs'],
     links: {
-      github: null,
+      github: 'https://github.com/Team-line/TeamLine-Backend',
       live: 'https://team-line-frontend-eight.vercel.app/',
       dashboard: null,
     },

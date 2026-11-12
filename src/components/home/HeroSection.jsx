@@ -18,7 +18,7 @@ const facts = [
 
 export default function HeroSection() {
   return (
-    <section className="pt-[84px] sm:pt-[96px] md:pt-[128px] lg:pt-[96px] pb-[70px]">
+    <section className="pt-[84px] sm:pt-[96px] pb-[70px]">
       {/* Full-width Gaza sea port photo band */}
       <div className="relative w-full h-[clamp(260px,46vh,500px)] border-b border-line overflow-hidden">
         <Image
@@ -63,7 +63,7 @@ export default function HeroSection() {
       <div className="max-w-7xl mx-auto px-5 sm:px-8 mt-[34px]">
         {/* Full-width name & role block */}
         <div>
-          <h1 className="font-sans text-[length:var(--text-display)] font-bold leading-[0.9] tracking-[-0.035em] text-ink hyphens-none">
+          <h1 className="font-sans text-[44px] min-[380px]:text-[length:var(--text-display)] font-bold leading-[0.9] tracking-[-0.035em] text-ink hyphens-none">
             Mohammed Ferwana
           </h1>
 

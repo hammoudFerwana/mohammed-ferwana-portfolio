@@ -1,0 +1,42 @@
+export const certificates = [
+  {
+    id: 'startup-mvp-bootcamp',
+    title: 'Certificate of Completion, Startup MVP Bootcamp',
+    issuer: 'Masar x Sanabel',
+    details: '80 hours, 9 Aug to 30 Sep 2026',
+    date: 'Oct 2026',
+    verifyUrl: null,
+  },
+  {
+    id: 'taqat-codemap-2026',
+    title: 'Certificate of Completion, CodeMap 2026 training program',
+    issuer: 'TAQAT',
+    details: '144 hours',
+    date: 'Jul 2026',
+    verifyUrl: 'https://taqat.academy/verify/TQ-2026-00078',
+  },
+  {
+    id: 'aristo-khireej-qader',
+    title: 'Certificate of Achievement, Backend with Node.js, Khireej Qader Program Season Five',
+    issuer: 'Aristo Software',
+    details: '90 hours',
+    date: 'May 2026',
+    verifyUrl: null,
+  },
+  {
+    id: 'tfp-nodejs',
+    title: 'Certificate of Appreciation, Intensive Node.js Development Training Program',
+    issuer: 'TFP',
+    details: '24 hours',
+    date: 'Sep to Oct 2025',
+    verifyUrl: null,
+  },
+  {
+    id: 'anthropic-ai-fluency',
+    title: 'Certificate of Completion, AI Fluency: Framework & Foundations',
+    issuer: 'Anthropic',
+    details: '',
+    date: '2026',
+    verifyUrl: null,
+  },
+];

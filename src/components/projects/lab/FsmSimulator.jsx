@@ -135,6 +135,9 @@ export default function FsmSimulator() {
               Simulation
             </Badge>
           </div>
+          <p className="text-xs text-text-muted">
+            Simulation in your browser. It replays the transition rules of the Sawn API and does not call the live API.
+          </p>
           <p className="text-xs text-text-secondary">
             Select a target state node to evaluate transition guards. Allowed transitions return{' '}
             <code className="text-functional-success font-mono font-semibold">200 OK</code>.
