@@ -5,6 +5,7 @@ import CareerTimeline from '@/components/experience/CareerTimeline';
 import Button from '@/components/shared/Button';
 import ResumeRequestButton from '@/components/shared/ResumeRequestButton';
 import { experiences, education } from '@/data/experience';
+import { certificates } from '@/data/certificates';
 
 export const metadata = {
   title: 'Engineering Experience & Background',
@@ -51,6 +52,50 @@ export default function ExperiencePage() {
       <div className="mt-12">
         <CareerTimeline experiences={experiences} education={education} />
       </div>
+
+      {/* ── Certificates ── */}
+      <section aria-labelledby="certificates-heading" className="mt-16 pt-12 border-t border-border-subtle space-y-6">
+        <h2 id="certificates-heading" className="text-2xl sm:text-3xl font-bold text-text-primary tracking-tight">
+          Certificates
+        </h2>
+
+        <ul className="divide-y divide-border-subtle rounded-2xl bg-bg-secondary border border-border-default">
+          {certificates.map((cert) => (
+            <li
+              key={cert.id}
+              className="p-5 sm:p-6 flex flex-col sm:flex-row sm:items-start justify-between gap-3"
+            >
+              <div className="space-y-1">
+                <h3 className="text-base font-semibold text-text-primary leading-snug">
+                  {cert.title}
+                </h3>
+                <p className="text-sm text-accent font-medium">
+                  {cert.issuer}
+                </p>
+                {cert.details && (
+                  <p className="text-xs text-text-secondary font-mono">
+                    {cert.details}
+                  </p>
+                )}
+              </div>
+
+              <div className="flex flex-col sm:items-end gap-1.5 shrink-0 font-mono text-xs">
+                <span className="text-text-muted">{cert.date}</span>
+                {cert.verifyUrl && (
+                  <a
+                    href={cert.verifyUrl}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="text-accent underline underline-offset-2 hover:text-accent-hover transition-colors"
+                  >
+                    Verify ↗
+                  </a>
+                )}
+              </div>
+            </li>
+          ))}
+        </ul>
+      </section>
 
       {/* ── Closing Conversion CTA ── */}
       <div className="mt-16 pt-16 border-t border-border-subtle">
