@@ -145,7 +145,7 @@ export default function InsurflowEvidence() {
                   <Badge variant="outline" size="sm">Unique</Badge>
                 </div>
                 <p className="text-xs text-text-secondary leading-relaxed">
-                  Guarantees tenant-isolated claim uniqueness at the database layer. Prevents ID collisions while allowing multiple organizations to maintain independent sequential counters.
+                  Enforces tenant-isolated claim uniqueness at the database layer. Prevents ID collisions while each organization keeps its own sequential counter.
                 </p>
               </div>
 

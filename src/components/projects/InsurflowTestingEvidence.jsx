@@ -227,8 +227,8 @@ export default function InsurflowTestingEvidence() {
                 </Badge>
               </div>
               <p className="text-xs sm:text-sm text-text-secondary leading-relaxed">
-                A two-layer data integrity guarantee: application-level atomic counter allocation combined with
-                storage-engine B-tree compound unique indexing, verified to prevent collisions under concurrent load.
+                Two layers protect data integrity: atomic counter allocation in the application and a compound unique index in MongoDB. A test creates 15 claims concurrently and checks for collisions.
+
               </p>
             </div>
 
