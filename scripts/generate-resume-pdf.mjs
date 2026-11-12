@@ -277,9 +277,9 @@ const resumeHtml = `<!DOCTYPE html>
       <div class="item-header">
         <div>
           <span class="item-title">Masar Tech</span>
-          <span class="item-subtitle"> — Backend Engineering Bootcamp, Batch 2</span>
+          <span class="item-subtitle"> — Assistant Trainer, Startup MVP Bootcamp 2</span>
         </div>
-        <div class="item-meta">In progress, 2026</div>
+        <div class="item-meta">Starting Nov 2026</div>
       </div>
     </div>
 
