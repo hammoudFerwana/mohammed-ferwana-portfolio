@@ -63,7 +63,7 @@ export default function HeroSection() {
       <div className="max-w-7xl mx-auto px-5 sm:px-8 mt-[34px]">
         {/* Full-width name & role block */}
         <div>
-          <h1 className="font-sans text-[44px] min-[380px]:text-[length:var(--text-display)] font-bold leading-[0.9] tracking-[-0.035em] text-ink hyphens-none">
+          <h1 className="font-sans text-[length:var(--text-hero)] font-bold leading-[0.95] tracking-[-0.03em] text-ink text-balance hyphens-none">
             Mohammed Ferwana
           </h1>
 
@@ -85,7 +85,7 @@ export default function HeroSection() {
         <div className="mt-10 grid grid-cols-1 min-[900px]:grid-cols-12 gap-10 min-[900px]:gap-12 items-start">
           {/* Left: promise + three buttons */}
           <div className="min-[900px]:col-span-6 space-y-8">
-            <p className="text-[clamp(19px,2vw,23px)] leading-[1.45] text-ink max-w-[34ch]">
+            <p className="text-[clamp(17px,1.4vw,19px)] leading-[1.6] text-ink max-w-[42ch]">
               I build the server side of web and mobile products: the data, the logins, the permissions and the business rules that keep them correct.
             </p>
 
