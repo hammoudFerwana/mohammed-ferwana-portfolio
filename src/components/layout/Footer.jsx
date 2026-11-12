@@ -10,7 +10,7 @@ export default function Footer() {
   return (
     <footer className="bg-bg-secondary/60 border-t border-border-subtle mt-24 md:mt-32">
       <div className="max-w-7xl mx-auto px-5 sm:px-8 py-16 md:py-20">
-        <div className="grid grid-cols-1 md:grid-cols-4 gap-10 md:gap-12">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-10 md:gap-12">
           {/* Brand Column */}
           <div className="md:col-span-2 space-y-4">
             <div className="flex items-center gap-2.5">
@@ -60,7 +60,7 @@ export default function Footer() {
                   href={siteMetadata.social.github}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="text-text-secondary hover:text-accent transition-colors inline-flex items-center gap-1.5"
+                  className="text-text-secondary hover:text-accent transition-colors inline-flex items-center gap-1.5 break-all"
                 >
                   GitHub
                   <span className="text-xs text-text-muted">↗</span>
@@ -71,7 +71,7 @@ export default function Footer() {
                   href={siteMetadata.social.linkedin}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="text-text-secondary hover:text-accent transition-colors inline-flex items-center gap-1.5"
+                  className="text-text-secondary hover:text-accent transition-colors inline-flex items-center gap-1.5 break-all"
                 >
                   LinkedIn
                   <span className="text-xs text-text-muted">↗</span>
@@ -80,7 +80,7 @@ export default function Footer() {
               <li>
                 <a
                   href={`mailto:${siteMetadata.email}`}
-                  className="text-text-secondary hover:text-accent transition-colors inline-flex items-center gap-1.5"
+                  className="text-text-secondary hover:text-accent transition-colors inline-flex items-center gap-1.5 break-all"
                 >
                   {siteMetadata.email}
                 </a>
@@ -89,7 +89,7 @@ export default function Footer() {
                 <a
                   href="/resume/Mohammed_Ferwana_Resume.pdf"
                   download="Mohammed_Ferwana_Resume.pdf"
-                  className="text-text-secondary hover:text-accent transition-colors inline-flex items-center gap-1.5"
+                  className="text-text-secondary hover:text-accent transition-colors inline-flex items-center gap-1.5 break-all"
                 >
                   Download Résumé (PDF)
                   <span className="text-xs text-text-muted">↓</span>
