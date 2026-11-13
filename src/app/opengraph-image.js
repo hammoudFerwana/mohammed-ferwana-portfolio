@@ -1,3 +1,4 @@
+/* eslint-disable @next/next/no-img-element */
 import { ImageResponse } from 'next/og';
 import fs from 'node:fs';
 import path from 'node:path';
