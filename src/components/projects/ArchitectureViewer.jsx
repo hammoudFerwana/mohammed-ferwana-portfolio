@@ -73,7 +73,7 @@ export default function ArchitectureViewer({ architecture }) {
   return (
     <div
       ref={containerRef}
-      className="rounded-2xl bg-bg-secondary border border-border-default overflow-hidden p-6 sm:p-8 space-y-8 shadow-xl"
+      className="rounded-2xl bg-bg-secondary border border-border-default overflow-hidden p-5 sm:p-6 space-y-5 shadow-xl"
     >
       {/* Header */}
       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 border-b border-border-subtle pb-4">
@@ -96,82 +96,97 @@ export default function ArchitectureViewer({ architecture }) {
 
       {/* Visual Diagram Canvas */}
       <div
-        className="p-6 rounded-xl bg-bg-primary/90 border border-border-subtle flex flex-col items-center gap-6 relative overflow-x-auto"
+        className="p-4 sm:p-5 rounded-xl bg-bg-primary/90 border border-border-subtle relative"
         onClick={handleContainerClick}
         role="group"
         aria-label="System architecture diagram"
       >
-        {/* Nodes Grid */}
-        <div className="w-full max-w-2xl flex flex-col items-center gap-4">
+        {/* Desktop: One horizontal row on lg+ */}
+        <div className="hidden lg:flex items-center justify-between gap-1.5 w-full">
           {architecture.nodes.map((node, index) => {
             const isSelected = selectedNode?.id === node.id;
             const style = nodeTypeStyles[node.type] || nodeTypeStyles.logic;
-            const nextNode = architecture.nodes[index + 1];
-            const connectionLabel = nextNode
-              ? getConnectionLabel(node, nextNode)
-              : null;
-
             return (
-              <div key={node.id} className="w-full flex flex-col items-center">
+              <div key={node.id} className="flex-1 min-w-0 flex items-center gap-1.5">
                 <button
                   type="button"
                   onClick={() => setSelectedNodeId(node.id)}
                   aria-pressed={isSelected}
                   className={cn(
-                    'w-full sm:w-80 p-3.5 rounded-xl border text-center font-mono text-xs sm:text-sm font-semibold transition-all duration-200 shadow-xs relative group',
+                    'flex-1 min-w-0 p-2.5 rounded-lg border text-left font-mono transition-all duration-200 relative group focus-visible:outline-hidden focus-visible:ring-2 focus-visible:ring-accent',
                     style,
                     isSelected
-                      ? 'ring-2 ring-accent scale-[1.02] shadow-accent/20 shadow-lg'
-                      : 'hover:scale-[1.01]'
+                      ? 'ring-2 ring-accent shadow-sm scale-[1.02]'
+                      : 'hover:border-accent/60'
                   )}
                 >
-                  <div className="flex items-center justify-between">
+                  <div className="flex items-center justify-between gap-1">
                     <span className="text-[10px] uppercase tracking-wider text-text-muted">
                       {node.type}
                     </span>
                     {isSelected && (
                       <span
-                        className="w-2 h-2 rounded-full bg-accent animate-pulse"
+                        className="w-1.5 h-1.5 rounded-full bg-accent animate-pulse"
                         aria-hidden="true"
                       />
                     )}
                   </div>
-                  <div className="text-text-primary font-bold text-sm my-1">
+                  <div className="text-text-primary font-bold text-xs mt-1 truncate" title={node.label}>
                     {node.label}
                   </div>
-                  <p className="text-[11px] text-text-muted font-sans font-normal line-clamp-1">
-                    {node.description}
-                  </p>
                 </button>
 
-                {/* Connector conduit with flowing animated pulse & label */}
                 {index < architecture.nodes.length - 1 && (
-                  <div className="my-2 flex flex-col items-center relative" aria-hidden="true">
-                    <div className="relative w-0.5 h-6 bg-border-strong overflow-hidden rounded-full">
-                      <div className="absolute inset-x-0 top-0 h-3 bg-linear-to-b from-transparent via-accent to-transparent animate-conduit-pulse" />
-                    </div>
-
-                    {/* Connection Label */}
-                    {connectionLabel && (
-                      <span className="font-mono text-[9px] text-accent font-medium px-2.5 py-0.5 rounded-full bg-accent/10 border border-accent/25 my-1 select-none shadow-xs">
-                        {connectionLabel}
-                      </span>
-                    )}
-
-                    <svg
-                      className="w-3.5 h-3.5 text-accent animate-pulse"
-                      fill="currentColor"
-                      viewBox="0 0 20 20"
-                    >
-                      <path
-                        fillRule="evenodd"
-                        d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z"
-                        clipRule="evenodd"
-                      />
-                    </svg>
-                  </div>
+                  <svg
+                    className="w-3.5 h-3.5 text-accent/60 shrink-0"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    stroke="currentColor"
+                    strokeWidth="2"
+                    aria-hidden="true"
+                  >
+                    <path strokeLinecap="round" strokeLinejoin="round" d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3" />
+                  </svg>
                 )}
               </div>
+            );
+          })}
+        </div>
+
+        {/* Mobile & Tablet: 2-column grid below lg */}
+        <div className="grid grid-cols-2 gap-2.5 w-full lg:hidden">
+          {architecture.nodes.map((node) => {
+            const isSelected = selectedNode?.id === node.id;
+            const style = nodeTypeStyles[node.type] || nodeTypeStyles.logic;
+            return (
+              <button
+                key={node.id}
+                type="button"
+                onClick={() => setSelectedNodeId(node.id)}
+                aria-pressed={isSelected}
+                className={cn(
+                  'p-2.5 rounded-lg border text-left font-mono transition-all duration-200 relative group focus-visible:outline-hidden focus-visible:ring-2 focus-visible:ring-accent',
+                  style,
+                  isSelected
+                    ? 'ring-2 ring-accent shadow-sm'
+                    : 'hover:border-accent/60'
+                )}
+              >
+                <div className="flex items-center justify-between gap-1">
+                  <span className="text-[10px] uppercase tracking-wider text-text-muted">
+                    {node.type}
+                  </span>
+                  {isSelected && (
+                    <span
+                      className="w-1.5 h-1.5 rounded-full bg-accent animate-pulse"
+                      aria-hidden="true"
+                    />
+                  )}
+                </div>
+                <div className="text-text-primary font-bold text-xs mt-1 truncate" title={node.label}>
+                  {node.label}
+                </div>
+              </button>
             );
           })}
         </div>

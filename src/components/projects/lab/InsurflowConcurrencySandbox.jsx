@@ -32,7 +32,7 @@ export default function InsurflowConcurrencySandbox() {
   const currentOrgData = ORGANIZATIONS.find((o) => o.id === selectedOrg) || ORGANIZATIONS[0];
 
   const runConcurrentBurst = useCallback(
-    async (burstSize = 15, isInterleaved = false) => {
+    async (burstSize = 15, isDualTenant = false) => {
       if (isRunning) return;
       setIsRunning(true);
 
@@ -44,49 +44,92 @@ export default function InsurflowConcurrencySandbox() {
       let baseB = counters[orgB.id];
 
       // Simulate concurrent requests firing with deterministic atomic sequential numbering
-      for (let i = 1; i <= burstSize; i++) {
-        const targetOrg = isInterleaved ? (i % 2 === 0 ? orgB : orgA) : currentOrgData;
-        const currentBase = targetOrg.id === orgA.id ? baseA : baseB;
-        const assignedSeq = currentBase + 1;
+      if (isDualTenant) {
+        // Creates 15 per tenant for Tenant Alpha and Tenant Beta (30 total, independent sequences 1 to 15)
+        for (let i = 1; i <= 15; i++) {
+          baseA += 1;
+          const claimIdA = `CLM-${orgA.code}-${String(baseA).padStart(4, '0')}`;
+          newEvents.push({
+            id: `${Date.now()}-A-${i}-${baseA}`,
+            index: (i - 1) * 2 + 1,
+            claimId: claimIdA,
+            orgCode: orgA.code,
+            threadId: `worker-pool-${((i * 2 - 1) % 4) + 1}`,
+            status: 201,
+            strategy: 'Atomic $inc',
+            timestamp: new Date().toLocaleTimeString('en-US', {
+              hour12: false,
+              hour: '2-digit',
+              minute: '2-digit',
+              second: '2-digit',
+            }),
+          });
 
-        if (targetOrg.id === orgA.id) baseA = assignedSeq;
-        else baseB = assignedSeq;
+          baseB += 1;
+          const claimIdB = `CLM-${orgB.code}-${String(baseB).padStart(4, '0')}`;
+          newEvents.push({
+            id: `${Date.now()}-B-${i}-${baseB}`,
+            index: i * 2,
+            claimId: claimIdB,
+            orgCode: orgB.code,
+            threadId: `worker-pool-${((i * 2) % 4) + 1}`,
+            status: 201,
+            strategy: 'Atomic $inc',
+            timestamp: new Date().toLocaleTimeString('en-US', {
+              hour12: false,
+              hour: '2-digit',
+              minute: '2-digit',
+              second: '2-digit',
+            }),
+          });
+        }
+      } else {
+        const targetOrg = currentOrgData;
+        for (let i = 1; i <= burstSize; i++) {
+          const currentBase = targetOrg.id === orgA.id ? baseA : baseB;
+          const assignedSeq = currentBase + 1;
 
-        const claimId = `CLM-${targetOrg.code}-${String(assignedSeq).padStart(4, '0')}`;
-        const threadId = `worker-pool-${(i % 4) + 1}`;
+          if (targetOrg.id === orgA.id) baseA = assignedSeq;
+          else baseB = assignedSeq;
 
-        newEvents.push({
-          id: `${Date.now()}-${i}-${assignedSeq}`,
-          index: i,
-          claimId,
-          orgCode: targetOrg.code,
-          threadId,
-          status: 201,
-          strategy: 'Atomic $inc',
-          timestamp: new Date().toLocaleTimeString('en-US', {
-            hour12: false,
-            hour: '2-digit',
-            minute: '2-digit',
-            second: '2-digit',
-          }),
-        });
+          const claimId = `CLM-${targetOrg.code}-${String(assignedSeq).padStart(4, '0')}`;
+          const threadId = `worker-pool-${(i % 4) + 1}`;
+
+          newEvents.push({
+            id: `${Date.now()}-${i}-${assignedSeq}`,
+            index: i,
+            claimId,
+            orgCode: targetOrg.code,
+            threadId,
+            status: 201,
+            strategy: 'Atomic $inc',
+            timestamp: new Date().toLocaleTimeString('en-US', {
+              hour12: false,
+              hour: '2-digit',
+              minute: '2-digit',
+              second: '2-digit',
+            }),
+          });
+        }
       }
 
       // Small async delay to give realistic visual feel
       await new Promise((resolve) => setTimeout(resolve, shouldReduceMotion ? 50 : 200));
 
+      const totalCreated = isDualTenant ? 30 : burstSize;
+
       setCounters((prev) => ({
         ...prev,
         [orgA.id]: baseA,
-        [orgB.id]: isInterleaved ? baseB : prev[orgB.id],
+        [orgB.id]: isDualTenant ? baseB : (currentOrgData.id === orgB.id ? baseB : prev[orgB.id]),
       }));
 
       setSimulationLog((prev) => [...newEvents, ...prev].slice(0, 30));
       setMetrics((prev) => ({
-        totalProcessed: prev.totalProcessed + burstSize,
+        totalProcessed: prev.totalProcessed + totalCreated,
         collisions: 0,
         gaps: 0,
-        lastBurstSize: burstSize,
+        lastBurstSize: totalCreated,
       }));
 
       setIsRunning(false);
@@ -199,18 +242,16 @@ export default function InsurflowConcurrencySandbox() {
                     Executing Injections...
                   </>
                 ) : (
-                  <>
-                    <span>⚡ Fire 15 Concurrent Requests</span>
-                  </>
+                  <span>Run 15 concurrent creations</span>
                 )}
               </button>
 
               <button
-                onClick={() => runConcurrentBurst(25, true)}
+                onClick={() => runConcurrentBurst(15, true)}
                 disabled={isRunning}
                 className="w-full py-2 px-3 rounded-lg border border-border-default hover:border-accent bg-bg-secondary text-text-primary font-mono text-xs transition-all disabled:opacity-50 flex items-center justify-center gap-1.5"
               >
-                <span>🔀 Interleaved Dual-Tenant Burst (25 reqs)</span>
+                <span>Two tenants, 15 creations each</span>
               </button>
             </div>
           </div>
@@ -282,7 +323,7 @@ export default function InsurflowConcurrencySandbox() {
                 {simulationLog.length === 0 ? (
                   <div className="h-full flex flex-col items-center justify-center text-text-muted text-center p-4">
                     <span>No concurrent bursts fired yet.</span>
-                    <span className="text-[11px] mt-1">Click &ldquo;Fire 15 Concurrent Requests&rdquo; to simulate parallel creation.</span>
+                    <span className="text-[11px] mt-1">Click &ldquo;Run 15 concurrent creations&rdquo; to simulate parallel creation.</span>
                   </div>
                 ) : (
                   simulationLog.map((ev) => (

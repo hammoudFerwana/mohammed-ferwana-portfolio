@@ -42,7 +42,7 @@ export default function InsurflowEvidence() {
       {/* Tab Switcher */}
       <div
         role="tablist"
-        aria-label="InsurFlow Technical Evidence Views"
+        aria-label="Sawn technical evidence views"
         className="flex p-1 bg-bg-primary/80 rounded-lg border border-border-subtle max-w-md"
       >
         <button
@@ -195,7 +195,7 @@ export default function InsurflowEvidence() {
                 Why OrganizationId Leads Every Compound Index
               </span>
               <span>
-                InsurFlow enforces multi-tenant boundary checks at the database query layer. By placing <code className="text-accent font-mono">organizationId</code> as the leftmost prefix on all compound indexes, MongoDB query execution plans use index-bounded lookups tailored to primary tenant query patterns, supporting query-level tenant isolation efficiently. The embedded <code className="text-accent font-mono">timeline</code> subdocument (<code className="text-accent font-mono">_id: false</code>) records sequential audit history without relational join overhead.
+                Sawn enforces multi-tenant boundary checks at the database query layer. By placing <code className="text-accent font-mono">organizationId</code> as the leftmost prefix on all compound indexes, MongoDB query execution plans use index-bounded lookups tailored to primary tenant query patterns, supporting query-level tenant isolation efficiently. The embedded <code className="text-accent font-mono">timeline</code> subdocument (<code className="text-accent font-mono">_id: false</code>) records sequential audit history without relational join overhead.
               </span>
             </div>
           </div>
