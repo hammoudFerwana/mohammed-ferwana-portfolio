@@ -24,10 +24,6 @@ export default function Footer() {
             <p className="text-sm text-text-secondary max-w-sm leading-relaxed">
               {siteMetadata.tagline} I build REST APIs with guarded state machines and tenant isolation.
             </p>
-            <div className="inline-flex items-center gap-2 px-2.5 py-1 rounded-full bg-functional-success/10 in-data-[theme=light]:bg-surface border border-functional-success/20 in-data-[theme=light]:border-functional-success/35 text-functional-success text-xs font-mono">
-              <span className="w-1.5 h-1.5 rounded-full bg-functional-success animate-pulse" />
-              Available for Backend Engineering Opportunities
-            </div>
           </div>
 
           {/* Navigation Column */}
@@ -102,11 +98,6 @@ export default function Footer() {
         {/* Bottom Bar */}
         <div className="mt-14 pt-8 border-t border-border-subtle flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-text-muted">
           <p>© {new Date().getFullYear()} {siteMetadata.name}.</p>
-          <div className="flex items-center gap-4 font-mono text-[11px]">
-            <span>Next.js 16 App Router</span>
-            <span>•</span>
-            <span>Tailwind CSS</span>
-          </div>
         </div>
       </div>
     </footer>

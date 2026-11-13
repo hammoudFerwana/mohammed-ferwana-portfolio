@@ -4,14 +4,12 @@ import { useState, useEffect } from 'react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { navigation } from '@/data/navigation';
-import { useOverlay } from '@/context/OverlayContext';
 import { cn } from '@/lib/utils';
 import MobileMenu from './MobileMenu';
 import ThemeToggle from '@/components/shared/ThemeToggle';
 
 export default function Navbar() {
   const pathname = usePathname();
-  const { openCommandPalette } = useOverlay();
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
@@ -96,32 +94,6 @@ export default function Navbar() {
               <span>CV</span>
             </a>
 
-            {/* Command Palette Trigger */}
-            <button
-              type="button"
-              onClick={openCommandPalette}
-              className="flex items-center gap-2 px-2 sm:px-2.5 py-1.5 rounded-full bg-bg-secondary hover:bg-bg-tertiary border border-border-default hover:border-border-strong text-text-secondary hover:text-text-primary text-xs transition-all duration-200 focus-visible:ring-2 focus-visible:ring-accent"
-            >
-              <svg
-                className="w-3.5 h-3.5 text-accent"
-                fill="none"
-                viewBox="0 0 24 24"
-                stroke="currentColor"
-                strokeWidth="2"
-              >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"
-                />
-              </svg>
-              <span className="sr-only sm:not-sr-only font-mono text-[11px] text-text-muted">
-                Search<span className="sr-only"> (Open command palette)</span>
-              </span>
-              <kbd aria-hidden="true" className="hidden sm:inline-flex items-center font-mono text-[10px] bg-bg-primary/80 border border-border-default px-1.5 py-0.5 rounded text-text-muted">
-                ⌘K
-              </kbd>
-            </button>
 
             {/* Theme Toggle (Desktop) */}
             <ThemeToggle className="hidden lg:inline-flex" />
