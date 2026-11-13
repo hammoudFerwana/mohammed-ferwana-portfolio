@@ -20,19 +20,13 @@ export default function AboutTechStack() {
             className={idx === techStack.categories.length - 1 ? 'md:col-span-2' : ''}
           >
             <div className="h-full rounded-2xl bg-bg-secondary border border-border-default hover:border-border-strong p-6 sm:p-7 flex flex-col justify-between transition-all duration-300">
-              <div className="space-y-3">
-                <div className="flex items-center justify-between">
-                  <h3 className="text-base sm:text-lg font-bold text-text-primary tracking-tight">
-                    {category.name}
-                  </h3>
-                  <span className="font-mono text-[11px] text-text-muted">
-                    {category.items.length} items
-                  </span>
-                </div>
-
-                <p className="text-xs sm:text-sm text-text-secondary leading-relaxed">
-                  {category.description}
-                </p>
+              <div className="flex items-center justify-between">
+                <h3 className="text-base sm:text-lg font-bold text-text-primary tracking-tight">
+                  {category.name}
+                </h3>
+                <span className="font-mono text-[11px] text-text-muted">
+                  {category.items.length} items
+                </span>
               </div>
 
               <div className="mt-6 pt-4 border-t border-border-subtle">

@@ -129,7 +129,7 @@ export default function FsmSimulator() {
           <div className="flex items-center gap-2">
             <span className="w-2 h-2 rounded-full bg-accent" aria-hidden="true" />
             <h3 className="font-mono text-sm sm:text-base font-semibold text-text-primary">
-              Interactive Claim Lifecycle Simulator (FSM)
+              Claim lifecycle simulator
             </h3>
             <Badge variant="accent" size="sm">
               Simulation

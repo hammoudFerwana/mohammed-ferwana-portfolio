@@ -27,17 +27,10 @@ export default function CTASection() {
             <span>OPEN FOR OPPORTUNITIES</span>
           </div>
           <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold tracking-tight text-text-primary text-balance">
-            Let&apos;s Build Resilient Systems{' '}
-            <span className="relative inline-block">
-              Together
-              <span
-                className="absolute left-0 -bottom-1 w-full h-[3px] bg-linear-to-r from-accent to-accent-secondary rounded-full"
-                aria-hidden="true"
-              />
-            </span>
+            Need a backend engineer?
           </h2>
           <p className="mt-4 text-base sm:text-lg text-text-secondary leading-relaxed max-w-2xl mx-auto text-balance">
-            Whether you need a backend engineer on your team or a REST API for your product, let&apos;s talk.
+            For a role on your team or an API for your product, let&apos;s talk.
           </p>
         </RevealOnScroll>
 

@@ -40,8 +40,8 @@ export default function ContactPage() {
       <RevealOnScroll>
         <SectionHeading
           as="h1"
-          title="Let's Build Something Meaningful"
-          description="Have a project in mind or want to discuss backend engineering? Let's connect."
+          title="Get in touch"
+          description="Hiring, a project, or a question about my work: send a message."
         />
       </RevealOnScroll>
 

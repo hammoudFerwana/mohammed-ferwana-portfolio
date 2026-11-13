@@ -46,7 +46,7 @@ export const experiences = [
     type: 'work',
     title: 'Backend Developer & Team Leader',
     organization: 'TAQAT',
-    period: '2026',
+    period: 'Completed Jul 2026',
     location: 'Remote',
     project: 'TeamLine',
     projectSlug: 'teamline',

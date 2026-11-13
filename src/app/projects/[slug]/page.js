@@ -228,6 +228,12 @@ export default async function CaseStudyPage({ params }) {
             </div>
           )}
 
+          {project.slug === 'insurflow' && (
+            <p className="text-[17px] text-text-secondary leading-relaxed max-w-[65ch]">
+              Sawn helps motor-insurance companies handle accident claims from the first report to closure: field adjusters assess the damage on site, claims officers review and decide, and every step is recorded on the claim.
+            </p>
+          )}
+
           {/* Technology Stack */}
           {project.technologies && project.technologies.length > 0 && (
             <div className="flex flex-wrap gap-1.5 pt-2">
@@ -262,8 +268,8 @@ export default async function CaseStudyPage({ params }) {
       {/* ── Case Study Sections ── */}
       {project.slug === 'insurflow' ? (
         <div className="space-y-0">
-          {/* 01 — EXECUTIVE OVERVIEW & BACKEND OWNERSHIP */}
-          <CaseStudySection number={nextSection()} title="Executive Overview & Backend Ownership">
+          {/* 01 — OVERVIEW */}
+          <CaseStudySection number={nextSection()} title="Overview">
             <div className="space-y-6">
               {project.problem && (
                 <div className="space-y-2">
@@ -322,9 +328,9 @@ export default async function CaseStudyPage({ params }) {
             </CaseStudySection>
           )}
 
-          {/* 03 — CORE ENGINEERING DECISIONS & TECHNICAL EVIDENCE */}
+          {/* 03 — KEY DECISIONS */}
           {project.engineeringDecisions && project.engineeringDecisions.length > 0 && (
-            <CaseStudySection number={nextSection()} title="Core Engineering Decisions & Technical Evidence">
+            <CaseStudySection number={nextSection()} title="Key decisions">
               <div className="space-y-6">
                 <div className="space-y-3">
                   {project.engineeringDecisions.map((decision, idx) => (
@@ -342,9 +348,9 @@ export default async function CaseStudyPage({ params }) {
             </CaseStudySection>
           )}
 
-          {/* 04 — TESTING & RELIABILITY */}
+          {/* 04 — TESTING */}
           {project.testing && (
-            <CaseStudySection number={nextSection()} title="Testing & Reliability">
+            <CaseStudySection number={nextSection()} title="Testing">
               <TestingSection testing={project.testing} projectSlug={project.slug} />
             </CaseStudySection>
           )}

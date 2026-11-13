@@ -13,8 +13,8 @@ export default function FeaturedProjects() {
       <div className="max-w-7xl mx-auto px-5 sm:px-8">
         <div className="flex flex-col sm:flex-row sm:items-end justify-between mb-8 gap-4">
           <SectionHeading
-            title="Featured Engineering Projects"
-            description="Systems designed with clear domain logic, resilient database modeling, and strict API contracts."
+            title="Projects"
+            description="Two backends I built, with the code and tests behind them."
             className="mb-0 sm:mb-0"
           />
           <Button href="/projects" variant="secondary" size="md">

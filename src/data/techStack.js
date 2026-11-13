@@ -11,7 +11,7 @@ export const techStack = {
       ],
     },
     {
-      name: 'Relational DBs (Training & Foundations)',
+      name: 'SQL (training)',
       description: 'Relational data modeling, SQL queries, and ORM concepts from intensive immersion.',
       items: [
         { name: 'PostgreSQL', icon: 'Postgres' },

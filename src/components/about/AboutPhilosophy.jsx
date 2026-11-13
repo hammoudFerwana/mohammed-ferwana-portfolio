@@ -41,15 +41,6 @@ export default function AboutPhilosophy() {
                   {principle.description}
                 </p>
               </div>
-
-              <div className="mt-6 pt-4 border-t border-border-subtle flex items-start gap-2.5 text-xs">
-                <span className="font-mono text-text-muted uppercase tracking-wider shrink-0 mt-0.5">
-                  RULE:
-                </span>
-                <p className="text-text-primary font-medium">
-                  {principle.takeaway}
-                </p>
-              </div>
             </div>
           </RevealOnScroll>
         ))}

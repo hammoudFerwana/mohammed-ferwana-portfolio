@@ -85,10 +85,10 @@ export default function CaseStudyFooter({ currentProject }) {
           <div className="rounded-2xl bg-bg-secondary border border-border-default p-6 sm:p-8 flex flex-col md:flex-row md:items-center justify-between gap-6 shadow-xs">
             <div className="space-y-2 max-w-xl">
               <h3 className="text-xl sm:text-2xl font-bold text-text-primary tracking-tight">
-                Discuss This Architecture
+                Questions about this project?
               </h3>
               <p className="text-sm text-text-secondary leading-relaxed">
-                Have questions about these architectural choices, or looking for a backend engineer who values test rigor and clean domain boundaries?
+                Ask me about any decision on this page, or about a backend role.
               </p>
             </div>
             <div className="flex flex-wrap items-center gap-3 shrink-0">

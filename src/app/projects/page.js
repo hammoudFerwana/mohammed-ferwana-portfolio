@@ -17,7 +17,7 @@ export default function ProjectsPage() {
       <RevealOnScroll>
         <SectionHeading
           as="h1"
-          title="Projects & Architecture Case Studies"
+          title="Projects"
           description="Case studies of the backends I built, with the decisions behind them."
         />
       </RevealOnScroll>

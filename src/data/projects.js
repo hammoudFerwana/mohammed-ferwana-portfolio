@@ -25,7 +25,7 @@ export const projects = [
       live: null,
       dashboard: 'https://insurflow-dashboard.vercel.app',
     },
-    problem: 'Motor insurance claims processing involves disconnected stakeholders across tenant organizations. Standard implementations risk out-of-order state transitions, cross-tenant data exposure, and sequence collisions during concurrent claim filings.',
+    problem: 'Several insurance companies share one platform. Each company must see only its own claims, a claim must move through its steps in order, and two claims filed at the same moment must never get the same number.',
     solution: `Engineered a modular backend architecture featuring a ${metrics.fsmStates}-state claim lifecycle finite state machine, tenant-scoped compound indexing, atomic sequential numbering, and automated integration test suites.`,
     system: 'Sawn coordinates claim filing, field damage assessment, and claims officer review with deterministic transition guards, an append-only claim timeline, and isolated multi-tenant data access across 3 roles: ADMIN, CLAIMS_OFFICER, and FIELD_ADJUSTER.',
     backendOwnership: [
@@ -35,7 +35,7 @@ export const projects = [
       },
       {
         title: 'Multi-Tenant Data Modeling & Indexing',
-        description: 'Designed tenant-scoped claim access patterns and compound B-tree indexes using organizationId as the leading scope field to enforce query isolation.',
+        description: 'Every claim query filters by organizationId, and every compound index starts with it.',
       },
       {
         title: 'Atomic Sequential Claim Numbering',

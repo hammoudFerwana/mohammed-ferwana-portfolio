@@ -159,7 +159,7 @@ export default function InsurflowConcurrencySandbox() {
           <div className="flex items-center gap-2">
             <span className="w-2 h-2 rounded-full bg-functional-success animate-pulse" aria-hidden="true" />
             <h3 className="font-mono text-sm sm:text-base font-bold text-text-primary tracking-wide">
-              Atomic Sequential Claims Sandbox
+              Claim numbering simulator
             </h3>
             <Badge variant="accent" size="sm">
               Concurrency Proof
@@ -176,9 +176,6 @@ export default function InsurflowConcurrencySandbox() {
               tests/claim.numbering.test.js
             </a>
             : 15 concurrent creations get numbers 1 to 15 with no gaps. It does not call the live API.
-          </p>
-          <p className="text-xs sm:text-sm text-text-secondary">
-            Simulates concurrent claim filings using tenant-scoped MongoDB <code className="text-accent bg-bg-tertiary px-1 py-0.5 rounded">$inc</code> atomic operations, verified by an automated test of 15 concurrent creations in one tenant.
           </p>
         </div>
 
