@@ -23,7 +23,7 @@ export default function AboutCTA() {
 
           <div className="flex flex-wrap items-center justify-center gap-3.5 pt-4">
             <Button href="/projects/insurflow" variant="primary" size="md">
-              InsurFlow Case Study & Tests
+              Sawn Case Study & Tests
             </Button>
             <Button href="/projects" variant="secondary" size="md">
               Browse All Projects

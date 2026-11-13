@@ -20,7 +20,7 @@ export default function AboutPhilosophy() {
           <RevealOnScroll
             key={principle.num}
             delay={0.06 * idx}
-            className={idx === principles.length - 1 ? 'md:col-span-2' : ''}
+            className="h-full"
           >
             <div className="h-full rounded-2xl bg-bg-secondary border border-border-default hover:border-border-strong p-6 sm:p-8 flex flex-col justify-between transition-all duration-300 hover:shadow-lg">
               <div className="space-y-3">
@@ -28,7 +28,6 @@ export default function AboutPhilosophy() {
                   <span className="px-2 py-0.5 rounded bg-accent/10 border border-accent/25 text-accent font-semibold">
                     {principle.num}
                   </span>
-                  <span className="text-text-muted uppercase tracking-wider">PRINCIPLE</span>
                 </div>
 
                 <h3 className="text-lg sm:text-xl font-bold text-text-primary tracking-tight">

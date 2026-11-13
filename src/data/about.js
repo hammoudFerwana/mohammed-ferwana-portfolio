@@ -62,38 +62,6 @@ export const aboutData = {
   principles: [
     {
       num: '01',
-      title: 'Understand before implementing',
-      tagline: 'Start with the problem, not the solution.',
-      description:
-        'Premature coding creates technical debt before the first commit. I prioritize clarifying domain boundaries, requirements, and data relationships before writing implementation code.',
-      takeaway: 'Clarity at the problem boundary prevents costly architectural rewrites.',
-    },
-    {
-      num: '02',
-      title: 'Prefer simple solutions before complex ones',
-      tagline: 'Complexity is a cost, not a feature.',
-      description:
-        'Every unnecessary abstraction, library, or distributed component adds operational friction. I build the simplest correct solution that meets system requirements cleanly.',
-      takeaway: 'Simplicity is a disciplined design choice, not a lack of sophistication.',
-    },
-    {
-      num: '03',
-      title: 'Design for maintainability',
-      tagline: 'Code is read far more than it is written.',
-      description:
-        'Software lives and evolves across teams and time. I enforce modular domain separation, explicit naming, and clear boundaries between routing, controllers, services, and persistence.',
-      takeaway: 'Maintainable architecture is respectful communication with your future team.',
-    },
-    {
-      num: '04',
-      title: 'Validate assumptions',
-      tagline: 'Test your understanding, not just your code.',
-      description:
-        'System failures frequently stem from unverified assumptions about input data or client payloads. I validate all inbound requests at the perimeter with strict schema definitions.',
-      takeaway: 'Never assume incoming data conforms to your expectations.',
-    },
-    {
-      num: '05',
       title: 'Test behavior, not just happy paths',
       tagline: 'Edge cases reveal system quality.',
       description:
@@ -101,80 +69,12 @@ export const aboutData = {
       takeaway: 'True confidence comes from proving how software behaves under failure conditions.',
     },
     {
-      num: '06',
+      num: '02',
       title: 'Take ownership of engineering decisions',
       tagline: 'Explain why, not just what.',
       description:
         'Every technical choice entails tradeoffs. I take ownership by documenting why an architecture or data model was chosen, acknowledging constraints, and guiding team consensus.',
       takeaway: 'Disciplined engineering means taking full responsibility for the tradeoffs you choose.',
-    },
-  ],
-
-  timeline: [
-    {
-      year: '2022',
-      period: '2022',
-      title: 'Enrolled in Computer Systems Engineering',
-      organization: 'Al-Azhar University',
-      type: 'academic',
-      status: 'Completed',
-      description:
-        'Began B.Sc. studies in Computer Systems Engineering, with coursework in data structures and algorithms, operating systems, databases and computer networks.',
-      highlight: 'Discovered passion for backend systems and low-level computer operation.',
-    },
-    {
-      year: '2026',
-      period: '2026',
-      title: 'Backend Developer & Team Leader',
-      organization: 'TAQAT (TeamLine)',
-      type: 'leadership',
-      status: 'Completed',
-      description:
-        'Backend Developer and Team Leader in the TAQAT CodeMap 2026 program, building TeamLine. Designed REST APIs, implemented workspace role-based access control (RBAC), and built real-time task updates with version-guarded task moves.',
-      highlight: 'Designed REST APIs and workspace role-based access control for team collaboration.',
-    },
-    {
-      year: '2026',
-      period: 'Aug – Sep 2026',
-      title: 'Startup MVP Bootcamp, Team Lead',
-      organization: 'Masar x Sanabel',
-      type: 'leadership',
-      status: 'Completed',
-      description: 'Led the Sawn team through an 80-hour, 8-week startup bootcamp, from idea to a working MVP, and built the full backend.',
-      highlight: 'Sawn placed 4th at the final demo day.',
-    },
-    {
-      year: '2026',
-      period: '2026',
-      title: 'Backend Engineering & Sawn (formerly InsurFlow)',
-      organization: 'Sawn (formerly InsurFlow)',
-      type: 'systems',
-      status: 'Active',
-      description:
-        `Built the core backend for Sawn (formerly InsurFlow), a multi-tenant motor claims management system. Implemented finite state machine transitions, MongoDB indexing, and ${metrics.integrationTests} automated tests (run ${formattedTestRunDate}).`,
-      highlight: `${metrics.integrationTests} automated tests across ${metrics.testSuites} test suites (run ${formattedTestRunDate}), all passing, covering the claim lifecycle.`,
-    },
-    {
-      year: '2026',
-      period: '2026 – Nov 2026',
-      title: 'Market Ready Developer Program',
-      organization: 'Gaza Sky Geeks (GSG)',
-      type: 'training',
-      status: 'Active',
-      description:
-        'Taking the Market Ready Developer program at Gaza Sky Geeks (GSG); completing November 2026.',
-      highlight: 'Completing November 2026.',
-    },
-    {
-      year: '2027',
-      period: 'Expected 2027',
-      title: 'Graduation — B.Sc. in Computer Systems Engineering',
-      organization: 'Al-Azhar University',
-      type: 'academic',
-      status: 'Expected',
-      description:
-        'Anticipated completion of undergraduate engineering curriculum, continuing direct trajectory into server-side engineering and database design.',
-      highlight: 'Expected graduation milestone.',
     },
   ],
 };
