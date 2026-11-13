@@ -9,7 +9,6 @@ const formattedTestRunDate = new Date(`${metrics.testRunDate}T00:00:00Z`).toLoca
 
 export const aboutData = {
   hero: {
-    eyebrow: 'THE ENGINEER',
     title: 'About Mohammed Ferwana',
     role: 'Backend Engineer',
     summary:
@@ -23,7 +22,6 @@ export const aboutData = {
   },
 
   story: {
-    eyebrow: 'ENGINEERING JOURNEY',
     title: 'From Computer Systems to Backend Architecture',
     subtitle:
       'My progression as an engineer is built on curiosity about how systems behave under the hood, practical project delivery, and technical team leadership.',

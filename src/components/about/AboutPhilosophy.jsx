@@ -6,10 +6,9 @@ export default function AboutPhilosophy() {
   const { principles } = aboutData;
 
   return (
-    <section className="py-16 md:py-24 border-t border-border-subtle" aria-labelledby="philosophy-heading">
+    <section className="py-16 lg:py-24 border-t border-border-subtle" aria-labelledby="philosophy-heading">
       <RevealOnScroll>
         <SectionHeading
-          eyebrow="HOW I WORK"
           title="Engineering Philosophy"
           description="The principles behind my architectural decisions and code quality."
         />

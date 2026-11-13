@@ -26,7 +26,7 @@ export default function CaseStudyFooter({ currentProject }) {
       : null;
 
   return (
-    <footer className="mt-16 sm:mt-20 pt-12 border-t border-border-subtle space-y-8" aria-label="Case Study Continuation">
+    <footer className="mt-16 lg:mt-24 pt-16 lg:pt-24 border-t border-border-subtle space-y-8" aria-label="Case Study Continuation">
       <RevealOnScroll>
         <div className="space-y-6">
           {/* ── Inter-Case Study Navigation ── */}
@@ -62,9 +62,6 @@ export default function CaseStudyFooter({ currentProject }) {
             <div className="rounded-2xl bg-bg-secondary/70 border border-border-default p-6 sm:p-7">
               <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
                 <div className="space-y-1.5">
-                  <span className="font-mono text-xs uppercase tracking-wider text-accent font-semibold">
-                    Project Archive
-                  </span>
                   <h3 className="text-lg sm:text-xl font-bold text-text-primary tracking-tight">
                     Explore All Engineering Systems
                   </h3>
@@ -87,12 +84,6 @@ export default function CaseStudyFooter({ currentProject }) {
           {/* ── Hiring & Architecture Discussion CTA ── */}
           <div className="rounded-2xl bg-bg-secondary border border-border-default p-6 sm:p-8 flex flex-col md:flex-row md:items-center justify-between gap-6 shadow-xs">
             <div className="space-y-2 max-w-xl">
-              <div className="inline-flex items-center gap-2">
-                <span className="w-2 h-2 rounded-full bg-functional-success animate-pulse shrink-0" aria-hidden="true" />
-                <span className="font-mono text-xs uppercase tracking-wider text-functional-success font-semibold">
-                  Hiring & Technical Collaboration
-                </span>
-              </div>
               <h3 className="text-xl sm:text-2xl font-bold text-text-primary tracking-tight">
                 Discuss This Architecture
               </h3>

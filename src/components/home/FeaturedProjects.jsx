@@ -9,11 +9,10 @@ export default function FeaturedProjects() {
   const featuredProjects = projects.filter((p) => p.featured);
 
   return (
-    <section className="py-20 md:py-28 border-t border-border-subtle bg-bg-secondary/15">
+    <section className="py-16 lg:py-24 border-t border-border-subtle bg-bg-secondary/15">
       <div className="max-w-7xl mx-auto px-5 sm:px-8">
         <div className="flex flex-col sm:flex-row sm:items-end justify-between mb-8 gap-4">
           <SectionHeading
-            eyebrow="PORTFOLIO HIGHLIGHTS"
             title="Featured Engineering Projects"
             description="Systems designed with clear domain logic, resilient database modeling, and strict API contracts."
             className="mb-0 sm:mb-0"
