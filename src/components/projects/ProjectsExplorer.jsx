@@ -230,13 +230,14 @@ export default function ProjectsExplorer({ projects = [] }) {
                   </h2>
                   <m.div
                     layout={!shouldReduceMotion}
-                    className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8"
+                    className="grid grid-cols-1 md:grid-cols-2 gap-8"
                   >
                     {group.items.map((project, idx) => (
                       <m.div
                         key={project.id}
                         data-reveal=""
                         layout={!shouldReduceMotion}
+                        className="h-full"
                         initial={
                           shouldReduceMotion ? { opacity: 1 } : { opacity: 0, scale: 0.96 }
                         }
