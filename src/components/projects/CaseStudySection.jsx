@@ -15,6 +15,7 @@ import { cn } from '@/lib/utils';
  * @param {string} [className] — Additional CSS classes
  */
 export default function CaseStudySection({
+  id,
   number,
   title,
   children,
@@ -23,8 +24,9 @@ export default function CaseStudySection({
   return (
     <RevealOnScroll>
       <section
+        id={id}
         className={cn(
-          'pt-12 md:pt-16 first:pt-0 first:border-none border-t border-border-subtle',
+          'pt-16 lg:pt-24 border-t border-border-subtle scroll-mt-28',
           className
         )}
         aria-labelledby={`section-${number}`}

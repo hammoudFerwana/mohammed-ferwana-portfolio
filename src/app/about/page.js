@@ -3,7 +3,6 @@ import RevealOnScroll from '@/components/shared/RevealOnScroll';
 import AboutHero from '@/components/about/AboutHero';
 import AboutStory from '@/components/about/AboutStory';
 import AboutPhilosophy from '@/components/about/AboutPhilosophy';
-import AboutTimeline from '@/components/about/AboutTimeline';
 import AboutTechStack from '@/components/about/AboutTechStack';
 import AboutCTA from '@/components/about/AboutCTA';
 
@@ -49,7 +48,6 @@ export default function AboutPage() {
       <AboutHero />
       <AboutStory />
       <AboutPhilosophy />
-      <AboutTimeline />
       <AboutTechStack />
       <AboutCTA />
     </div>

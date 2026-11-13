@@ -55,14 +55,14 @@ export const metadata = {
     images: [
       {
         url: siteMetadata.ogImage,
-        width: 800,
-        height: 800,
-        alt: `${siteMetadata.name} — ${siteMetadata.title}`,
+        width: 1200,
+        height: 630,
+        alt: 'Mohammed Ferwana, Backend Engineer',
       },
     ],
   },
   twitter: {
-    card: 'summary',
+    card: 'summary_large_image',
     title: `${siteMetadata.name} | ${siteMetadata.title}`,
     description: siteMetadata.description,
     images: [siteMetadata.ogImage],

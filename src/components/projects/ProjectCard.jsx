@@ -11,36 +11,44 @@ export default function ProjectCard({ project, priority = false }) {
   return (
     <SpotlightCard
       as="div"
-      className="group overflow-hidden transition-all duration-300 flex flex-col justify-between hover:-translate-y-1 hover:shadow-xl hover:shadow-accent/5"
+      className={cn(
+        'group overflow-hidden transition-all duration-300 flex flex-col justify-between hover:-translate-y-1 hover:shadow-xl hover:shadow-accent/5',
+        isTier1 ? 'h-full' : 'h-auto'
+      )}
     >
-      <div>
+      <div className="flex-1 flex flex-col">
         {/* Project Image */}
         {project.image && (
-          <div className="relative w-full aspect-video overflow-hidden bg-bg-tertiary border-b border-border-subtle">
+          <div className="relative w-full aspect-[16/10] overflow-hidden bg-bg-tertiary border-b border-border-subtle">
             <Image
               src={project.image}
               alt={`${project.title} Preview`}
               fill
               priority={priority}
-              sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
-              className="object-cover object-center group-hover:scale-[1.03] transition-transform duration-500 filter contrast-[1.02]"
+              sizes="(max-width: 768px) 100vw, 50vw"
+              className="object-cover object-top group-hover:scale-[1.03] transition-transform duration-500 filter contrast-[1.02]"
             />
-            <div className="absolute inset-0 bg-linear-to-t from-bg-secondary via-transparent to-transparent opacity-40" />
-            <div className="absolute top-3 right-3 flex items-center gap-2">
-              <Badge variant="accent" size="sm" className="bg-bg-primary shadow-xs">
-                {project.category}
-              </Badge>
-              {project.leadership && (
-                <Badge variant="success" size="sm" className="bg-bg-primary shadow-xs">
-                  Leadership
-                </Badge>
-              )}
-            </div>
           </div>
         )}
 
         {/* Card Body */}
-        <div className="p-6 sm:p-7 space-y-4">
+        <div className="p-6 sm:p-7 space-y-4 flex-1 flex flex-col">
+          {/* Category & Leadership chips above title */}
+          {(project.category || project.leadership) && (
+            <div className="flex items-center gap-2 flex-wrap">
+              {project.category && (
+                <Badge variant="accent" size="sm">
+                  {project.category}
+                </Badge>
+              )}
+              {project.leadership && (
+                <Badge variant="success" size="sm">
+                  Leadership
+                </Badge>
+              )}
+            </div>
+          )}
+
           <div className="space-y-1">
             <div className="flex items-center justify-between gap-2">
               <h3 className="text-xl font-bold text-text-primary tracking-tight group-hover:text-accent transition-colors">
@@ -50,6 +58,11 @@ export default function ProjectCard({ project, priority = false }) {
             <p className="font-mono text-xs text-text-muted">
               Role: <span className="text-text-secondary">{project.role}</span>
             </p>
+            {project.outcome && (
+              <p className="text-[15px] text-ink font-medium leading-snug md:truncate">
+                {project.outcome}
+              </p>
+            )}
           </div>
 
           <p className="text-sm text-text-secondary leading-relaxed line-clamp-3">
@@ -57,23 +70,22 @@ export default function ProjectCard({ project, priority = false }) {
           </p>
 
           {/* Technology Badges */}
-          {project.technologies && project.technologies.length > 0 && (
-            <div className="flex flex-wrap gap-1.5 pt-2">
-              {project.technologies.slice(0, 6).map((tech) => (
-                <span
-                  key={tech}
-                  className="font-mono text-[11px] px-2.5 py-1 rounded-md bg-bg-primary/80 border border-border-subtle text-text-muted"
-                >
-                  {tech}
-                </span>
-              ))}
-              {project.technologies.length > 6 && (
-                <span className="font-mono text-[10px] px-2 py-1 rounded text-text-muted">
-                  +{project.technologies.length - 6} more
-                </span>
-              )}
-            </div>
-          )}
+          {(() => {
+            const chips = (project.cardStack ?? project.technologies ?? []).slice(0, 4);
+            if (chips.length === 0) return null;
+            return (
+              <div className="flex flex-wrap gap-1.5 pt-2 mt-auto">
+                {chips.map((tech) => (
+                  <span
+                    key={tech}
+                    className="font-mono text-[11px] px-2.5 py-1 rounded-md bg-bg-primary/80 border border-border-subtle text-text-muted"
+                  >
+                    {tech}
+                  </span>
+                ))}
+              </div>
+            );
+          })()}
         </div>
       </div>
 

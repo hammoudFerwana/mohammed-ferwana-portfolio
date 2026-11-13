@@ -1,5 +1,6 @@
 import { test, expect } from '@playwright/test';
 import AxeBuilder from '@axe-core/playwright';
+import { metrics } from '../../src/data/metrics.js';
 
 const OK_ROUTES = [
   '/',
@@ -380,7 +381,9 @@ test.describe('Portfolio quality gates', () => {
       await page.goto('/', { waitUntil: 'load' });
       await page.evaluate(() => document.fonts.ready);
 
-      const portrait = page.locator('img[alt="Mohammed Ferwana - Backend Engineer"]');
+      const portrait = vp.width >= 1024
+        ? page.locator('img[alt="Mohammed Ferwana - Backend Engineer"]')
+        : page.locator('img[alt="Mohammed Ferwana"]');
       await expect(portrait).toBeVisible();
 
       const portraitBox = await portrait.boundingBox();
@@ -441,5 +444,142 @@ test.describe('Portfolio quality gates', () => {
       expect(hitResults.clock.ok, `Clock chip obscured at ${vp.width}x${vp.height}: ${JSON.stringify(hitResults.clock)}`).toBe(true);
       expect(hitResults.credit.ok, `Credit link obscured at ${vp.width}x${vp.height}: ${JSON.stringify(hitResults.credit)}`).toBe(true);
     }
+  });
+
+  test('/ hero at phone widths', async ({ page }) => {
+    for (const width of [320, 360, 390, 414]) {
+      await page.setViewportSize({ width, height: 844 });
+      await page.goto('/', { waitUntil: 'load' });
+      await page.evaluate(() => document.fonts.ready);
+
+      const scrollWidth = await page.evaluate(() => document.documentElement.scrollWidth);
+      expect(scrollWidth).toBeLessThanOrEqual(width);
+
+      const h1 = page.locator('h1').first();
+      const avatar = page.locator('img[alt="Mohammed Ferwana"]');
+
+      await expect(avatar).toBeVisible();
+
+      const h1Box = await h1.boundingBox();
+      const avatarBox = await avatar.boundingBox();
+
+      expect(h1Box).not.toBeNull();
+      expect(avatarBox).not.toBeNull();
+
+      // h1 and avatar on the same row: avatar top within 40px of h1 top
+      const topDiff = Math.abs(avatarBox.y - h1Box.y);
+      expect(topDiff).toBeLessThanOrEqual(40);
+    }
+  });
+
+  test('/projects has no filter controls and two-column cards at 1440', async ({ page }) => {
+    await page.setViewportSize({ width: 1440, height: 900 });
+    await page.goto('/projects', { waitUntil: 'load' });
+    await page.evaluate(() => document.fonts.ready);
+
+    const main = page.locator('main');
+    await expect(main.locator('[role="tab"]')).toHaveCount(0);
+    await expect(main.locator('input[type="search"]')).toHaveCount(0);
+
+    const cards = page.locator('section[aria-labelledby="group-main-projects"] [data-reveal]');
+    const box0 = await cards.nth(0).boundingBox();
+    const box1 = await cards.nth(1).boundingBox();
+
+    expect(box0).not.toBeNull();
+    expect(box1).not.toBeNull();
+    expect(Math.abs(box0.y - box1.y)).toBeLessThanOrEqual(2);
+  });
+
+  test('/projects/insurflow key facts', async ({ page }) => {
+    await page.goto('/projects/insurflow', { waitUntil: 'load' });
+    await page.evaluate(() => document.fonts.ready);
+
+    for (const label of ['Role', 'Team', 'Period', 'Status', 'Tests', 'Code']) {
+      await expect(page.getByText(label, { exact: true }).first()).toBeVisible();
+    }
+
+    const testsText = page.getByText(new RegExp(`${metrics.integrationTests}\\s+passing`)).first();
+    await expect(testsText).toBeVisible();
+  });
+
+  test('/projects/insurflow folds technical details', async ({ page }) => {
+    await page.setViewportSize({ width: 1440, height: 900 });
+    await page.goto('/projects/insurflow', { waitUntil: 'load' });
+    await page.evaluate(() => document.fonts.ready);
+
+    const details = page.locator('details#sawn-tech-details');
+    await expect(details).toBeVisible();
+
+    // details closed on load
+    const isOpenOnLoad = await details.evaluate((el) => el.open);
+    expect(isOpenOnLoad).toBe(false);
+
+    // "Show technical details" visible
+    const showDetailsText = page.getByText('Show technical details');
+    await expect(showDetailsText).toBeVisible();
+
+    // the 1248 number from metrics.js visible above the fold-out
+    const metricsNumberText = String(metrics.integrationTests);
+    const metricsElement = page.getByText(new RegExp(`${metricsNumberText}\\s+passing`)).first();
+    await expect(metricsElement).toBeVisible();
+
+    const metricsBox = await metricsElement.boundingBox();
+    const detailsBox = await details.boundingBox();
+    expect(metricsBox).not.toBeNull();
+    expect(detailsBox).not.toBeNull();
+    expect(metricsBox.y).toBeLessThan(detailsBox.y);
+
+    // clicking TOC item "Testing" at 1440 opens details and the Testing heading is in viewport
+    const tocTestingLink = page.locator('nav[aria-label="Table of contents"] a[href="#testing"]');
+    await expect(tocTestingLink).toBeVisible();
+    await tocTestingLink.click();
+
+    // details should now be open
+    await expect(details).toHaveAttribute('open', '');
+
+    // the Testing heading is in viewport
+    const testingHeading = page.locator('#testing h2');
+    await expect(testingHeading).toBeInViewport({ timeout: 5000 });
+  });
+
+  test('navbar has no search button', async ({ page }) => {
+    for (const width of [1440, 390]) {
+      await page.setViewportSize({ width, height: 900 });
+      await page.goto('/', { waitUntil: 'load' });
+      await page.evaluate(() => document.fonts.ready);
+
+      const navButtons = page.locator('header nav button, header button');
+      const count = await navButtons.count();
+      for (let i = 0; i < count; i++) {
+        const btn = navButtons.nth(i);
+        const ariaLabel = (await btn.getAttribute('aria-label')) || '';
+        const text = (await btn.textContent()) || '';
+        expect(ariaLabel.toLowerCase()).not.toContain('search');
+        expect(text.toLowerCase()).not.toContain('search');
+      }
+    }
+  });
+
+  test('og image', async ({ request }) => {
+    const res = await request.get('/opengraph-image');
+    expect(res.status()).toBe(200);
+
+    const contentType = res.headers()['content-type'] || '';
+    expect(contentType).toContain('image/png');
+
+    const buffer = await res.body();
+    expect(buffer.length).toBeGreaterThan(0);
+
+    // PNG signature check
+    expect(buffer[0]).toBe(0x89);
+    expect(buffer[1]).toBe(0x50); // P
+    expect(buffer[2]).toBe(0x4e); // N
+    expect(buffer[3]).toBe(0x47); // G
+
+    // PNG width and height in IHDR chunk (bytes 16-23)
+    const width = buffer.readUInt32BE(16);
+    const height = buffer.readUInt32BE(20);
+    expect(width).toBe(1200);
+    expect(height).toBe(630);
   });
 });

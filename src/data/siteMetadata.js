@@ -14,6 +14,6 @@ export const siteMetadata = {
     linkedin: 'https://www.linkedin.com/in/mohammed-ferwana/',
     github: 'https://github.com/hammoudFerwana',
   },
-  ogImage: '/images/portrait.jpg',
+  ogImage: '/opengraph-image',
   formspreeKey: process.env.NEXT_PUBLIC_FORMSPREE_KEY || 'myewyldg',
 };

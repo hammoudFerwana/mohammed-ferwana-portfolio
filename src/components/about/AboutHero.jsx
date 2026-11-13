@@ -6,17 +6,11 @@ export default function AboutHero() {
   const { hero } = aboutData;
 
   return (
-    <section className="mb-20 md:mb-24">
+    <section className="mb-16 lg:mb-24">
       <RevealOnScroll>
         <div className="space-y-8">
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-10 items-center">
             <div className="lg:col-span-7 space-y-6">
-              <div className="inline-flex items-center gap-2">
-                <span className="font-mono text-xs uppercase tracking-widest text-accent font-semibold px-2.5 py-1 rounded bg-accent/10 border border-accent/20">
-                  {hero.eyebrow}
-                </span>
-              </div>
-
               <div className="space-y-3">
                 <h1 className="text-3xl sm:text-4xl md:text-5xl font-bold tracking-tight text-text-primary text-balance">
                   {hero.title}

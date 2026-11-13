@@ -69,9 +69,28 @@ export default function HeroSection() {
         <div className="grid grid-cols-1 lg:grid-cols-[minmax(0,1fr)_350px] xl:grid-cols-[minmax(0,1fr)_380px] lg:gap-x-12 items-start">
           {/* Text column first in DOM for screen readers */}
           <div className="mt-8 lg:mt-0 lg:pt-10">
-            <h1 className="font-sans text-[length:var(--text-hero)] font-bold leading-[0.95] tracking-[-0.03em] text-ink text-balance hyphens-none">
-              Mohammed Ferwana
-            </h1>
+            <div className="flex items-start gap-3 lg:block">
+              <h1 className="flex-1 min-w-0 font-sans text-[length:var(--text-hero)] font-bold leading-[0.95] tracking-[-0.03em] text-ink text-balance hyphens-none">
+                Mohammed Ferwana
+              </h1>
+              <div
+                className="lg:hidden shrink-0 relative overflow-hidden rounded-2xl border"
+                style={{
+                  width: 'clamp(64px, calc(100vw - 290px), 120px)',
+                  height: 'clamp(64px, calc(100vw - 290px), 120px)',
+                  borderColor: 'color-mix(in srgb, var(--hz-violet) 40%, transparent)',
+                }}
+              >
+                <Image
+                  src="/images/portrait.jpg"
+                  alt="Mohammed Ferwana"
+                  fill
+                  loading="eager"
+                  sizes="120px"
+                  className="object-cover object-center"
+                />
+              </div>
+            </div>
 
             <div className="mt-4 flex items-center gap-4">
               <p className="font-mono text-[15px] text-violet shrink-0">
@@ -108,9 +127,9 @@ export default function HeroSection() {
             </div>
           </div>
 
-          {/* Portrait card: visually first below lg, overlapping band right on lg+ */}
-          <div className="order-first lg:order-last mt-8 lg:-mt-[150px] lg:justify-self-end w-[min(78vw,300px)] lg:w-full lg:max-w-[380px] relative z-10">
-            <InteractivePortraitCard loading="eager" />
+          {/* Portrait card: desktop only (lg+) */}
+          <div className="hidden lg:block lg:order-last lg:-mt-[150px] lg:justify-self-end lg:w-full lg:max-w-[380px] relative z-10">
+            <InteractivePortraitCard />
           </div>
         </div>
 

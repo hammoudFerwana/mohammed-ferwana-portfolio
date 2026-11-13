@@ -17,8 +17,7 @@ export default function ProjectsPage() {
       <RevealOnScroll>
         <SectionHeading
           as="h1"
-          eyebrow="ENGINEERING PORTFOLIO"
-          title="Projects & Architecture Case Studies"
+          title="Projects"
           description="Case studies of the backends I built, with the decisions behind them."
         />
       </RevealOnScroll>
@@ -29,13 +28,10 @@ export default function ProjectsPage() {
       </div>
 
       {/* ── Closing Conversion CTA ── */}
-      <div className="mt-20 pt-16 border-t border-border-subtle">
+      <div className="mt-16 lg:mt-24 pt-16 lg:pt-24 border-t border-border-subtle">
         <RevealOnScroll>
           <div className="rounded-2xl bg-bg-secondary border border-border-default p-6 sm:p-8 md:p-10 flex flex-col sm:flex-row sm:items-center justify-between gap-6 shadow-xs">
             <div className="space-y-2 max-w-xl">
-              <span className="font-mono text-xs uppercase tracking-wider text-accent font-semibold px-2 py-0.5 rounded bg-accent/10 border border-accent/20 inline-block">
-                Hiring & Collaboration
-              </span>
               <h2 className="text-xl sm:text-2xl font-bold text-text-primary tracking-tight">
                 Looking for a Backend Engineer?
               </h2>

@@ -128,7 +128,7 @@ export default function TeamlineWorkspaceSimulator() {
           <div className="flex items-center gap-2">
             <span className="w-2 h-2 rounded-full bg-accent animate-pulse" aria-hidden="true" />
             <h3 className="font-mono text-sm sm:text-base font-bold text-text-primary tracking-wide">
-              Real-time Kanban Sync & Concurrency Lab
+              Task board simulator
             </h3>
             <Badge variant="success" size="sm">
               Simulation

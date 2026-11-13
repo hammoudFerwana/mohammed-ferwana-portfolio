@@ -1,6 +1,6 @@
 export default function StatementSection() {
   return (
-    <section className="py-16 sm:py-20 border-t border-line">
+    <section className="py-16 lg:py-24 border-t border-line">
       <div className="max-w-7xl mx-auto px-5 sm:px-8">
         <div data-reveal="" className="statement-reveal">
           <div className="flex items-center gap-3 mb-6">
