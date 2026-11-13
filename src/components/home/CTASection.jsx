@@ -6,7 +6,7 @@ import { siteMetadata } from '@/data/siteMetadata';
 
 export default function CTASection() {
   return (
-    <section id="contact" className="py-24 md:py-32 border-t border-border-subtle relative overflow-hidden overflow-x-clip scroll-mt-20">
+    <section id="contact" className="py-16 lg:py-24 border-t border-border-subtle relative overflow-hidden overflow-x-clip scroll-mt-20">
       {/* Background Animated Aurora Finale (3 Orbs, GPU-accelerated) */}
       <div className="absolute inset-0 overflow-hidden overflow-x-clip pointer-events-none" aria-hidden="true">
         <div className="absolute top-1/2 left-1/3 -translate-x-1/2 -translate-y-1/2 w-[520px] h-[340px] bg-accent/12 blur-[130px] rounded-full animate-aurora" />

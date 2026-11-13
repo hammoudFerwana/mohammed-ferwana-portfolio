@@ -1,5 +1,6 @@
 import { test, expect } from '@playwright/test';
 import AxeBuilder from '@axe-core/playwright';
+import { metrics } from '../../src/data/metrics.js';
 
 const OK_ROUTES = [
   '/',
@@ -380,7 +381,9 @@ test.describe('Portfolio quality gates', () => {
       await page.goto('/', { waitUntil: 'load' });
       await page.evaluate(() => document.fonts.ready);
 
-      const portrait = page.locator('img[alt="Mohammed Ferwana - Backend Engineer"]');
+      const portrait = vp.width >= 1024
+        ? page.locator('img[alt="Mohammed Ferwana - Backend Engineer"]')
+        : page.locator('img[alt="Mohammed Ferwana"]');
       await expect(portrait).toBeVisible();
 
       const portraitBox = await portrait.boundingBox();
@@ -441,5 +444,61 @@ test.describe('Portfolio quality gates', () => {
       expect(hitResults.clock.ok, `Clock chip obscured at ${vp.width}x${vp.height}: ${JSON.stringify(hitResults.clock)}`).toBe(true);
       expect(hitResults.credit.ok, `Credit link obscured at ${vp.width}x${vp.height}: ${JSON.stringify(hitResults.credit)}`).toBe(true);
     }
+  });
+
+  test('/ hero at phone widths', async ({ page }) => {
+    for (const width of [320, 360, 390, 414]) {
+      await page.setViewportSize({ width, height: 844 });
+      await page.goto('/', { waitUntil: 'load' });
+      await page.evaluate(() => document.fonts.ready);
+
+      const scrollWidth = await page.evaluate(() => document.documentElement.scrollWidth);
+      expect(scrollWidth).toBeLessThanOrEqual(width);
+
+      const h1 = page.locator('h1').first();
+      const avatar = page.locator('img[alt="Mohammed Ferwana"]');
+
+      await expect(avatar).toBeVisible();
+
+      const h1Box = await h1.boundingBox();
+      const avatarBox = await avatar.boundingBox();
+
+      expect(h1Box).not.toBeNull();
+      expect(avatarBox).not.toBeNull();
+
+      // h1 and avatar on the same row: avatar top within 40px of h1 top
+      const topDiff = Math.abs(avatarBox.y - h1Box.y);
+      expect(topDiff).toBeLessThanOrEqual(40);
+    }
+  });
+
+  test('/projects has no filter controls and two-column cards at 1440', async ({ page }) => {
+    await page.setViewportSize({ width: 1440, height: 900 });
+    await page.goto('/projects', { waitUntil: 'load' });
+    await page.evaluate(() => document.fonts.ready);
+
+    const main = page.locator('main');
+    await expect(main.locator('[role="tab"]')).toHaveCount(0);
+    await expect(main.locator('input[type="search"]')).toHaveCount(0);
+
+    const cards = page.locator('section[aria-labelledby="group-main-projects"] [data-reveal]');
+    const box0 = await cards.nth(0).boundingBox();
+    const box1 = await cards.nth(1).boundingBox();
+
+    expect(box0).not.toBeNull();
+    expect(box1).not.toBeNull();
+    expect(Math.abs(box0.y - box1.y)).toBeLessThanOrEqual(2);
+  });
+
+  test('/projects/insurflow key facts', async ({ page }) => {
+    await page.goto('/projects/insurflow', { waitUntil: 'load' });
+    await page.evaluate(() => document.fonts.ready);
+
+    for (const label of ['Role', 'Team', 'Period', 'Status', 'Tests', 'Code']) {
+      await expect(page.getByText(label, { exact: true }).first()).toBeVisible();
+    }
+
+    const testsText = page.getByText(new RegExp(`${metrics.integrationTests}\\s+passing`)).first();
+    await expect(testsText).toBeVisible();
   });
 });

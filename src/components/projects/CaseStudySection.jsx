@@ -24,7 +24,7 @@ export default function CaseStudySection({
     <RevealOnScroll>
       <section
         className={cn(
-          'pt-12 md:pt-16 first:pt-0 first:border-none border-t border-border-subtle',
+          'pt-16 lg:pt-24 border-t border-border-subtle',
           className
         )}
         aria-labelledby={`section-${number}`}

@@ -6,10 +6,9 @@ export default function AboutStory() {
   const { story } = aboutData;
 
   return (
-    <section className="py-16 md:py-24 border-t border-border-subtle" aria-labelledby="story-heading">
+    <section className="py-16 lg:py-24 border-t border-border-subtle" aria-labelledby="story-heading">
       <RevealOnScroll>
         <SectionHeading
-          eyebrow={story.eyebrow}
           title={story.title}
           description={story.subtitle}
         />

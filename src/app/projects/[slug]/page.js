@@ -3,6 +3,7 @@ import Image from 'next/image';
 import dynamic from 'next/dynamic';
 import { notFound } from 'next/navigation';
 import { projects } from '@/data/projects';
+import { metrics } from '@/data/metrics';
 import Badge from '@/components/shared/Badge';
 import RevealOnScroll from '@/components/shared/RevealOnScroll';
 import CaseStudySection from '@/components/projects/CaseStudySection';
@@ -145,17 +146,87 @@ export default async function CaseStudyPage({ params }) {
             {project.description}
           </p>
 
-          {/* Meta Row */}
-          <div className="flex flex-wrap items-center gap-x-6 gap-y-2 text-sm font-mono">
-            <div className="flex items-center gap-2">
-              <span className="text-text-muted">Role:</span>
-              <span className="text-text-primary font-medium">{project.role}</span>
+          {/* Key Facts Box (Sawn) / Meta Row (Other Projects) */}
+          {project.slug === 'insurflow' ? (
+            <div className="rounded-xl border border-border-default bg-bg-secondary/60 p-5 sm:p-6 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
+              <div className="space-y-1">
+                <span className="block font-mono text-[12px] uppercase tracking-wider text-text-muted">
+                  Role
+                </span>
+                <span className="block text-[15px] text-text-primary leading-snug">
+                  Co-founder &amp; Backend Engineer (sole backend)
+                </span>
+              </div>
+              <div className="space-y-1">
+                <span className="block font-mono text-[12px] uppercase tracking-wider text-text-muted">
+                  Team
+                </span>
+                <span className="block text-[15px] text-text-primary leading-snug">
+                  4 people: 2 frontend, 1 mobile, 1 backend
+                </span>
+              </div>
+              <div className="space-y-1">
+                <span className="block font-mono text-[12px] uppercase tracking-wider text-text-muted">
+                  Period
+                </span>
+                <span className="block text-[15px] text-text-primary leading-snug">
+                  Aug 2026 – Present
+                </span>
+              </div>
+              <div className="space-y-1">
+                <span className="block font-mono text-[12px] uppercase tracking-wider text-text-muted">
+                  Status
+                </span>
+                <span className="block text-[15px] text-text-primary leading-snug">
+                  API live on Render (MongoDB Atlas)
+                </span>
+              </div>
+              <div className="space-y-1">
+                <span className="block font-mono text-[12px] uppercase tracking-wider text-text-muted">
+                  Tests
+                </span>
+                <span className="block text-[15px] text-text-primary leading-snug">
+                  {metrics.integrationTests} passing in {metrics.testSuites} suites, run {new Date(`${metrics.testRunDate}T00:00:00Z`).toLocaleDateString('en-GB', { day: 'numeric', month: 'short', year: 'numeric', timeZone: 'UTC' })}
+                </span>
+              </div>
+              <div className="space-y-1">
+                <span className="block font-mono text-[12px] uppercase tracking-wider text-text-muted">
+                  Code
+                </span>
+                <div className="text-[15px] text-text-primary leading-snug flex flex-col gap-1">
+                  <a
+                    href="https://github.com/InsurFlow-Team/insurflow-backend"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="underline decoration-border-default underline-offset-2 hover:text-accent transition-colors"
+                  >
+                    insurflow-backend on GitHub
+                  </a>
+                  {project.links?.dashboard && (
+                    <a
+                      href={project.links.dashboard}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="underline decoration-border-default underline-offset-2 hover:text-accent transition-colors"
+                    >
+                      Live dashboard
+                    </a>
+                  )}
+                </div>
+              </div>
             </div>
-            <div className="flex items-center gap-2">
-              <span className="text-text-muted">Category:</span>
-              <span className="text-text-primary font-medium">{project.category}</span>
+          ) : (
+            <div className="flex flex-wrap items-center gap-x-6 gap-y-2 text-sm font-mono">
+              <div className="flex items-center gap-2">
+                <span className="text-text-muted">Role:</span>
+                <span className="text-text-primary font-medium">{project.role}</span>
+              </div>
+              <div className="flex items-center gap-2">
+                <span className="text-text-muted">Category:</span>
+                <span className="text-text-primary font-medium">{project.category}</span>
+              </div>
             </div>
-          </div>
+          )}
 
           {/* Technology Stack */}
           {project.technologies && project.technologies.length > 0 && (

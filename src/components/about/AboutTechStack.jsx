@@ -4,10 +4,9 @@ import { techStack } from '@/data/techStack';
 
 export default function AboutTechStack() {
   return (
-    <section className="py-16 md:py-24 border-t border-border-subtle" aria-labelledby="tech-stack-heading">
+    <section className="py-16 lg:py-24 border-t border-border-subtle" aria-labelledby="tech-stack-heading">
       <RevealOnScroll>
         <SectionHeading
-          eyebrow="TOOLS I USE"
           title="Technical Stack & Domains"
           description="Technologies I have used in shipped projects and training."
         />
