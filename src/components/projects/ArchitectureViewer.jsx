@@ -102,7 +102,7 @@ export default function ArchitectureViewer({ architecture }) {
         aria-label="System architecture diagram"
       >
         {/* Desktop: One horizontal row on lg+ */}
-        <div className="hidden lg:flex items-center justify-between gap-1.5 w-full">
+        <div className="hidden lg:flex items-stretch justify-between gap-1.5 w-full">
           {architecture.nodes.map((node, index) => {
             const isSelected = selectedNode?.id === node.id;
             const style = nodeTypeStyles[node.type] || nodeTypeStyles.logic;
@@ -113,7 +113,7 @@ export default function ArchitectureViewer({ architecture }) {
                   onClick={() => setSelectedNodeId(node.id)}
                   aria-pressed={isSelected}
                   className={cn(
-                    'flex-1 min-w-0 p-2.5 rounded-lg border text-left font-mono transition-all duration-200 relative group focus-visible:outline-hidden focus-visible:ring-2 focus-visible:ring-accent',
+                    'flex-1 min-w-0 p-2.5 rounded-lg border text-left font-mono transition-all duration-200 relative group focus-visible:outline-hidden focus-visible:ring-2 focus-visible:ring-accent flex flex-col justify-between h-full min-h-[72px]',
                     style,
                     isSelected
                       ? 'ring-2 ring-accent shadow-sm scale-[1.02]'
@@ -131,7 +131,7 @@ export default function ArchitectureViewer({ architecture }) {
                       />
                     )}
                   </div>
-                  <div className="text-text-primary font-bold text-xs mt-1 truncate" title={node.label}>
+                  <div className="text-text-primary font-bold text-xs mt-1 leading-snug break-words" title={node.label}>
                     {node.label}
                   </div>
                 </button>
@@ -154,7 +154,7 @@ export default function ArchitectureViewer({ architecture }) {
         </div>
 
         {/* Mobile & Tablet: 2-column grid below lg */}
-        <div className="grid grid-cols-2 gap-2.5 w-full lg:hidden">
+        <div className="grid grid-cols-2 gap-2.5 w-full lg:hidden items-stretch">
           {architecture.nodes.map((node) => {
             const isSelected = selectedNode?.id === node.id;
             const style = nodeTypeStyles[node.type] || nodeTypeStyles.logic;
@@ -165,7 +165,7 @@ export default function ArchitectureViewer({ architecture }) {
                 onClick={() => setSelectedNodeId(node.id)}
                 aria-pressed={isSelected}
                 className={cn(
-                  'p-2.5 rounded-lg border text-left font-mono transition-all duration-200 relative group focus-visible:outline-hidden focus-visible:ring-2 focus-visible:ring-accent',
+                  'p-2.5 rounded-lg border text-left font-mono transition-all duration-200 relative group focus-visible:outline-hidden focus-visible:ring-2 focus-visible:ring-accent flex flex-col justify-between min-h-[64px]',
                   style,
                   isSelected
                     ? 'ring-2 ring-accent shadow-sm'
@@ -183,7 +183,7 @@ export default function ArchitectureViewer({ architecture }) {
                     />
                   )}
                 </div>
-                <div className="text-text-primary font-bold text-xs mt-1 truncate" title={node.label}>
+                <div className="text-text-primary font-bold text-xs mt-1 leading-snug break-words" title={node.label}>
                   {node.label}
                 </div>
               </button>
