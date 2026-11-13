@@ -8,7 +8,7 @@ export default function CTASection() {
   return (
     <section id="contact" className="py-16 lg:py-24 border-t border-border-subtle relative overflow-hidden overflow-x-clip scroll-mt-20">
       {/* Background Animated Aurora Finale (3 Orbs, GPU-accelerated) */}
-      <div className="absolute inset-0 overflow-hidden overflow-x-clip pointer-events-none" aria-hidden="true">
+      <div className="absolute inset-0 overflow-hidden overflow-x-clip pointer-events-none opacity-25" aria-hidden="true">
         <div className="absolute top-1/2 left-1/3 -translate-x-1/2 -translate-y-1/2 w-[520px] h-[340px] bg-accent/12 blur-[130px] rounded-full animate-aurora" />
         <div
           className="absolute top-1/2 right-1/3 translate-x-1/4 -translate-y-1/2 w-[440px] h-[300px] bg-accent-secondary/10 blur-[130px] rounded-full animate-aurora"
@@ -22,7 +22,7 @@ export default function CTASection() {
 
       <div className="max-w-4xl mx-auto px-5 sm:px-8 text-center relative z-10 space-y-8">
         <RevealOnScroll>
-          <div className="inline-flex items-center gap-2 font-mono text-xs text-accent uppercase tracking-widest px-3 py-1 rounded-full bg-accent/10 border border-accent/20 mb-4">
+          <div className="inline-flex items-center gap-2 font-mono text-xs text-accent font-medium uppercase tracking-widest px-3 py-1 rounded-full bg-surface border border-accent/30 mb-4">
             <span className="w-1.5 h-1.5 rounded-full bg-functional-success animate-pulse-ring" />
             <span>OPEN FOR OPPORTUNITIES</span>
           </div>
