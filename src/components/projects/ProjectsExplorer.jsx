@@ -1,5 +1,6 @@
 import ProjectCard from '@/components/projects/ProjectCard';
 import RevealOnScroll from '@/components/shared/RevealOnScroll';
+import { cn } from '@/lib/utils';
 
 export default function ProjectsExplorer({ projects = [] }) {
   const mainProjects = projects.filter((p) => p.tier === 1);
@@ -24,12 +25,17 @@ export default function ProjectsExplorer({ projects = [] }) {
           >
             {group.heading}
           </h2>
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+          <div
+            className={cn(
+              'grid grid-cols-1 md:grid-cols-2 gap-8',
+              group.id === 'group-other-work' ? 'items-start' : 'items-stretch'
+            )}
+          >
             {group.items.map((project, idx) => (
               <RevealOnScroll
                 key={project.id}
                 delay={0.1 * (idx + 1)}
-                className="h-full"
+                className={group.id === 'group-main-projects' ? 'h-full' : 'h-auto'}
               >
                 <ProjectCard
                   project={project}

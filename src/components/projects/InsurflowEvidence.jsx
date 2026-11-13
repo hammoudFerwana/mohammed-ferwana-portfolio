@@ -157,7 +157,7 @@ export default function InsurflowEvidence() {
                   <Badge variant="outline" size="sm">Triage Queue</Badge>
                 </div>
                 <p className="text-xs text-text-secondary leading-relaxed">
-                  Satisfies claims officer dashboard queries (filtering by tenant and status, sorted newest first) directly from index B-trees, eliminating in-memory MongoDB sorts.
+                  Serves the claims officer dashboard: claims of one company, filtered by status, newest first.
                 </p>
               </div>
 
@@ -169,7 +169,7 @@ export default function InsurflowEvidence() {
                   <Badge variant="outline" size="sm">Adjuster Feed</Badge>
                 </div>
                 <p className="text-xs text-text-secondary leading-relaxed">
-                  Powers the field adjuster portal feed, enabling rapid index-bounded lookup of active tasks assigned to specific field personnel ordered chronologically.
+                  Serves the field adjuster app: claims assigned to one adjuster, newest first.
                 </p>
               </div>
 
@@ -181,7 +181,7 @@ export default function InsurflowEvidence() {
                   <Badge variant="outline" size="sm">Policy Scoping</Badge>
                 </div>
                 <p className="text-xs text-text-secondary leading-relaxed">
-                  Scopes policy verification queries to the tenant, accelerating historical claims checks against an insured policy and preventing cross-tenant policy exposure.
+                  Serves policy checks: past claims on one policy, inside one company.
                 </p>
               </div>
             </div>

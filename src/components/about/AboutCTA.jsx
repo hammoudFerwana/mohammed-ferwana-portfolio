@@ -12,7 +12,7 @@ export default function AboutCTA() {
           </h2>
 
           <p className="text-sm sm:text-base text-text-secondary leading-relaxed max-w-2xl mx-auto">
-            Engineering philosophy is only as good as the software it produces. Inspect real architectural decisions, state machine models, and comprehensive test suites.
+            See the code, the decisions and the tests in the case studies.
           </p>
 
           <div className="flex flex-wrap items-center justify-center gap-3.5 pt-4">

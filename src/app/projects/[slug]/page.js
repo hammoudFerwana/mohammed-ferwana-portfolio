@@ -16,8 +16,20 @@ import ProjectLinks from '@/components/projects/ProjectLinks';
 import LeadershipCard from '@/components/projects/LeadershipCard';
 import InsurflowEvidence from '@/components/projects/InsurflowEvidence';
 import CaseStudyFooter from '@/components/projects/CaseStudyFooter';
+import CaseStudyToc from '@/components/projects/CaseStudyToc';
+import { cn } from '@/lib/utils';
 
 export const dynamicParams = false;
+
+const sawnTocItems = [
+  { id: 'overview', label: 'Overview', inDetails: false },
+  { id: 'architecture', label: 'Architecture', inDetails: true },
+  { id: 'key-decisions', label: 'Key decisions', inDetails: true },
+  { id: 'testing', label: 'Testing', inDetails: true },
+  { id: 'trade-offs', label: 'Trade-offs', inDetails: true },
+  { id: 'what-i-would-improve', label: 'What I would improve', inDetails: true },
+  { id: 'links', label: 'Links', inDetails: false },
+];
 
 const FsmSimulator = dynamic(
   () => import('@/components/projects/lab/FsmSimulator'),
@@ -96,9 +108,16 @@ export default async function CaseStudyPage({ params }) {
     return String(sectionCounter).padStart(2, '0');
   };
 
+  const isSawn = project.slug === 'insurflow';
+
   return (
-    <div className="pt-28 sm:pt-32 pb-24 max-w-4xl mx-auto px-5 sm:px-8">
-      {/* ── Back Navigation ── */}
+    <div className={cn('pt-28 sm:pt-32 pb-24 mx-auto px-5 sm:px-8', isSawn ? 'max-w-4xl xl:max-w-6xl' : 'max-w-4xl')}>
+      <div className={cn(isSawn && 'xl:flex xl:gap-12 xl:items-start')}>
+        {isSawn && (
+          <CaseStudyToc items={sawnTocItems} detailsId="sawn-tech-details" />
+        )}
+        <div className="max-w-4xl w-full min-w-0">
+          {/* ── Back Navigation ── */}
       <RevealOnScroll>
         <Link
           href="/projects"
@@ -228,6 +247,12 @@ export default async function CaseStudyPage({ params }) {
             </div>
           )}
 
+          {project.slug === 'insurflow' && (
+            <p className="text-[17px] text-text-secondary leading-relaxed max-w-[65ch]">
+              Sawn helps motor-insurance companies handle accident claims from the first report to closure: field adjusters assess the damage on site, claims officers review and decide, and every step is recorded on the claim.
+            </p>
+          )}
+
           {/* Technology Stack */}
           {project.technologies && project.technologies.length > 0 && (
             <div className="flex flex-wrap gap-1.5 pt-2">
@@ -262,8 +287,8 @@ export default async function CaseStudyPage({ params }) {
       {/* ── Case Study Sections ── */}
       {project.slug === 'insurflow' ? (
         <div className="space-y-0">
-          {/* 01 — EXECUTIVE OVERVIEW & BACKEND OWNERSHIP */}
-          <CaseStudySection number={nextSection()} title="Executive Overview & Backend Ownership">
+          {/* 01 — OVERVIEW */}
+          <CaseStudySection id="overview" number={nextSection()} title="Overview">
             <div className="space-y-6">
               {project.problem && (
                 <div className="space-y-2">
@@ -315,6 +340,122 @@ export default async function CaseStudyPage({ params }) {
             </div>
           </CaseStudySection>
 
+          {/* ── Folded Technical Details ── */}
+          <details
+            id="sawn-tech-details"
+            className="group my-8 rounded-2xl border border-border-default bg-bg-secondary/20 transition-all duration-300"
+          >
+            <summary className="w-full cursor-pointer select-none list-none [&::-webkit-details-marker]:hidden flex items-center justify-between p-4 sm:p-5 rounded-2xl bg-bg-secondary hover:bg-bg-tertiary border border-border-default hover:border-border-strong text-text-primary font-mono text-sm font-semibold transition-all duration-200 focus-visible:outline-hidden focus-visible:ring-2 focus-visible:ring-accent group-open:rounded-b-none group-open:border-b-border-subtle">
+              <span className="flex items-center gap-2">
+                <span className="group-open:hidden">Show technical details</span>
+                <span className="hidden group-open:inline">Hide technical details</span>
+              </span>
+              <svg
+                className="w-5 h-5 text-accent transition-transform duration-200 group-open:rotate-180"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="currentColor"
+                strokeWidth="2"
+                aria-hidden="true"
+              >
+                <path strokeLinecap="round" strokeLinejoin="round" d="M19 9l-7 7-7-7" />
+              </svg>
+            </summary>
+
+            <div className="p-4 sm:p-6 space-y-0">
+              {/* 02 — ARCHITECTURE */}
+              {project.architecture && project.architecture.nodes && project.architecture.nodes.length > 0 && (
+                <CaseStudySection id="architecture" number={nextSection()} title="Architecture">
+                  <ArchitectureViewer architecture={project.architecture} />
+                </CaseStudySection>
+              )}
+
+              {/* 03 — KEY DECISIONS */}
+              {project.engineeringDecisions && project.engineeringDecisions.length > 0 && (
+                <CaseStudySection id="key-decisions" number={nextSection()} title="Key decisions">
+                  <div className="space-y-6">
+                    <div className="space-y-3">
+                      {project.engineeringDecisions.map((decision, idx) => (
+                        <DecisionCard key={idx} decision={decision} index={idx} />
+                      ))}
+                    </div>
+                    {project.slug === 'insurflow' && (
+                      <>
+                        <FsmSimulator />
+                        <InsurflowConcurrencySandbox />
+                      </>
+                    )}
+                    <InsurflowEvidence />
+                  </div>
+                </CaseStudySection>
+              )}
+
+              {/* 04 — TESTING */}
+              {project.testing && (
+                <CaseStudySection id="testing" number={nextSection()} title="Testing">
+                  <TestingSection testing={project.testing} projectSlug={project.slug} />
+                </CaseStudySection>
+              )}
+
+              {/* 05 — TRADE-OFFS */}
+              {project.tradeoffs && project.tradeoffs.length > 0 && (
+                <CaseStudySection id="trade-offs" number={nextSection()} title="Trade-Offs">
+                  <div className="space-y-3">
+                    {project.tradeoffs.map((tradeoff, idx) => (
+                      <TradeoffCard key={idx} tradeoff={tradeoff} />
+                    ))}
+                  </div>
+                </CaseStudySection>
+              )}
+
+              {/* 06 — WHAT I WOULD IMPROVE */}
+              {project.whatIWouldImprove && project.whatIWouldImprove.length > 0 && (
+                <CaseStudySection id="what-i-would-improve" number={nextSection()} title="What I Would Improve">
+                  <div className="space-y-3">
+                    {project.whatIWouldImprove.map((improvement, idx) => (
+                      <ImprovementCard key={idx} improvement={improvement} />
+                    ))}
+                  </div>
+                </CaseStudySection>
+              )}
+            </div>
+          </details>
+
+          {/* 07 — LINKS */}
+          <CaseStudySection id="links" number={nextSection()} title="Links">
+            <ProjectLinks links={project.links} projectSlug={project.slug} />
+          </CaseStudySection>
+        </div>
+      ) : (
+        <div className="space-y-0">
+          {/* 01 — OVERVIEW (Merged Problem, Role/Leadership, and System) */}
+          <CaseStudySection number={nextSection()} title="Overview">
+            <div className="space-y-6">
+              {project.problem && (
+                <p className="text-base text-text-secondary leading-relaxed">
+                  {project.problem}
+                </p>
+              )}
+
+              {(project.solution || project.leadership) && (
+                <div className="space-y-4">
+                  {project.solution && (
+                    <p className="text-base text-text-secondary leading-relaxed">
+                      {project.solution}
+                    </p>
+                  )}
+                  <LeadershipCard leadership={project.leadership} />
+                </div>
+              )}
+
+              {project.system && (
+                <p className="text-base text-text-secondary leading-relaxed">
+                  {project.system}
+                </p>
+              )}
+            </div>
+          </CaseStudySection>
+
           {/* 02 — ARCHITECTURE */}
           {project.architecture && project.architecture.nodes && project.architecture.nodes.length > 0 && (
             <CaseStudySection number={nextSection()} title="Architecture">
@@ -322,34 +463,21 @@ export default async function CaseStudyPage({ params }) {
             </CaseStudySection>
           )}
 
-          {/* 03 — CORE ENGINEERING DECISIONS & TECHNICAL EVIDENCE */}
+          {/* 03 — ENGINEERING DECISIONS & INTERACTIVE LAB */}
           {project.engineeringDecisions && project.engineeringDecisions.length > 0 && (
-            <CaseStudySection number={nextSection()} title="Core Engineering Decisions & Technical Evidence">
+            <CaseStudySection number={nextSection()} title="Engineering Decisions & Interactive Lab">
               <div className="space-y-6">
                 <div className="space-y-3">
                   {project.engineeringDecisions.map((decision, idx) => (
                     <DecisionCard key={idx} decision={decision} index={idx} />
                   ))}
                 </div>
-                {project.slug === 'insurflow' && (
-                  <>
-                    <FsmSimulator />
-                    <InsurflowConcurrencySandbox />
-                  </>
-                )}
-                <InsurflowEvidence />
+                {project.slug === 'teamline' && <TeamlineWorkspaceSimulator />}
               </div>
             </CaseStudySection>
           )}
 
-          {/* 04 — TESTING & RELIABILITY */}
-          {project.testing && (
-            <CaseStudySection number={nextSection()} title="Testing & Reliability">
-              <TestingSection testing={project.testing} projectSlug={project.slug} />
-            </CaseStudySection>
-          )}
-
-          {/* 05 — TRADE-OFFS */}
+          {/* 04 — TRADE-OFFS */}
           {project.tradeoffs && project.tradeoffs.length > 0 && (
             <CaseStudySection number={nextSection()} title="Trade-Offs">
               <div className="space-y-3">
@@ -357,6 +485,13 @@ export default async function CaseStudyPage({ params }) {
                   <TradeoffCard key={idx} tradeoff={tradeoff} />
                 ))}
               </div>
+            </CaseStudySection>
+          )}
+
+          {/* 05 — TESTING & RELIABILITY */}
+          {project.testing && (
+            <CaseStudySection number={nextSection()} title="Testing & Reliability">
+              <TestingSection testing={project.testing} projectSlug={project.slug} />
             </CaseStudySection>
           )}
 
@@ -372,95 +507,6 @@ export default async function CaseStudyPage({ params }) {
           )}
 
           {/* 07 — LINKS */}
-          <CaseStudySection number={nextSection()} title="Links">
-            <ProjectLinks links={project.links} projectSlug={project.slug} />
-          </CaseStudySection>
-        </div>
-      ) : (
-        <div className="space-y-0">
-          {/* 01 — THE PROBLEM */}
-          {project.problem && (
-            <CaseStudySection number={nextSection()} title="The Problem">
-              <p className="text-base text-text-secondary leading-relaxed">
-                {project.problem}
-              </p>
-            </CaseStudySection>
-          )}
-
-          {/* 02 — MY ROLE */}
-          {(project.role || project.leadership) && (
-            <CaseStudySection number={nextSection()} title="My Role">
-              <div className="space-y-4">
-                {project.solution && (
-                  <p className="text-base text-text-secondary leading-relaxed">
-                    {project.solution}
-                  </p>
-                )}
-                <LeadershipCard leadership={project.leadership} />
-              </div>
-            </CaseStudySection>
-          )}
-
-          {/* 03 — THE SYSTEM */}
-          {project.system && (
-            <CaseStudySection number={nextSection()} title="The System">
-              <p className="text-base text-text-secondary leading-relaxed">
-                {project.system}
-              </p>
-            </CaseStudySection>
-          )}
-
-          {/* 04 — ARCHITECTURE */}
-          {project.architecture && project.architecture.nodes && project.architecture.nodes.length > 0 && (
-            <CaseStudySection number={nextSection()} title="Architecture">
-              <ArchitectureViewer architecture={project.architecture} />
-            </CaseStudySection>
-          )}
-
-          {/* 05 — ENGINEERING DECISIONS & INTERACTIVE LAB */}
-          {project.engineeringDecisions && project.engineeringDecisions.length > 0 && (
-            <CaseStudySection number={nextSection()} title="Engineering Decisions & Interactive Lab">
-              <div className="space-y-6">
-                <div className="space-y-3">
-                  {project.engineeringDecisions.map((decision, idx) => (
-                    <DecisionCard key={idx} decision={decision} index={idx} />
-                  ))}
-                </div>
-                {project.slug === 'teamline' && <TeamlineWorkspaceSimulator />}
-              </div>
-            </CaseStudySection>
-          )}
-
-          {/* 06 — TRADE-OFFS */}
-          {project.tradeoffs && project.tradeoffs.length > 0 && (
-            <CaseStudySection number={nextSection()} title="Trade-Offs">
-              <div className="space-y-3">
-                {project.tradeoffs.map((tradeoff, idx) => (
-                  <TradeoffCard key={idx} tradeoff={tradeoff} />
-                ))}
-              </div>
-            </CaseStudySection>
-          )}
-
-          {/* 07 — TESTING & RELIABILITY */}
-          {project.testing && (
-            <CaseStudySection number={nextSection()} title="Testing & Reliability">
-              <TestingSection testing={project.testing} projectSlug={project.slug} />
-            </CaseStudySection>
-          )}
-
-          {/* 08 — WHAT I WOULD IMPROVE */}
-          {project.whatIWouldImprove && project.whatIWouldImprove.length > 0 && (
-            <CaseStudySection number={nextSection()} title="What I Would Improve">
-              <div className="space-y-3">
-                {project.whatIWouldImprove.map((improvement, idx) => (
-                  <ImprovementCard key={idx} improvement={improvement} />
-                ))}
-              </div>
-            </CaseStudySection>
-          )}
-
-          {/* 09 — LINKS */}
           {project.links && (project.links.github || project.links.live || project.links.dashboard) && (
             <CaseStudySection number={nextSection()} title="Links">
               <ProjectLinks links={project.links} projectSlug={project.slug} />
@@ -471,6 +517,8 @@ export default async function CaseStudyPage({ params }) {
 
       {/* ── Case Study Continuation & Conversion Footer ── */}
       <CaseStudyFooter currentProject={project} />
+        </div>
+      </div>
     </div>
   );
 }

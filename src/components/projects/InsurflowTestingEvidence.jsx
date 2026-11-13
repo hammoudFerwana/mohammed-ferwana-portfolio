@@ -444,7 +444,7 @@ export default function InsurflowTestingEvidence() {
           <p className="text-xs text-text-secondary leading-relaxed">
             Sensitive authentication and resource endpoints enforce request rate limits and return <code className="font-mono text-functional-warning">HTTP 429 Too Many Requests</code> with
             code <code className="font-mono text-accent">TOO_MANY_REQUESTS</code> when thresholds are exceeded (<code className="font-mono text-text-muted">tests/rateLimiting.test.js</code>),
-            mitigating brute-force and resource exhaustion vectors.
+            to slow down password guessing.
           </p>
         </div>
       </div>

@@ -12,9 +12,9 @@ export const aboutData = {
     title: 'About Mohammed Ferwana',
     role: 'Backend Engineer',
     summary:
-      'Backend Engineer focused on building reliable and well-architected systems. Grounded in computer systems engineering principles, domain-driven boundaries, and evidence-first reliability.',
+      "I'm a backend engineer from Gaza. I build the server side of web and mobile apps with Node.js, Express and MongoDB, and I write tests for the rules that keep the data correct.",
     highlights: [
-      { label: 'Role', value: 'Backend Developer & Team Leader' },
+      { label: 'Role', value: 'Co-founder & Backend Engineer, Sawn' },
       { label: 'Education', value: 'B.Sc. Computer Systems Engineering (Al-Azhar)' },
       { label: 'Core Focus', value: 'REST APIs, State Machines, Data Modeling' },
       { label: 'Location', value: 'Gaza, Palestine' },
@@ -22,37 +22,23 @@ export const aboutData = {
   },
 
   story: {
-    title: 'From Computer Systems to Backend Architecture',
-    subtitle:
-      'My progression as an engineer is built on curiosity about how systems behave under the hood, practical project delivery, and technical team leadership.',
+    title: 'My story',
     chapters: [
       {
-        number: '01',
-        title: 'Foundations & Low-Level Discovery',
-        period: '2022',
-        content:
-          'My journey into software engineering began in 2022 when I enrolled in Computer Systems Engineering at Al-Azhar University. Studying data structures, algorithms, operating systems and computer networks demystified how computers actually execute instructions and manage memory. That foundation shaped my preference for server-side engineering: I found myself far more fascinated by what happens behind the API endpoint — data integrity, atomic updates, and state management — than by purely visual interfaces.',
+        label: '2022 · Foundations',
+        text: 'I started Computer Systems Engineering at Al-Azhar University in 2022. Courses in data structures, operating systems, databases and networks pulled me toward the server side.',
       },
       {
-        number: '02',
-        title: 'Backend Developer and Team Leader at TAQAT',
-        period: '2026',
-        content:
-          'In the TAQAT CodeMap 2026 program, I served as Backend Developer and Team Leader for TeamLine, a collaborative team workspace platform. I designed REST APIs, implemented workspace role-based access control (RBAC), and built real-time task updates with version-guarded task moves.',
+        label: '2026 · TeamLine at TAQAT',
+        text: 'In the TAQAT CodeMap 2026 program I was backend developer and team leader for TeamLine. I built the REST API, workspace roles and real-time task updates.',
       },
       {
-        number: '03',
-        title: 'Backend Engineering & Sawn (formerly InsurFlow)',
-        period: '2026',
-        content:
-          `Designing and implementing the backend for Sawn (formerly InsurFlow) — a multi-tenant B2B motor insurance claim management platform — represented a major focus on complex server-side systems. Managing multi-party claims cannot rely on arbitrary database updates; it requires strict lifecycle state machines to prevent illegal state transitions, granular permission middleware, and audit trails. I wrote the test suite: ${metrics.integrationTests} tests passing in ${metrics.testSuites} suites (run ${formattedTestRunDate}).`,
+        label: '2026 · Sawn',
+        text: `Sawn started in the Startup MVP Bootcamp, where our team placed 4th. I am a co-founder and the only backend engineer: I built the claim lifecycle, tenant isolation and a suite of ${metrics.integrationTests} passing tests (run ${formattedTestRunDate}).`,
       },
       {
-        number: '04',
-        title: 'Where I am Heading',
-        period: 'Looking Ahead → 2027',
-        content:
-          'As I continue working toward my expected university graduation in 2027, my engineering trajectory remains focused on reliable backend systems and data integrity. I believe the best engineering is characterized not by complexity, but by simplicity, defensive boundaries, and verifiable proof.',
+        label: '2027 · Next',
+        text: 'I graduate in 2027. I want to keep building backends where the data has to stay correct.',
       },
     ],
   },

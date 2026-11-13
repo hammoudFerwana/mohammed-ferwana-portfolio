@@ -305,6 +305,20 @@ body {
   }
 }
 
+/* Page Transition: Gentle fade-in on client navigation (180ms ease-out) */
+@keyframes pageFadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+.animate-page-fade {
+  animation: pageFadeIn 180ms ease-out forwards;
+}
+
 /* Accessibility: Reduced motion */
 @media (prefers-reduced-motion: reduce) {
   *,
@@ -320,7 +334,8 @@ body {
   .animate-pulse-ring,
   .animate-shimmer,
   .animate-aurora,
-  .animate-conduit-pulse {
+  .animate-conduit-pulse,
+  .animate-page-fade {
     animation: none !important;
   }
 }

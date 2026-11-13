@@ -501,4 +501,85 @@ test.describe('Portfolio quality gates', () => {
     const testsText = page.getByText(new RegExp(`${metrics.integrationTests}\\s+passing`)).first();
     await expect(testsText).toBeVisible();
   });
+
+  test('/projects/insurflow folds technical details', async ({ page }) => {
+    await page.setViewportSize({ width: 1440, height: 900 });
+    await page.goto('/projects/insurflow', { waitUntil: 'load' });
+    await page.evaluate(() => document.fonts.ready);
+
+    const details = page.locator('details#sawn-tech-details');
+    await expect(details).toBeVisible();
+
+    // details closed on load
+    const isOpenOnLoad = await details.evaluate((el) => el.open);
+    expect(isOpenOnLoad).toBe(false);
+
+    // "Show technical details" visible
+    const showDetailsText = page.getByText('Show technical details');
+    await expect(showDetailsText).toBeVisible();
+
+    // the 1248 number from metrics.js visible above the fold-out
+    const metricsNumberText = String(metrics.integrationTests);
+    const metricsElement = page.getByText(new RegExp(`${metricsNumberText}\\s+passing`)).first();
+    await expect(metricsElement).toBeVisible();
+
+    const metricsBox = await metricsElement.boundingBox();
+    const detailsBox = await details.boundingBox();
+    expect(metricsBox).not.toBeNull();
+    expect(detailsBox).not.toBeNull();
+    expect(metricsBox.y).toBeLessThan(detailsBox.y);
+
+    // clicking TOC item "Testing" at 1440 opens details and the Testing heading is in viewport
+    const tocTestingLink = page.locator('nav[aria-label="Table of contents"] a[href="#testing"]');
+    await expect(tocTestingLink).toBeVisible();
+    await tocTestingLink.click();
+
+    // details should now be open
+    await expect(details).toHaveAttribute('open', '');
+
+    // the Testing heading is in viewport
+    const testingHeading = page.locator('#testing h2');
+    await expect(testingHeading).toBeInViewport({ timeout: 5000 });
+  });
+
+  test('navbar has no search button', async ({ page }) => {
+    for (const width of [1440, 390]) {
+      await page.setViewportSize({ width, height: 900 });
+      await page.goto('/', { waitUntil: 'load' });
+      await page.evaluate(() => document.fonts.ready);
+
+      const navButtons = page.locator('header nav button, header button');
+      const count = await navButtons.count();
+      for (let i = 0; i < count; i++) {
+        const btn = navButtons.nth(i);
+        const ariaLabel = (await btn.getAttribute('aria-label')) || '';
+        const text = (await btn.textContent()) || '';
+        expect(ariaLabel.toLowerCase()).not.toContain('search');
+        expect(text.toLowerCase()).not.toContain('search');
+      }
+    }
+  });
+
+  test('og image', async ({ request }) => {
+    const res = await request.get('/opengraph-image');
+    expect(res.status()).toBe(200);
+
+    const contentType = res.headers()['content-type'] || '';
+    expect(contentType).toContain('image/png');
+
+    const buffer = await res.body();
+    expect(buffer.length).toBeGreaterThan(0);
+
+    // PNG signature check
+    expect(buffer[0]).toBe(0x89);
+    expect(buffer[1]).toBe(0x50); // P
+    expect(buffer[2]).toBe(0x4e); // N
+    expect(buffer[3]).toBe(0x47); // G
+
+    // PNG width and height in IHDR chunk (bytes 16-23)
+    const width = buffer.readUInt32BE(16);
+    const height = buffer.readUInt32BE(20);
+    expect(width).toBe(1200);
+    expect(height).toBe(630);
+  });
 });

@@ -9,7 +9,6 @@ export default function ContactInfo() {
       value: siteMetadata.email,
       href: `mailto:${siteMetadata.email}`,
       external: false,
-      description: 'Best for project proposals, hiring inquiries, or detailed discussions.',
       icon: (
         <svg
           className="w-5 h-5 text-accent"
@@ -31,7 +30,6 @@ export default function ContactInfo() {
       value: 'mohammed-ferwana',
       href: siteMetadata.social.linkedin,
       external: true,
-      description: 'Professional networking, background overview, and industry connections.',
       icon: (
         <svg
           className="w-5 h-5 text-accent"
@@ -48,7 +46,6 @@ export default function ContactInfo() {
       value: 'hammoudFerwana',
       href: siteMetadata.social.github,
       external: true,
-      description: 'Source code, open-source repositories, and backend system commits.',
       icon: (
         <svg
           className="w-5 h-5 text-accent"
@@ -66,7 +63,6 @@ export default function ContactInfo() {
       href: '/resume/Mohammed_Ferwana_Resume.pdf',
       external: false,
       download: 'Mohammed_Ferwana_Resume.pdf',
-      description: 'One-page CV as a PDF.',
       icon: (
         <svg
           className="w-5 h-5 text-accent"
@@ -143,15 +139,12 @@ export default function ContactInfo() {
                   <p className="text-sm font-semibold text-text-primary group-hover:text-accent transition-colors truncate mt-0.5">
                     {channel.value}
                   </p>
-                  <p className="text-xs text-text-secondary mt-1 line-clamp-2">
-                    {channel.description}
-                  </p>
                 </div>
               </>
             );
 
             const baseClass =
-              'w-full text-left group flex items-start gap-4 p-3.5 rounded-xl bg-bg-tertiary/50 border border-border-subtle hover:border-accent/40 hover:bg-bg-tertiary transition-all duration-200 focus-visible:outline-hidden focus-visible:ring-2 focus-visible:ring-accent cursor-pointer';
+              'w-full text-left group flex items-center gap-4 p-3.5 rounded-xl bg-bg-tertiary/50 border border-border-subtle hover:border-accent/40 hover:bg-bg-tertiary transition-all duration-200 focus-visible:outline-hidden focus-visible:ring-2 focus-visible:ring-accent cursor-pointer';
 
             return (
               <li key={channel.platform}>

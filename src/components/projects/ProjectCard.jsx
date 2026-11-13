@@ -11,7 +11,10 @@ export default function ProjectCard({ project, priority = false }) {
   return (
     <SpotlightCard
       as="div"
-      className="group overflow-hidden transition-all duration-300 flex flex-col justify-between hover:-translate-y-1 hover:shadow-xl hover:shadow-accent/5 h-full"
+      className={cn(
+        'group overflow-hidden transition-all duration-300 flex flex-col justify-between hover:-translate-y-1 hover:shadow-xl hover:shadow-accent/5',
+        isTier1 ? 'h-full' : 'h-auto'
+      )}
     >
       <div className="flex-1 flex flex-col">
         {/* Project Image */}
@@ -55,6 +58,11 @@ export default function ProjectCard({ project, priority = false }) {
             <p className="font-mono text-xs text-text-muted">
               Role: <span className="text-text-secondary">{project.role}</span>
             </p>
+            {project.outcome && (
+              <p className="text-[15px] text-ink font-medium leading-snug md:truncate">
+                {project.outcome}
+              </p>
+            )}
           </div>
 
           <p className="text-sm text-text-secondary leading-relaxed line-clamp-3">
@@ -62,23 +70,22 @@ export default function ProjectCard({ project, priority = false }) {
           </p>
 
           {/* Technology Badges */}
-          {project.technologies && project.technologies.length > 0 && (
-            <div className="flex flex-wrap gap-1.5 pt-2 mt-auto">
-              {project.technologies.slice(0, 6).map((tech) => (
-                <span
-                  key={tech}
-                  className="font-mono text-[11px] px-2.5 py-1 rounded-md bg-bg-primary/80 border border-border-subtle text-text-muted"
-                >
-                  {tech}
-                </span>
-              ))}
-              {project.technologies.length > 6 && (
-                <span className="font-mono text-[10px] px-2 py-1 rounded text-text-muted">
-                  +{project.technologies.length - 6} more
-                </span>
-              )}
-            </div>
-          )}
+          {(() => {
+            const chips = (project.cardStack ?? project.technologies ?? []).slice(0, 4);
+            if (chips.length === 0) return null;
+            return (
+              <div className="flex flex-wrap gap-1.5 pt-2 mt-auto">
+                {chips.map((tech) => (
+                  <span
+                    key={tech}
+                    className="font-mono text-[11px] px-2.5 py-1 rounded-md bg-bg-primary/80 border border-border-subtle text-text-muted"
+                  >
+                    {tech}
+                  </span>
+                ))}
+              </div>
+            );
+          })()}
         </div>
       </div>
 
