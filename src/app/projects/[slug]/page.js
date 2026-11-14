@@ -23,6 +23,7 @@ export const dynamicParams = false;
 
 const sawnTocItems = [
   { id: 'overview', label: 'Overview', inDetails: false },
+  { id: 'a-bug-i-fixed', label: 'A bug I fixed', inDetails: false },
   { id: 'architecture', label: 'Architecture', inDetails: true },
   { id: 'key-decisions', label: 'Key decisions', inDetails: true },
   { id: 'testing', label: 'Testing', inDetails: true },
@@ -330,6 +331,39 @@ export default async function CaseStudyPage({ params }) {
                   </div>
                 </div>
               )}
+            </div>
+          </CaseStudySection>
+
+          {/* A BUG I FIXED */}
+          <CaseStudySection id="a-bug-i-fixed" title="A bug I fixed">
+            <div className="rounded-xl bg-bg-secondary border border-border-default p-5 sm:p-7 space-y-4 shadow-xs">
+              <h3 className="text-lg sm:text-xl font-bold text-text-primary tracking-tight">
+                A bug Express 5 hid from me
+              </h3>
+              <p className="text-sm sm:text-base text-text-secondary leading-relaxed">
+                <strong className="font-semibold text-text-primary">What broke:</strong> in Express 5, <code className="font-mono text-accent">req.query</code> is a getter. Our validation middleware assigned the Joi result back with <code className="font-mono text-accent">req.query = value</code>. The assignment did nothing and threw no error, so the converted values and defaults from Joi never reached the route handlers.
+              </p>
+              <p className="text-sm sm:text-base text-text-secondary leading-relaxed">
+                <strong className="font-semibold text-text-primary">The fix:</strong> one change in <code className="font-mono text-accent">src/middlewares/validate.middleware.js</code> replaces the property with <code className="font-mono text-accent">Object.defineProperty</code>, so every route that validates its query now gets the validated value.
+              </p>
+              <div className="pt-1">
+                <a
+                  href="https://github.com/InsurFlow-Team/insurflow-backend/blob/7f39380f64f7f82f705fabca3c22ac2432f6dad9/src/middlewares/validate.middleware.js#L41"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="font-mono text-xs text-text-muted hover:text-accent underline decoration-border-default underline-offset-4 transition-colors"
+                >
+                  validate.middleware.js, line 41 at commit 7f39380
+                </a>
+              </div>
+              <div tabIndex={0} className="overflow-x-auto rounded-lg bg-bg-primary/95 border border-border-subtle p-3.5 sm:p-4 font-mono text-xs sm:text-[13px] leading-relaxed text-text-secondary mt-3">
+                <pre>{`      if (property === 'query') {
+        Object.defineProperty(req, 'query', {
+          value,
+          writable: true,
+          configurable: true,
+          enumerable: true,`}</pre>
+              </div>
             </div>
           </CaseStudySection>
 
