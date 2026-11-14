@@ -102,10 +102,10 @@ export default function ExperiencePage() {
           <div className="rounded-2xl bg-bg-secondary border border-border-default p-6 sm:p-8 flex flex-col sm:flex-row sm:items-center justify-between gap-6 shadow-xs">
             <div className="space-y-1.5 max-w-xl">
               <h2 className="text-xl sm:text-2xl font-bold text-text-primary tracking-tight">
-                Ready to Discuss Engineering Opportunities?
+                Need a backend engineer?
               </h2>
               <p className="text-sm text-text-secondary leading-relaxed">
-                Open to remote backend roles, internships and freelance projects.
+                For a role on your team or an API for your product, let&apos;s talk.
               </p>
             </div>
             <div className="flex flex-wrap items-center gap-3 shrink-0">

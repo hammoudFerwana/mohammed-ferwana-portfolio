@@ -23,6 +23,7 @@ export const dynamicParams = false;
 
 const sawnTocItems = [
   { id: 'overview', label: 'Overview', inDetails: false },
+  { id: 'a-bug-i-fixed', label: 'A bug I fixed', inDetails: false },
   { id: 'architecture', label: 'Architecture', inDetails: true },
   { id: 'key-decisions', label: 'Key decisions', inDetails: true },
   { id: 'testing', label: 'Testing', inDetails: true },
@@ -100,13 +101,6 @@ export default async function CaseStudyPage({ params }) {
   if (!project) {
     notFound();
   }
-
-  // Count available sections for section numbering
-  let sectionCounter = 0;
-  const nextSection = () => {
-    sectionCounter += 1;
-    return String(sectionCounter).padStart(2, '0');
-  };
 
   const isSawn = project.slug === 'insurflow';
 
@@ -287,8 +281,8 @@ export default async function CaseStudyPage({ params }) {
       {/* ── Case Study Sections ── */}
       {project.slug === 'insurflow' ? (
         <div className="space-y-0">
-          {/* 01 — OVERVIEW */}
-          <CaseStudySection id="overview" number={nextSection()} title="Overview">
+          {/* OVERVIEW */}
+          <CaseStudySection id="overview" title="Overview">
             <div className="space-y-6">
               {project.problem && (
                 <div className="space-y-2">
@@ -340,6 +334,39 @@ export default async function CaseStudyPage({ params }) {
             </div>
           </CaseStudySection>
 
+          {/* A BUG I FIXED */}
+          <CaseStudySection id="a-bug-i-fixed" title="A bug I fixed">
+            <div className="rounded-xl bg-bg-secondary border border-border-default p-5 sm:p-7 space-y-4 shadow-xs">
+              <h3 className="text-lg sm:text-xl font-bold text-text-primary tracking-tight">
+                A bug Express 5 hid from me
+              </h3>
+              <p className="text-sm sm:text-base text-text-secondary leading-relaxed">
+                <strong className="font-semibold text-text-primary">What broke:</strong> in Express 5, <code className="font-mono text-accent">req.query</code> is a getter. Our validation middleware assigned the Joi result back with <code className="font-mono text-accent">req.query = value</code>. The assignment did nothing and threw no error, so the converted values and defaults from Joi never reached the route handlers.
+              </p>
+              <p className="text-sm sm:text-base text-text-secondary leading-relaxed">
+                <strong className="font-semibold text-text-primary">The fix:</strong> one change in <code className="font-mono text-accent">src/middlewares/validate.middleware.js</code> replaces the property with <code className="font-mono text-accent">Object.defineProperty</code>, so every route that validates its query now gets the validated value.
+              </p>
+              <div className="pt-1">
+                <a
+                  href="https://github.com/InsurFlow-Team/insurflow-backend/blob/7f39380f64f7f82f705fabca3c22ac2432f6dad9/src/middlewares/validate.middleware.js#L41"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="font-mono text-xs text-text-muted hover:text-accent underline decoration-border-default underline-offset-4 transition-colors"
+                >
+                  validate.middleware.js, line 41 at commit 7f39380
+                </a>
+              </div>
+              <div tabIndex={0} className="overflow-x-auto rounded-lg bg-bg-primary/95 border border-border-subtle p-3.5 sm:p-4 font-mono text-xs sm:text-[13px] leading-relaxed text-text-secondary mt-3">
+                <pre>{`      if (property === 'query') {
+        Object.defineProperty(req, 'query', {
+          value,
+          writable: true,
+          configurable: true,
+          enumerable: true,`}</pre>
+              </div>
+            </div>
+          </CaseStudySection>
+
           {/* ── Folded Technical Details ── */}
           <details
             id="sawn-tech-details"
@@ -363,16 +390,16 @@ export default async function CaseStudyPage({ params }) {
             </summary>
 
             <div className="p-4 sm:p-6 space-y-0">
-              {/* 02 — ARCHITECTURE */}
+              {/* ARCHITECTURE */}
               {project.architecture && project.architecture.nodes && project.architecture.nodes.length > 0 && (
-                <CaseStudySection id="architecture" number={nextSection()} title="Architecture">
+                <CaseStudySection id="architecture" title="Architecture">
                   <ArchitectureViewer architecture={project.architecture} />
                 </CaseStudySection>
               )}
 
-              {/* 03 — KEY DECISIONS */}
+              {/* KEY DECISIONS */}
               {project.engineeringDecisions && project.engineeringDecisions.length > 0 && (
-                <CaseStudySection id="key-decisions" number={nextSection()} title="Key decisions">
+                <CaseStudySection id="key-decisions" title="Key decisions">
                   <div className="space-y-6">
                     <div className="space-y-3">
                       {project.engineeringDecisions.map((decision, idx) => (
@@ -390,16 +417,16 @@ export default async function CaseStudyPage({ params }) {
                 </CaseStudySection>
               )}
 
-              {/* 04 — TESTING */}
+              {/* TESTING */}
               {project.testing && (
-                <CaseStudySection id="testing" number={nextSection()} title="Testing">
+                <CaseStudySection id="testing" title="Testing">
                   <TestingSection testing={project.testing} projectSlug={project.slug} />
                 </CaseStudySection>
               )}
 
-              {/* 05 — TRADE-OFFS */}
+              {/* TRADE-OFFS */}
               {project.tradeoffs && project.tradeoffs.length > 0 && (
-                <CaseStudySection id="trade-offs" number={nextSection()} title="Trade-Offs">
+                <CaseStudySection id="trade-offs" title="Trade-Offs">
                   <div className="space-y-3">
                     {project.tradeoffs.map((tradeoff, idx) => (
                       <TradeoffCard key={idx} tradeoff={tradeoff} />
@@ -408,9 +435,9 @@ export default async function CaseStudyPage({ params }) {
                 </CaseStudySection>
               )}
 
-              {/* 06 — WHAT I WOULD IMPROVE */}
+              {/* WHAT I WOULD IMPROVE */}
               {project.whatIWouldImprove && project.whatIWouldImprove.length > 0 && (
-                <CaseStudySection id="what-i-would-improve" number={nextSection()} title="What I Would Improve">
+                <CaseStudySection id="what-i-would-improve" title="What I Would Improve">
                   <div className="space-y-3">
                     {project.whatIWouldImprove.map((improvement, idx) => (
                       <ImprovementCard key={idx} improvement={improvement} />
@@ -421,15 +448,15 @@ export default async function CaseStudyPage({ params }) {
             </div>
           </details>
 
-          {/* 07 — LINKS */}
-          <CaseStudySection id="links" number={nextSection()} title="Links">
+          {/* LINKS */}
+          <CaseStudySection id="links" title="Links">
             <ProjectLinks links={project.links} projectSlug={project.slug} />
           </CaseStudySection>
         </div>
       ) : (
         <div className="space-y-0">
-          {/* 01 — OVERVIEW (Merged Problem, Role/Leadership, and System) */}
-          <CaseStudySection number={nextSection()} title="Overview">
+          {/* OVERVIEW (Merged Problem, Role/Leadership, and System) */}
+          <CaseStudySection title="Overview">
             <div className="space-y-6">
               {project.problem && (
                 <p className="text-base text-text-secondary leading-relaxed">
@@ -456,16 +483,16 @@ export default async function CaseStudyPage({ params }) {
             </div>
           </CaseStudySection>
 
-          {/* 02 — ARCHITECTURE */}
+          {/* ARCHITECTURE */}
           {project.architecture && project.architecture.nodes && project.architecture.nodes.length > 0 && (
-            <CaseStudySection number={nextSection()} title="Architecture">
+            <CaseStudySection title="Architecture">
               <ArchitectureViewer architecture={project.architecture} />
             </CaseStudySection>
           )}
 
-          {/* 03 — ENGINEERING DECISIONS & INTERACTIVE LAB */}
+          {/* KEY DECISIONS */}
           {project.engineeringDecisions && project.engineeringDecisions.length > 0 && (
-            <CaseStudySection number={nextSection()} title="Engineering Decisions & Interactive Lab">
+            <CaseStudySection title="Key decisions">
               <div className="space-y-6">
                 <div className="space-y-3">
                   {project.engineeringDecisions.map((decision, idx) => (
@@ -477,9 +504,9 @@ export default async function CaseStudyPage({ params }) {
             </CaseStudySection>
           )}
 
-          {/* 04 — TRADE-OFFS */}
+          {/* TRADE-OFFS */}
           {project.tradeoffs && project.tradeoffs.length > 0 && (
-            <CaseStudySection number={nextSection()} title="Trade-Offs">
+            <CaseStudySection title="Trade-Offs">
               <div className="space-y-3">
                 {project.tradeoffs.map((tradeoff, idx) => (
                   <TradeoffCard key={idx} tradeoff={tradeoff} />
@@ -488,16 +515,16 @@ export default async function CaseStudyPage({ params }) {
             </CaseStudySection>
           )}
 
-          {/* 05 — TESTING & RELIABILITY */}
+          {/* TESTING & RELIABILITY */}
           {project.testing && (
-            <CaseStudySection number={nextSection()} title="Testing & Reliability">
+            <CaseStudySection title="Testing & Reliability">
               <TestingSection testing={project.testing} projectSlug={project.slug} />
             </CaseStudySection>
           )}
 
-          {/* 06 — WHAT I WOULD IMPROVE */}
+          {/* WHAT I WOULD IMPROVE */}
           {project.whatIWouldImprove && project.whatIWouldImprove.length > 0 && (
-            <CaseStudySection number={nextSection()} title="What I Would Improve">
+            <CaseStudySection title="What I Would Improve">
               <div className="space-y-3">
                 {project.whatIWouldImprove.map((improvement, idx) => (
                   <ImprovementCard key={idx} improvement={improvement} />
@@ -506,9 +533,9 @@ export default async function CaseStudyPage({ params }) {
             </CaseStudySection>
           )}
 
-          {/* 07 — LINKS */}
+          {/* LINKS */}
           {project.links && (project.links.github || project.links.live || project.links.dashboard) && (
-            <CaseStudySection number={nextSection()} title="Links">
+            <CaseStudySection title="Links">
               <ProjectLinks links={project.links} projectSlug={project.slug} />
             </CaseStudySection>
           )}

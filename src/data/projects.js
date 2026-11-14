@@ -29,26 +29,26 @@ export const projects = [
     },
     problem: 'Several insurance companies share one platform. Each company must see only its own claims, a claim must move through its steps in order, and two claims filed at the same moment must never get the same number.',
     solution: `Engineered a modular backend architecture featuring a ${metrics.fsmStates}-state claim lifecycle finite state machine, tenant-scoped compound indexing, atomic sequential numbering, and automated integration test suites.`,
-    system: 'Sawn coordinates claim filing, field damage assessment, and claims officer review with deterministic transition guards, an append-only claim timeline, and isolated multi-tenant data access across 3 roles: ADMIN, CLAIMS_OFFICER, and FIELD_ADJUSTER.',
+    system: 'Sawn handles claim filing, damage assessment on site and officer review. A claim can only move through allowed steps, its timeline is append-only, and each of the three roles (Admin, Claims Officer, Field Adjuster) sees only its own company\'s data.',
     backendOwnership: [
       {
-        title: 'State Machine Lifecycle Engine',
+        title: 'Claim lifecycle',
         description: 'Implemented the claim lifecycle finite state machine in claim.service.js with transition guards and deterministic HTTP 409 INVALID_STATUS_TRANSITION responses.',
       },
       {
-        title: 'Multi-Tenant Data Modeling & Indexing',
+        title: 'Tenant-scoped data and indexes',
         description: 'Every claim query filters by organizationId, and every compound index starts with it.',
       },
       {
-        title: 'Atomic Sequential Claim Numbering',
+        title: 'Claim numbers per company',
         description: 'Implemented tenant-scoped sequential claim numbering (CLM-<ORG>-0001) using atomic counter increments, verified under automated integration tests without collisions or sequence gaps.',
       },
       {
-        title: 'Cross-Tenant Resource Masking',
+        title: 'No access across companies',
         description: 'Implemented repository-level tenant checks that return HTTP 404 CLAIM_NOT_FOUND rather than 403 Forbidden for cross-tenant access attempts to prevent ID enumeration.',
       },
       {
-        title: 'Automated Integration Testing',
+        title: 'Integration tests',
         description: 'Authored and maintained automated integration test suites using Jest, Supertest, and MongoMemoryServer, validating business rules against an in-memory MongoDB (mongodb-memory-server).',
       },
     ],

@@ -510,6 +510,12 @@ test.describe('Portfolio quality gates', () => {
     const details = page.locator('details#sawn-tech-details');
     await expect(details).toBeVisible();
 
+    // at page top: section menu highlights "Overview" instead of "Links"
+    const tocOverviewLink = page.locator('nav[aria-label="Table of contents"] a[href="#overview"]');
+    await expect(tocOverviewLink).toHaveClass(/border-accent/);
+    const tocLinksLink = page.locator('nav[aria-label="Table of contents"] a[href="#links"]');
+    await expect(tocLinksLink).not.toHaveClass(/border-accent/);
+
     // details closed on load
     const isOpenOnLoad = await details.evaluate((el) => el.open);
     expect(isOpenOnLoad).toBe(false);

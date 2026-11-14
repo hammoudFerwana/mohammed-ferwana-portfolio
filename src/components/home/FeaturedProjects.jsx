@@ -25,7 +25,7 @@ export default function FeaturedProjects() {
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mt-12">
           {featuredProjects.map((project, idx) => (
             <RevealOnScroll key={project.id} delay={0.1 * (idx + 1)} className="h-full">
-              <ProjectCard project={project} priority={idx === 0} />
+              <ProjectCard project={project} priority={false} />
             </RevealOnScroll>
           ))}
         </div>

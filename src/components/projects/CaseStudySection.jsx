@@ -4,23 +4,24 @@ import RevealOnScroll from '@/components/shared/RevealOnScroll';
 import { cn } from '@/lib/utils';
 
 /**
- * CaseStudySection — Numbered section wrapper for the 9-part case study template.
+ * CaseStudySection — Section wrapper for case study templates.
  *
- * Renders a numbered section (e.g., "01 — THE PROBLEM") with consistent styling,
- * scroll-reveal entrance animation, and a subtle top border separator.
+ * Renders a section with consistent styling, scroll-reveal entrance animation,
+ * and a subtle top border separator.
  *
- * @param {string} number — Two-digit section number (e.g., "01")
- * @param {string} title  — Section heading (e.g., "THE PROBLEM")
+ * @param {string} [id]    — Optional section id for TOC navigation
+ * @param {string} title   — Section heading
  * @param {React.ReactNode} children — Section content
  * @param {string} [className] — Additional CSS classes
  */
 export default function CaseStudySection({
   id,
-  number,
   title,
   children,
   className = '',
 }) {
+  const headingId = id ? `${id}-heading` : undefined;
+
   return (
     <RevealOnScroll>
       <section
@@ -29,16 +30,13 @@ export default function CaseStudySection({
           'pt-16 lg:pt-24 border-t border-border-subtle scroll-mt-28',
           className
         )}
-        aria-labelledby={`section-${number}`}
+        {...(headingId ? { 'aria-labelledby': headingId } : {})}
       >
-        {/* Section Number & Title */}
+        {/* Section Title */}
         <div className="mb-6 md:mb-8">
-          <span className="font-mono text-3xl md:text-4xl font-bold text-accent/75 select-none block leading-none">
-            {number}
-          </span>
           <h2
-            id={`section-${number}`}
-            className="font-mono text-sm uppercase tracking-[0.2em] text-text-secondary font-semibold mt-2"
+            id={headingId}
+            className="font-mono text-sm uppercase tracking-[0.2em] text-text-secondary font-semibold"
           >
             {title}
           </h2>

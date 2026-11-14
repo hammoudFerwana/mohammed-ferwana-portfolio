@@ -9,31 +9,111 @@ export default function CaseStudyToc({ items = [], detailsId = 'sawn-tech-detail
   useEffect(() => {
     if (typeof window === 'undefined' || items.length === 0) return;
 
-    const observer = new IntersectionObserver(
-      (entries) => {
-        // Find visible sections
-        const visibleEntries = entries.filter((entry) => entry.isIntersecting);
-        if (visibleEntries.length > 0) {
-          // Sort by top distance to pick the one closest to header (112px)
-          visibleEntries.sort(
-            (a, b) => Math.abs(a.boundingClientRect.top - 112) - Math.abs(b.boundingClientRect.top - 112)
-          );
-          setActiveId(visibleEntries[0].target.id);
+    let ticking = false;
+
+    const updateActiveSection = () => {
+      const details = document.getElementById(detailsId);
+      const isDetailsOpen = details ? details.open : false;
+
+      // Sections inside the closed <details> are ignored while it is closed
+      const candidateItems = items.filter((item) => {
+        if (item.inDetails && !isDetailsOpen) return false;
+        return true;
+      });
+
+      if (candidateItems.length === 0) return;
+
+      const headerOffset = 112;
+
+      // At page top: "Overview" (candidateItems[0])
+      const firstEl = document.getElementById(candidateItems[0].id);
+      if (firstEl) {
+        const firstRect = firstEl.getBoundingClientRect();
+        if (firstRect.top > headerOffset) {
+          setActiveId(candidateItems[0].id);
+          return;
         }
-      },
-      {
-        rootMargin: '-100px 0px -40% 0px',
-        threshold: [0, 0.2, 0.5],
+      } else if (window.scrollY < 200) {
+        setActiveId(candidateItems[0].id);
+        return;
       }
-    );
 
-    items.forEach((item) => {
-      const el = document.getElementById(item.id);
-      if (el) observer.observe(el);
-    });
+      // If scrolled to bottom of the page, activate the last candidate item
+      if (window.innerHeight + window.scrollY >= document.documentElement.scrollHeight - 50) {
+        setActiveId(candidateItems[candidateItems.length - 1].id);
+        return;
+      }
 
-    return () => observer.disconnect();
-  }, [items]);
+      // Check if a section currently spans the reading area (headerOffset)
+      let activeCandidate = null;
+      for (const item of candidateItems) {
+        const el = document.getElementById(item.id);
+        if (!el) continue;
+        const rect = el.getBoundingClientRect();
+        if (rect.height === 0 && rect.width === 0) continue;
+
+        if (rect.top <= headerOffset + 50 && rect.bottom > headerOffset) {
+          activeCandidate = item;
+          break;
+        }
+      }
+
+      if (activeCandidate) {
+        setActiveId(activeCandidate.id);
+        return;
+      }
+
+      // Otherwise pick the candidate section nearest the top of the viewport
+      let nearestItem = candidateItems[0];
+      let minDistance = Infinity;
+
+      for (const item of candidateItems) {
+        const el = document.getElementById(item.id);
+        if (!el) continue;
+        const rect = el.getBoundingClientRect();
+        if (rect.height === 0 && rect.width === 0) continue;
+
+        const distance = Math.abs(rect.top - headerOffset);
+        if (distance < minDistance) {
+          minDistance = distance;
+          nearestItem = item;
+        }
+      }
+
+      if (nearestItem) {
+        setActiveId(nearestItem.id);
+      }
+    };
+
+    const onScrollOrResize = () => {
+      if (!ticking) {
+        window.requestAnimationFrame(() => {
+          updateActiveSection();
+          ticking = false;
+        });
+        ticking = true;
+      }
+    };
+
+    // Run on initial mount
+    updateActiveSection();
+
+    window.addEventListener('scroll', onScrollOrResize, { passive: true });
+    window.addEventListener('resize', onScrollOrResize, { passive: true });
+
+    const details = document.getElementById(detailsId);
+    if (details) {
+      details.addEventListener('toggle', onScrollOrResize);
+    }
+
+    return () => {
+      window.removeEventListener('scroll', onScrollOrResize);
+      window.removeEventListener('resize', onScrollOrResize);
+      if (details) {
+        details.removeEventListener('toggle', onScrollOrResize);
+      }
+    };
+  }, [items, detailsId]);
 
   const handleLinkClick = (e, item) => {
     e.preventDefault();
