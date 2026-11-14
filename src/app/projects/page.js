@@ -33,10 +33,10 @@ export default function ProjectsPage() {
           <div className="rounded-2xl bg-bg-secondary border border-border-default p-6 sm:p-8 md:p-10 flex flex-col sm:flex-row sm:items-center justify-between gap-6 shadow-xs">
             <div className="space-y-2 max-w-xl">
               <h2 className="text-xl sm:text-2xl font-bold text-text-primary tracking-tight">
-                Looking for a Backend Engineer?
+                Need a backend engineer?
               </h2>
               <p className="text-sm text-text-secondary leading-relaxed">
-                Whether you need a backend engineer on your team or a REST API for your product, let&apos;s talk.
+                For a role on your team or an API for your product, let&apos;s talk.
               </p>
             </div>
             <div className="flex flex-wrap items-center gap-3 shrink-0">
