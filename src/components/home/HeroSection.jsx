@@ -27,7 +27,9 @@ export default function HeroSection() {
           alt="Gaza sea port at sunset, fishing boats inside the harbour wall, with a minaret in the foreground"
           fill
           priority
+          fetchPriority="high"
           sizes="100vw"
+          quality={60}
           className="object-cover object-center"
         />
 
@@ -85,7 +87,7 @@ export default function HeroSection() {
                   src="/images/portrait.jpg"
                   alt="Mohammed Ferwana"
                   fill
-                  loading="eager"
+                  loading="lazy"
                   sizes="120px"
                   className="object-cover object-center"
                 />
