@@ -1,166 +1,109 @@
-# Mohammed Ferwana — Premium Engineering Portfolio
+# Mohammed Ferwana · Portfolio
 
-> A sophisticated personal engineering portfolio built with Next.js 16, Tailwind CSS, and Framer Motion. Designed to communicate backend engineering thinking through evidence, architecture, and storytelling.
+**Personal portfolio of a backend developer, with interactive case studies of real projects.**
+
+![Next.js 16](https://img.shields.io/badge/Next.js_16-000000?logo=nextdotjs&logoColor=white)
+![React 19](https://img.shields.io/badge/React_19-61DAFB?logo=react&logoColor=black)
+![Tailwind CSS 4](https://img.shields.io/badge/Tailwind_CSS_4-06B6D4?logo=tailwindcss&logoColor=white)
+![Vercel](https://img.shields.io/badge/Vercel-000000?logo=vercel&logoColor=white)
+
+**[Visit the live site](https://mohammed-ferwana-portfolio.vercel.app/)**
 
 ---
 
-## Quick Start
+## Purpose
+
+Built to show backend engineering work (architecture, state machines, data design, API contracts and tests) to recruiters and engineering managers, in a form anyone can explore.
+
+## What you will find on the site
+
+| Page | Content |
+|------|---------|
+| Home | Introduction, featured projects, live Gaza clock |
+| Projects | All projects, grouped into main projects and other work |
+| Case study | Problem, architecture, decisions, trade-offs and testing for each project |
+| About | Story, approach and tech stack |
+| Experience | Training, work and education timeline |
+| Contact | Contact form and social links |
+
+## Interactive features
+
+- **Claim lifecycle simulator:** step a Sawn insurance claim through its states and watch invalid moves get rejected.
+- **Concurrency sandbox:** shows how Sawn keeps claim numbers unique when two claims arrive at once.
+- **Task board simulator:** an interactive TeamLine task board demo.
+- **Architecture viewer:** click through each layer of a project's system design.
+- **Command palette:** press `Ctrl+K` (or `Cmd+K`) to jump anywhere.
+- **Dark and light themes,** saved between visits.
+- **One-click resume** download as PDF.
+
+## Quality gates
+
+Every push to `main` and `develop` runs the CI pipeline in `.github/workflows/ci.yml`:
+
+1. ESLint
+2. Unit tests for the claim state machine (`node --test`)
+3. Production build
+4. Facts check: blocks unverifiable or inflated wording in site content
+5. Playwright end-to-end tests with axe accessibility checks
+6. Lighthouse CI for performance and best practices
+
+## Tech stack
+
+| Area | Tools |
+|------|-------|
+| Framework | Next.js 16 (App Router), React 19 |
+| Styling | Tailwind CSS 4 |
+| Animation | Motion |
+| Icons and fonts | Phosphor Icons, Geist |
+| Forms | Formspree |
+| Testing | Node test runner, Playwright, axe-core, Lighthouse CI |
+| Hosting | Vercel, Vercel Analytics |
+
+## Project structure
+
+```text
+src/
+├── app/          # pages and routes (App Router)
+├── components/   # UI by section: home, projects, about, contact, layout, shared
+├── context/      # theme and command palette state
+├── data/         # all site content: projects, experience, metrics, tech stack
+└── lib/          # state machine logic, animations, helpers
+scripts/          # facts check, resume PDF builder
+tests/e2e/        # Playwright tests
+docs/             # architecture, design system, content model, feature specs
+```
+
+All content lives in `src/data/`. Adding a project means adding one entry to `src/data/projects.js`; the case study page builds from that data.
+
+## Run locally
 
 ```bash
-# Install dependencies
+git clone https://github.com/hammoudFerwana/mohammed-ferwana-portfolio.git
+cd mohammed-ferwana-portfolio
 npm install
-
-# Run development server
-npm run dev
-
-# Build for production
-npm run build
-
-# Start production server
-npm start
-
-# Lint code
-npm run lint
+npm run dev        # http://localhost:3000
 ```
 
-Open [http://localhost:3000](http://localhost:3000) in your browser.
+| Command | Purpose |
+|---------|---------|
+| `npm run build` | Production build |
+| `npm run lint` | Lint the code |
+| `npm test` | Unit tests |
+| `npm run test:e2e` | End-to-end and accessibility tests |
+| `npm run check:facts` | Content facts check |
+| `npm run build:resume` | Rebuild the resume PDF |
 
----
+Optional `.env.local` values:
 
-## Tech Stack
-
-| Layer | Technology | Version |
-|-------|-----------|---------|
-| **Framework** | Next.js (App Router) | 14+ |
-| **Language** | JavaScript (JSX) | ES2022+ |
-| **Styling** | Tailwind CSS | v3 |
-| **Animation** | Framer Motion | Latest |
-| **Icons** | Phosphor Icons (React) | Latest |
-| **Fonts** | Geist + Geist Mono | Variable |
-| **Deployment** | Vercel | — |
-| **Analytics** | Vercel Analytics | — |
-| **Contact Form** | Formspree / EmailJS | — |
-
----
-
-## Project Structure
-
-```
-src/
-├── app/                    # Next.js App Router pages
-│   ├── layout.js           # Root layout, fonts, metadata
-│   ├── page.js             # Home page
-│   ├── projects/           # Projects listing + case studies
-│   ├── about/              # About page (story, philosophy, timeline)
-│   ├── experience/         # Experience & education
-│   ├── contact/            # Contact form + social links
-│   ├── lab/                # Engineering Lab
-│   └── not-found.js        # Custom 404
-│
-├── components/             # Reusable UI components
-│   ├── layout/             # Navbar, Footer, MobileMenu
-│   ├── home/               # Hero, Identity, HowIThink, Featured
-│   ├── projects/           # ProjectCard, CaseStudy, ArchViewer
-│   ├── about/              # Story, Philosophy, Timeline, TechStack
-│   ├── experience/         # ExperienceCard, EducationCard
-│   ├── contact/            # ContactForm, SocialLinks
-│   └── shared/             # CommandPalette, Button, SpotlightCard, etc.
-│
-├── data/                   # Centralized content/data
-│   ├── projects.js         # All project data
-│   ├── experience.js       # Work & education data
-│   ├── techStack.js        # Technology categories
-│   ├── navigation.js       # Nav items & routes
-│   ├── siteMetadata.js     # Global SEO metadata
-│   └── commands.js         # Command palette actions
-│
-├── lib/                    # Utilities & helpers
-│   ├── animations.js       # Animation variants & configs
-│   ├── seo.js              # SEO helper functions
-│   └── utils.js            # General utilities
-│
-└── public/                 # Static assets
-    ├── images/             # Photos & screenshots
-    ├── resume/             # Resume PDF
-    └── favicon/            # Favicon set
-```
-
----
-
-## Pages & Routes
-
-| Route | Page | Description |
-|-------|------|-------------|
-| `/` | Home | Hero, engineering identity, featured projects, thinking process |
-| `/projects` | Projects | All projects with filtering |
-| `/projects/[slug]` | Case Study | Detailed engineering case study |
-| `/about` | About | Story, philosophy, timeline, tech stack |
-| `/experience` | Experience | Work experience, training, education |
-| `/contact` | Contact | Contact form, social links |
-| `/lab` | Engineering Lab | Engineering experiments & explorations |
-
----
-
-## Features
-
-- **Interactive Architecture Viewer** — Visualize system architecture for case studies
-- **Command Palette** (`Ctrl+K`) — Quick navigation across the site
-- **One-Click Resume Download** — Direct access to verifiable PDF resume
-- **Engineering Case Studies** — 9-part project deep-dives
-- **"How I Think" Section** — Visual engineering thought process
-- **Scroll Reveal Animations** — Framer Motion powered entrances
-- **Dark Theme** — Premium dark surfaces with purple/indigo accent
-- **Responsive Design** — Intentional layouts for all viewports
-- **Accessible** — Keyboard nav, focus states, reduced-motion support
-- **SEO Optimized** — Meta tags, Open Graph, structured data
-
----
-
-## Content Management
-
-All content is centralized in `src/data/`. To add a new project:
-
-1. Add project data to `src/data/projects.js`
-2. Add project screenshot to `public/images/projects/`
-3. The case study page auto-generates from the data
-
-See [CONTENT_MODEL.md](./docs/CONTENT_MODEL.md) for the complete data schema.
-
----
-
-## Environment Variables
-
-| Variable | Description | Required |
-|----------|-------------|----------|
-| `NEXT_PUBLIC_FORMSPREE_KEY` | Formspree form endpoint ID | For contact form |
-| `NEXT_PUBLIC_SITE_URL` | Production site URL | For SEO |
-
----
-
-## Deployment
-
-This project is configured for **Vercel** deployment:
-
-1. Push to GitHub
-2. Import in Vercel
-3. Set environment variables
-4. Deploy
-
----
+| Variable | Use |
+|----------|-----|
+| `NEXT_PUBLIC_FORMSPREE_ID` | Contact form endpoint |
+| `NEXT_PUBLIC_SITE_URL` | Base URL for SEO metadata |
 
 ## Documentation
 
-| Document | Purpose |
-|----------|---------|
-| [ARCHITECTURE.md](./docs/ARCHITECTURE.md) | Component architecture & data flow |
-| [DESIGN_SYSTEM.md](./docs/DESIGN_SYSTEM.md) | Colors, typography, spacing, motion tokens |
-| [CONTENT_MODEL.md](./docs/CONTENT_MODEL.md) | Data structures & schemas |
-| [DEPLOYMENT.md](./docs/DEPLOYMENT.md) | Build & deployment guide |
-| [CHANGELOG.md](./CHANGELOG.md) | Version history |
-| [features/](./docs/features/) | Feature specification documents |
+[Architecture](docs/ARCHITECTURE.md) · [Design system](docs/DESIGN_SYSTEM.md) · [Content model](docs/CONTENT_MODEL.md) · [Deployment](docs/DEPLOYMENT.md) · [Changelog](CHANGELOG.md)
 
----
+## Contact
 
-## License
-
-Private — Mohammed Ferwana © 2024–2027
+[LinkedIn](https://www.linkedin.com/in/mohammed-ferwana) · [GitHub](https://github.com/hammoudFerwana) · mohammedferwana2@gmail.com
